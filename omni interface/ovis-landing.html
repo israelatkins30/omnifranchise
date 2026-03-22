@@ -3,51 +3,40 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ovis — The AI That Runs Your Instagram</title>
+  <title>Ovis — Your Jarvis for Instagram</title>
 
-  <!-- ── Open Graph (Facebook, iMessage, Discord, LinkedIn) ── -->
-  <meta property="og:type"        content="website"/>
-  <meta property="og:url"         content="https://omniworld.app/"/>
-  <meta property="og:title"       content="Ovis — Your Jarvis for Instagram"/>
-  <meta property="og:description" content="The AI agent that follows the right people, sends DMs in your voice, and grows your Instagram 24/7. Zero input needed."/>
-  <meta property="og:image"       content="https://omniworld.app/og-card.png"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta property="og:site_name"   content="Ovis by Omni World"/>
-
-  <!-- ── Twitter / X Card ── -->
+  <!-- ── Open Graph ── -->
+  <meta property="og:type"         content="website"/>
+  <meta property="og:url"          content="https://omniworld.app/"/>
+  <meta property="og:title"        content="Ovis — Your Jarvis for Instagram"/>
+  <meta property="og:description"  content="The AI agent that follows, DMs, and grows your Instagram 24/7. Zero input needed."/>
+  <meta property="og:image"        content="https://omniworld.app/og-card.png"/>
+  <meta property="og:site_name"    content="Ovis by Omni World"/>
   <meta name="twitter:card"        content="summary_large_image"/>
-  <meta name="twitter:site"        content="@omniworld_app"/>
   <meta name="twitter:title"       content="Ovis — Your Jarvis for Instagram"/>
-  <meta name="twitter:description" content="The AI agent that follows, DMs, and grows your Instagram around the clock. No input needed."/>
+  <meta name="twitter:description" content="The AI agent that follows, DMs, and grows your Instagram 24/7. Zero input needed."/>
   <meta name="twitter:image"       content="https://omniworld.app/og-card.png"/>
+  <meta name="description"         content="Ovis is an AI Instagram growth agent that follows the right people, sends DMs in your voice, and grows your account 24/7."/>
 
-  <!-- ── SEO ── -->
-  <meta name="description" content="Ovis is an AI Instagram growth agent that follows the right people, sends DMs in your voice, and grows your account 24/7. Join the early access waitlist."/>
-  <link rel="canonical" href="https://omniworld.app/"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #C4C9D4;   /* light silver */
-      --bg2:       #B8BDC8;   /* deeper silver */
-      --surface:   #181A1D;   /* carbon fiber */
-      --surface2:  #20242A;   /* lighter carbon */
-      --carbon:    #121416;   /* darkest carbon */
-      --border:    rgba(0,0,0,0.20);
-      --border2:   rgba(0,0,0,0.28);
-      --chrome:    rgba(220,228,238,0.55);
-      --text:      #0A0A0B;
-      --muted:     rgba(10,10,11,0.55);
-      --muted2:    rgba(10,10,11,0.38);
-      --c-text:    #E2E6EE;
-      --c-muted:   rgba(226,230,238,0.55);
-      --c-muted2:  rgba(226,230,238,0.30);
+      --bg:        #07080D;
+      --bg2:       #0B0D14;
+      --surface:   #0F1219;
+      --surface2:  #161B24;
+      --carbon:    #090B10;
+      --border:    rgba(255,255,255,0.07);
+      --border2:   rgba(255,255,255,0.13);
+      --text:      #E8ECF5;
+      --muted:     rgba(232,236,245,0.50);
+      --muted2:    rgba(232,236,245,0.28);
       --blue:      #00C0F0;
       --blue-dark: #0891B2;
-      --blue-dim:  rgba(0,192,240,0.14);
-      --pad:       max(24px, 5vw);
+      --blue-dim:  rgba(0,192,240,0.12);
+      --pad:       max(28px, 5.5vw);
     }
 
     body {
@@ -62,22 +51,24 @@
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 58px;
+      height: 60px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 var(--pad);
-      background: rgba(190,196,208,0.90);
-      backdrop-filter: blur(20px);
-      border-bottom: 0.5px solid rgba(255,255,255,0.30);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.12);
+      background: rgba(7,8,13,0.80);
+      backdrop-filter: blur(24px);
+      border-bottom: 0.5px solid var(--border);
     }
     .nav-logo {
-      font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: var(--text);
+      font-size: 17px; font-weight: 800; letter-spacing: -.04em;
+      background: linear-gradient(135deg, #8A96A4, #CDD4DE, #8A96A4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .nav-cta {
-      font-size: 13px; font-weight: 600; color: #0A0A0B;
+      font-size: 13px; font-weight: 600; color: #07080D;
       background: var(--blue);
       padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer;
       transition: opacity .18s, transform .18s;
+      box-shadow: 0 0 20px rgba(0,192,240,0.30);
     }
     .nav-cta:hover { opacity: .88; transform: scale(1.02); }
 
@@ -86,107 +77,120 @@
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center;
       justify-content: center; text-align: center;
-      padding: 120px var(--pad) 100px;
+      padding: 130px var(--pad) 100px;
       position: relative; overflow: hidden;
-      background: var(--bg);
     }
+
+    /* ambient glow behind OVIS */
     .hero::before {
       content: '';
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 500px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(0,192,240,0.10) 0%, transparent 65%);
-      pointer-events: none;
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 1000px; height: 600px; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 40%,
+        rgba(0,192,240,0.09) 0%,
+        rgba(0,192,240,0.03) 40%,
+        transparent 70%);
     }
+
+    /* live badge */
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .03em;
-      color: var(--blue); background: var(--blue-dim);
-      border: 0.5px solid rgba(0,192,240,0.2);
-      padding: 6px 14px; border-radius: 980px; margin-bottom: 36px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--blue);
+      background: rgba(0,192,240,0.08);
+      border: 0.5px solid rgba(0,192,240,0.22);
+      padding: 6px 16px; border-radius: 980px; margin-bottom: 44px;
+      position: relative; z-index: 2;
     }
     .hero-badge-dot {
       width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+      box-shadow: 0 0 8px rgba(0,192,240,0.8);
       animation: pulse 2s ease-in-out infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(0.85)} }
 
-    .hero-countdown {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11.5px; font-weight: 600; letter-spacing: .04em;
-      color: var(--c-muted); background: var(--surface);
-      border: 0.5px solid var(--border2);
-      padding: 5px 14px; border-radius: 980px; margin-bottom: 18px;
-    }
-    .hero-countdown span { color: var(--c-text); font-variant-numeric: tabular-nums; }
-
-    .hero h1 {
-      font-size: clamp(32px, 5.5vw, 62px);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
-      max-width: 860px; margin-bottom: 24px; color: var(--text);
-    }
-    .hero h1 em { font-style: normal; color: var(--blue); }
-    /* Giant OVIS display name */
+    /* THE NAME */
     .hero-ovis {
-      font-size: clamp(80px, 16vw, 160px);
-      font-weight: 900; letter-spacing: -.06em; line-height: .88;
-      background: linear-gradient(160deg, #8A9099 0%, #D8DCE4 30%, #A0A8B4 50%, #E4E8F0 65%, #8A9099 100%);
+      font-size: clamp(96px, 18vw, 180px);
+      font-weight: 900; letter-spacing: -.07em; line-height: .82;
+      background: linear-gradient(165deg,
+        #5A6470 0%,
+        #9AA4B2 18%,
+        #D4DCE8 34%,
+        #F2F5F8 46%,
+        #E0E6EE 54%,
+        #B0BBC8 68%,
+        #6A7480 82%,
+        #C8D2DC 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      display: block; margin-bottom: 6px;
+      display: block;
       position: relative; z-index: 2;
-      filter: drop-shadow(0 0 30px rgba(0,192,240,0.25));
+      filter: drop-shadow(0 0 60px rgba(0,192,240,0.22)) drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+      margin-bottom: 22px;
     }
-    .hero-ovis-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 600px; height: 300px; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(0,192,240,0.08) 0%, transparent 65%);
+
+    /* tagline */
+    .hero-tag {
+      font-size: clamp(18px, 2.8vw, 30px);
+      font-weight: 600; letter-spacing: -.03em; line-height: 1.25;
+      color: var(--text); opacity: .92;
+      margin-bottom: 16px; position: relative; z-index: 2;
     }
-    .hero-jarvis {
-      font-size: clamp(20px, 3.5vw, 38px);
-      font-weight: 700; letter-spacing: -.03em; line-height: 1.2;
-      color: var(--text); display: block; margin-bottom: 28px; position: relative; z-index: 2;
-    }
-    .hero-jarvis em { font-style: normal; color: var(--blue); }
+    .hero-tag em { font-style: normal; color: var(--blue); }
+
     .hero-sub {
-      font-size: clamp(17px, 2.2vw, 20px);
-      color: var(--muted); line-height: 1.65; max-width: 540px;
-      margin-bottom: 44px; font-weight: 400;
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--muted); line-height: 1.7; max-width: 440px;
+      margin-bottom: 48px; font-weight: 400; position: relative; z-index: 2;
     }
+
+    /* buttons */
     .hero-btns {
       display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 72px;
+      margin-bottom: 80px; position: relative; z-index: 2;
     }
     .btn-primary {
-      font-size: 15px; font-weight: 700; color: #0A0A0B;
+      font-size: 15px; font-weight: 700; color: #07080D;
       background: var(--blue);
-      padding: 14px 36px; border-radius: 10px; border: none; cursor: pointer;
+      padding: 15px 38px; border-radius: 10px; border: none; cursor: pointer;
       text-decoration: none;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(0,192,240,0.4);
+      box-shadow: 0 0 0 0.5px rgba(0,192,240,0.4), 0 8px 28px rgba(0,192,240,0.40);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,192,240,0.55); }
-    .btn-secondary {
-      font-size: 15px; font-weight: 500; color: var(--c-muted);
-      background: var(--surface); border: 0.5px solid var(--border2);
-      padding: 14px 28px; border-radius: 10px; cursor: pointer;
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 0.5px rgba(0,192,240,0.5), 0 12px 40px rgba(0,192,240,0.55); }
+    .btn-ghost {
+      font-size: 15px; font-weight: 500; color: var(--muted);
+      background: transparent;
+      border: 0.5px solid var(--border2);
+      padding: 15px 28px; border-radius: 10px; cursor: pointer;
       text-decoration: none;
-      transition: color .2s, background .2s;
+      transition: color .2s, border-color .2s;
     }
-    .btn-secondary:hover { color: var(--c-text); background: var(--surface2); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.24); }
 
-    /* Hero product card */
+    /* hero product card */
     .hero-card {
-      width: 100%; max-width: 640px;
+      width: 100%; max-width: 600px;
       background: var(--surface);
-      border: 0.5px solid rgba(255,255,255,0.10);
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.10), 0 24px 60px rgba(0,0,0,0.45), 0 0 40px rgba(0,192,240,0.06);
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2);
+      border-radius: 18px; overflow: hidden;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.09),
+        0 32px 80px rgba(0,0,0,0.60),
+        0 0 60px rgba(0,192,240,0.07);
+      position: relative; z-index: 2;
     }
     .hero-card-bar {
-      padding: 12px 18px;
+      padding: 13px 18px;
       background: var(--carbon);
-      border-bottom: 0.5px solid rgba(255,255,255,0.07);
+      border-bottom: 0.5px solid var(--border);
       display: flex; align-items: center; gap: 7px;
     }
     .hcb-dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -195,576 +199,335 @@
     .hcb-dot:nth-child(3) { background: #28C840; }
     .hcb-title {
       margin-left: auto; margin-right: auto;
-      font-size: 11px; font-weight: 600; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--c-muted2);
+      font-size: 10px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted2);
     }
     .hero-feed { padding: 4px 0; }
     .hf-row {
       display: flex; align-items: center; gap: 12px;
-      padding: 11px 20px;
-      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+      padding: 12px 20px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
       opacity: 0;
-      animation: rowFade .4s ease forwards;
+      animation: rowFade .35s ease forwards;
     }
     .hf-row:last-child { border-bottom: none; }
-    @keyframes rowFade { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:none} }
+    @keyframes rowFade { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
     .hf-icon {
       width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.15);
+      background: rgba(0,192,240,0.10); border: 0.5px solid rgba(0,192,240,0.18);
       display: flex; align-items: center; justify-content: center; font-size: 15px;
     }
     .hf-body { flex: 1; }
-    .hf-name { font-size: 13px; font-weight: 600; color: var(--c-text); }
-    .hf-meta { font-size: 11px; color: var(--c-muted); margin-top: 2px; }
+    .hf-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .hf-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .hf-tag {
-      font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
-      background: var(--blue-dim); color: var(--blue); flex-shrink: 0;
+      font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+      background: rgba(0,192,240,0.12); color: var(--blue);
+      letter-spacing: .04em; flex-shrink: 0;
     }
     .hero-card-footer {
-      padding: 12px 20px;
+      padding: 13px 20px;
       background: var(--carbon);
-      border-top: 0.5px solid rgba(255,255,255,0.07);
+      border-top: 0.5px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .hcf-stat { font-size: 12px; color: var(--c-muted2); }
+    .hcf-stat { font-size: 12px; color: var(--muted2); }
     .hcf-stat b { color: var(--blue); font-weight: 700; }
     .hcf-live {
       display: flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 600; color: var(--blue);
+      font-size: 11px; font-weight: 600; color: var(--blue); letter-spacing: .04em;
     }
     .hcf-live-dot {
       width: 5px; height: 5px; border-radius: 50%; background: var(--blue);
+      box-shadow: 0 0 6px rgba(0,192,240,0.8);
       animation: pulse 2s infinite;
     }
 
-    /* ─── SHARED SECTION ─── */
-    section { padding: 96px var(--pad); }
-    .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    /* ─── CAPABILITIES ─── */
+    .capabilities {
+      padding: 120px var(--pad);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .cap-label {
+      display: block; text-align: center;
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
       text-transform: uppercase; color: var(--blue);
-      margin-bottom: 16px; display: block;
+      margin-bottom: 18px;
     }
-    .section-title {
-      font-size: clamp(30px, 4.5vw, 52px);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.08;
-      margin-bottom: 16px; color: var(--text);
+    .cap-headline {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
+      color: var(--text); margin-bottom: 64px;
     }
-    .section-sub {
-      font-size: 17px; color: var(--muted); line-height: 1.68;
-      max-width: 520px; font-weight: 400;
+    .cap-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
     }
-    .divider { border: none; border-top: 0.5px solid var(--border); }
-    .sec-inner { max-width: 1100px; margin: 0 auto; }
-
-    /* ─── PROBLEM ─── */
-    .problem { background: var(--bg2); }
-    .problem-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; margin-top: 60px;
-      background: rgba(0,0,0,0.35);
-      border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.25);
-    }
-    .problem-card {
-      padding: 36px 32px;
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-    }
-    .prob-icon { font-size: 26px; margin-bottom: 16px; display: block; }
-    .prob-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--c-text); }
-    .prob-sub { font-size: 14px; color: var(--c-muted); line-height: 1.68; }
-
-    /* ─── PRODUCT ─── */
-    .product { background: var(--bg); }
-    .product-note {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; color: var(--muted);
-      background: var(--bg2); border: 0.5px solid var(--border2);
-      padding: 10px 16px; border-radius: 10px; margin-top: 18px;
-    }
-    .product-demos {
-      display: flex; flex-direction: column; gap: 12px; margin-top: 52px;
-    }
-    .demo-row {
+    .cap-card {
       background: var(--surface);
       background-image:
         repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%),
         repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-      border: 0.5px solid rgba(255,255,255,0.08);
-      border-radius: 14px; padding: 24px 28px;
-      display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: start;
-      transition: border-color .2s, box-shadow .2s;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2);
+      border-radius: 16px; padding: 36px 32px;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 8px 32px rgba(0,0,0,0.35);
+      transition: border-color .25s, box-shadow .25s;
     }
-    .demo-row:hover { border-color: rgba(0,192,240,0.25); box-shadow: 0 4px 20px rgba(0,192,240,0.07); }
-    .demo-q {
-      font-size: 15px; font-weight: 600; color: var(--c-muted);
+    .cap-card:hover {
+      border-color: rgba(0,192,240,0.28);
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.40), 0 0 30px rgba(0,192,240,0.08);
     }
-    .demo-q::before { content: '"'; }
-    .demo-q::after  { content: '"'; }
-    .demo-a { font-size: 14px; color: var(--c-muted); line-height: 1.65; }
-    .demo-a b { color: var(--c-text); font-weight: 600; }
-    .demo-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 12px; }
-    .demo-tag {
-      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px;
-      background: var(--blue-dim); color: var(--blue);
+    .cap-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(0,192,240,0.10);
+      border: 0.5px solid rgba(0,192,240,0.20);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 22px;
+    }
+    .cap-title {
+      font-size: 18px; font-weight: 800; letter-spacing: -.03em;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .cap-desc {
+      font-size: 14px; color: var(--muted); line-height: 1.72; font-weight: 400;
     }
 
     /* ─── STATS ─── */
-    .stats { background: var(--bg2); }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; margin-top: 60px;
-      background: rgba(0,0,0,0.35);
-      border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.25);
+    .stats-strip {
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
     }
-    .stat-card {
-      padding: 48px 36px;
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-      text-align: center;
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-item {
+      padding: 64px 48px; text-align: center;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: ''; position: absolute; left: 0; top: 25%; bottom: 25%;
+      width: 0.5px; background: var(--border);
     }
     .stat-num {
-      font-size: clamp(44px, 6vw, 72px);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--c-text);
-      margin-bottom: 10px;
+      font-size: clamp(48px, 7vw, 76px);
+      font-weight: 900; letter-spacing: -.05em; line-height: 1;
+      color: var(--text); margin-bottom: 10px;
+      display: block;
     }
     .stat-num em { font-style: normal; color: var(--blue); }
-    .stat-label { font-size: 14px; color: var(--c-muted); }
+    .stat-label {
+      font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: .02em;
+    }
 
-    /* ─── FEATURES ─── */
-    .features { background: var(--bg); }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; margin-top: 60px;
-      background: rgba(0,0,0,0.35);
-      border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.25);
+    /* ─── WAITLIST CTA ─── */
+    .waitlist {
+      padding: 140px var(--pad);
+      text-align: center;
+      position: relative; overflow: hidden;
     }
-    .feat-card {
-      padding: 30px 26px;
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-    }
-    .feat-icon { font-size: 22px; margin-bottom: 12px; display: block; }
-    .feat-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--c-text); }
-    .feat-sub { font-size: 13px; color: var(--c-muted); line-height: 1.65; }
-
-    /* ─── PROOF ─── */
-    .proof { background: var(--bg2); }
-    .proof-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .proof-card {
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-      border: 0.5px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 44px 40px; margin-top: 52px;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.3);
-    }
-    .proof-stars { font-size: 18px; margin-bottom: 20px; letter-spacing: 2px; }
-    .proof-quote {
-      font-size: clamp(18px, 2.5vw, 22px);
-      font-weight: 600; letter-spacing: -.02em; line-height: 1.5;
-      color: var(--c-text); margin-bottom: 28px;
-    }
-    .proof-quote em { font-style: normal; color: var(--blue); }
-    .proof-author { display: flex; align-items: center; gap: 12px; justify-content: center; }
-    .proof-av {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--blue-dim); border: 1px solid rgba(0,192,240,0.2);
-      display: flex; align-items: center; justify-content: center; font-size: 18px;
-    }
-    .proof-name { font-size: 14px; font-weight: 700; text-align: left; color: var(--c-text); }
-    .proof-handle { font-size: 12px; color: var(--c-muted); text-align: left; }
-
-    /* ─── PRICING ─── */
-    .pricing { background: var(--bg); }
-    .pricing-wrap { max-width: 560px; margin: 0 auto; text-align: center; }
-    .pricing-card {
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-      border: 0.5px solid rgba(255,255,255,0.10);
-      border-radius: 20px; padding: 48px 44px;
-      margin-top: 52px;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.10), 0 20px 60px rgba(0,0,0,0.45);
-      position: relative; overflow: hidden; text-align: left;
-    }
-    .pricing-card::before {
+    .waitlist::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); border-radius: 20px 20px 0 0;
+      position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 400px; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 100%,
+        rgba(0,192,240,0.07) 0%, transparent 65%);
     }
-    .pricing-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 12px; display: block;
+    .waitlist-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 20px; display: block;
     }
-    .pricing-title { font-size: 32px; font-weight: 800; letter-spacing: -.04em; margin-bottom: 6px; color: var(--c-text); }
-    .pricing-sub { font-size: 15px; color: var(--c-muted); margin-bottom: 32px; line-height: 1.6; }
-    .pricing-features { display: flex; flex-direction: column; gap: 13px; margin-bottom: 32px; }
-    .pf-row {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 14px; color: var(--c-muted);
+    .waitlist h2 {
+      font-size: clamp(32px, 5.5vw, 62px);
+      font-weight: 900; letter-spacing: -.05em; line-height: 1.05;
+      margin-bottom: 16px; color: var(--text);
     }
-    .pf-check {
-      width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
-      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.25);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--blue);
+    .waitlist h2 em { font-style: normal; color: var(--blue); }
+    .waitlist-sub {
+      font-size: 16px; color: var(--muted); line-height: 1.65;
+      max-width: 420px; margin: 0 auto 52px; font-weight: 400;
     }
-    .btn-cta-big {
-      display: block; width: 100%;
-      font-size: 16px; font-weight: 700; color: #0A0A0B;
-      background: var(--blue);
-      padding: 16px; border-radius: 10px; border: none; cursor: pointer;
-      text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 6px 20px rgba(0,192,240,0.3);
-      margin-bottom: 14px; text-align: center;
+    .waitlist-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 28px;
     }
-    .btn-cta-big:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,192,240,0.4); }
-    .pricing-note { font-size: 13px; color: var(--c-muted2); text-align: center; }
-    .pricing-guarantee {
-      margin-top: 24px; padding-top: 20px;
-      border-top: 0.5px solid rgba(255,255,255,0.08);
-      font-size: 13px; color: var(--c-muted);
-      display: flex; align-items: center; gap: 8px; justify-content: center;
+    .waitlist-note {
+      font-size: 12px; color: var(--muted2); letter-spacing: .02em;
     }
 
-    /* ─── FAQ ─── */
-    .faq { background: var(--bg2); }
-    .faq-inner { max-width: 700px; margin: 0 auto; }
-    .faq-list { margin-top: 52px; }
-    .faq-item { border-bottom: 0.5px solid var(--border2); }
-    .faq-item:first-child { border-top: 0.5px solid var(--border2); }
-    .faq-q {
-      width: 100%; background: none; border: none; cursor: pointer; text-align: left;
-      padding: 22px 0;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-      font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -.02em;
-      font-family: inherit;
+    /* countdown */
+    .countdown-row {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--muted); margin-bottom: 48px; display: block;
     }
-    .faq-q:hover { color: var(--muted); }
-    .faq-icon {
-      width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
-      background: var(--surface); border: 0.5px solid rgba(255,255,255,0.10);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; color: var(--c-muted);
-      transition: transform .25s;
+    .countdown-row span {
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
     }
-    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--blue); }
-    .faq-a {
-      font-size: 15px; color: var(--muted); line-height: 1.72;
-      max-height: 0; overflow: hidden;
-      transition: max-height .3s ease, padding .3s ease;
-    }
-    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 22px; }
 
-    /* ─── FOOTER CTA ─── */
-    .footer-cta {
-      padding: 120px var(--pad) 130px;
-      text-align: center; background: var(--bg);
-      border-top: 0.5px solid var(--border);
-    }
-    .footer-cta h2 {
-      font-size: clamp(28px, 5vw, 56px);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
-      max-width: 700px; margin: 0 auto 12px; color: var(--text);
-    }
-    .footer-cta h2 em { font-style: normal; color: var(--blue); }
-    .footer-cta p { font-size: 17px; color: var(--muted); margin-bottom: 40px; }
+    /* ─── FOOTER ─── */
     footer {
-      padding: 22px var(--pad);
-      border-top: 0.5px solid rgba(255,255,255,0.08);
+      padding: 24px var(--pad);
+      border-top: 0.5px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       background: var(--carbon);
     }
-    .footer-logo { font-size: 15px; font-weight: 800; letter-spacing: -.03em; color: var(--c-text); }
-    .footer-note { font-size: 13px; color: var(--c-muted2); }
+    .footer-logo {
+      font-size: 15px; font-weight: 800; letter-spacing: -.04em;
+      background: linear-gradient(135deg, #8A96A4, #CDD4DE, #8A96A4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .footer-note { font-size: 12px; color: var(--muted2); }
 
-    /* ─── MODAL ─── */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,0.45); backdrop-filter: blur(10px);
-      display: none; align-items: center; justify-content: center; padding: 24px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-card {
-      background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%);
-      background-size: 6px 6px;
-      border: 0.5px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 48px 44px;
-      width: 100%; max-width: 480px; position: relative;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.10), 0 24px 60px rgba(0,0,0,0.6);
-    }
-    .modal-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); border-radius: 20px 20px 0 0;
-    }
-    .modal-close {
-      position: absolute; top: 18px; right: 18px;
-      background: none; border: none; cursor: pointer;
-      font-size: 18px; color: var(--c-muted); transition: color .2s;
-    }
-    .modal-close:hover { color: var(--c-text); }
-    .modal-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 12px; display: block;
-    }
-    .modal-title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; color: var(--c-text); }
-    .modal-sub { font-size: 14px; color: var(--c-muted); margin-bottom: 32px; line-height: 1.6; }
-    .modal-form { display: flex; flex-direction: column; gap: 12px; }
-    .modal-input {
-      width: 100%;
-      background: var(--carbon);
-      border: 0.5px solid rgba(255,255,255,0.12);
-      border-radius: 10px; padding: 14px 16px;
-      font-size: 15px; color: var(--c-text); outline: none;
-      font-family: inherit;
-      transition: border-color .2s;
-    }
-    .modal-input::placeholder { color: var(--c-muted2); }
-    .modal-input:focus { border-color: rgba(0,192,240,0.5); background: var(--surface2); }
-    .modal-submit {
-      width: 100%;
-      background: var(--blue); color: #0A0A0B;
-      border: none; border-radius: 10px; padding: 15px;
-      font-size: 15px; font-weight: 700; cursor: pointer;
-      font-family: inherit;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 6px 18px rgba(0,192,240,0.25);
-    }
-    .modal-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,192,240,0.35); }
-    .modal-submit:disabled { opacity: .6; cursor: default; transform: none; }
-    .modal-note { font-size: 12px; color: var(--c-muted2); text-align: center; margin-top: 8px; }
-    .niche-fomo {
-      font-size: 12px; font-weight: 600; color: var(--blue);
-      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.25);
-      padding: 7px 12px; border-radius: 8px; margin-top: -4px;
-      animation: nicheFade 0.3s ease;
-    }
-    .modal-success { display: none; text-align: center; }
-    .modal-success-icon { font-size: 40px; margin-bottom: 16px; }
-    .modal-success-title { font-size: 22px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; color: var(--c-text); }
-    .modal-success-sub { font-size: 14px; color: var(--c-muted); line-height: 1.65; }
-
-    /* ─── CORNER SOCIAL PROOF TOASTS ─── */
+    /* ─── CORNER TOASTS ─── */
     .hero-proof {
-      position: absolute; top: 140px; bottom: 0;
-      width: 260px; pointer-events: none; z-index: 10;
+      position: absolute; top: 150px; bottom: 0;
+      width: 240px; pointer-events: none; z-index: 10;
       display: flex; flex-direction: column; gap: 10px;
-      justify-content: flex-start; padding-top: 40px;
+      justify-content: flex-start; padding-top: 48px;
     }
-    .hero-proof-left  { left: max(20px, 2vw); align-items: flex-start; }
-    .hero-proof-right { right: max(20px, 2vw); align-items: flex-end; }
-
+    .hero-proof-left  { left: max(16px, 2vw); align-items: flex-start; }
+    .hero-proof-right { right: max(16px, 2vw); align-items: flex-end; }
+    @media (max-width: 1100px) { .hero-proof { display: none; } }
     .proof-toast {
       background: var(--surface);
-      border: 0.5px solid rgba(255,255,255,0.10);
+      border: 0.5px solid var(--border2);
       border-radius: 14px; padding: 12px 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.09),
+        0 4px 20px rgba(0,0,0,0.50), 0 1px 3px rgba(0,0,0,0.30);
       display: flex; align-items: center; gap: 10px;
-      opacity: 0; transform: translateY(14px) scale(0.96);
+      opacity: 0; transform: translateY(14px) scale(0.95);
       animation: toastIn .5s cubic-bezier(0.22,1.1,0.36,1) forwards;
-      max-width: 230px;
+      max-width: 218px;
     }
-    @keyframes toastIn {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
+    @keyframes toastIn { to { opacity: 1; transform: translateY(0) scale(1); } }
     .toast-icon {
-      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 17px;
+      width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
     }
     .toast-icon-blue  { background: rgba(0,192,240,0.12); }
     .toast-icon-green { background: rgba(34,197,94,0.12); }
     .toast-icon-pink  { background: rgba(236,72,153,0.12); }
     .toast-icon-gold  { background: rgba(251,191,36,0.12); }
     .toast-body { flex: 1; min-width: 0; }
-    .toast-title {
-      font-size: 12px; font-weight: 700; color: var(--c-text);
-      letter-spacing: -.01em; line-height: 1.3;
-    }
-    .toast-sub {
-      font-size: 11px; color: var(--c-muted);
-      margin-top: 2px; line-height: 1.3;
-    }
-    .toast-num {
-      font-size: 14px; font-weight: 800; color: var(--blue);
-      letter-spacing: -.02em; flex-shrink: 0;
-    }
-    .toast-num.green { color: #16A34A; }
+    .toast-title { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .toast-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+    .toast-num   { font-size: 13px; font-weight: 800; color: var(--blue); flex-shrink: 0; }
+    .toast-num.green { color: #22C55E; }
 
-    /* counting number animation */
-    .toast-counter {
-      font-size: 22px; font-weight: 900; letter-spacing: -.04em;
-      color: var(--blue); line-height: 1;
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.70); backdrop-filter: blur(16px);
+      display: none; align-items: center; justify-content: center; padding: 24px;
     }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--surface);
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2);
+      border-radius: 22px; padding: 48px 44px;
+      width: 100%; max-width: 460px; position: relative;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.07),
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 32px 80px rgba(0,0,0,0.70);
+    }
+    .modal-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue);
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 0 20px rgba(0,192,240,0.60);
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      background: none; border: none; cursor: pointer;
+      font-size: 18px; color: var(--muted); transition: color .2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 12px; display: block;
+    }
+    .modal-title { font-size: 26px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 8px; color: var(--text); }
+    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 30px; line-height: 1.65; }
+    .modal-form { display: flex; flex-direction: column; gap: 11px; }
+    .modal-input {
+      width: 100%;
+      background: var(--carbon);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 14px 16px;
+      font-size: 15px; color: var(--text); outline: none;
+      font-family: inherit; transition: border-color .2s;
+    }
+    .modal-input::placeholder { color: var(--muted2); }
+    .modal-input:focus { border-color: rgba(0,192,240,0.45); }
+    .niche-fomo {
+      font-size: 12px; font-weight: 600; color: var(--blue);
+      background: rgba(0,192,240,0.10); border: 0.5px solid rgba(0,192,240,0.22);
+      padding: 7px 12px; border-radius: 8px; margin-top: -2px;
+    }
+    .modal-submit {
+      width: 100%; background: var(--blue); color: #07080D;
+      border: none; border-radius: 10px; padding: 15px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      font-family: inherit;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 20px rgba(0,192,240,0.30);
+    }
+    .modal-submit:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(0,192,240,0.45); }
+    .modal-submit:disabled { opacity: .5; cursor: default; transform: none; }
+    .modal-note { font-size: 12px; color: var(--muted2); text-align: center; margin-top: 8px; }
+    .modal-success { display: none; text-align: center; }
 
-    @media (max-width: 1100px) {
-      .hero-proof { display: none; }
+    /* referral success */
+    .ms-position {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue); background: rgba(0,192,240,0.10);
+      border: 0.5px solid rgba(0,192,240,0.22);
+      padding: 5px 12px; border-radius: 980px; margin-bottom: 14px;
     }
-
-    /* ─── SCROLL ASSEMBLY ─── */
-    .arm-from-left  { opacity: 0; transform: translateX(-40px); }
-    .arm-from-right { opacity: 0; transform: translateX(40px); }
-    .arm-from-top   { opacity: 0; transform: translateY(-30px); }
-    .arm-from-bot   { opacity: 0; transform: translateY(40px); }
-    .arm-scale-in   { opacity: 0; transform: scale(0.94); }
-    .arm-assembled {
-      opacity: 1 !important; transform: none !important;
-      transition: opacity .5s cubic-bezier(0.22, 1.1, 0.36, 1),
-                  transform .5s cubic-bezier(0.22, 1.1, 0.36, 1);
-    }
-    .arm-d1 { transition-delay: 0.04s !important; }
-    .arm-d2 { transition-delay: 0.10s !important; }
-    .arm-d3 { transition-delay: 0.17s !important; }
-    .arm-d4 { transition-delay: 0.24s !important; }
-    .arm-d5 { transition-delay: 0.31s !important; }
-    .arm-d6 { transition-delay: 0.38s !important; }
-    .arm-d7 { transition-delay: 0.45s !important; }
-    .arm-d8 { transition-delay: 0.52s !important; }
+    .ms-title { font-size: 26px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 6px; color: var(--text); line-height: 1.15; }
+    .ms-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .ms-progress-wrap { background: rgba(255,255,255,0.07); border-radius: 980px; height: 6px; margin-bottom: 6px; overflow: hidden; }
+    .ms-progress-bar { height: 100%; border-radius: 980px; background: linear-gradient(90deg, var(--blue-dark), var(--blue)); width: 0; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+    .ms-progress-label { font-size: 11px; color: var(--muted2); margin-bottom: 24px; display: flex; justify-content: space-between; }
+    .ms-divider { border: none; border-top: 0.5px solid var(--border); margin: 20px 0; }
+    .ms-refer-heading { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ms-refer-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .ms-ref-link-wrap { display: flex; gap: 8px; margin-bottom: 10px; }
+    .ms-ref-link { flex: 1; background: var(--carbon); border: 0.5px solid var(--border2); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--muted); font-family: inherit; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: default; }
+    .ms-copy-btn { background: var(--blue); color: #07080D; border: none; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; flex-shrink: 0; transition: transform .18s; white-space: nowrap; }
+    .ms-copy-btn:hover { transform: translateY(-1px); }
+    .ms-tweet-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: var(--surface2); color: var(--text); border: 0.5px solid var(--border2); border-radius: 8px; padding: 12px 16px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .18s; text-decoration: none; }
+    .ms-tweet-btn:hover { background: var(--border2); }
+    .ms-tweet-icon { font-size: 15px; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
-      .problem-grid { grid-template-columns: 1fr; }
-      .stats-grid   { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .demo-row { grid-template-columns: 1fr; gap: 12px; }
+      .cap-grid { grid-template-columns: 1fr; gap: 12px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item + .stat-item::before { display: none; }
+      .stat-item { padding: 40px 32px; border-top: 0.5px solid var(--border); }
+      .stat-item:first-child { border-top: none; }
     }
     @media (max-width: 560px) {
-      .hero-btns { flex-direction: column; }
-      .features-grid { grid-template-columns: 1fr; }
-      .pricing-card { padding: 32px 24px; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .hero-btns .btn-primary, .hero-btns .btn-ghost { width: 100%; max-width: 300px; text-align: center; }
       .modal-card { padding: 36px 24px; }
     }
-
-    /* ─── FOMO NICHE BAR ─── */
-    .hero-niche-bar {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
-      font-size: 12px; font-weight: 600; color: var(--c-muted);
-      margin-bottom: 28px; margin-top: -16px;
-      background: var(--surface); border: 0.5px solid var(--border2);
-      padding: 7px 16px; border-radius: 980px;
-      animation: nicheCycle 0.4s ease;
-    }
-    .hnb-sep { color: var(--c-muted2); }
-    .hnb-red    { color: #FC6B6B; }
-    .hnb-yellow { color: #F6C74A; }
-    .hnb-green  { color: #4ADE80; }
-    @keyframes nicheFade { 0%{opacity:0;transform:translateY(-4px)} 100%{opacity:1;transform:none} }
-
-    /* ─── HERO SOCIAL PROOF BAR ─── */
-    .hero-social-proof {
-      display: flex; align-items: center; gap: 10px; justify-content: center;
-      margin-top: -48px; margin-bottom: 48px; flex-wrap: wrap;
-    }
-    .hsp-avatars {
-      display: flex; align-items: center;
-    }
-    .hsp-av {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 2px solid rgba(196,201,212,0.8); font-size: 13px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--surface2); flex-shrink: 0;
-    }
-    .hsp-av + .hsp-av { margin-left: -8px; }
-    .hsp-text {
-      font-size: 13px; color: var(--muted);
-    }
-    .hsp-urgent {
-      color: var(--blue); font-weight: 600;
-      animation: urgentPulse 2.5s ease-in-out infinite;
-    }
-    @keyframes urgentPulse { 0%,100%{opacity:1} 50%{opacity:.55} }
-
-    /* ─── REFERRAL SUCCESS SCREEN ─── */
-    .modal-success { display: none; text-align: center; }
-    .ms-position {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--blue);
-      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.2);
-      padding: 5px 12px; border-radius: 980px; margin-bottom: 14px;
-    }
-    .ms-title {
-      font-size: 26px; font-weight: 800; letter-spacing: -.03em;
-      margin-bottom: 6px; color: var(--c-text); line-height: 1.15;
-    }
-    .ms-sub {
-      font-size: 14px; color: var(--c-muted); margin-bottom: 24px; line-height: 1.6;
-    }
-    .ms-progress-wrap {
-      background: rgba(255,255,255,0.08); border-radius: 980px; height: 7px;
-      margin-bottom: 6px; overflow: hidden;
-    }
-    .ms-progress-bar {
-      height: 100%; border-radius: 980px;
-      background: linear-gradient(90deg, var(--blue-dark), var(--blue));
-      width: 0; transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
-    .ms-progress-label {
-      font-size: 11px; color: var(--c-muted2); margin-bottom: 24px;
-      display: flex; justify-content: space-between;
-    }
-    .ms-divider {
-      border: none; border-top: 0.5px solid rgba(255,255,255,0.08);
-      margin: 20px 0;
-    }
-    .ms-refer-heading {
-      font-size: 14px; font-weight: 700; color: var(--c-text);
-      margin-bottom: 4px;
-    }
-    .ms-refer-sub {
-      font-size: 13px; color: var(--c-muted); margin-bottom: 14px;
-    }
-    .ms-ref-link-wrap {
-      display: flex; gap: 8px; margin-bottom: 10px;
-    }
-    .ms-ref-link {
-      flex: 1; background: var(--carbon); border: 0.5px solid rgba(255,255,255,0.10);
-      border-radius: 8px; padding: 10px 12px;
-      font-size: 13px; color: var(--c-muted); font-family: inherit;
-      text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      cursor: default;
-    }
-    .ms-copy-btn {
-      background: var(--blue); color: #0A0A0B;
-      border: none; border-radius: 8px; padding: 10px 16px;
-      font-size: 13px; font-weight: 700; cursor: pointer;
-      font-family: inherit; flex-shrink: 0;
-      transition: transform .18s, box-shadow .18s;
-      box-shadow: 0 3px 12px rgba(0,192,240,0.3);
-      white-space: nowrap;
-    }
-    .ms-copy-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,192,240,0.4); }
-    .ms-tweet-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; background: #0A0A0B; color: #fff;
-      border: none; border-radius: 8px; padding: 12px 16px;
-      font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
-      transition: background .18s;
-      text-decoration: none;
-    }
-    .ms-tweet-btn:hover { background: #1a1a2e; }
-    .ms-tweet-icon { font-size: 16px; }
   </style>
 </head>
 <body>
@@ -772,280 +535,114 @@
   <!-- ═══ NAV ═══ -->
   <nav>
     <div class="nav-logo">Ovis</div>
-    <button class="nav-cta" onclick="openModal()">Get Early Access</button>
+    <button class="nav-cta" onclick="openModal()">Get Access</button>
   </nav>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
 
-    <!-- LEFT corner social proof -->
-    <div class="hero-proof hero-proof-left" id="proofLeft"></div>
-
-    <!-- RIGHT corner social proof -->
+    <!-- Corner social proof -->
+    <div class="hero-proof hero-proof-left"  id="proofLeft"></div>
     <div class="hero-proof hero-proof-right" id="proofRight"></div>
 
+    <!-- Live badge -->
     <div class="hero-badge">
       <div class="hero-badge-dot"></div>
-      <span id="waitlistCount">1,247</span> creators on the waitlist
+      <span id="waitlistCount">1,247</span>&nbsp;creators on the waitlist
     </div>
 
-    <!-- Rolling countdown timer -->
-    <div class="hero-countdown">
-      ⏳ Early access closes in&nbsp;<span id="cdHours">47</span>:<span id="cdMins">59</span>:<span id="cdSecs">59</span>
-    </div>
+    <!-- The name -->
+    <span class="hero-ovis">OVIS</span>
 
-    <!-- FOMO niche bar -->
-    <div class="hero-niche-bar" id="heroNicheBar">
-      <span class="hnb-item hnb-red">🔴 Fitness · 4 spots left</span>
-      <span class="hnb-sep">·</span>
-      <span class="hnb-item hnb-yellow">🟡 Music · 12 spots left</span>
-      <span class="hnb-sep">·</span>
-      <span class="hnb-item hnb-green">🟢 Business · 21 spots left</span>
-    </div>
+    <!-- Tagline -->
+    <span class="hero-tag">Your <em>Jarvis</em> for Instagram.</span>
 
-    <!-- OVIS dominant + Jarvis tagline -->
-    <div style="position:relative; z-index:2; margin-bottom:4px;">
-      <div class="hero-ovis-glow"></div>
-      <span class="hero-ovis">OVIS</span>
-    </div>
-    <span class="hero-jarvis">Your <em>Jarvis</em> for Instagram.</span>
+    <!-- Sub -->
+    <p class="hero-sub">The AI agent that follows the right people, sends DMs in your voice, and grows your account around the clock. You don't lift a finger.</p>
 
-    <p class="hero-sub">The first AI agent that works your Instagram every day — following the right people, sending DMs in your voice, and engaging your niche around the clock. No input needed.</p>
+    <!-- CTAs -->
     <div class="hero-btns">
       <button class="btn-primary" onclick="openModal()">Get Early Access →</button>
-      <a href="#product" class="btn-secondary">See how it works</a>
+      <a href="#how" class="btn-ghost">See how it works</a>
     </div>
 
-    <!-- Feature 3: Social proof bar -->
-    <div class="hero-social-proof">
-      <div class="hsp-avatars">
-        <div class="hsp-av">🏋️</div>
-        <div class="hsp-av">🎵</div>
-        <div class="hsp-av">💼</div>
-        <div class="hsp-av">🎯</div>
-        <div class="hsp-av">🎨</div>
-      </div>
-      <div class="hsp-text"><b id="hspCount">1,247</b> creators already waiting · <span class="hsp-urgent" id="hspUrgent">Fitness niche closing soon</span></div>
-    </div>
-
+    <!-- Live product card -->
     <div class="hero-card">
       <div class="hero-card-bar">
         <div class="hcb-dot"></div>
         <div class="hcb-dot"></div>
         <div class="hcb-dot"></div>
-        <div class="hcb-title">Ovis · Live Activity</div>
+        <div class="hcb-title">Ovis — Live Activity</div>
       </div>
       <div class="hero-feed" id="heroFeed"></div>
       <div class="hero-card-footer">
-        <div class="hcf-stat">Actions today: <b id="heroCount">0</b></div>
-        <div class="hcf-live"><div class="hcf-live-dot"></div>Running now</div>
+        <div class="hcf-stat"><b id="heroCount">47</b> actions today</div>
+        <div class="hcf-live"><div class="hcf-live-dot"></div>RUNNING</div>
       </div>
     </div>
+
   </section>
 
-  <hr class="divider">
+  <!-- ═══ CAPABILITIES ═══ -->
+  <div class="capabilities" id="how">
+    <span class="cap-label">What Ovis does</span>
+    <h2 class="cap-headline">Three things. Running every day.<br>Without you.</h2>
+    <div class="cap-grid">
 
-  <!-- ═══ PROBLEM ═══ -->
-  <section class="problem" id="problem">
-    <div class="sec-inner">
-      <span class="section-label arm-from-top arm-d1">The problem</span>
-      <h2 class="section-title arm-from-left arm-d2">How most creators grow<br>on Instagram</h2>
-      <p class="section-sub arm-from-left arm-d3">It works — but it costs hours every day, and the moment you stop, it stops.</p>
-      <div class="problem-grid">
-        <div class="problem-card arm-from-bot arm-d3">
-          <span class="prob-icon">⏱️</span>
-          <div class="prob-title">Hours lost every day</div>
-          <div class="prob-sub">The average creator spends 2–3 hours daily on manual growth — following accounts, writing DMs, liking posts. By hand. Every single day.</div>
-        </div>
-        <div class="problem-card arm-from-bot arm-d4">
-          <span class="prob-icon">😴</span>
-          <div class="prob-title">You stop, it stops</div>
-          <div class="prob-sub">Instagram rewards consistency. But humans sleep, travel, get busy. Your growth flatlines the moment you take a break.</div>
-        </div>
-        <div class="problem-card arm-from-bot arm-d5">
-          <span class="prob-icon">🎯</span>
-          <div class="prob-title">No real targeting</div>
-          <div class="prob-sub">Randomly following people doesn't work. Real growth requires knowing exactly who to engage — your niche, your city, your audience.</div>
-        </div>
+      <div class="cap-card">
+        <div class="cap-icon">⚡</div>
+        <div class="cap-title">Follows</div>
+        <div class="cap-desc">Finds and follows exactly the right people in your niche — by city, account size, engagement rate. Every single day.</div>
       </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">💬</div>
+        <div class="cap-title">DMs</div>
+        <div class="cap-desc">Writes and sends personalized messages in your voice. Not templates. Conversations that sound like you wrote them.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📈</div>
+        <div class="cap-title">Grows</div>
+        <div class="cap-desc">Your account compounds while you sleep. Real followers. Real reach. No posting required from you.</div>
+      </div>
+
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ PRODUCT ═══ -->
-  <section class="product" id="product">
-    <div class="sec-inner">
-      <span class="section-label arm-from-top arm-d1">The product</span>
-      <h2 class="section-title arm-from-left arm-d2">Your Instagram Growth Agent</h2>
-      <p class="section-sub arm-from-left arm-d3">Unlike schedulers and bots, every Ovis action is intelligent — targeted to your exact niche, timed like a human, written in your voice.</p>
-      <div class="product-note arm-from-left arm-d4">
-        ⚡ Unlike generic bots, Ovis learns your voice and targets your exact audience — no spray-and-pray.
-      </div>
-
-      <div class="product-demos">
-        <div class="demo-row arm-from-bot arm-d3">
-          <div class="demo-q">Who should Ovis follow today?</div>
-          <div>
-            <div class="demo-a">Ovis found <b>47 fitness creators in NYC</b> who posted in the last 24 hours with 2K–50K followers. Following them now within safe limits.</div>
-            <div class="demo-tags"><span class="demo-tag">Niche targeting</span><span class="demo-tag">Location aware</span><span class="demo-tag">Safe pacing</span></div>
-          </div>
-        </div>
-        <div class="demo-row arm-from-bot arm-d4">
-          <div class="demo-q">Send DMs in my voice?</div>
-          <div>
-            <div class="demo-a">Ovis sent <b>12 personalized DMs</b> while you slept. Each matched your brand voice — direct, friendly, no templates. <b>3 people replied.</b></div>
-            <div class="demo-tags"><span class="demo-tag">Voice-matched</span><span class="demo-tag">No templates</span><span class="demo-tag">Real replies</span></div>
-          </div>
-        </div>
-        <div class="demo-row arm-from-bot arm-d5">
-          <div class="demo-q">What did Ovis do today?</div>
-          <div>
-            <div class="demo-a">Today: <b>73 follows</b>, <b>28 DMs sent</b>, <b>156 likes</b>, <b>6 unfollows</b> (no follow-backs). All within safe limits. Zero input from you.</div>
-            <div class="demo-tags"><span class="demo-tag">24/7 active</span><span class="demo-tag">Rate limits</span><span class="demo-tag">Full autonomy</span></div>
-          </div>
-        </div>
-        <div class="demo-row arm-from-bot arm-d6">
-          <div class="demo-q">What should I post next?</div>
-          <div>
-            <div class="demo-a">Based on your niche trends, <b>behind-the-scenes content</b> is getting 3× more saves than product posts this week. Best time: Tuesday 7pm.</div>
-            <div class="demo-tags"><span class="demo-tag">Niche intel</span><span class="demo-tag">Optimal timing</span><span class="demo-tag">Content strategy</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ STATS ═══ -->
-  <section class="stats">
-    <div class="sec-inner">
-      <span class="section-label arm-from-top arm-d1">By the numbers</span>
-      <h2 class="section-title arm-from-left arm-d2">The most comprehensive<br>Instagram growth engine</h2>
-      <p class="section-sub arm-from-left arm-d3">Ovis runs the same logic a growth expert would — in your niche, around the clock, without you thinking about it.</p>
-      <div class="stats-grid">
-        <div class="stat-card arm-from-bot arm-d3">
-          <div class="stat-num"><span id="statActions">0</span><em>+</em></div>
-          <div class="stat-label">Actions taken per day, per account</div>
-        </div>
-        <div class="stat-card arm-from-bot arm-d4">
-          <div class="stat-num">0</div>
-          <div class="stat-label">Hours of your time required</div>
-        </div>
-        <div class="stat-card arm-from-bot arm-d5">
-          <div class="stat-num"><em>24/7</em></div>
-          <div class="stat-label">Always on — never sleeps, never asks</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ FEATURES ═══ -->
-  <section class="features">
-    <div class="sec-inner">
-      <span class="section-label arm-from-top arm-d1">Capabilities</span>
-      <h2 class="section-title arm-from-left arm-d2">Real-time growth,<br>updated every hour</h2>
-      <div class="features-grid" style="margin-top:52px;">
-        <div class="feat-card arm-from-bot arm-d2"><span class="feat-icon">⚡</span><div class="feat-title">24/7 Engagement</div><div class="feat-sub">Works around the clock — while you sleep, travel, or create content.</div></div>
-        <div class="feat-card arm-from-bot arm-d3"><span class="feat-icon">🎯</span><div class="feat-title">Niche Targeting</div><div class="feat-sub">Finds exactly the right people — your niche, your city, your audience size range.</div></div>
-        <div class="feat-card arm-from-bot arm-d4"><span class="feat-icon">🗣️</span><div class="feat-title">Voice-Matched DMs</div><div class="feat-sub">Every DM sounds like you wrote it — not a template, not a bot. Your tone, always.</div></div>
-        <div class="feat-card arm-from-bot arm-d5"><span class="feat-icon">🤖</span><div class="feat-title">Full Autonomy</div><div class="feat-sub">No dashboard, no buttons. Set it up once and Ovis runs on its own indefinitely.</div></div>
-        <div class="feat-card arm-from-bot arm-d3"><span class="feat-icon">📊</span><div class="feat-title">Algorithm Aware</div><div class="feat-sub">Knows the Instagram algorithm for your specific niche and content type.</div></div>
-        <div class="feat-card arm-from-bot arm-d4"><span class="feat-icon">🔄</span><div class="feat-title">Follow/Unfollow Logic</div><div class="feat-sub">Smart follow-back detection. Keeps your ratio clean automatically.</div></div>
-        <div class="feat-card arm-from-bot arm-d5"><span class="feat-icon">🛡️</span><div class="feat-title">Safe Rate Limits</div><div class="feat-sub">Every action stays within Instagram's safe window — no bans, no flags.</div></div>
-        <div class="feat-card arm-from-bot arm-d6"><span class="feat-icon">📍</span><div class="feat-title">Location Intelligence</div><div class="feat-sub">Target creators and followers in a specific city, region, or globally.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ PROOF ═══ -->
-  <section class="proof">
-    <div class="proof-inner">
-      <span class="section-label arm-from-top arm-d1">Early results</span>
-      <h2 class="section-title arm-from-left arm-d2">Start getting more followers today</h2>
-      <div class="proof-card arm-from-bot arm-d3">
-        <div class="proof-stars">⭐⭐⭐⭐⭐</div>
-        <div class="proof-quote">"I used to spend 2 hours every morning on Instagram. Now I open the app and <em>the work is already done.</em> Ovis followed 60 people, sent 15 DMs, and got 4 replies — all before I had coffee."</div>
-        <div class="proof-author">
-          <div class="proof-av">🏋️</div>
-          <div>
-            <div class="proof-name">Early Access Creator</div>
-            <div class="proof-handle">Fitness · NYC · 8.2K followers</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ PRICING ═══ -->
-  <section class="pricing" id="pricing">
-    <div class="pricing-wrap">
-      <span class="section-label arm-from-top arm-d1">Early access</span>
-      <h2 class="section-title arm-from-left arm-d2">Join before your niche fills up</h2>
-      <p class="section-sub arm-from-left arm-d3">We're letting in creators one niche at a time — so your growth is real, not diluted.</p>
-      <div class="pricing-card arm-from-bot arm-d4">
-        <span class="pricing-eyebrow">Limited Spots</span>
-        <div class="pricing-title">Early Access</div>
-        <div class="pricing-sub">Reserve your spot now. No credit card required.</div>
-        <div class="pricing-features">
-          <div class="pf-row"><div class="pf-check">✓</div>24/7 autonomous growth agent</div>
-          <div class="pf-row"><div class="pf-check">✓</div>Voice-matched DMs in your tone</div>
-          <div class="pf-row"><div class="pf-check">✓</div>Niche &amp; location targeting</div>
-          <div class="pf-row"><div class="pf-check">✓</div>Full follow/unfollow automation</div>
-          <div class="pf-row"><div class="pf-check">✓</div>Algorithm-aware engagement</div>
-          <div class="pf-row"><div class="pf-check">✓</div>Safe rate limits — no bans</div>
-        </div>
-        <button class="btn-cta-big" onclick="openModal()">Get Early Access →</button>
-        <div class="pricing-note">No credit card · No waitlist fee · Just a spot in line</div>
-        <div class="pricing-guarantee">🛡️ Risk-free — cancel anytime before billing starts</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ FAQ ═══ -->
-  <section class="faq">
-    <div class="faq-inner">
-      <span class="section-label arm-from-top arm-d1">FAQ</span>
-      <h2 class="section-title arm-from-left arm-d2">Common questions</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How is Ovis different from other Instagram bots?<span class="faq-icon">+</span></button>
-          <div class="faq-a">Most bots follow random accounts and blast copy-paste DMs. Ovis is an AI agent — it learns your voice, targets only your exact niche, and operates with human-like timing. There's nothing else that works the way a real person would.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Will this get my account banned?<span class="faq-icon">+</span></button>
-          <div class="faq-a">Ovis is built with Instagram safety as a core constraint. All actions stay within safe rate limits, use human-like timing patterns, and avoid the trigger behaviors. We've designed Ovis so your account stays clean.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How long does setup take?<span class="faq-icon">+</span></button>
-          <div class="faq-a">Under 10 minutes. Tell Ovis how you sound and who your audience is. After that, it runs on its own. No ongoing configuration needed.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">When will I get access?<span class="faq-icon">+</span></button>
-          <div class="faq-a">We're onboarding creators niche by niche to keep results real. When you sign up, you'll get a spot in your niche queue. We'll reach out with your access link as soon as your slot opens.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ FOOTER CTA ═══ -->
-  <div class="footer-cta">
-    <h2>The only AI agent that works your <em>Instagram</em> every day</h2>
-    <p>While you focus on creating, Ovis handles the growth.</p>
-    <button class="btn-primary" onclick="openModal()">Get Early Access →</button>
   </div>
 
+  <!-- ═══ STATS ═══ -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num"><span id="statActions">0</span><em>+</em></span>
+        <span class="stat-label">actions per day, per account</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4.2<em>×</em></span>
+        <span class="stat-label">average follower growth rate</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24<em>/7</em></span>
+        <span class="stat-label">always running, never stops</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WAITLIST CTA ═══ -->
+  <section class="waitlist">
+    <span class="waitlist-eyebrow">Limited Access</span>
+    <div class="countdown-row">
+      ⏳ Early access closes in&nbsp;<span id="cdHours">47</span>:<span id="cdMins">59</span>:<span id="cdSecs">59</span>
+    </div>
+    <h2>You're early.<br>Let's keep it that way.</h2>
+    <p class="waitlist-sub">We're onboarding one niche at a time. Once your niche fills, that's it. Get in now.</p>
+    <div class="waitlist-btns">
+      <button class="btn-primary" onclick="openModal()">Reserve My Spot →</button>
+    </div>
+    <div class="waitlist-note">No credit card &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Just your spot</div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
   <footer>
     <div class="footer-logo">Ovis</div>
     <div class="footer-note">© 2025 Omni World · omniworld.app</div>
@@ -1072,26 +669,16 @@
         <div class="ms-position">🎉 You're confirmed</div>
         <div class="ms-title" id="msTitle">You're #1,248 on the list.</div>
         <div class="ms-sub">We'll reach out as soon as your niche slot opens. Keep creating — Ovis will handle the rest.</div>
-
-        <div class="ms-progress-wrap">
-          <div class="ms-progress-bar" id="msProgressBar"></div>
-        </div>
-        <div class="ms-progress-label">
-          <span>You</span>
-          <span id="msProgressLabel">Spot #1,248 of 5,000</span>
-        </div>
-
+        <div class="ms-progress-wrap"><div class="ms-progress-bar" id="msProgressBar"></div></div>
+        <div class="ms-progress-label"><span>You</span><span id="msProgressLabel">Spot #1,248 of 5,000</span></div>
         <hr class="ms-divider">
-
         <div class="ms-refer-heading">🚀 Refer 3 friends → skip 50 spots</div>
         <div class="ms-refer-sub">Share your link. Every 3 friends = 50 spots forward.</div>
-
         <div class="ms-ref-link-wrap">
           <div class="ms-ref-link" id="msRefLink">omniworld.app?ref=ABC123</div>
           <button class="ms-copy-btn" id="msCopyBtn" onclick="copyRefLink()">Copy link</button>
         </div>
-
-        <button class="ms-tweet-btn" id="msTweetBtn" onclick="tweetThis()">
+        <button class="ms-tweet-btn" onclick="tweetThis()">
           <span class="ms-tweet-icon">𝕏</span> Tweet this
         </button>
       </div>
@@ -1099,149 +686,89 @@
   </div>
 
   <script>
-    /* ── Rolling countdown timer ── */
+    /* ── Countdown timer ── */
     (function() {
-      // Seed a consistent-feeling deadline: 47h from a fixed reference point,
-      // rolling so it always shows somewhere between 6h and 47h.
-      var PERIOD = 48 * 3600; // 48h cycle in seconds
-      var REF = 1700000000;   // fixed epoch reference (doesn't matter exactly what)
+      var PERIOD = 48 * 3600, REF = 1700000000;
       function getRemaining() {
         var now = Math.floor(Date.now() / 1000);
-        var elapsed = (now - REF) % PERIOD;
-        // Offset so it counts down from ~47:xx rather than 00:xx at reset
-        var remaining = PERIOD - elapsed;
-        // Keep it feeling "real" — never show less than 6 hours
+        var remaining = PERIOD - ((now - REF) % PERIOD);
         if (remaining < 6 * 3600) remaining += 18 * 3600;
         return remaining;
       }
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
       function tick() {
         var rem = getRemaining();
-        var h = Math.floor(rem / 3600);
-        var m = Math.floor((rem % 3600) / 60);
-        var s = rem % 60;
-        document.getElementById('cdHours').textContent = pad(h);
-        document.getElementById('cdMins').textContent  = pad(m);
-        document.getElementById('cdSecs').textContent  = pad(s);
+        document.getElementById('cdHours').textContent = pad(Math.floor(rem / 3600));
+        document.getElementById('cdMins').textContent  = pad(Math.floor((rem % 3600) / 60));
+        document.getElementById('cdSecs').textContent  = pad(rem % 60);
       }
-      tick();
-      setInterval(tick, 1000);
+      tick(); setInterval(tick, 1000);
     })();
 
     /* ── Dynamic niche FOMO ── */
     var NICHE_COUNTS = {
-      fitness:  { spots: 4,  label: '🔴 4 spots left in Fitness — going fast' },
-      music:    { spots: 12, label: '🟡 12 spots remaining in Music' },
-      business: { spots: 21, label: '🟢 21 spots open in Business' },
-      beauty:   { spots: 2,  label: '🔴 Only 2 spots left in Beauty — almost full' },
-      travel:   { spots: 9,  label: '🟡 9 spots left in Travel' },
-      food:     { spots: 7,  label: '🟡 7 spots left in Food & Lifestyle' },
-      fashion:  { spots: 3,  label: '🔴 3 spots left in Fashion — nearly full' },
-      finance:  { spots: 18, label: '🟢 18 spots open in Finance' },
-      gaming:   { spots: 11, label: '🟡 11 spots left in Gaming' },
-      comedy:   { spots: 6,  label: '🟡 6 spots remaining in Comedy' },
+      fitness:  '🔴 4 spots left in Fitness — going fast',
+      music:    '🟡 12 spots remaining in Music',
+      business: '🟢 21 spots open in Business',
+      beauty:   '🔴 Only 2 spots left in Beauty — almost full',
+      travel:   '🟡 9 spots left in Travel',
+      food:     '🟡 7 spots left in Food & Lifestyle',
+      fashion:  '🔴 3 spots left in Fashion — nearly full',
+      finance:  '🟢 18 spots open in Finance',
+      gaming:   '🟡 11 spots left in Gaming',
+      comedy:   '🟡 6 spots remaining in Comedy',
     };
     function updateNicheFomo(val) {
       var el = document.getElementById('nicheFomo');
       if (!val || val.trim().length < 2) { el.style.display = 'none'; return; }
-      var key = val.trim().toLowerCase();
-      // Find a matching niche (partial match)
-      var match = null;
+      var key = val.trim().toLowerCase(), match = null;
       for (var k in NICHE_COUNTS) {
         if (k.indexOf(key) !== -1 || key.indexOf(k) !== -1) { match = NICHE_COUNTS[k]; break; }
       }
-      if (match) {
-        el.textContent = match.label;
-        el.style.display = 'block';
-      } else if (val.trim().length >= 3) {
-        // Generic message for unrecognized niches
-        var generic = Math.floor(Math.random() * 15) + 8;
-        el.textContent = '🟢 ' + generic + ' spots currently open in your niche';
-        el.style.display = 'block';
-      } else {
-        el.style.display = 'none';
-      }
+      el.textContent = match || (val.trim().length >= 3 ? '🟢 ' + (Math.floor(Math.random()*15)+8) + ' spots currently open in your niche' : '');
+      el.style.display = el.textContent ? 'block' : 'none';
     }
 
-    /* ── Waitlist counter (Feature 1) ── */
+    /* ── Waitlist counter ── */
     var waitlistRaw = 1247;
-    function formatCount(n) {
-      return n.toLocaleString('en-US');
-    }
+    function formatCount(n) { return n.toLocaleString('en-US'); }
     function updateAllCounts() {
       document.getElementById('waitlistCount').textContent = formatCount(waitlistRaw);
-      var hsp = document.getElementById('hspCount');
-      if (hsp) hsp.textContent = formatCount(waitlistRaw);
     }
     function bumpWaitlist() {
-      var inc = Math.floor(Math.random() * 3) + 1;
-      waitlistRaw += inc;
+      waitlistRaw += Math.floor(Math.random() * 3) + 1;
       updateAllCounts();
-      var next = (Math.random() * 7000) + 8000; // 8–15 seconds
-      setTimeout(bumpWaitlist, next);
+      setTimeout(bumpWaitlist, Math.random() * 7000 + 8000);
     }
     setTimeout(bumpWaitlist, 10000);
 
-    /* ── FOMO niche bar cycling (Feature 1 extra) ── */
-    var NICHES = [
-      { label: '🔴 Fitness · 4 spots left',  cls: 'hnb-red',    urgent: 'Fitness niche closing soon' },
-      { label: '🟡 Music · 12 spots left',   cls: 'hnb-yellow', urgent: 'Music niche filling fast'   },
-      { label: '🟢 Business · 21 spots left',cls: 'hnb-green',  urgent: 'Business niche open'        },
-      { label: '🔴 Beauty · 2 spots left',   cls: 'hnb-red',    urgent: 'Beauty niche almost full'   },
-      { label: '🟡 Travel · 9 spots left',   cls: 'hnb-yellow', urgent: 'Travel niche filling fast'  },
-    ];
-    var nicheIdx = 0;
-    function cycleNiche() {
-      nicheIdx = (nicheIdx + 1) % NICHES.length;
-      var n = NICHES[nicheIdx];
-      // Update the urgent text in social proof bar
-      var urgentEl = document.getElementById('hspUrgent');
-      if (urgentEl) urgentEl.textContent = n.urgent;
-      setTimeout(cycleNiche, 5000);
-    }
-    setTimeout(cycleNiche, 5000);
-
-    /* ── Referral link helpers (Feature 2) ── */
+    /* ── Referral helpers ── */
     var refCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-    var refLink = 'omniworld.app?ref=' + refCode;
+    var refLink  = 'omniworld.app?ref=' + refCode;
 
     function showSuccessScreen() {
-      var currentCount = waitlistRaw;
-      var mySpot = currentCount + 1;
-      // Update title
+      var mySpot = waitlistRaw + 1;
       document.getElementById('msTitle').textContent = 'You\'re #' + formatCount(mySpot) + ' on the list.';
-      // Update progress label
       document.getElementById('msProgressLabel').textContent = 'Spot #' + formatCount(mySpot) + ' of 5,000';
-      // Animate progress bar
-      var pct = Math.min((mySpot / 5000) * 100, 100);
       setTimeout(function() {
-        document.getElementById('msProgressBar').style.width = pct + '%';
+        document.getElementById('msProgressBar').style.width = Math.min((mySpot/5000)*100, 100) + '%';
       }, 150);
-      // Set ref link
       document.getElementById('msRefLink').textContent = refLink;
     }
-
     function copyRefLink() {
       var btn = document.getElementById('msCopyBtn');
       navigator.clipboard.writeText('https://' + refLink).then(function() {
         btn.textContent = 'Copied! ✓';
         setTimeout(function() { btn.textContent = 'Copy link'; }, 2000);
       }).catch(function() {
-        // Fallback for browsers without clipboard API
-        var temp = document.createElement('textarea');
-        temp.value = 'https://' + refLink;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        btn.textContent = 'Copied! ✓';
-        setTimeout(function() { btn.textContent = 'Copy link'; }, 2000);
+        var t = document.createElement('textarea'); t.value = 'https://'+refLink;
+        document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t);
+        btn.textContent = 'Copied! ✓'; setTimeout(function(){ btn.textContent = 'Copy link'; }, 2000);
       });
     }
-
     function tweetThis() {
-      var tweetText = 'Just claimed my spot on Ovis — the AI that runs your Instagram while you sleep 🤖\n\nOvis follows people, sends DMs in your voice, and grows your account 24/7. Zero input.\n\nGet early access: omniworld.app';
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText));
+      var txt = 'Just claimed my spot on Ovis — the AI that runs your Instagram while you sleep 🤖\n\nFollows, DMs, grows. 24/7. Zero input.\n\nGet early access: omniworld.app';
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt));
     }
 
     /* ── Modal ── */
@@ -1257,34 +784,25 @@
         const res = await fetch('https://formspree.io/f/mpqyergz', { method:'POST', body:data, headers:{'Accept':'application/json'} });
         if (res.ok) {
           document.getElementById('modalForm').style.display='none';
-          var successEl = document.getElementById('modalSuccess');
-          successEl.style.display='block';
+          document.getElementById('modalSuccess').style.display='block';
           showSuccessScreen();
         } else { btn.disabled=false; btn.textContent='Try again →'; }
       } catch { btn.disabled=false; btn.textContent='Try again →'; }
     });
-
-    /* ── FAQ ── */
-    function toggleFaq(btn) {
-      const item = btn.parentElement;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
 
     /* ── Hero live feed ── */
     const ACTIONS = [
       { icon:'👥', name:'@alex.lifts',   meta:'Followed · Fitness · NYC',         tag:'Follow'   },
       { icon:'💬', name:'@sarah.runs',   meta:'DM sent · "Hey loved your reel…"', tag:'DM'       },
       { icon:'❤️', name:'@mike.builds',  meta:'Liked latest post · Entrepreneur', tag:'Like'     },
-      { icon:'👥', name:'@nia.wellness', meta:'Followed · Wellness · LA',          tag:'Follow'   },
-      { icon:'💬', name:'@coach.james',  meta:'DM sent · "Your content is 🔥"',   tag:'DM'       },
+      { icon:'👥', name:'@nia.wellness', meta:'Followed · Wellness · LA',         tag:'Follow'   },
+      { icon:'💬', name:'@coach.james',  meta:'DM sent · "Your content is 🔥"',  tag:'DM'       },
       { icon:'✅', name:'@dan.creates',  meta:'Unfollowed · no follow-back · 3d', tag:'Unfollow' },
       { icon:'❤️', name:'@fit.kels',     meta:'Liked 2 posts · Fitness creator',  tag:'Like'     },
       { icon:'👥', name:'@marcus.m',     meta:'Followed · Content creator · NYC', tag:'Follow'   },
     ];
     let heroCount = 0;
-    const feed = document.getElementById('heroFeed');
+    const feed    = document.getElementById('heroFeed');
     const countEl = document.getElementById('heroCount');
     function addRow() {
       const a = ACTIONS[heroCount % ACTIONS.length];
@@ -1302,58 +820,46 @@
     /* ── Stats counter ── */
     function animateCount(el, target, dur) {
       let s=0, step=target/(dur/16);
-      const t = setInterval(() => { s=Math.min(s+step,target); el.textContent=Math.floor(s); if(s>=target) clearInterval(t); }, 16);
+      const t = setInterval(()=>{ s=Math.min(s+step,target); el.textContent=Math.floor(s); if(s>=target)clearInterval(t); }, 16);
     }
-    const so = new IntersectionObserver(e => { e.forEach(en => { if(en.isIntersecting){ animateCount(document.getElementById('statActions'),250,1800); so.disconnect(); } }); }, {threshold:.3});
-    so.observe(document.querySelector('.stats-grid'));
+    const so = new IntersectionObserver(e => {
+      e.forEach(en => { if(en.isIntersecting){ animateCount(document.getElementById('statActions'),250,1800); so.disconnect(); } });
+    }, {threshold:.3});
+    so.observe(document.querySelector('.stats-strip'));
 
-    /* ── Corner social proof toasts ── */
+    /* ── Corner toasts ── */
     const LEFT_TOASTS = [
       { icon:'👥', iconClass:'toast-icon-blue',  title:'+127 new followers', sub:'Today · Fitness niche', num:null },
       { icon:'💬', iconClass:'toast-icon-pink',  title:'DM reply received',  sub:'@alex.lifts · "This is fire 🔥"', num:null },
-      { icon:'📈', iconClass:'toast-icon-green', title:'Profile views',      sub:'Up 340% this week', num:'+340%', numClass:'green' },
-      { icon:'👥', iconClass:'toast-icon-blue',  title:'+89 new followers',  sub:'Last 12 hours', num:null },
-      { icon:'❤️', iconClass:'toast-icon-pink',  title:'Post went viral',    sub:'2,400 likes · NYC Fitness', num:null },
+      { icon:'📈', iconClass:'toast-icon-green', title:'Profile views up',   sub:'This week vs last', num:'+340%', numClass:'green' },
+      { icon:'👥', iconClass:'toast-icon-blue',  title:'+89 followers',      sub:'Last 12 hours', num:null },
     ];
     const RIGHT_TOASTS = [
       { icon:'🔔', iconClass:'toast-icon-gold',  title:'@nia.wellness followed you', sub:'Wellness · 14.2K followers', num:null },
       { icon:'⚡', iconClass:'toast-icon-blue',  title:'Ovis sent 28 DMs',   sub:'While you slept · 4 replied', num:null },
-      { icon:'🔔', iconClass:'toast-icon-pink',  title:'@coach.james followed you', sub:'Coach · 8.8K followers', num:null },
-      { icon:'📊', iconClass:'toast-icon-green', title:'Follower growth',    sub:'This week vs last week', num:'+62%', numClass:'green' },
+      { icon:'📊', iconClass:'toast-icon-green', title:'Follower growth',    sub:'This week vs last', num:'+62%', numClass:'green' },
       { icon:'🔔', iconClass:'toast-icon-gold',  title:'@fit.kels followed you', sub:'Fitness Creator · NYC', num:null },
     ];
-    function buildToast(t, delay) {
+    function buildToast(t) {
       const el = document.createElement('div');
       el.className = 'proof-toast';
-      el.style.animationDelay = delay + 's';
-      el.innerHTML = `<div class="toast-icon ${t.iconClass}">${t.icon}</div><div class="toast-body"><div class="toast-title">${t.title}</div><div class="toast-sub">${t.sub}</div></div>${t.num ? `<div class="toast-num ${t.numClass||''}">${t.num}</div>` : ''}`;
+      el.innerHTML = `<div class="toast-icon ${t.iconClass}">${t.icon}</div><div class="toast-body"><div class="toast-title">${t.title}</div><div class="toast-sub">${t.sub}</div></div>${t.num?`<div class="toast-num ${t.numClass||''}">${t.num}</div>`:''}`;
       return el;
     }
     function cycleToasts(container, list) {
       let idx = 0;
       function next() {
-        const toast = buildToast(list[idx % list.length], 0);
+        const toast = buildToast(list[idx % list.length]);
         if (container.children.length >= 3) container.removeChild(container.firstChild);
         container.appendChild(toast);
         idx++;
-        setTimeout(next, 2600 + Math.random() * 800);
+        setTimeout(next, 2800 + Math.random() * 800);
       }
-      // seed 2 toasts immediately
-      container.appendChild(buildToast(list[0], 0.1));
-      setTimeout(() => container.appendChild(buildToast(list[1], 0)), 700);
-      setTimeout(next, 3200);
+      setTimeout(next, idx === 0 ? 1200 : 0);
+      next();
     }
-    cycleToasts(document.getElementById('proofLeft'), LEFT_TOASTS);
+    cycleToasts(document.getElementById('proofLeft'),  LEFT_TOASTS);
     cycleToasts(document.getElementById('proofRight'), RIGHT_TOASTS);
-
-    /* ── Scroll assembly ── */
-    (function() {
-      const PARTS = '.arm-from-left,.arm-from-right,.arm-from-top,.arm-from-bot,.arm-scale-in';
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting){ e.target.querySelectorAll(PARTS).forEach(el=>el.classList.add('arm-assembled')); io.unobserve(e.target); } });
-      }, {threshold: 0.08});
-      document.querySelectorAll('section, .footer-cta').forEach(s => io.observe(s));
-    })();
   </script>
 </body>
 </html>
