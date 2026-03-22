@@ -572,6 +572,116 @@
       .pricing-card { padding: 32px 24px; }
       .modal-card { padding: 36px 24px; }
     }
+
+    /* ─── FOMO NICHE BAR ─── */
+    .hero-niche-bar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      margin-bottom: 28px; margin-top: -16px;
+      background: var(--surface); border: 0.5px solid var(--border2);
+      padding: 7px 16px; border-radius: 980px;
+      animation: nicheCycle 0.4s ease;
+    }
+    .hnb-sep { color: var(--muted2); }
+    .hnb-red    { color: #E53E3E; }
+    .hnb-yellow { color: #D69E2E; }
+    .hnb-green  { color: #38A169; }
+    @keyframes nicheFade { 0%{opacity:0;transform:translateY(-4px)} 100%{opacity:1;transform:none} }
+
+    /* ─── HERO SOCIAL PROOF BAR ─── */
+    .hero-social-proof {
+      display: flex; align-items: center; gap: 10px; justify-content: center;
+      margin-top: -48px; margin-bottom: 48px; flex-wrap: wrap;
+    }
+    .hsp-avatars {
+      display: flex; align-items: center;
+    }
+    .hsp-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid white; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface2); flex-shrink: 0;
+    }
+    .hsp-av + .hsp-av { margin-left: -8px; }
+    .hsp-text {
+      font-size: 13px; color: var(--muted);
+    }
+    .hsp-urgent {
+      color: var(--blue); font-weight: 600;
+      animation: urgentPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes urgentPulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+
+    /* ─── REFERRAL SUCCESS SCREEN ─── */
+    .modal-success { display: none; text-align: center; }
+    .ms-position {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--blue);
+      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.2);
+      padding: 5px 12px; border-radius: 980px; margin-bottom: 14px;
+    }
+    .ms-title {
+      font-size: 26px; font-weight: 800; letter-spacing: -.03em;
+      margin-bottom: 6px; color: var(--text); line-height: 1.15;
+    }
+    .ms-sub {
+      font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6;
+    }
+    .ms-progress-wrap {
+      background: var(--surface); border-radius: 980px; height: 7px;
+      margin-bottom: 6px; overflow: hidden;
+    }
+    .ms-progress-bar {
+      height: 100%; border-radius: 980px;
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+      width: 0; transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ms-progress-label {
+      font-size: 11px; color: var(--muted2); margin-bottom: 24px;
+      display: flex; justify-content: space-between;
+    }
+    .ms-divider {
+      border: none; border-top: 0.5px solid var(--border);
+      margin: 20px 0;
+    }
+    .ms-refer-heading {
+      font-size: 14px; font-weight: 700; color: var(--text);
+      margin-bottom: 4px;
+    }
+    .ms-refer-sub {
+      font-size: 13px; color: var(--muted); margin-bottom: 14px;
+    }
+    .ms-ref-link-wrap {
+      display: flex; gap: 8px; margin-bottom: 10px;
+    }
+    .ms-ref-link {
+      flex: 1; background: var(--bg2); border: 0.5px solid var(--border2);
+      border-radius: 8px; padding: 10px 12px;
+      font-size: 13px; color: var(--muted); font-family: inherit;
+      text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      cursor: default;
+    }
+    .ms-copy-btn {
+      background: var(--blue); color: #0A0A0B;
+      border: none; border-radius: 8px; padding: 10px 16px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      font-family: inherit; flex-shrink: 0;
+      transition: transform .18s, box-shadow .18s;
+      box-shadow: 0 3px 12px rgba(0,192,240,0.3);
+      white-space: nowrap;
+    }
+    .ms-copy-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,192,240,0.4); }
+    .ms-tweet-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; background: #0A0A0B; color: #fff;
+      border: none; border-radius: 8px; padding: 12px 16px;
+      font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: background .18s;
+      text-decoration: none;
+    }
+    .ms-tweet-btn:hover { background: #1a1a2e; }
+    .ms-tweet-icon { font-size: 16px; }
   </style>
 </head>
 <body>
@@ -593,7 +703,16 @@
 
     <div class="hero-badge">
       <div class="hero-badge-dot"></div>
-      Now accepting early creators
+      <span id="waitlistCount">1,247</span> creators on the waitlist
+    </div>
+
+    <!-- FOMO niche bar -->
+    <div class="hero-niche-bar" id="heroNicheBar">
+      <span class="hnb-item hnb-red">🔴 Fitness · 4 spots left</span>
+      <span class="hnb-sep">·</span>
+      <span class="hnb-item hnb-yellow">🟡 Music · 12 spots left</span>
+      <span class="hnb-sep">·</span>
+      <span class="hnb-item hnb-green">🟢 Business · 21 spots left</span>
     </div>
 
     <!-- OVIS dominant + Jarvis tagline -->
@@ -607,6 +726,18 @@
     <div class="hero-btns">
       <button class="btn-primary" onclick="openModal()">Get Early Access →</button>
       <a href="#product" class="btn-secondary">See how it works</a>
+    </div>
+
+    <!-- Feature 3: Social proof bar -->
+    <div class="hero-social-proof">
+      <div class="hsp-avatars">
+        <div class="hsp-av">🏋️</div>
+        <div class="hsp-av">🎵</div>
+        <div class="hsp-av">💼</div>
+        <div class="hsp-av">🎯</div>
+        <div class="hsp-av">🎨</div>
+      </div>
+      <div class="hsp-text"><b id="hspCount">1,247</b> creators already waiting · <span class="hsp-urgent" id="hspUrgent">Fitness niche closing soon</span></div>
     </div>
 
     <div class="hero-card">
@@ -849,14 +980,117 @@
         </form>
       </div>
       <div class="modal-success" id="modalSuccess">
-        <div class="modal-success-icon">✅</div>
-        <div class="modal-success-title">You're in line.</div>
-        <div class="modal-success-sub">We'll reach out as soon as your niche slot opens. Keep creating — Ovis will handle the rest.</div>
+        <div class="ms-position">🎉 You're confirmed</div>
+        <div class="ms-title" id="msTitle">You're #1,248 on the list.</div>
+        <div class="ms-sub">We'll reach out as soon as your niche slot opens. Keep creating — Ovis will handle the rest.</div>
+
+        <div class="ms-progress-wrap">
+          <div class="ms-progress-bar" id="msProgressBar"></div>
+        </div>
+        <div class="ms-progress-label">
+          <span>You</span>
+          <span id="msProgressLabel">Spot #1,248 of 5,000</span>
+        </div>
+
+        <hr class="ms-divider">
+
+        <div class="ms-refer-heading">🚀 Refer 3 friends → skip 50 spots</div>
+        <div class="ms-refer-sub">Share your link. Every 3 friends = 50 spots forward.</div>
+
+        <div class="ms-ref-link-wrap">
+          <div class="ms-ref-link" id="msRefLink">omniworld.app?ref=ABC123</div>
+          <button class="ms-copy-btn" id="msCopyBtn" onclick="copyRefLink()">Copy link</button>
+        </div>
+
+        <button class="ms-tweet-btn" id="msTweetBtn" onclick="tweetThis()">
+          <span class="ms-tweet-icon">𝕏</span> Tweet this
+        </button>
       </div>
     </div>
   </div>
 
   <script>
+    /* ── Waitlist counter (Feature 1) ── */
+    var waitlistRaw = 1247;
+    function formatCount(n) {
+      return n.toLocaleString('en-US');
+    }
+    function updateAllCounts() {
+      document.getElementById('waitlistCount').textContent = formatCount(waitlistRaw);
+      var hsp = document.getElementById('hspCount');
+      if (hsp) hsp.textContent = formatCount(waitlistRaw);
+    }
+    function bumpWaitlist() {
+      var inc = Math.floor(Math.random() * 3) + 1;
+      waitlistRaw += inc;
+      updateAllCounts();
+      var next = (Math.random() * 7000) + 8000; // 8–15 seconds
+      setTimeout(bumpWaitlist, next);
+    }
+    setTimeout(bumpWaitlist, 10000);
+
+    /* ── FOMO niche bar cycling (Feature 1 extra) ── */
+    var NICHES = [
+      { label: '🔴 Fitness · 4 spots left',  cls: 'hnb-red',    urgent: 'Fitness niche closing soon' },
+      { label: '🟡 Music · 12 spots left',   cls: 'hnb-yellow', urgent: 'Music niche filling fast'   },
+      { label: '🟢 Business · 21 spots left',cls: 'hnb-green',  urgent: 'Business niche open'        },
+      { label: '🔴 Beauty · 2 spots left',   cls: 'hnb-red',    urgent: 'Beauty niche almost full'   },
+      { label: '🟡 Travel · 9 spots left',   cls: 'hnb-yellow', urgent: 'Travel niche filling fast'  },
+    ];
+    var nicheIdx = 0;
+    function cycleNiche() {
+      nicheIdx = (nicheIdx + 1) % NICHES.length;
+      var n = NICHES[nicheIdx];
+      // Update the urgent text in social proof bar
+      var urgentEl = document.getElementById('hspUrgent');
+      if (urgentEl) urgentEl.textContent = n.urgent;
+      setTimeout(cycleNiche, 5000);
+    }
+    setTimeout(cycleNiche, 5000);
+
+    /* ── Referral link helpers (Feature 2) ── */
+    var refCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+    var refLink = 'omniworld.app?ref=' + refCode;
+
+    function showSuccessScreen() {
+      var currentCount = waitlistRaw;
+      var mySpot = currentCount + 1;
+      // Update title
+      document.getElementById('msTitle').textContent = 'You\'re #' + formatCount(mySpot) + ' on the list.';
+      // Update progress label
+      document.getElementById('msProgressLabel').textContent = 'Spot #' + formatCount(mySpot) + ' of 5,000';
+      // Animate progress bar
+      var pct = Math.min((mySpot / 5000) * 100, 100);
+      setTimeout(function() {
+        document.getElementById('msProgressBar').style.width = pct + '%';
+      }, 150);
+      // Set ref link
+      document.getElementById('msRefLink').textContent = refLink;
+    }
+
+    function copyRefLink() {
+      var btn = document.getElementById('msCopyBtn');
+      navigator.clipboard.writeText('https://' + refLink).then(function() {
+        btn.textContent = 'Copied! ✓';
+        setTimeout(function() { btn.textContent = 'Copy link'; }, 2000);
+      }).catch(function() {
+        // Fallback for browsers without clipboard API
+        var temp = document.createElement('textarea');
+        temp.value = 'https://' + refLink;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        btn.textContent = 'Copied! ✓';
+        setTimeout(function() { btn.textContent = 'Copy link'; }, 2000);
+      });
+    }
+
+    function tweetThis() {
+      var tweetText = 'Just claimed my spot on Ovis — the AI that runs your Instagram while you sleep 🤖\n\nOvis follows people, sends DMs in your voice, and grows your account 24/7. Zero input.\n\nGet early access: omniworld.app';
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText));
+    }
+
     /* ── Modal ── */
     function openModal()  { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
     function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
@@ -868,8 +1102,12 @@
       const data = new URLSearchParams(new FormData(this));
       try {
         const res = await fetch('https://formspree.io/f/mpqyergz', { method:'POST', body:data, headers:{'Accept':'application/json'} });
-        if (res.ok) { document.getElementById('modalForm').style.display='none'; document.getElementById('modalSuccess').style.display='block'; }
-        else { btn.disabled=false; btn.textContent='Try again →'; }
+        if (res.ok) {
+          document.getElementById('modalForm').style.display='none';
+          var successEl = document.getElementById('modalSuccess');
+          successEl.style.display='block';
+          showSuccessScreen();
+        } else { btn.disabled=false; btn.textContent='Try again →'; }
       } catch { btn.disabled=false; btn.textContent='Try again →'; }
     });
 
