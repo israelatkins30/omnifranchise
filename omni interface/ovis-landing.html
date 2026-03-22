@@ -4,6 +4,27 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ovis — The AI That Runs Your Instagram</title>
+
+  <!-- ── Open Graph (Facebook, iMessage, Discord, LinkedIn) ── -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:url"         content="https://omniworld.app/"/>
+  <meta property="og:title"       content="Ovis — Your Jarvis for Instagram"/>
+  <meta property="og:description" content="The AI agent that follows the right people, sends DMs in your voice, and grows your Instagram 24/7. Zero input needed."/>
+  <meta property="og:image"       content="https://omniworld.app/og-card.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name"   content="Ovis by Omni World"/>
+
+  <!-- ── Twitter / X Card ── -->
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:site"        content="@omniworld_app"/>
+  <meta name="twitter:title"       content="Ovis — Your Jarvis for Instagram"/>
+  <meta name="twitter:description" content="The AI agent that follows, DMs, and grows your Instagram around the clock. No input needed."/>
+  <meta name="twitter:image"       content="https://omniworld.app/og-card.png"/>
+
+  <!-- ── SEO ── -->
+  <meta name="description" content="Ovis is an AI Instagram growth agent that follows the right people, sends DMs in your voice, and grows your account 24/7. Join the early access waitlist."/>
+  <link rel="canonical" href="https://omniworld.app/"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -82,6 +103,15 @@
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .hero-countdown {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11.5px; font-weight: 600; letter-spacing: .04em;
+      color: var(--muted); background: var(--surface);
+      border: 0.5px solid var(--border2);
+      padding: 5px 14px; border-radius: 980px; margin-bottom: 18px;
+    }
+    .hero-countdown span { color: var(--text); font-variant-numeric: tabular-nums; }
 
     .hero h1 {
       font-size: clamp(32px, 5.5vw, 62px);
@@ -478,6 +508,12 @@
     .modal-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,192,240,0.35); }
     .modal-submit:disabled { opacity: .6; cursor: default; transform: none; }
     .modal-note { font-size: 12px; color: var(--muted2); text-align: center; margin-top: 8px; }
+    .niche-fomo {
+      font-size: 12px; font-weight: 600; color: var(--blue);
+      background: var(--blue-dim); border: 0.5px solid rgba(0,192,240,0.25);
+      padding: 7px 12px; border-radius: 8px; margin-top: -4px;
+      animation: nicheFade 0.3s ease;
+    }
     .modal-success { display: none; text-align: center; }
     .modal-success-icon { font-size: 40px; margin-bottom: 16px; }
     .modal-success-title { font-size: 22px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; color: var(--text); }
@@ -704,6 +740,11 @@
     <div class="hero-badge">
       <div class="hero-badge-dot"></div>
       <span id="waitlistCount">1,247</span> creators on the waitlist
+    </div>
+
+    <!-- Rolling countdown timer -->
+    <div class="hero-countdown">
+      ⏳ Early access closes in&nbsp;<span id="cdHours">47</span>:<span id="cdMins">59</span>:<span id="cdSecs">59</span>
     </div>
 
     <!-- FOMO niche bar -->
@@ -974,7 +1015,8 @@
         <form class="modal-form" id="earlyAccessForm">
           <input class="modal-input" type="text"  name="name"  placeholder="Your name" required/>
           <input class="modal-input" type="email" name="email" placeholder="Your email" required/>
-          <input class="modal-input" type="text"  name="niche" placeholder="Your niche (e.g. Fitness, Music, Business)"/>
+          <input class="modal-input" type="text"  name="niche" id="nicheInput" placeholder="Your niche (e.g. Fitness, Music, Business)" oninput="updateNicheFomo(this.value)" autocomplete="off"/>
+          <div class="niche-fomo" id="nicheFomo" style="display:none"></div>
           <button class="modal-submit" type="submit" id="modalBtn">Reserve my spot →</button>
           <div class="modal-note">No credit card · No spam · Just your spot</div>
         </form>
@@ -1010,6 +1052,70 @@
   </div>
 
   <script>
+    /* ── Rolling countdown timer ── */
+    (function() {
+      // Seed a consistent-feeling deadline: 47h from a fixed reference point,
+      // rolling so it always shows somewhere between 6h and 47h.
+      var PERIOD = 48 * 3600; // 48h cycle in seconds
+      var REF = 1700000000;   // fixed epoch reference (doesn't matter exactly what)
+      function getRemaining() {
+        var now = Math.floor(Date.now() / 1000);
+        var elapsed = (now - REF) % PERIOD;
+        // Offset so it counts down from ~47:xx rather than 00:xx at reset
+        var remaining = PERIOD - elapsed;
+        // Keep it feeling "real" — never show less than 6 hours
+        if (remaining < 6 * 3600) remaining += 18 * 3600;
+        return remaining;
+      }
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      function tick() {
+        var rem = getRemaining();
+        var h = Math.floor(rem / 3600);
+        var m = Math.floor((rem % 3600) / 60);
+        var s = rem % 60;
+        document.getElementById('cdHours').textContent = pad(h);
+        document.getElementById('cdMins').textContent  = pad(m);
+        document.getElementById('cdSecs').textContent  = pad(s);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    /* ── Dynamic niche FOMO ── */
+    var NICHE_COUNTS = {
+      fitness:  { spots: 4,  label: '🔴 4 spots left in Fitness — going fast' },
+      music:    { spots: 12, label: '🟡 12 spots remaining in Music' },
+      business: { spots: 21, label: '🟢 21 spots open in Business' },
+      beauty:   { spots: 2,  label: '🔴 Only 2 spots left in Beauty — almost full' },
+      travel:   { spots: 9,  label: '🟡 9 spots left in Travel' },
+      food:     { spots: 7,  label: '🟡 7 spots left in Food & Lifestyle' },
+      fashion:  { spots: 3,  label: '🔴 3 spots left in Fashion — nearly full' },
+      finance:  { spots: 18, label: '🟢 18 spots open in Finance' },
+      gaming:   { spots: 11, label: '🟡 11 spots left in Gaming' },
+      comedy:   { spots: 6,  label: '🟡 6 spots remaining in Comedy' },
+    };
+    function updateNicheFomo(val) {
+      var el = document.getElementById('nicheFomo');
+      if (!val || val.trim().length < 2) { el.style.display = 'none'; return; }
+      var key = val.trim().toLowerCase();
+      // Find a matching niche (partial match)
+      var match = null;
+      for (var k in NICHE_COUNTS) {
+        if (k.indexOf(key) !== -1 || key.indexOf(k) !== -1) { match = NICHE_COUNTS[k]; break; }
+      }
+      if (match) {
+        el.textContent = match.label;
+        el.style.display = 'block';
+      } else if (val.trim().length >= 3) {
+        // Generic message for unrecognized niches
+        var generic = Math.floor(Math.random() * 15) + 8;
+        el.textContent = '🟢 ' + generic + ' spots currently open in your niche';
+        el.style.display = 'block';
+      } else {
+        el.style.display = 'none';
+      }
+    }
+
     /* ── Waitlist counter (Feature 1) ── */
     var waitlistRaw = 1247;
     function formatCount(n) {
