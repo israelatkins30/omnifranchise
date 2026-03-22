@@ -154,6 +154,12 @@
       margin-bottom: 16px; position: relative; z-index: 2;
     }
     .hero-tag em { font-style: normal; color: var(--blue); }
+    .ig-logo {
+      width: 1.05em; height: 1.05em;
+      vertical-align: middle; margin-bottom: 0.12em;
+      display: inline-block;
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+    }
 
     /* ─── JARVIS SCAN HIGHLIGHT (A) ─── */
     .jarvis-scan {
@@ -707,7 +713,23 @@
 
     <!-- Designation + Tagline -->
     <div class="hero-designation">Agent Designation ·</div>
-    <span class="hero-tag">Your <em><span class="jarvis-scan">Jarvis</span></em> for Instagram.</span>
+    <span class="hero-tag">Your <em><span class="jarvis-scan">Jarvis</span></em> for
+      <svg class="ig-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Instagram">
+        <defs>
+          <radialGradient id="ig" cx="30%" cy="110%" r="145%">
+            <stop offset="0%"   stop-color="#feda75"/>
+            <stop offset="18%"  stop-color="#fa7e1e"/>
+            <stop offset="48%"  stop-color="#d62976"/>
+            <stop offset="74%"  stop-color="#962fbf"/>
+            <stop offset="100%" stop-color="#4f5bd5"/>
+          </radialGradient>
+        </defs>
+        <rect width="24" height="24" rx="5.6" fill="url(#ig)"/>
+        <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4.4" fill="none" stroke="white" stroke-width="1.9"/>
+        <circle cx="12" cy="12" r="4.6" fill="none" stroke="white" stroke-width="1.9"/>
+        <circle cx="17.8" cy="6.2" r="1.25" fill="white"/>
+      </svg><span style="display:none">Instagram</span>.
+    </span>
 
     <!-- Sub -->
     <p class="hero-sub">The AI agent that follows the right people, sends DMs in your voice, and grows your account around the clock. You don't lift a finger.</p>
