@@ -132,6 +132,20 @@
       animation: ovisAssemble 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
     }
 
+    /* ─── AGENT DESIGNATION LABEL (D) ─── */
+    .hero-designation {
+      font-size: 9px; font-weight: 700; letter-spacing: .20em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: rgba(0,192,240,0.40); text-transform: uppercase;
+      margin-bottom: 10px; position: relative; z-index: 2;
+      opacity: 0;
+      animation: desigFadeIn 0.5s ease 0.9s forwards;
+    }
+    @keyframes desigFadeIn {
+      from { opacity:0; transform: translateY(5px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
     /* tagline */
     .hero-tag {
       font-size: clamp(18px, 2.8vw, 30px);
@@ -140,6 +154,44 @@
       margin-bottom: 16px; position: relative; z-index: 2;
     }
     .hero-tag em { font-style: normal; color: var(--blue); }
+
+    /* ─── JARVIS SCAN HIGHLIGHT (A) ─── */
+    .jarvis-scan {
+      position: relative; display: inline-block;
+    }
+    .jarvis-scan::after {
+      content: '';
+      position: absolute; top: 4%; bottom: 4%; left: -4%;
+      width: 35%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0,192,240,0.35) 30%,
+        rgba(0,192,240,0.75) 50%,
+        rgba(0,192,240,0.35) 70%,
+        transparent 100%);
+      animation: jarvisScan 0.5s cubic-bezier(0.4,0,0.2,1) 1.55s both;
+      pointer-events: none; border-radius: 3px;
+    }
+    @keyframes jarvisScan {
+      0%   { left: -10%; opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: 105%; opacity: 0; }
+    }
+
+    /* ─── JARVIS BRIEF TYPEWRITER (B → transition) ─── */
+    .jarvis-brief {
+      text-align: center; height: 22px; margin-bottom: 32px;
+      font-size: 11px; font-weight: 600; letter-spacing: .07em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: rgba(0,192,240,0.55);
+    }
+    .jb-cursor {
+      display: inline-block; width: 1.5px; height: 11px;
+      background: var(--blue); vertical-align: middle; margin-left: 2px;
+      animation: jbBlink 0.75s step-end infinite;
+    }
+    @keyframes jbBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
     .hero-sub {
       font-size: clamp(15px, 1.6vw, 17px);
@@ -653,8 +705,9 @@
       <span class="hero-ovis">OVIS</span>
     </div>
 
-    <!-- Tagline -->
-    <span class="hero-tag">Your <em>Jarvis</em> for Instagram.</span>
+    <!-- Designation + Tagline -->
+    <div class="hero-designation">Agent Designation ·</div>
+    <span class="hero-tag">Your <em><span class="jarvis-scan">Jarvis</span></em> for Instagram.</span>
 
     <!-- Sub -->
     <p class="hero-sub">The AI agent that follows the right people, sends DMs in your voice, and grows your account around the clock. You don't lift a finger.</p>
@@ -688,6 +741,7 @@
 
   <!-- ═══ CAPABILITIES ═══ -->
   <div class="capabilities" id="how">
+    <div class="jarvis-brief" id="jarvisBrief"><span class="jb-cursor"></span></div>
     <span class="cap-label">System Capabilities</span>
     <h2 class="cap-headline">Three modules. Running every day.<br>Without you.</h2>
     <div class="cap-grid">
@@ -968,6 +1022,34 @@
     }
     cycleToasts(document.getElementById('proofLeft'),  LEFT_TOASTS);
     cycleToasts(document.getElementById('proofRight'), RIGHT_TOASTS);
+
+    /* ── JARVIS brief typewriter (B → transition) ── */
+    (function() {
+      var briefEl  = document.getElementById('jarvisBrief');
+      var cursor   = briefEl.querySelector('.jb-cursor');
+      var text     = '> Initializing FOLLOW.EXE · DM.EXE · GROW.EXE...';
+      var started  = false;
+      function typewriter(str, speed) {
+        var i = 0;
+        (function tick() {
+          if (i < str.length) {
+            briefEl.insertBefore(document.createTextNode(str[i]), cursor);
+            i++;
+            setTimeout(tick, speed + (Math.random() * 18));
+          }
+        })();
+      }
+      var briefObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) {
+          if (en.isIntersecting && !started) {
+            started = true;
+            setTimeout(function() { typewriter(text, 30); }, 200);
+            briefObs.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+      briefObs.observe(document.querySelector('.capabilities'));
+    })();
   </script>
 </body>
 </html>
