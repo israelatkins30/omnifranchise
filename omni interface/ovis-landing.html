@@ -128,7 +128,8 @@
       display: block;
       position: relative; z-index: 2;
       filter: drop-shadow(0 0 60px rgba(0,192,240,0.22)) drop-shadow(0 2px 2px rgba(0,0,0,0.5));
-      margin-bottom: 22px;
+      margin-bottom: 0;
+      animation: ovisAssemble 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
     }
 
     /* tagline */
@@ -199,8 +200,9 @@
     .hcb-dot:nth-child(3) { background: #28C840; }
     .hcb-title {
       margin-left: auto; margin-right: auto;
-      font-size: 10px; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--muted2);
+      font-size: 9px; font-weight: 700; letter-spacing: .10em;
+      text-transform: uppercase; color: rgba(0,192,240,0.45);
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     }
     .hero-feed { padding: 4px 0; }
     .hf-row {
@@ -515,6 +517,95 @@
     .ms-tweet-btn:hover { background: var(--border2); }
     .ms-tweet-icon { font-size: 15px; }
 
+    /* ─── OVIS WRAP + ARC REACTOR ─── */
+    .ovis-wrap {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px; z-index: 2;
+    }
+    .arc-reactor {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 560px; height: 560px;
+      pointer-events: none; z-index: 1;
+    }
+    .arc-ring {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    .arc-ring-1 {
+      width: 170px; height: 170px;
+      border: 1.5px solid rgba(0,192,240,0.35);
+      box-shadow: 0 0 18px rgba(0,192,240,0.12), inset 0 0 18px rgba(0,192,240,0.06);
+      animation: arcPowerOn 1.2s cubic-bezier(0.22,1,0.36,1) forwards, arcPulse 3s ease-in-out infinite 1.2s;
+    }
+    .arc-ring-2 {
+      width: 290px; height: 290px;
+      border: 1px solid rgba(0,192,240,0.18);
+      animation: arcPowerOn 1.2s cubic-bezier(0.22,1,0.36,1) 0.15s forwards, arcPulse 3s ease-in-out infinite 1.35s;
+      opacity: 0;
+    }
+    .arc-ring-3 {
+      width: 420px; height: 420px;
+      border: 1px solid rgba(0,192,240,0.10);
+      animation: arcPowerOn 1.2s cubic-bezier(0.22,1,0.36,1) 0.28s forwards, arcPulse 3s ease-in-out infinite 1.48s;
+      opacity: 0;
+    }
+    .arc-ring-4 {
+      width: 550px; height: 550px;
+      border: 0.5px solid rgba(0,192,240,0.05);
+      animation: arcPowerOn 1.2s cubic-bezier(0.22,1,0.36,1) 0.40s forwards, arcPulse 3s ease-in-out infinite 1.6s;
+      opacity: 0;
+    }
+    @keyframes arcPowerOn {
+      0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.6); }
+      60%  { opacity: 1; transform: translate(-50%,-50%) scale(1.04); }
+      80%  { transform: translate(-50%,-50%) scale(0.98); }
+      100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+    }
+    @keyframes arcPulse {
+      0%,100% { opacity: 0.55; transform: translate(-50%,-50%) scale(1); }
+      50%     { opacity: 1;    transform: translate(-50%,-50%) scale(1.018); }
+    }
+
+    /* ─── OVIS ASSEMBLY ANIMATION ─── */
+    @keyframes ovisAssemble {
+      0%   { opacity:0; letter-spacing:.28em; filter: blur(10px) drop-shadow(0 0 0px rgba(0,192,240,0)); }
+      55%  { opacity:1; letter-spacing:-.05em; filter: blur(0)   drop-shadow(0 0 100px rgba(0,192,240,0.65)); }
+      72%  { letter-spacing:-.08em; }
+      88%  { letter-spacing:-.065em; }
+      100% { opacity:1; letter-spacing:-.07em; filter: drop-shadow(0 0 60px rgba(0,192,240,0.22)) drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
+    }
+
+    /* ─── HUD CORNERS ─── */
+    .hud-corner {
+      position: absolute; width: 18px; height: 18px; z-index: 4; pointer-events: none;
+    }
+    .hud-corner::before, .hud-corner::after {
+      content: ''; position: absolute; background: var(--blue); opacity: 0.65;
+    }
+    .hud-tl { top: -1px; left: -1px; }
+    .hud-tl::before { top:0; left:0; width:18px; height:1.5px; }
+    .hud-tl::after  { top:0; left:0; width:1.5px; height:18px; }
+    .hud-tr { top: -1px; right: -1px; }
+    .hud-tr::before { top:0; right:0; width:18px; height:1.5px; }
+    .hud-tr::after  { top:0; right:0; width:1.5px; height:18px; }
+    .hud-bl { bottom: -1px; left: -1px; }
+    .hud-bl::before { bottom:0; left:0; width:18px; height:1.5px; }
+    .hud-bl::after  { bottom:0; left:0; width:1.5px; height:18px; }
+    .hud-br { bottom: -1px; right: -1px; }
+    .hud-br::before { bottom:0; right:0; width:18px; height:1.5px; }
+    .hud-br::after  { bottom:0; right:0; width:1.5px; height:18px; }
+
+    /* ─── CAP MODULE LABEL ─── */
+    .cap-module {
+      font-size: 9px; font-weight: 700; letter-spacing: .16em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: rgba(0,192,240,0.55); margin-bottom: 8px; display: block;
+      text-transform: uppercase;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
       .cap-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -551,8 +642,16 @@
       <span id="waitlistCount">1,247</span>&nbsp;creators on the waitlist
     </div>
 
-    <!-- The name -->
-    <span class="hero-ovis">OVIS</span>
+    <!-- The name + arc reactor -->
+    <div class="ovis-wrap">
+      <div class="arc-reactor" aria-hidden="true">
+        <div class="arc-ring arc-ring-1"></div>
+        <div class="arc-ring arc-ring-2"></div>
+        <div class="arc-ring arc-ring-3"></div>
+        <div class="arc-ring arc-ring-4"></div>
+      </div>
+      <span class="hero-ovis">OVIS</span>
+    </div>
 
     <!-- Tagline -->
     <span class="hero-tag">Your <em>Jarvis</em> for Instagram.</span>
@@ -562,22 +661,26 @@
 
     <!-- CTAs -->
     <div class="hero-btns">
-      <button class="btn-primary" onclick="openModal()">Get Early Access →</button>
+      <button class="btn-primary" onclick="openModal()">Request Access →</button>
       <a href="#how" class="btn-ghost">See how it works</a>
     </div>
 
     <!-- Live product card -->
     <div class="hero-card">
+      <div class="hud-corner hud-tl"></div>
+      <div class="hud-corner hud-tr"></div>
+      <div class="hud-corner hud-bl"></div>
+      <div class="hud-corner hud-br"></div>
       <div class="hero-card-bar">
         <div class="hcb-dot"></div>
         <div class="hcb-dot"></div>
         <div class="hcb-dot"></div>
-        <div class="hcb-title">Ovis — Live Activity</div>
+        <div class="hcb-title">OVIS · UNIT-001 · LIVE FEED</div>
       </div>
       <div class="hero-feed" id="heroFeed"></div>
       <div class="hero-card-footer">
-        <div class="hcf-stat"><b id="heroCount">47</b> actions today</div>
-        <div class="hcf-live"><div class="hcf-live-dot"></div>RUNNING</div>
+        <div class="hcf-stat"><b id="heroCount">47</b> ops completed</div>
+        <div class="hcf-live"><div class="hcf-live-dot"></div>SYSTEM ONLINE</div>
       </div>
     </div>
 
@@ -585,24 +688,27 @@
 
   <!-- ═══ CAPABILITIES ═══ -->
   <div class="capabilities" id="how">
-    <span class="cap-label">What Ovis does</span>
-    <h2 class="cap-headline">Three things. Running every day.<br>Without you.</h2>
+    <span class="cap-label">System Capabilities</span>
+    <h2 class="cap-headline">Three modules. Running every day.<br>Without you.</h2>
     <div class="cap-grid">
 
       <div class="cap-card">
         <div class="cap-icon">⚡</div>
+        <div class="cap-module">FOLLOW.EXE</div>
         <div class="cap-title">Follows</div>
         <div class="cap-desc">Finds and follows exactly the right people in your niche — by city, account size, engagement rate. Every single day.</div>
       </div>
 
       <div class="cap-card">
         <div class="cap-icon">💬</div>
+        <div class="cap-module">DM.EXE</div>
         <div class="cap-title">DMs</div>
         <div class="cap-desc">Writes and sends personalized messages in your voice. Not templates. Conversations that sound like you wrote them.</div>
       </div>
 
       <div class="cap-card">
         <div class="cap-icon">📈</div>
+        <div class="cap-module">GROW.EXE</div>
         <div class="cap-title">Grows</div>
         <div class="cap-desc">Your account compounds while you sleep. Real followers. Real reach. No posting required from you.</div>
       </div>
@@ -612,6 +718,7 @@
 
   <!-- ═══ STATS ═══ -->
   <div class="stats-strip">
+    <div style="text-align:center;padding:48px var(--pad) 0;font-size:9px;font-weight:700;letter-spacing:.18em;font-family:'SF Mono','Fira Code',monospace;color:rgba(0,192,240,0.45);text-transform:uppercase;">SYSTEM PERFORMANCE</div>
     <div class="stats-inner">
       <div class="stat-item">
         <span class="stat-num"><span id="statActions">0</span><em>+</em></span>
@@ -626,18 +733,19 @@
         <span class="stat-label">always running, never stops</span>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- ═══ WAITLIST CTA ═══ -->
   <section class="waitlist">
-    <span class="waitlist-eyebrow">Limited Access</span>
+    <span class="waitlist-eyebrow">MARK I — LIMITED ACCESS</span>
     <div class="countdown-row">
       ⏳ Early access closes in&nbsp;<span id="cdHours">47</span>:<span id="cdMins">59</span>:<span id="cdSecs">59</span>
     </div>
     <h2>You're early.<br>Let's keep it that way.</h2>
     <p class="waitlist-sub">We're onboarding one niche at a time. Once your niche fills, that's it. Get in now.</p>
     <div class="waitlist-btns">
-      <button class="btn-primary" onclick="openModal()">Reserve My Spot →</button>
+      <button class="btn-primary" onclick="openModal()">Initialize Access →</button>
     </div>
     <div class="waitlist-note">No credit card &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Just your spot</div>
   </section>
@@ -653,15 +761,15 @@
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div id="modalForm">
-        <span class="modal-eyebrow">Early Access</span>
-        <div class="modal-title">Reserve your spot</div>
+        <span class="modal-eyebrow">UNIT-001 · EARLY ACCESS</span>
+        <div class="modal-title">Initialize your slot</div>
         <div class="modal-sub">We're onboarding creators one niche at a time. Drop your info and we'll reach out when your slot opens.</div>
         <form class="modal-form" id="earlyAccessForm">
           <input class="modal-input" type="text"  name="name"  placeholder="Your name" required/>
           <input class="modal-input" type="email" name="email" placeholder="Your email" required/>
           <input class="modal-input" type="text"  name="niche" id="nicheInput" placeholder="Your niche (e.g. Fitness, Music, Business)" oninput="updateNicheFomo(this.value)" autocomplete="off"/>
           <div class="niche-fomo" id="nicheFomo" style="display:none"></div>
-          <button class="modal-submit" type="submit" id="modalBtn">Reserve my spot →</button>
+          <button class="modal-submit" type="submit" id="modalBtn">Initialize access →</button>
           <div class="modal-note">No credit card · No spam · Just your spot</div>
         </form>
       </div>
