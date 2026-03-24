@@ -353,6 +353,13 @@
       font-size: clamp(15px, 2vw, 20px);
       font-weight: 400; letter-spacing: -.01em;
       color: rgba(28, 30, 40, 0.80);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .ovis-bar-text.fade-out {
+      opacity: 0; transform: translateY(-6px);
+    }
+    .ovis-bar-text.fade-in {
+      opacity: 1; transform: translateY(0);
     }
     .ovis-bar-right {
       display: flex; align-items: center; gap: 14px;
@@ -1094,6 +1101,26 @@
         });
       }, { threshold: 0.25 });
       briefObs.observe(document.querySelector('.focal'));
+    })();
+
+    /* ── Rotating bar text ── */
+    (function() {
+      var lines = [
+        "Found 23 fitness creators in LA worth following.",
+        "3 people didn't follow back. Already handled.",
+        "Sent a DM to @alexfitness. Sounded just like you."
+      ];
+      var el = document.querySelector('.ovis-bar-text');
+      var i = 0;
+      function rotate() {
+        el.classList.add('fade-out');
+        setTimeout(function() {
+          i = (i + 1) % lines.length;
+          el.textContent = lines[i];
+          el.classList.remove('fade-out');
+        }, 460);
+      }
+      setInterval(rotate, 3200);
     })();
   </script>
 </body>
