@@ -607,6 +607,196 @@
     .suit-custom .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(168,180,192,0.10) 0%, transparent 70%); }
     .suit-custom .suit-mark { color: #A8B4C0; }
 
+    /* ─── HALL OF SUITS ─── */
+    .hall {
+      padding: 140px var(--pad) 120px;
+      text-align: center; overflow: hidden;
+    }
+    .hall-header { margin-bottom: 72px; }
+    .hall-eyebrow {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: .20em;
+      text-transform: uppercase;
+      font-family: 'SF Mono','Fira Code',monospace;
+      color: rgba(0,192,240,0.50); margin-bottom: 18px;
+    }
+    .hall-headline {
+      font-size: clamp(30px, 5vw, 56px);
+      font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .hall-sub {
+      font-size: clamp(14px, 1.4vw, 17px);
+      color: var(--muted); font-weight: 400;
+    }
+
+    /* ── Scene ── */
+    .hall-scene {
+      position: relative;
+      max-width: 1000px; margin: 0 auto 64px;
+      perspective: 1400px;
+    }
+    .hall-floor-glow {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
+      background: radial-gradient(ellipse at 50% 100%,
+        rgba(0,192,240,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hall-row {
+      display: flex; align-items: flex-end; justify-content: center;
+      gap: 10px; transform-style: preserve-3d;
+    }
+
+    /* ── Individual pod ── */
+    .hall-pod {
+      flex: 0 0 130px; width: 130px;
+      transform: perspective(1000px) rotateY(var(--pod-angle));
+      transition: transform .4s cubic-bezier(0.22,1,0.36,1);
+      cursor: pointer;
+    }
+    .hall-pod:hover {
+      transform: perspective(1000px) rotateY(0deg) translateY(-12px) scale(1.04);
+      z-index: 10;
+    }
+
+    /* ── Glass door ── */
+    .hall-glass {
+      position: relative;
+      height: 280px;
+      border-radius: 6px 6px 0 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-bottom: none;
+      background:
+        linear-gradient(160deg,
+          rgba(255,255,255,0.07) 0%,
+          rgba(255,255,255,0.02) 40%,
+          rgba(var(--pod-rgb),0.03) 100%);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      box-shadow:
+        inset 1px 0 0 rgba(255,255,255,0.08),
+        inset -1px 0 0 rgba(255,255,255,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.14);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: space-between;
+    }
+
+    /* Backlit glow from floor — color per pod */
+    .hall-glass::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+      background: radial-gradient(ellipse at 50% 100%,
+        color-mix(in srgb, var(--pod-color) 30%, transparent) 0%,
+        transparent 75%);
+      pointer-events: none;
+    }
+
+    /* Glass reflection streak */
+    .hall-glass::after {
+      content: '';
+      position: absolute; top: 0; left: 12%; width: 18%; height: 100%;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.06) 0%,
+        rgba(255,255,255,0.02) 50%,
+        transparent 100%);
+      pointer-events: none;
+    }
+
+    /* ── Suit silhouette ── */
+    .hall-suit-wrap {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 20px 12px 10px;
+      position: relative; z-index: 2;
+    }
+    .hall-suit {
+      width: 62px; height: auto;
+      color: var(--pod-color);
+      filter:
+        drop-shadow(0 0 12px var(--pod-color))
+        drop-shadow(0 0 30px color-mix(in srgb, var(--pod-color) 50%, transparent));
+    }
+
+    /* ── Pod bottom bar ── */
+    .hall-pod-bottom {
+      width: 100%;
+      padding: 10px 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.25);
+      position: relative; z-index: 2;
+    }
+    .hall-pod-label {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      font-family: 'SF Mono','Fira Code',monospace;
+      color: var(--pod-color);
+    }
+    .hall-lock { font-size: 11px; opacity: .55; }
+    .hall-status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 6px rgba(0,192,240,0.9);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── Locked overlay (frosted glass door effect) ── */
+    .hall-pod-overlay {
+      position: absolute; inset: 0; border-radius: 6px 6px 0 0;
+      background: rgba(7,8,13,0.42);
+      backdrop-filter: blur(1.5px);
+      pointer-events: none;
+    }
+
+    /* ── Active pod glow ring ── */
+    .hall-pod.active .hall-glass {
+      border-color: rgba(0,192,240,0.30);
+      box-shadow:
+        inset 1px 0 0 rgba(0,192,240,0.14),
+        inset -1px 0 0 rgba(0,192,240,0.10),
+        inset 0 1px 0 rgba(0,192,240,0.22),
+        0 0 40px rgba(0,192,240,0.14),
+        0 0 80px rgba(0,192,240,0.07);
+    }
+
+    /* ── Floor line ── */
+    .hall-floor-line {
+      height: 1px; max-width: 800px; margin: 0 auto;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0,192,240,0.20) 20%,
+        rgba(180,210,255,0.35) 50%,
+        rgba(0,192,240,0.20) 80%,
+        transparent 100%);
+    }
+
+    /* ── Build CTA ── */
+    .hall-build-cta {
+      margin-top: 52px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .hall-build-label {
+      font-size: 13px; color: var(--muted); font-weight: 400;
+    }
+    .hall-build-btn {
+      font-size: 14px; font-weight: 700; letter-spacing: -.01em;
+      color: var(--text);
+      background: transparent;
+      border: 0.5px solid var(--border2);
+      padding: 13px 28px; border-radius: 10px; cursor: pointer;
+      transition: border-color .2s, color .2s, box-shadow .2s;
+    }
+    .hall-build-btn:hover {
+      border-color: rgba(0,192,240,0.40);
+      color: var(--blue);
+      box-shadow: 0 0 20px rgba(0,192,240,0.08);
+    }
+
+    @media (max-width: 700px) {
+      .hall-row { gap: 6px; }
+      .hall-pod { flex: 0 0 90px; width: 90px; }
+      .hall-glass { height: 200px; }
+      .hall-suit { width: 44px; }
+    }
+
     /* ─── STATS ─── */
     .stats-strip {
       border-top: 0.5px solid var(--border);
@@ -1179,6 +1369,98 @@
     </div>
     </div>
   </div>
+
+  <!-- ═══ OVIS STORE — HALL OF SUITS ═══ -->
+  <section class="hall">
+    <div class="hall-header">
+      <span class="hall-eyebrow">OVIS STORE</span>
+      <h2 class="hall-headline">An Ovis for everything.</h2>
+      <p class="hall-sub">Choose your agent. Or build your own.</p>
+    </div>
+
+    <div class="hall-scene">
+      <div class="hall-floor-glow"></div>
+      <div class="hall-row">
+
+        <!-- Pod 1 — FITNESS -->
+        <div class="hall-pod locked" style="--pod-color:#E84040;--pod-angle:22deg">
+          <div class="hall-glass">
+            <div class="hall-suit-wrap">
+              <svg class="hall-suit" viewBox="0 0 60 120"><rect x="18" y="6" width="24" height="20" rx="6" fill="currentColor" opacity=".92"/><rect x="21" y="12" width="18" height="6" rx="3" fill="white" opacity=".28"/><rect x="11" y="30" width="38" height="42" rx="7" fill="currentColor" opacity=".85"/><circle cx="30" cy="48" r="5" fill="white" opacity=".30"/><rect x="1" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="49" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="13" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/><rect x="32" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/></svg>
+            </div>
+            <div class="hall-pod-bottom">
+              <span class="hall-pod-label">FITNESS</span>
+              <span class="hall-lock">🔒</span>
+            </div>
+          </div>
+          <div class="hall-pod-overlay"></div>
+        </div>
+
+        <!-- Pod 2 — MUSIC -->
+        <div class="hall-pod locked" style="--pod-color:#9B5CF6;--pod-angle:13deg">
+          <div class="hall-glass">
+            <div class="hall-suit-wrap">
+              <svg class="hall-suit" viewBox="0 0 60 120"><rect x="18" y="6" width="24" height="20" rx="6" fill="currentColor" opacity=".92"/><rect x="21" y="12" width="18" height="6" rx="3" fill="white" opacity=".28"/><rect x="11" y="30" width="38" height="42" rx="7" fill="currentColor" opacity=".85"/><circle cx="30" cy="48" r="5" fill="white" opacity=".30"/><rect x="1" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="49" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="13" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/><rect x="32" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/></svg>
+            </div>
+            <div class="hall-pod-bottom">
+              <span class="hall-pod-label">MUSIC</span>
+              <span class="hall-lock">🔒</span>
+            </div>
+          </div>
+          <div class="hall-pod-overlay"></div>
+        </div>
+
+        <!-- Pod 3 — CREATOR (ACTIVE / UNLOCKED) -->
+        <div class="hall-pod active" style="--pod-color:#00C0F0;--pod-angle:0deg">
+          <div class="hall-glass">
+            <div class="hall-suit-wrap">
+              <svg class="hall-suit" viewBox="0 0 60 120"><rect x="18" y="6" width="24" height="20" rx="6" fill="currentColor" opacity=".92"/><rect x="21" y="12" width="18" height="6" rx="3" fill="white" opacity=".50"/><rect x="11" y="30" width="38" height="42" rx="7" fill="currentColor" opacity=".85"/><circle cx="30" cy="48" r="5" fill="white" opacity=".55"/><rect x="1" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="49" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="13" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/><rect x="32" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/></svg>
+            </div>
+            <div class="hall-pod-bottom">
+              <span class="hall-pod-label">CREATOR</span>
+              <span class="hall-status-dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pod 4 — SALES -->
+        <div class="hall-pod locked" style="--pod-color:#F59E0B;--pod-angle:-13deg">
+          <div class="hall-glass">
+            <div class="hall-suit-wrap">
+              <svg class="hall-suit" viewBox="0 0 60 120"><rect x="18" y="6" width="24" height="20" rx="6" fill="currentColor" opacity=".92"/><rect x="21" y="12" width="18" height="6" rx="3" fill="white" opacity=".28"/><rect x="11" y="30" width="38" height="42" rx="7" fill="currentColor" opacity=".85"/><circle cx="30" cy="48" r="5" fill="white" opacity=".30"/><rect x="1" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="49" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="13" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/><rect x="32" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/></svg>
+            </div>
+            <div class="hall-pod-bottom">
+              <span class="hall-pod-label">SALES</span>
+              <span class="hall-lock">🔒</span>
+            </div>
+          </div>
+          <div class="hall-pod-overlay"></div>
+        </div>
+
+        <!-- Pod 5 — FASHION -->
+        <div class="hall-pod locked" style="--pod-color:#EC4899;--pod-angle:-22deg">
+          <div class="hall-glass">
+            <div class="hall-suit-wrap">
+              <svg class="hall-suit" viewBox="0 0 60 120"><rect x="18" y="6" width="24" height="20" rx="6" fill="currentColor" opacity=".92"/><rect x="21" y="12" width="18" height="6" rx="3" fill="white" opacity=".28"/><rect x="11" y="30" width="38" height="42" rx="7" fill="currentColor" opacity=".85"/><circle cx="30" cy="48" r="5" fill="white" opacity=".30"/><rect x="1" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="49" y="32" width="10" height="34" rx="5" fill="currentColor" opacity=".72"/><rect x="13" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/><rect x="32" y="74" width="15" height="38" rx="6" fill="currentColor" opacity=".72"/></svg>
+            </div>
+            <div class="hall-pod-bottom">
+              <span class="hall-pod-label">FASHION</span>
+              <span class="hall-lock">🔒</span>
+            </div>
+          </div>
+          <div class="hall-pod-overlay"></div>
+        </div>
+
+      </div><!-- end hall-row -->
+
+      <div class="hall-floor-line"></div>
+    </div>
+
+    <div class="hall-build-cta">
+      <span class="hall-build-label">Don't see yours?</span>
+      <button class="hall-build-btn" onclick="openModal()">Build Your Own Ovis →</button>
+    </div>
+  </section>
 
   <!-- ═══ WAITLIST CTA ═══ -->
   <section class="waitlist">
