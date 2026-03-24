@@ -303,7 +303,7 @@
 
     /* ─── FOCAL BAR ─── */
     .focal {
-      padding: 160px var(--pad) 180px;
+      padding: 100px var(--pad) 100px;
       display: flex; flex-direction: column;
       align-items: center; text-align: center;
     }
@@ -436,9 +436,60 @@
       color: var(--text); max-width: 560px;
     }
 
+    /* ─── FEATURES ─── */
+    .features {
+      padding: 80px var(--pad);
+      max-width: 1100px; margin: 0 auto; text-align: center;
+    }
+    .feat-eyebrow {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .20em;
+      text-transform: uppercase; color: rgba(0,192,240,0.45);
+      font-family: 'SF Mono','Fira Code',monospace; margin-bottom: 18px;
+    }
+    .feat-headline {
+      font-size: clamp(28px, 4.5vw, 50px); font-weight: 800;
+      letter-spacing: -.05em; line-height: 1.05;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .feat-sub {
+      font-size: 16px; color: var(--muted); margin-bottom: 56px; line-height: 1.65;
+    }
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    .feat-card {
+      background: var(--surface);
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.014) 0, rgba(255,255,255,0.014) 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.014) 0, rgba(255,255,255,0.014) 1px, transparent 0, transparent 50%);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2); border-radius: 16px;
+      padding: 32px 28px; text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 20px rgba(0,0,0,0.25);
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .feat-card:hover {
+      border-color: rgba(0,192,240,0.25);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 30px rgba(0,0,0,0.35), 0 0 25px rgba(0,192,240,0.07);
+    }
+    .feat-icon-wrap {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(0,192,240,0.09);
+      border: 0.5px solid rgba(0,192,240,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); margin-bottom: 20px;
+    }
+    .feat-card-title {
+      font-size: 16px; font-weight: 700; letter-spacing: -.02em;
+      color: var(--text); margin-bottom: 10px;
+    }
+    .feat-card-desc {
+      font-size: 13px; color: var(--muted); line-height: 1.72;
+    }
+
     /* ─── BEFORE / AFTER ─── */
     .contrast {
-      padding: 120px var(--pad) 100px;
+      padding: 80px var(--pad);
       max-width: 960px; margin: 0 auto; text-align: center;
     }
     .contrast-eyebrow {
@@ -486,7 +537,7 @@
 
     /* ─── BUILT / ASSEMBLY ─── */
     .built {
-      padding: 140px var(--pad) 160px;
+      padding: 80px var(--pad);
       max-width: 1100px; margin: 0 auto; text-align: center;
     }
     .built-eyebrow {
@@ -517,7 +568,6 @@
       border: 0.5px solid var(--border2); border-radius: 18px;
       padding: 36px 30px; text-align: left;
       box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),inset 0 1px 0 rgba(255,255,255,0.08),0 8px 32px rgba(0,0,0,0.4);
-      opacity: 0;
       transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1), border-color .25s, box-shadow .25s;
     }
     .bc-left   { transform: translateX(-110px) rotateY(22deg); }
@@ -541,7 +591,7 @@
       100% { box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),0 8px 32px rgba(0,0,0,0.4); }
     }
     .built-card.lock-flash { animation: lockFlash .55s ease forwards; }
-    .arm-from-bot { opacity: 0; transform: translateY(50px); transition: opacity .8s ease, transform .8s cubic-bezier(0.22,1,0.36,1); }
+    .arm-from-bot { transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(0.22,1,0.36,1); }
     .arm-from-bot.in-view { opacity: 1; transform: none; }
     .built-num {
       font-size: 9px; font-weight: 700; letter-spacing: .14em;
@@ -1252,7 +1302,7 @@
 
     /* ─── FAQ ─── */
     .faq {
-      padding: 120px var(--pad) 100px;
+      padding: 80px var(--pad);
       max-width: 720px; margin: 0 auto;
     }
     .faq-eyebrow {
@@ -1301,7 +1351,7 @@
 
     /* ─── PRICING HINT ─── */
     .pricing-hint {
-      padding: 120px var(--pad) 100px;
+      padding: 80px var(--pad);
       max-width: 680px; margin: 0 auto; text-align: center;
     }
     .ph-eyebrow {
@@ -1348,6 +1398,7 @@
     }
     .ph-tier-featured .ph-tier-price { color: var(--blue); }
     .ph-tier-price span { font-size: 22px; }
+    .ph-tier-price small { font-size: 14px; font-weight: 500; opacity: .6; }
     .ph-tier-note {
       font-size: 12px; color: var(--muted2); line-height: 1.6;
     }
@@ -1357,7 +1408,7 @@
 
     /* ─── SOCIAL PROOF ─── */
     .proof {
-      padding: 100px var(--pad);
+      padding: 80px var(--pad);
       max-width: 760px; margin: 0 auto; text-align: center;
     }
     .proof-card {
@@ -1415,6 +1466,16 @@
       .stat-item + .stat-item::before { display: none; }
       .stat-item { padding: 40px 32px; border-top: 0.5px solid var(--border); }
       .stat-item:first-child { border-top: none; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .contrast-grid { grid-template-columns: 1fr; gap: 12px; }
+      .ph-tiers { flex-direction: column; }
+      .proof-stats { flex-direction: column; gap: 20px; }
+      .proof-stat-div { display: none; }
+    }
+    @media (max-width: 600px) {
+      .feat-grid { grid-template-columns: 1fr; }
+      .hall-row { padding: 40px 20px 0; gap: 4px; }
+      .hall-pod { flex: 0 0 88px; width: 88px; }
     }
     @media (max-width: 560px) {
       .hero-btns { flex-direction: column; align-items: center; }
@@ -1525,6 +1586,64 @@
     <p class="focal-label">Every other platform gives you a dashboard.<br>Campaigns. Settings. Setups. Onboarding flows.</p>
     <h2 class="focal-headline">We gave you a conversation.</h2>
   </div>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="features">
+    <div class="feat-eyebrow">WHAT OVIS DOES</div>
+    <h2 class="feat-headline">Your Instagram.<br>Fully automated.</h2>
+    <p class="feat-sub">Six things running 24/7 on your behalf. Set once, runs forever.</p>
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feat-card-title">Smart Follow</div>
+        <div class="feat-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="feat-card-title">Voice-Matched DMs</div>
+        <div class="feat-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
+        </div>
+        <div class="feat-card-title">Auto-Unfollow</div>
+        <div class="feat-card-desc">Silently removes anyone who doesn't follow back or isn't a fit for your account. Keeps your ratio clean.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="feat-card-title">Niche Targeting</div>
+        <div class="feat-card-desc">Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="feat-card-title">24/7 Engagement</div>
+        <div class="feat-card-desc">Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat-card-title">Human-like Pacing</div>
+        <div class="feat-card-desc">Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person — keeping your account safe.</div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ═══ BEFORE / AFTER ═══ -->
   <section class="contrast arm-from-bot">
@@ -2072,14 +2191,14 @@
     <div class="ph-tiers">
       <div class="ph-tier">
         <div class="ph-tier-name">Presence</div>
-        <div class="ph-tier-price">$<span>—</span></div>
+        <div class="ph-tier-price">$<span>299</span><small>/mo</small></div>
         <div class="ph-tier-note">Core automation · 1 account</div>
       </div>
       <div class="ph-divider"></div>
       <div class="ph-tier ph-tier-featured">
         <div class="ph-tier-badge">MOST POPULAR</div>
         <div class="ph-tier-name">Max</div>
-        <div class="ph-tier-price">$<span>—</span></div>
+        <div class="ph-tier-price">$<span>699</span><small>/mo</small></div>
         <div class="ph-tier-note">Full suite · multiple campaigns · inbox management</div>
       </div>
     </div>
