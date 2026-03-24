@@ -568,6 +568,7 @@
       border: 0.5px solid var(--border2); border-radius: 18px;
       padding: 36px 30px; text-align: left;
       box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),inset 0 1px 0 rgba(255,255,255,0.08),0 8px 32px rgba(0,0,0,0.4);
+      opacity: 0.15;
       transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1), border-color .25s, box-shadow .25s;
     }
     .bc-left   { transform: translateX(-110px) rotateY(22deg); }
@@ -591,8 +592,9 @@
       100% { box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),0 8px 32px rgba(0,0,0,0.4); }
     }
     .built-card.lock-flash { animation: lockFlash .55s ease forwards; }
-    .arm-from-bot { transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(0.22,1,0.36,1); }
-    .arm-from-bot.in-view { opacity: 1; transform: none; }
+    @keyframes armFromBot { from { opacity: 0; transform: translateY(44px); } to { opacity: 1; transform: none; } }
+    .arm-from-bot { animation: armFromBot 0.85s cubic-bezier(0.22,1,0.36,1) both; }
+    .arm-from-bot.in-view { animation-play-state: running; }
     .built-num {
       font-size: 9px; font-weight: 700; letter-spacing: .14em;
       font-family: 'SF Mono',monospace; color: var(--blue);
@@ -607,7 +609,7 @@
 
     /* ─── OVIS STORE ─── */
     .store {
-      padding: 0 0 160px; text-align: center; overflow: hidden;
+      padding: 0 0 100px; text-align: center; overflow: hidden;
     }
     .store-eyebrow {
       font-size: 10px; font-weight: 700; letter-spacing: .18em;
@@ -709,7 +711,7 @@
 
     /* ─── HALL OF SUITS ─── */
     .hall {
-      padding: 140px 0 120px;
+      padding: 100px 0 100px;
       text-align: center; overflow: hidden;
       position: relative;
     }
@@ -1022,7 +1024,7 @@
 
     /* ─── WAITLIST CTA ─── */
     .waitlist {
-      padding: 140px var(--pad);
+      padding: 100px var(--pad);
       text-align: center;
       position: relative; overflow: hidden;
     }
@@ -1352,7 +1354,7 @@
     /* ─── PRICING HINT ─── */
     .pricing-hint {
       padding: 80px var(--pad);
-      max-width: 680px; margin: 0 auto; text-align: center;
+      max-width: 760px; margin: 0 auto; text-align: center;
     }
     .ph-eyebrow {
       display: block; font-size: 10px; font-weight: 700; letter-spacing: .20em;
@@ -1374,7 +1376,7 @@
       overflow: hidden; margin-bottom: 28px;
     }
     .ph-tier {
-      flex: 1; padding: 36px 32px; position: relative;
+      flex: 1; padding: 36px 32px 40px; position: relative;
     }
     .ph-tier-featured {
       background: rgba(0,192,240,0.05);
@@ -1402,6 +1404,19 @@
     .ph-tier-note {
       font-size: 12px; color: var(--muted2); line-height: 1.6;
     }
+    .ph-tier-features {
+      list-style: none; margin-top: 16px; text-align: left;
+      display: flex; flex-direction: column; gap: 9px;
+    }
+    .ph-tier-features li {
+      font-size: 13px; color: var(--muted); line-height: 1.5;
+      padding-left: 18px; position: relative;
+    }
+    .ph-tier-features li::before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(0,192,240,0.40); font-weight: 700;
+    }
+    .ph-tier-featured .ph-tier-features li { color: rgba(220,232,248,0.72); }
     .ph-lock {
       font-size: 13px; color: var(--muted2); letter-spacing: .01em;
     }
@@ -2185,24 +2200,38 @@
 
   <!-- ═══ PRICING HINT ═══ -->
   <section class="pricing-hint arm-from-bot">
-    <span class="ph-eyebrow">EARLY ACCESS</span>
-    <h2 class="ph-headline">Founding member pricing.<br>Yours when you join.</h2>
-    <p class="ph-sub">Public launch rates haven't been set yet. Everyone on the waitlist locks in founding-tier pricing — significantly below what this will cost at launch.</p>
+    <span class="ph-eyebrow">PRICING</span>
+    <h2 class="ph-headline">Simple pricing.<br>Serious results.</h2>
+    <p class="ph-sub">Lock in founding member rates when you join the waitlist. Prices increase at public launch.</p>
     <div class="ph-tiers">
       <div class="ph-tier">
-        <div class="ph-tier-name">Presence</div>
+        <div class="ph-tier-name">Omni Presence</div>
         <div class="ph-tier-price">$<span>299</span><small>/mo</small></div>
-        <div class="ph-tier-note">Core automation · 1 account</div>
+        <ul class="ph-tier-features">
+          <li>1 Instagram account</li>
+          <li>Up to 150 actions/day</li>
+          <li>Smart follow &amp; unfollow</li>
+          <li>Voice-matched DMs</li>
+          <li>Pulse activity feed</li>
+          <li>Ovis bar access</li>
+        </ul>
       </div>
       <div class="ph-divider"></div>
       <div class="ph-tier ph-tier-featured">
         <div class="ph-tier-badge">MOST POPULAR</div>
-        <div class="ph-tier-name">Max</div>
+        <div class="ph-tier-name">Omni Max</div>
         <div class="ph-tier-price">$<span>699</span><small>/mo</small></div>
-        <div class="ph-tier-note">Full suite · multiple campaigns · inbox management</div>
+        <ul class="ph-tier-features">
+          <li>Multiple accounts</li>
+          <li>Unlimited daily actions</li>
+          <li>Full inbox management</li>
+          <li>Priority Ovis updates</li>
+          <li>Early access to new store agents</li>
+          <li>Founding member badge</li>
+        </ul>
       </div>
     </div>
-    <p class="ph-lock">🔒 Founding rates locked in at signup. No credit card required.</p>
+    <p class="ph-lock">🔒 Join the waitlist to lock in founding member pricing before launch.</p>
   </section>
 
   <!-- ═══ FAQ ═══ -->
@@ -2449,7 +2478,7 @@
       const t = setInterval(()=>{ s=Math.min(s+step,target); el.textContent=Math.floor(s); if(s>=target)clearInterval(t); }, 16);
     }
     const so = new IntersectionObserver(e => {
-      e.forEach(en => { if(en.isIntersecting){ animateCount(document.getElementById('statActions'),250,1800); so.disconnect(); } });
+      e.forEach(en => { if(en.isIntersecting){ animateCount(document.getElementById('statActions'),150,1800); so.disconnect(); } });
     }, {threshold:.3});
     so.observe(document.querySelector('.stats-strip'));
 
