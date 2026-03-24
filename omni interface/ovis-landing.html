@@ -396,98 +396,176 @@
       color: var(--text); max-width: 560px;
     }
 
-    /* ─── HOW IT WORKS ─── */
-    .how {
-      padding: 120px var(--pad) 130px;
-      max-width: 1000px; margin: 0 auto; text-align: center;
+    /* ─── BUILT / ASSEMBLY ─── */
+    .built {
+      padding: 140px var(--pad) 160px;
+      max-width: 1100px; margin: 0 auto; text-align: center;
     }
-    .how-eyebrow {
+    .built-eyebrow {
       font-size: 10px; font-weight: 700; letter-spacing: .18em;
       text-transform: uppercase; color: rgba(0,192,240,0.50);
       font-family: 'SF Mono','Fira Code',monospace;
-      display: block; margin-bottom: 20px;
+      margin-bottom: 24px; display: block;
     }
-    .how-headline {
-      font-size: clamp(28px, 4.5vw, 52px);
+    .built-headline {
+      font-size: clamp(30px, 4.5vw, 54px);
       font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
-      color: var(--text); margin-bottom: 72px;
+      color: var(--text); margin-bottom: 18px;
     }
-    .how-steps {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
-      position: relative;
+    .built-sub {
+      font-size: clamp(14px, 1.4vw, 17px); color: var(--muted);
+      max-width: 440px; margin: 0 auto 80px; line-height: 1.7;
     }
-    .how-steps::before {
-      content: '';
-      position: absolute; top: 28px; left: 16%; right: 16%;
-      height: 0.5px; background: linear-gradient(90deg,
-        transparent, rgba(0,192,240,0.30) 20%, rgba(0,192,240,0.30) 80%, transparent);
+    .built-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+      perspective: 1400px;
     }
-    .how-step { padding: 0 32px; text-align: center; }
-    .how-num {
-      width: 56px; height: 56px; border-radius: 50%;
+    .built-card {
       background: var(--surface);
-      border: 0.5px solid rgba(0,192,240,0.25);
-      box-shadow: 0 0 20px rgba(0,192,240,0.12);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 28px;
-      font-size: 13px; font-weight: 800; letter-spacing: .04em;
-      color: var(--blue);
-      font-family: 'SF Mono','Fira Code',monospace;
-      position: relative; z-index: 1;
+      background-image:
+        repeating-linear-gradient(45deg,rgba(255,255,255,0.016) 0,rgba(255,255,255,0.016) 1px,transparent 0,transparent 50%),
+        repeating-linear-gradient(-45deg,rgba(255,255,255,0.016) 0,rgba(255,255,255,0.016) 1px,transparent 0,transparent 50%);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2); border-radius: 18px;
+      padding: 36px 30px; text-align: left;
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),inset 0 1px 0 rgba(255,255,255,0.08),0 8px 32px rgba(0,0,0,0.4);
+      opacity: 0;
+      transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1), border-color .25s, box-shadow .25s;
     }
-    .how-title {
-      font-size: 18px; font-weight: 800; letter-spacing: -.03em;
-      color: var(--text); margin-bottom: 12px;
+    .bc-left   { transform: translateX(-110px) rotateY(22deg); }
+    .bc-right  { transform: translateX( 110px) rotateY(-22deg); }
+    .bc-top    { transform: translateY(-90px) rotateX(18deg); }
+    .bc-bottom { transform: translateY( 90px) rotateX(-18deg); }
+    .built-card.assembled { opacity: 1; transform: none; }
+    .built-card:nth-child(1).assembled { transition-delay: .00s; }
+    .built-card:nth-child(2).assembled { transition-delay: .10s; }
+    .built-card:nth-child(3).assembled { transition-delay: .20s; }
+    .built-card:nth-child(4).assembled { transition-delay: .32s; }
+    .built-card:nth-child(5).assembled { transition-delay: .44s; }
+    .built-card:nth-child(6).assembled { transition-delay: .56s; }
+    .built-card:hover {
+      border-color: rgba(0,192,240,0.30);
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06),inset 0 1px 0 rgba(255,255,255,0.09),0 16px 50px rgba(0,0,0,0.5),0 0 30px rgba(0,192,240,0.10);
     }
-    .how-desc {
-      font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 400;
+    @keyframes lockFlash {
+      0%   { box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),0 8px 32px rgba(0,0,0,0.4); }
+      35%  { box-shadow: 0 0 0 1.5px rgba(0,192,240,0.7),0 8px 40px rgba(0,0,0,0.45),0 0 45px rgba(0,192,240,0.28); }
+      100% { box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),0 8px 32px rgba(0,0,0,0.4); }
     }
+    .built-card.lock-flash { animation: lockFlash .55s ease forwards; }
+    .built-num {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      font-family: 'SF Mono',monospace; color: var(--blue);
+      opacity: .55; margin-bottom: 18px; display: block;
+    }
+    .built-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .built-title {
+      font-size: 17px; font-weight: 800; letter-spacing: -.03em;
+      color: var(--text); margin-bottom: 10px;
+    }
+    .built-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
 
-    /* ─── SAFETY ─── */
-    .safety {
-      border-top: 0.5px solid var(--border);
-      padding: 100px var(--pad) 110px;
-      max-width: 1000px; margin: 0 auto; text-align: center;
+    /* ─── OVIS STORE ─── */
+    .store {
+      padding: 0 0 160px; text-align: center; overflow: hidden;
     }
-    .safety-eyebrow {
+    .store-eyebrow {
       font-size: 10px; font-weight: 700; letter-spacing: .18em;
       text-transform: uppercase; color: rgba(0,192,240,0.50);
       font-family: 'SF Mono','Fira Code',monospace;
-      display: block; margin-bottom: 20px;
+      margin-bottom: 24px; display: block;
     }
-    .safety-headline {
-      font-size: clamp(26px, 4vw, 48px);
+    .store-headline {
+      font-size: clamp(30px, 4.5vw, 54px);
       font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
       color: var(--text); margin-bottom: 16px;
     }
-    .safety-sub {
-      font-size: clamp(14px, 1.4vw, 16px); color: var(--muted);
-      max-width: 440px; margin: 0 auto 60px; line-height: 1.7;
+    .store-sub {
+      font-size: clamp(14px, 1.4vw, 17px); color: var(--muted);
+      max-width: 460px; margin: 0 auto 72px; line-height: 1.7;
     }
-    .safety-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+    .suits-hall {
+      display: flex; gap: 14px;
+      justify-content: flex-start; align-items: stretch;
+      perspective: 1600px;
+      padding: 40px var(--pad) 80px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
     }
-    .safety-card {
+    .suits-hall::-webkit-scrollbar { display: none; }
+    .suit-card {
+      position: relative; flex-shrink: 0;
+      width: 170px;
       background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 1px,transparent 0,transparent 50%),
-        repeating-linear-gradient(-45deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 1px,transparent 0,transparent 50%);
-      background-size: 5px 5px;
-      border: 0.5px solid var(--border2);
-      border-radius: 16px; padding: 36px 28px;
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 28px rgba(0,0,0,0.30);
-      text-align: left;
+      border-radius: 22px; padding: 28px 18px 26px;
+      text-align: center; cursor: pointer;
+      transform: translateZ(-8px) scale(0.97);
+      transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s, border-color .3s;
+      overflow: hidden;
     }
-    .safety-icon {
-      font-size: 24px; margin-bottom: 20px; display: block;
+    .suit-card:hover {
+      transform: translateZ(0) translateY(-18px) scale(1.04);
     }
-    .safety-card-title {
-      font-size: 16px; font-weight: 800; letter-spacing: -.03em;
-      color: var(--text); margin-bottom: 10px;
+    .suit-glow {
+      position: absolute; inset: -1px; border-radius: 22px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .45s;
     }
-    .safety-card-desc {
-      font-size: 13px; color: var(--muted); line-height: 1.75;
+    .suit-card:hover .suit-glow { opacity: 1; }
+    .suit-mark {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      font-family: 'SF Mono',monospace;
+      margin-bottom: 16px; display: block; opacity: .65;
     }
+    .suit-emoji { font-size: 34px; margin-bottom: 14px; display: block; }
+    .suit-name {
+      font-size: 14px; font-weight: 800; letter-spacing: -.02em;
+      color: var(--text); margin-bottom: 7px;
+    }
+    .suit-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+    /* Per-suit colors */
+    .suit-creator { border: 0.5px solid rgba(0,192,240,0.20); }
+    .suit-creator:hover { border-color: #00C0F0; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(0,192,240,0.25); }
+    .suit-creator .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(0,192,240,0.12) 0%, transparent 70%); }
+    .suit-creator .suit-mark { color: #00C0F0; }
+
+    .suit-fitness { border: 0.5px solid rgba(255,68,68,0.20); }
+    .suit-fitness:hover { border-color: #FF4444; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(255,68,68,0.25); }
+    .suit-fitness .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(255,68,68,0.12) 0%, transparent 70%); }
+    .suit-fitness .suit-mark { color: #FF4444; }
+
+    .suit-music { border: 0.5px solid rgba(155,89,182,0.20); }
+    .suit-music:hover { border-color: #9B59B6; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(155,89,182,0.25); }
+    .suit-music .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(155,89,182,0.12) 0%, transparent 70%); }
+    .suit-music .suit-mark { color: #9B59B6; }
+
+    .suit-sales { border: 0.5px solid rgba(240,165,0,0.20); }
+    .suit-sales:hover { border-color: #F0A500; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(240,165,0,0.25); }
+    .suit-sales .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(240,165,0,0.12) 0%, transparent 70%); }
+    .suit-sales .suit-mark { color: #F0A500; }
+
+    .suit-fashion { border: 0.5px solid rgba(255,105,164,0.20); }
+    .suit-fashion:hover { border-color: #FF69A4; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(255,105,164,0.25); }
+    .suit-fashion .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(255,105,164,0.12) 0%, transparent 70%); }
+    .suit-fashion .suit-mark { color: #FF69A4; }
+
+    .suit-food { border: 0.5px solid rgba(255,107,53,0.20); }
+    .suit-food:hover { border-color: #FF6B35; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(255,107,53,0.25); }
+    .suit-food .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.12) 0%, transparent 70%); }
+    .suit-food .suit-mark { color: #FF6B35; }
+
+    .suit-realty { border: 0.5px solid rgba(52,152,219,0.20); }
+    .suit-realty:hover { border-color: #3498DB; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(52,152,219,0.25); }
+    .suit-realty .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(52,152,219,0.12) 0%, transparent 70%); }
+    .suit-realty .suit-mark { color: #3498DB; }
+
+    .suit-custom { border: 0.5px solid rgba(168,180,192,0.20); background: rgba(255,255,255,0.03); }
+    .suit-custom:hover { border-color: #A8B4C0; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(168,180,192,0.20); }
+    .suit-custom .suit-glow { background: radial-gradient(ellipse at 50% 0%, rgba(168,180,192,0.10) 0%, transparent 70%); }
+    .suit-custom .suit-mark { color: #A8B4C0; }
 
     /* ─── STATS ─── */
     .stats-strip {
@@ -800,9 +878,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
       .focal-img-wrap { max-width: 95vw; }
-      .how-steps { grid-template-columns: 1fr; gap: 48px; }
-      .how-steps::before { display: none; }
-      .safety-grid { grid-template-columns: 1fr; gap: 12px; }
+      .built-grid { grid-template-columns: 1fr; gap: 12px; }
       .stats-inner { grid-template-columns: 1fr; }
       .stat-item + .stat-item::before { display: none; }
       .stat-item { padding: 40px 32px; border-top: 0.5px solid var(--border); }
@@ -903,7 +979,7 @@
     <div class="ovis-bar-wrap">
       <div class="ovis-bar">
         <div class="ovis-bar-inner">
-          <span class="ovis-bar-text">Ready when you are.</span>
+          <span class="ovis-bar-text" id="barText">Ready when you are.</span>
           <div class="ovis-bar-right">
             <div class="ovis-bar-grid">
               <span></span><span></span><span></span><span></span>
@@ -918,56 +994,127 @@
     <h2 class="focal-headline">We gave you a conversation.</h2>
   </div>
 
-  <!-- ═══ HOW IT WORKS ═══ -->
-  <section class="how">
-    <span class="how-eyebrow">How It Works</span>
-    <h2 class="how-headline">Three steps.<br>Then never again.</h2>
-    <div class="how-steps">
+  <!-- ═══ BUILT ═══ -->
+  <section class="built">
+    <span class="built-eyebrow">How It Works · Why It's Safe</span>
+    <h2 class="built-headline">Built in seconds.<br>Safe forever.</h2>
+    <p class="built-sub">Set it up once. Ovis does the rest — precisely, quietly, and well within Instagram's limits.</p>
+    <div class="built-grid" id="builtGrid">
 
-      <div class="how-step">
-        <div class="how-num">01</div>
-        <div class="how-title">Connect</div>
-        <div class="how-desc">Link your Instagram account. Takes 30 seconds. No technical setup. No API keys.</div>
+      <div class="built-card bc-left">
+        <span class="built-num">01 —</span>
+        <span class="built-icon">⚡</span>
+        <div class="built-title">Connect</div>
+        <div class="built-desc">Link your Instagram in 30 seconds. No API keys. No technical setup. Just log in and go.</div>
       </div>
 
-      <div class="how-step">
-        <div class="how-num">02</div>
-        <div class="how-title">Tell Ovis</div>
-        <div class="how-desc">Describe your ideal audience in plain English — niche, age, city, whatever you want. Say it once.</div>
+      <div class="built-card bc-top">
+        <span class="built-num">02 —</span>
+        <span class="built-icon">🎯</span>
+        <div class="built-title">Tell Ovis once</div>
+        <div class="built-desc">Describe your ideal audience in plain English — niche, city, age. Say it once. It never forgets.</div>
       </div>
 
-      <div class="how-step">
-        <div class="how-num">03</div>
-        <div class="how-title">Done.</div>
-        <div class="how-desc">Ovis follows, DMs, unfollows, and engages — every single day. On autopilot. You do nothing.</div>
+      <div class="built-card bc-right">
+        <span class="built-num">03 —</span>
+        <span class="built-icon">♾️</span>
+        <div class="built-title">It runs forever</div>
+        <div class="built-desc">Follows, DMs, unfollows, engages — every day on autopilot. You do absolutely nothing after this.</div>
+      </div>
+
+      <div class="built-card bc-left">
+        <span class="built-num">— —</span>
+        <span class="built-icon">🕐</span>
+        <div class="built-title">Human-like pacing</div>
+        <div class="built-desc">Natural timing between every action. No burst patterns. Ovis moves exactly like a real person would.</div>
+      </div>
+
+      <div class="built-card bc-bottom">
+        <span class="built-num">— —</span>
+        <span class="built-icon">🛡️</span>
+        <div class="built-title">Within Instagram's limits</div>
+        <div class="built-desc">Conservative by design. Ovis stays well inside daily thresholds. Your account's safety comes first.</div>
+      </div>
+
+      <div class="built-card bc-right">
+        <span class="built-num">— —</span>
+        <span class="built-icon">⏸️</span>
+        <div class="built-title">Full control, always</div>
+        <div class="built-desc">Pause or stop with one tap. No questions. You're always in command — Ovis just does the work.</div>
       </div>
 
     </div>
   </section>
 
-  <!-- ═══ SAFETY ═══ -->
-  <section class="safety">
-    <span class="safety-eyebrow">Account Safety</span>
-    <h2 class="safety-headline">Your account is protected.<br>Always.</h2>
-    <p class="safety-sub">Ovis doesn't act like a bot. It acts like you — because that's the only way this works long-term.</p>
-    <div class="safety-grid">
+  <!-- ═══ OVIS STORE ═══ -->
+  <section class="store">
+    <span class="store-eyebrow">Ovis Store</span>
+    <h2 class="store-headline">An Ovis for everything.</h2>
+    <p class="store-sub">Pre-built for your niche. Ready to deploy in seconds. Or build your own and share it with the world.</p>
+    <div class="suits-hall">
 
-      <div class="safety-card">
-        <span class="safety-icon">🕐</span>
-        <div class="safety-card-title">Human-like pacing</div>
-        <div class="safety-card-desc">Natural timing between every action. No burst activity. No robotic patterns. Ovis moves the way a real person does.</div>
+      <div class="suit-card suit-creator">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-01</span>
+        <span class="suit-emoji">🤖</span>
+        <div class="suit-name">Creator</div>
+        <div class="suit-desc">Grows any content creator account</div>
       </div>
 
-      <div class="safety-card">
-        <span class="safety-icon">📊</span>
-        <div class="safety-card-title">Within Instagram's limits</div>
-        <div class="safety-card-desc">Ovis stays well inside daily action thresholds. Conservative by design — your account's longevity matters more than speed.</div>
+      <div class="suit-card suit-fitness">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-02</span>
+        <span class="suit-emoji">💪</span>
+        <div class="suit-name">Fitness</div>
+        <div class="suit-desc">Built for coaches, gyms &amp; athletes</div>
       </div>
 
-      <div class="safety-card">
-        <span class="safety-icon">⏸</span>
-        <div class="safety-card-title">Full control, always</div>
-        <div class="safety-card-desc">Pause or stop anytime. One tap. No questions asked. You're always in control — Ovis just does the work.</div>
+      <div class="suit-card suit-music">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-03</span>
+        <span class="suit-emoji">🎵</span>
+        <div class="suit-name">Music</div>
+        <div class="suit-desc">Grows artists, labels &amp; producers</div>
+      </div>
+
+      <div class="suit-card suit-sales">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-04</span>
+        <span class="suit-emoji">💰</span>
+        <div class="suit-name">Sales</div>
+        <div class="suit-desc">Finds buyers and starts conversations</div>
+      </div>
+
+      <div class="suit-card suit-fashion">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-05</span>
+        <span class="suit-emoji">👗</span>
+        <div class="suit-name">Fashion</div>
+        <div class="suit-desc">Built for brands, boutiques &amp; style</div>
+      </div>
+
+      <div class="suit-card suit-food">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-06</span>
+        <span class="suit-emoji">🍽️</span>
+        <div class="suit-name">Food</div>
+        <div class="suit-desc">Restaurants, chefs &amp; food brands</div>
+      </div>
+
+      <div class="suit-card suit-realty">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-07</span>
+        <span class="suit-emoji">🏡</span>
+        <div class="suit-name">Real Estate</div>
+        <div class="suit-desc">Agents, brokers &amp; property brands</div>
+      </div>
+
+      <div class="suit-card suit-custom">
+        <div class="suit-glow"></div>
+        <span class="suit-mark">MK-??</span>
+        <span class="suit-emoji">✦</span>
+        <div class="suit-name">Build Yours</div>
+        <div class="suit-desc">Any niche. Your rules. Ship it to the store.</div>
       </div>
 
     </div>
@@ -1254,25 +1401,46 @@
       briefObs.observe(document.querySelector('.focal'));
     })();
 
-    /* ── Rotating bar text ── */
-    (function() {
-      var lines = [
-        "Found 23 fitness creators in LA worth following.",
-        "3 people didn't follow back. Already handled.",
-        "Sent a DM to @alexfitness. Sounded just like you."
-      ];
-      var el = document.querySelector('.ovis-bar-text');
-      var i = 0;
-      function rotate() {
-        el.classList.add('fade-out');
-        setTimeout(function() {
-          i = (i + 1) % lines.length;
-          el.textContent = lines[i];
-          el.classList.remove('fade-out');
-        }, 460);
-      }
-      setInterval(rotate, 3200);
-    })();
+  // ── Built card assembly ──
+  const builtGrid = document.getElementById('builtGrid');
+  if (builtGrid) {
+    const assembleObs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const cards = builtGrid.querySelectorAll('.built-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => {
+              card.classList.add('assembled');
+              setTimeout(() => card.classList.add('lock-flash'), 750 * (i === 0 ? 1 : 1));
+            }, i * 110);
+          });
+          assembleObs.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    assembleObs.observe(builtGrid);
+  }
+
+    // ── Bar text rotation (Set 5) ──
+  const barPhrases = [
+    'Found 23 fitness creators in LA worth following.',
+    '3 people didn't follow back. Already handled.',
+    'Sent a DM to @alexfitness. Sounded just like you.',
+  ];
+  let barIdx = 0;
+  const barEl = document.getElementById('barText');
+  if (barEl) {
+    setInterval(() => {
+      barEl.style.opacity = '0';
+      barEl.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        barIdx = (barIdx + 1) % barPhrases.length;
+        barEl.textContent = barPhrases[barIdx];
+        barEl.style.opacity = '1';
+        barEl.style.transform = 'translateY(0)';
+      }, 350);
+    }, 3200);
+  }
   </script>
 </body>
 </html>
