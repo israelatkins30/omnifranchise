@@ -303,58 +303,83 @@
       animation: pulse 2s infinite;
     }
 
-    /* ─── CAPABILITIES ─── */
-    .capabilities {
-      padding: 120px var(--pad);
-      max-width: 1100px; margin: 0 auto;
-    }
-    .cap-label {
-      display: block; text-align: center;
-      font-size: 11px; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--blue);
-      margin-bottom: 18px;
-    }
-    .cap-headline {
+    /* ─── SHOWCASE ─── */
+    .showcase {
+      padding: 120px var(--pad) 140px;
+      max-width: 1080px; margin: 0 auto;
       text-align: center;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
-      color: var(--text); margin-bottom: 64px;
     }
-    .cap-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    .showcase-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(0,192,240,0.50);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-bottom: 24px; display: block;
     }
-    .cap-card {
+    .showcase-headline {
+      font-size: clamp(34px, 5.5vw, 62px);
+      font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .showcase-sub {
+      font-size: clamp(15px, 1.5vw, 18px);
+      color: var(--muted); line-height: 1.72;
+      max-width: 480px; margin: 0 auto 72px;
+      font-weight: 400;
+    }
+    .showcase-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      max-width: 940px; margin: 0 auto 80px;
+    }
+    .showcase-card {
       background: var(--surface);
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 0, transparent 50%);
-      background-size: 5px 5px;
       border: 0.5px solid var(--border2);
-      border-radius: 16px; padding: 36px 32px;
+      border-radius: 22px; overflow: hidden;
       box-shadow:
         0 0 0 0.5px rgba(255,255,255,0.05),
         inset 0 1px 0 rgba(255,255,255,0.08),
-        0 8px 32px rgba(0,0,0,0.35);
-      transition: border-color .25s, box-shadow .25s;
+        0 24px 60px rgba(0,0,0,0.55);
+      transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s;
     }
-    .cap-card:hover {
-      border-color: rgba(0,192,240,0.28);
-      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 40px rgba(0,0,0,0.40), 0 0 30px rgba(0,192,240,0.08);
+    .showcase-card:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.07),
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 40px 90px rgba(0,0,0,0.65),
+        0 0 50px rgba(0,192,240,0.10);
     }
-    .cap-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: rgba(0,192,240,0.10);
-      border: 0.5px solid rgba(0,192,240,0.20);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; margin-bottom: 22px;
+    .showcase-img-wrap {
+      width: 100%; overflow: hidden;
+      border-bottom: 0.5px solid var(--border);
+      background: #F5F7FA;
     }
-    .cap-title {
-      font-size: 18px; font-weight: 800; letter-spacing: -.03em;
-      color: var(--text); margin-bottom: 12px;
+    .showcase-img {
+      width: 100%; height: auto; display: block;
     }
-    .cap-desc {
-      font-size: 14px; color: var(--muted); line-height: 1.72; font-weight: 400;
+    .showcase-card-info {
+      padding: 26px 28px 30px;
+      text-align: left;
     }
+    .showcase-card-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--blue);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-bottom: 10px; display: block;
+    }
+    .showcase-card-title {
+      font-size: 17px; font-weight: 800; letter-spacing: -.03em;
+      color: var(--text); margin-bottom: 9px;
+    }
+    .showcase-card-desc {
+      font-size: 13px; color: var(--muted); line-height: 1.75; font-weight: 400;
+    }
+    .showcase-manifesto {
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 600; letter-spacing: -.03em; line-height: 1.5;
+      color: var(--text); max-width: 620px; margin: 0 auto;
+      opacity: .92;
+    }
+    .showcase-manifesto em { font-style: normal; color: var(--blue); }
 
     /* ─── STATS ─── */
     .stats-strip {
@@ -666,7 +691,7 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
-      .cap-grid { grid-template-columns: 1fr; gap: 12px; }
+      .showcase-grid { grid-template-columns: 1fr; gap: 16px; }
       .stats-inner { grid-template-columns: 1fr; }
       .stat-item + .stat-item::before { display: none; }
       .stat-item { padding: 40px 32px; border-top: 0.5px solid var(--border); }
@@ -761,35 +786,40 @@
 
   </section>
 
-  <!-- ═══ CAPABILITIES ═══ -->
-  <div class="capabilities" id="how">
+  <!-- ═══ SHOWCASE ═══ -->
+  <div class="showcase" id="how">
     <div class="jarvis-brief" id="jarvisBrief"><span class="jb-cursor"></span></div>
-    <span class="cap-label">System Capabilities</span>
-    <h2 class="cap-headline">Three modules. Running every day.<br>Without you.</h2>
-    <div class="cap-grid">
+    <span class="showcase-eyebrow">The Interface</span>
+    <h2 class="showcase-headline">Two screens.<br>That's your entire<br>relationship with Ovis.</h2>
+    <p class="showcase-sub">Most platforms bury you in dashboards and settings. We built two things — and made them perfect.</p>
 
-      <div class="cap-card">
-        <div class="cap-icon">⚡</div>
-        <div class="cap-module">FOLLOW.EXE</div>
-        <div class="cap-title">Follows</div>
-        <div class="cap-desc">Finds and follows exactly the right people in your niche — by city, account size, engagement rate. Every single day.</div>
+    <div class="showcase-grid">
+
+      <div class="showcase-card">
+        <div class="showcase-img-wrap">
+          <img src="pulse-ui.png" alt="Ovis Pulse — live activity feed" class="showcase-img"/>
+        </div>
+        <div class="showcase-card-info">
+          <span class="showcase-card-tag">Pulse</span>
+          <div class="showcase-card-title">Every action, in real time.</div>
+          <div class="showcase-card-desc">Watch Ovis follow, unfollow, and DM — live. A full log of everything running on your behalf, around the clock. You always know exactly what's happening.</div>
+        </div>
       </div>
 
-      <div class="cap-card">
-        <div class="cap-icon">💬</div>
-        <div class="cap-module">DM.EXE</div>
-        <div class="cap-title">DMs</div>
-        <div class="cap-desc">Writes and sends personalized messages in your voice. Not templates. Conversations that sound like you wrote them.</div>
-      </div>
-
-      <div class="cap-card">
-        <div class="cap-icon">📈</div>
-        <div class="cap-module">GROW.EXE</div>
-        <div class="cap-title">Grows</div>
-        <div class="cap-desc">Your account compounds while you sleep. Real followers. Real reach. No posting required from you.</div>
+      <div class="showcase-card">
+        <div class="showcase-img-wrap">
+          <img src="ovis-island.png" alt="Ovis Dynamic Island — tap to talk" class="showcase-img"/>
+        </div>
+        <div class="showcase-card-info">
+          <span class="showcase-card-tag">Ovis</span>
+          <div class="showcase-card-title">Tap it. Talk to it. Done.</div>
+          <div class="showcase-card-desc">The Dynamic Island lives at the bottom of your screen. Tap it, tell Ovis what you want — it adjusts and keeps running. No menus. No settings pages. Just a conversation.</div>
+        </div>
       </div>
 
     </div>
+
+    <p class="showcase-manifesto">"The most advanced Instagram AI ever built.<br>You'd <em>never</em> know it."</p>
   </div>
 
   <!-- ═══ STATS ═══ -->
@@ -1070,7 +1100,7 @@
           }
         });
       }, { threshold: 0.25 });
-      briefObs.observe(document.querySelector('.capabilities'));
+      briefObs.observe(document.querySelector('.showcase'));
     })();
   </script>
 </body>
