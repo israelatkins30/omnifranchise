@@ -436,6 +436,54 @@
       color: var(--text); max-width: 560px;
     }
 
+    /* ─── BEFORE / AFTER ─── */
+    .contrast {
+      padding: 120px var(--pad) 100px;
+      max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    .contrast-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: .20em;
+      text-transform: uppercase; color: rgba(0,192,240,0.45);
+      font-family: 'SF Mono','Fira Code',monospace;
+      margin-bottom: 20px; display: block;
+    }
+    .contrast-headline {
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
+      color: var(--text); margin-bottom: 56px;
+    }
+    .contrast-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      text-align: left;
+    }
+    .contrast-col {
+      padding: 40px 36px; border-radius: 18px;
+    }
+    .contrast-before {
+      background: rgba(255,60,60,0.04);
+      border: 0.5px solid rgba(255,80,80,0.12);
+    }
+    .contrast-after {
+      background: rgba(0,192,240,0.05);
+      border: 0.5px solid rgba(0,192,240,0.18);
+      box-shadow: 0 0 40px rgba(0,192,240,0.05);
+    }
+    .contrast-col-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .10em;
+      text-transform: uppercase; margin-bottom: 24px;
+      font-family: 'SF Mono','Fira Code',monospace;
+    }
+    .contrast-before .contrast-col-label { color: rgba(255,100,100,0.65); }
+    .contrast-after  .contrast-col-label { color: rgba(0,192,240,0.80); }
+    .contrast-list {
+      list-style: none; display: flex; flex-direction: column; gap: 16px;
+    }
+    .contrast-list li {
+      font-size: 14px; color: var(--muted); line-height: 1.65; font-weight: 400;
+      padding-left: 0;
+    }
+    .contrast-after .contrast-list li { color: rgba(220,232,248,0.75); }
+
     /* ─── BUILT / ASSEMBLY ─── */
     .built {
       padding: 140px var(--pad) 160px;
@@ -493,6 +541,8 @@
       100% { box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05),0 8px 32px rgba(0,0,0,0.4); }
     }
     .built-card.lock-flash { animation: lockFlash .55s ease forwards; }
+    .arm-from-bot { opacity: 0; transform: translateY(50px); transition: opacity .8s ease, transform .8s cubic-bezier(0.22,1,0.36,1); }
+    .arm-from-bot.in-view { opacity: 1; transform: none; }
     .built-num {
       font-size: 9px; font-weight: 700; letter-spacing: .14em;
       font-family: 'SF Mono',monospace; color: var(--blue);
@@ -1200,6 +1250,163 @@
       text-transform: uppercase;
     }
 
+    /* ─── FAQ ─── */
+    .faq {
+      padding: 120px var(--pad) 100px;
+      max-width: 720px; margin: 0 auto;
+    }
+    .faq-eyebrow {
+      display: block; text-align: center;
+      font-size: 10px; font-weight: 700; letter-spacing: .20em;
+      text-transform: uppercase; color: rgba(0,192,240,0.45);
+      font-family: 'SF Mono','Fira Code',monospace;
+      margin-bottom: 18px;
+    }
+    .faq-headline {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -.05em;
+      color: var(--text); text-align: center;
+      margin-bottom: 56px;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-top: 0.5px solid var(--border);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .faq-item:last-child { border-bottom: 0.5px solid var(--border); }
+    .faq-item:hover { background: rgba(255,255,255,0.015); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 4px; gap: 20px;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      letter-spacing: -.01em; line-height: 1.4;
+    }
+    .faq-arrow {
+      font-size: 20px; font-weight: 300; color: var(--blue);
+      flex-shrink: 0; transition: transform .3s cubic-bezier(0.22,1,0.36,1);
+      line-height: 1;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 14px; color: var(--muted); line-height: 1.78;
+      max-height: 0; overflow: hidden;
+      transition: max-height .45s cubic-bezier(0.22,1,0.36,1), padding .3s ease;
+      padding: 0 4px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding: 0 4px 22px;
+    }
+
+    /* ─── PRICING HINT ─── */
+    .pricing-hint {
+      padding: 120px var(--pad) 100px;
+      max-width: 680px; margin: 0 auto; text-align: center;
+    }
+    .ph-eyebrow {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .20em;
+      text-transform: uppercase; color: rgba(0,192,240,0.45);
+      font-family: 'SF Mono','Fira Code',monospace; margin-bottom: 18px;
+    }
+    .ph-headline {
+      font-size: clamp(26px, 4vw, 46px); font-weight: 800;
+      letter-spacing: -.05em; line-height: 1.05;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .ph-sub {
+      font-size: 15px; color: var(--muted); line-height: 1.72;
+      max-width: 520px; margin: 0 auto 48px;
+    }
+    .ph-tiers {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+      border: 0.5px solid var(--border2); border-radius: 18px;
+      overflow: hidden; margin-bottom: 28px;
+    }
+    .ph-tier {
+      flex: 1; padding: 36px 32px; position: relative;
+    }
+    .ph-tier-featured {
+      background: rgba(0,192,240,0.05);
+      border-left: 0.5px solid rgba(0,192,240,0.15);
+      border-right: 0.5px solid rgba(0,192,240,0.15);
+    }
+    .ph-divider { display: none; }
+    .ph-tier-badge {
+      font-size: 8px; font-weight: 700; letter-spacing: .16em;
+      color: var(--blue); font-family: 'SF Mono','Fira Code',monospace;
+      margin-bottom: 12px;
+    }
+    .ph-tier-name {
+      font-size: 16px; font-weight: 700; color: var(--text);
+      letter-spacing: -.02em; margin-bottom: 8px;
+    }
+    .ph-tier-price {
+      font-size: 36px; font-weight: 800; letter-spacing: -.04em;
+      color: var(--muted2); margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+    .ph-tier-featured .ph-tier-price { color: var(--blue); }
+    .ph-tier-price span { font-size: 22px; }
+    .ph-tier-note {
+      font-size: 12px; color: var(--muted2); line-height: 1.6;
+    }
+    .ph-lock {
+      font-size: 13px; color: var(--muted2); letter-spacing: .01em;
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    .proof {
+      padding: 100px var(--pad);
+      max-width: 760px; margin: 0 auto; text-align: center;
+    }
+    .proof-card {
+      background: var(--surface);
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%);
+      background-size: 5px 5px;
+      border: 0.5px solid var(--border2);
+      border-radius: 20px; padding: 44px 48px 36px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 60px rgba(0,0,0,0.35);
+      margin-bottom: 32px;
+    }
+    .proof-quote {
+      font-size: clamp(16px, 2vw, 20px); font-weight: 500;
+      color: var(--text); line-height: 1.65; letter-spacing: -.02em;
+      margin-bottom: 32px; font-style: italic; opacity: .92;
+    }
+    .proof-author {
+      display: flex; align-items: center; gap: 14px; justify-content: flex-start;
+    }
+    .proof-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(0,192,240,0.25), rgba(0,192,240,0.10));
+      border: 0.5px solid rgba(0,192,240,0.30);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--blue);
+    }
+    .proof-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .proof-handle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .proof-ig { margin-left: auto; opacity: .6; }
+    .proof-stats {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+    }
+    .proof-stat {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 0 32px;
+    }
+    .proof-stat-num {
+      font-size: clamp(22px, 3vw, 30px); font-weight: 800;
+      letter-spacing: -.04em; color: var(--blue);
+    }
+    .proof-stat-label {
+      font-size: 11px; color: var(--muted2); font-weight: 500; letter-spacing: .02em;
+    }
+    .proof-stat-div {
+      width: 0.5px; height: 36px; background: var(--border);
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
       .focal-img-wrap { max-width: 95vw; }
@@ -1318,6 +1525,34 @@
     <p class="focal-label">Every other platform gives you a dashboard.<br>Campaigns. Settings. Setups. Onboarding flows.</p>
     <h2 class="focal-headline">We gave you a conversation.</h2>
   </div>
+
+  <!-- ═══ BEFORE / AFTER ═══ -->
+  <section class="contrast arm-from-bot">
+    <div class="contrast-eyebrow">THE DIFFERENCE</div>
+    <h2 class="contrast-headline">What changes<br>when you have Ovis.</h2>
+    <div class="contrast-grid">
+      <div class="contrast-col contrast-before">
+        <div class="contrast-col-label">❌ Without Ovis</div>
+        <ul class="contrast-list">
+          <li>Spending 2+ hours a day manually following and unfollowing</li>
+          <li>Guessing who to DM — most messages get ignored</li>
+          <li>Manually checking who didn't follow back</li>
+          <li>Your account goes quiet the moment you stop</li>
+          <li>No system. No consistency. No scale.</li>
+        </ul>
+      </div>
+      <div class="contrast-col contrast-after">
+        <div class="contrast-col-label">✓ With Ovis</div>
+        <ul class="contrast-list">
+          <li>150+ targeted actions per day. Automatically.</li>
+          <li>DMs sent only to the right people, in your exact voice</li>
+          <li>Unfollows handled silently in the background</li>
+          <li>Growing 24/7 — even while you sleep</li>
+          <li>Tell it once. It runs forever.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══ BUILT ═══ -->
   <section class="built">
@@ -1799,6 +2034,107 @@
     </div>
   </section>
 
+  <!-- ═══ SOCIAL PROOF ═══ -->
+  <section class="proof arm-from-bot">
+    <div class="proof-card">
+      <div class="proof-quote">"I gained 400 followers in the first week without touching my phone. My DMs are going out. People are responding. It feels like I have a team working for me."</div>
+      <div class="proof-author">
+        <div class="proof-avatar">JR</div>
+        <div class="proof-info">
+          <div class="proof-name">Jordan R.</div>
+          <div class="proof-handle">Fitness creator · 12k followers</div>
+        </div>
+        <div class="proof-ig">
+          <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="ig2" cx="30%" cy="110%" r="145%"><stop offset="0%" stop-color="#feda75"/><stop offset="18%" stop-color="#fa7e1e"/><stop offset="48%" stop-color="#d62976"/><stop offset="74%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></radialGradient></defs>
+            <rect width="24" height="24" rx="5.6" fill="url(#ig2)"/>
+            <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4.4" fill="none" stroke="white" stroke-width="1.9"/>
+            <circle cx="12" cy="12" r="4.6" fill="none" stroke="white" stroke-width="1.9"/>
+            <circle cx="17.8" cy="6.2" r="1.25" fill="white"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="proof-stats">
+      <div class="proof-stat"><span class="proof-stat-num">+400</span><span class="proof-stat-label">followers · week 1</span></div>
+      <div class="proof-stat-div"></div>
+      <div class="proof-stat"><span class="proof-stat-num">24/7</span><span class="proof-stat-label">running on autopilot</span></div>
+      <div class="proof-stat-div"></div>
+      <div class="proof-stat"><span class="proof-stat-num">0</span><span class="proof-stat-label">hours of manual work</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING HINT ═══ -->
+  <section class="pricing-hint arm-from-bot">
+    <span class="ph-eyebrow">EARLY ACCESS</span>
+    <h2 class="ph-headline">Founding member pricing.<br>Yours when you join.</h2>
+    <p class="ph-sub">Public launch rates haven't been set yet. Everyone on the waitlist locks in founding-tier pricing — significantly below what this will cost at launch.</p>
+    <div class="ph-tiers">
+      <div class="ph-tier">
+        <div class="ph-tier-name">Presence</div>
+        <div class="ph-tier-price">$<span>—</span></div>
+        <div class="ph-tier-note">Core automation · 1 account</div>
+      </div>
+      <div class="ph-divider"></div>
+      <div class="ph-tier ph-tier-featured">
+        <div class="ph-tier-badge">MOST POPULAR</div>
+        <div class="ph-tier-name">Max</div>
+        <div class="ph-tier-price">$<span>—</span></div>
+        <div class="ph-tier-note">Full suite · multiple campaigns · inbox management</div>
+      </div>
+    </div>
+    <p class="ph-lock">🔒 Founding rates locked in at signup. No credit card required.</p>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq arm-from-bot">
+    <span class="faq-eyebrow">FAQ</span>
+    <h2 class="faq-headline">Questions answered.</h2>
+    <div class="faq-list">
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Will Ovis get my account banned?</span>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Ovis is built with account safety as the top priority. Every action is spaced naturally, mimicking real human behavior. We stay well within Instagram's daily limits and never use methods that trigger automated detection. Your account's safety is non-negotiable.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>How long does setup take?</span>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Less than 5 minutes. Connect your account, describe your target audience in plain English — niche, city, age range — and Ovis starts working immediately. No technical knowledge required. No API keys. No manuals.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>What niches does Ovis work best for?</span>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Any niche on Instagram. Fitness, music, real estate, fashion, food, coaching, finance, healthcare — if your audience is on Instagram, Ovis can find them, engage them, and grow your account within that community.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>When do I get access?</span>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Early access opens in rolling waves, starting with waitlist members first. The earlier you join, the sooner you're in — and you lock in founding member pricing that won't be available after public launch.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>How is Ovis different from other tools?</span>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Most tools require daily management, get accounts flagged, and feel like you're operating a dashboard. Ovis uses AI to run your account the way a real person would — intelligently, strategically, safely. You set it once. It handles everything else. Forever.</div>
+      </div>
+
+    </div>
+  </section>
+
     <!-- ═══ WAITLIST CTA ═══ -->
   <section class="waitlist">
     <span class="waitlist-eyebrow">MARK I — LIMITED ACCESS</span>
@@ -2099,6 +2435,43 @@
         barEl.style.transform = 'translateY(0)';
       }, 350);
     }, 3200);
+  }
+
+  // ── Built section assembly ──
+  const builtCards = document.querySelectorAll('.built-card');
+  if (builtCards.length) {
+    const builtObs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const cards = document.querySelectorAll('.built-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => {
+              card.classList.add('assembled');
+              setTimeout(() => {
+                card.classList.add('lock-flash');
+                setTimeout(() => card.classList.remove('lock-flash'), 400);
+              }, 200);
+            }, i * 140);
+          });
+          builtObs.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    builtObs.observe(builtCards[0]);
+  }
+
+  // ── arm-from-bot general observer ──
+  document.querySelectorAll('.arm-from-bot').forEach(el => {
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add('in-view'); }
+    }, { threshold: 0.15 }).observe(el);
+  });
+
+  // ── FAQ toggle ──
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
   }
   </script>
 </body>
