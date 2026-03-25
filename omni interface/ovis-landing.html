@@ -1545,6 +1545,651 @@
     .sp-testi-author {
       font-size: 10.5px; color: rgba(12,13,20,0.45); font-weight: 500;
     }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANT SECTIONS — 7 design options for review
+    ═══════════════════════════════════════════════════════════════════ */
+
+    .variant-section {
+      padding: 100px var(--pad) 120px;
+      position: relative;
+    }
+    .variant-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.12), transparent);
+      margin: 0 var(--pad);
+    }
+    .variant-label {
+      text-align: center;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 60px;
+      text-transform: uppercase;
+    }
+    .variant-label span {
+      display: inline-block;
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 6px 16px;
+      background: var(--surface2);
+    }
+
+    /* ── OPTION 1: JARVIS Module Cards ── */
+    .v1-section {
+      background: #0C0D14;
+    }
+    .v1-headline {
+      font-size: clamp(28px,4vw,42px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .v1-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .v1-card {
+      background: #12141C;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid #0098C8;
+      padding: 28px 26px;
+      transition: border-left-color .2s, box-shadow .2s;
+      cursor: default;
+    }
+    .v1-card:hover {
+      border-left-color: #00D4FF;
+      box-shadow: -4px 0 20px rgba(0,212,255,0.18), 0 0 30px rgba(0,152,200,0.08);
+    }
+    .v1-module-label {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #0098C8;
+      margin-bottom: 12px;
+    }
+    .v1-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #C8CDD8 0%, #8E95A8 50%, #C0C6D4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .v1-card-desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: rgba(200,210,220,0.65);
+    }
+
+    /* ── OPTION 5: Animated Timeline ── */
+    .v5-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      margin-bottom: 80px;
+      color: var(--text);
+    }
+    .v5-timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .v5-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, rgba(0,152,200,0.3) 10%, rgba(0,152,200,0.3) 90%, transparent);
+      transform: translateX(-50%);
+    }
+    .v5-entry {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 52px;
+      position: relative;
+    }
+    .v5-entry:nth-child(odd) {
+      flex-direction: row;
+    }
+    .v5-entry:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .v5-content {
+      width: calc(50% - 36px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    }
+    .v5-entry:nth-child(odd) .v5-content { margin-right: auto; }
+    .v5-entry:nth-child(even) .v5-content { margin-left: auto; }
+    .v5-time {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #0098C8;
+      margin-bottom: 6px;
+    }
+    .v5-entry-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .v5-entry-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .v5-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #0098C8;
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px rgba(0,152,200,0.4), 0 0 12px rgba(0,152,200,0.5);
+      position: absolute;
+      left: 50%;
+      top: 22px;
+      transform: translateX(-50%);
+      animation: v5pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes v5pulse {
+      0%,100% { box-shadow: 0 0 0 2px rgba(0,152,200,0.4), 0 0 12px rgba(0,152,200,0.5); }
+      50% { box-shadow: 0 0 0 5px rgba(0,152,200,0.15), 0 0 24px rgba(0,152,200,0.7); }
+    }
+
+    /* ── OPTION 6: Stats-Embedded Cards ── */
+    .v6-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text);
+    }
+    .v6-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .v6-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 26px 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .v6-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .v6-icon-wrap {
+      width: 42px; height: 42px;
+      background: var(--blue-dim);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .v6-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .v6-card-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .v6-divider {
+      height: 1px;
+      background: rgba(0,152,200,0.2);
+      margin-bottom: 16px;
+    }
+    .v6-stat {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0098C8;
+      letter-spacing: -.02em;
+      margin-bottom: 3px;
+    }
+    .v6-stat-label {
+      font-size: 11px;
+      color: var(--muted2);
+      letter-spacing: .04em;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .v6-bar-track {
+      height: 4px;
+      background: rgba(0,152,200,0.12);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .v6-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0098C8, #00C8E0);
+      border-radius: 99px;
+      transition: width 1.2s ease;
+    }
+
+    /* ── OPTION 7: Split Screen Menu + Detail ── */
+    .v7-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text);
+    }
+    .v7-split {
+      display: flex;
+      gap: 0;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+      min-height: 400px;
+    }
+    .v7-menu {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--surface2);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .v7-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+      border-left: 3px solid transparent;
+      transition: color .15s, background .15s, border-left-color .15s;
+      position: relative;
+    }
+    .v7-menu-item:hover {
+      background: rgba(0,152,200,0.04);
+      color: var(--text);
+    }
+    .v7-menu-item.active {
+      background: rgba(0,152,200,0.07);
+      color: var(--text);
+      border-left-color: #0098C8;
+    }
+    .v7-menu-num {
+      font-family: 'SF Mono','Fira Code','Courier New',monospace;
+      font-size: 10px;
+      color: var(--muted2);
+      width: 16px;
+    }
+    .v7-detail {
+      flex: 1;
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+    .v7-detail-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .v7-detail-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+    .v7-terminal {
+      background: #0C0D14;
+      border-radius: 10px;
+      padding: 20px 22px;
+      font-family: 'SF Mono','Fira Code','Courier New',monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .v7-terminal .t-prompt { color: rgba(255,255,255,0.35); }
+    .v7-terminal .t-cmd { color: #A8D8EA; }
+    .v7-terminal .t-ok { color: #4ADE80; }
+    .v7-terminal .t-info { color: rgba(255,255,255,0.5); }
+    .v7-terminal .t-accent { color: #0098C8; }
+    .v7-stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0098C8;
+      background: rgba(0,152,200,0.1);
+      border: 1px solid rgba(0,152,200,0.2);
+      padding: 6px 14px;
+      border-radius: 980px;
+    }
+
+    /* ── OPTION 8: 3D Perspective Tilt Cards ── */
+    .v8-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text);
+    }
+    .v8-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .v8-card-wrap {
+      perspective: 600px;
+    }
+    .v8-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px 26px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: box-shadow .3s;
+      transform-style: preserve-3d;
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+    }
+    .v8-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 40px rgba(0,152,200,0.08);
+    }
+    .v8-card-gloss {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .v8-card:hover .v8-card-gloss { opacity: 1; }
+    .v8-icon-wrap {
+      width: 42px; height: 42px;
+      background: var(--blue-dim);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .v8-card-title {
+      font-size: 15px; font-weight: 700; letter-spacing: -.02em;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .v8-card-desc {
+      font-size: 13px; line-height: 1.6; color: var(--muted);
+    }
+
+    /* ── OPTION 9: Terminal Readout Cards ── */
+    .v9-section {
+      background: #0C0D14;
+    }
+    .v9-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      color: #FFFFFF;
+      margin-bottom: 60px;
+    }
+    .v9-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .v9-card {
+      background: #151820;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .v9-topbar {
+      background: #1E2028;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .v9-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .v9-dot.red { background: #FF5F57; }
+    .v9-dot.yellow { background: #FEBC2E; }
+    .v9-dot.green { background: #28C840; }
+    .v9-term-title {
+      font-family: 'SF Mono','Fira Code','Courier New',monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: .06em;
+    }
+    .v9-body {
+      padding: 16px 18px 20px;
+      font-family: 'SF Mono','Fira Code','Courier New',monospace;
+      font-size: 11.5px;
+      line-height: 1.8;
+    }
+    .v9-cmd { color: #A8D8EA; }
+    .v9-ok { color: #4ADE80; }
+    .v9-dim { color: rgba(255,255,255,0.35); }
+    .v9-accent { color: #0098C8; }
+    .v9-cursor {
+      display: inline-block;
+      width: 7px; height: 13px;
+      background: #0098C8;
+      vertical-align: middle;
+      animation: blink .85s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── OPTION 10: Feature Cards with Mini Phone Preview ── */
+    .v10-headline {
+      font-size: clamp(26px,3.8vw,40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text);
+    }
+    .v10-list {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .v10-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .v10-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .v10-left {
+      flex: 1;
+    }
+    .v10-icon-wrap {
+      width: 42px; height: 42px;
+      background: var(--blue-dim);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .v10-card-title {
+      font-size: 17px; font-weight: 700; letter-spacing: -.02em;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .v10-card-desc {
+      font-size: 13.5px; line-height: 1.6; color: var(--muted);
+    }
+    .v10-phone {
+      width: 110px;
+      height: 195px;
+      border: 2px solid #1A1D26;
+      border-radius: 22px;
+      background: #F8F9FC;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(255,255,255,0.5);
+    }
+    .v10-phone::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 50%; transform: translateX(-50%);
+      width: 28px; height: 4px;
+      background: #1A1D26;
+      border-radius: 99px;
+    }
+    .v10-phone-inner {
+      position: absolute;
+      top: 20px; left: 4px; right: 4px; bottom: 4px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #FFF;
+    }
+    /* phone ui snippets */
+    .v10-ui-follow .v10-profile-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 5px 6px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 7px; font-weight: 600; color: #1A1D26;
+    }
+    .v10-ui-follow .v10-profile-row .v10-avatar {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+      flex-shrink: 0;
+    }
+    .v10-ui-follow .v10-follow-btn {
+      font-size: 7px; font-weight: 700; color: #FFF;
+      background: #0098C8; border-radius: 4px; padding: 2px 7px;
+      box-shadow: 0 0 6px rgba(0,152,200,0.5);
+    }
+    .v10-ui-dm {
+      padding: 6px 6px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .v10-bubble {
+      border-radius: 10px; padding: 5px 8px; font-size: 7px; line-height: 1.4; max-width: 85%;
+    }
+    .v10-bubble.sent { background: #0098C8; color: #FFF; align-self: flex-end; }
+    .v10-bubble.recv { background: #EBEBEB; color: #1A1D26; align-self: flex-start; }
+    .v10-ui-unfollow {
+      padding: 5px 6px; display: flex; flex-direction: column; gap: 3px;
+    }
+    .v10-unfollow-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 7px; color: #1A1D26; padding: 3px 2px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .v10-unfollow-row.crossed { text-decoration: line-through; color: rgba(0,0,0,0.3); }
+    .v10-ui-search {
+      padding: 8px 6px;
+    }
+    .v10-search-bar {
+      background: #F0F1F5; border-radius: 6px; padding: 4px 8px;
+      font-size: 7px; color: #1A1D26; margin-bottom: 6px;
+    }
+    .v10-search-result {
+      font-size: 7px; color: var(--muted); padding: 3px 2px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .v10-ui-engage {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 8px; padding: 12px 8px;
+    }
+    .v10-heart {
+      font-size: 28px;
+      animation: heartbeat 1.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(255,48,100,0.6));
+    }
+    @keyframes heartbeat {
+      0%,100%{transform:scale(1)} 30%{transform:scale(1.25)} 60%{transform:scale(1.1)}
+    }
+    .v10-engage-label { font-size: 7px; color: var(--muted); font-weight: 600; }
+    .v10-ui-pace {
+      padding: 10px 8px; display: flex; flex-direction: column; gap: 7px;
+    }
+    .v10-pace-row {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .v10-pace-label { font-size: 6.5px; color: var(--muted); font-weight: 600; }
+    .v10-pace-bar {
+      height: 5px; background: #EEF; border-radius: 99px; overflow: hidden;
+    }
+    .v10-pace-fill {
+      height: 100%; background: linear-gradient(90deg,#0098C8,#00C8E0);
+      border-radius: 99px;
+    }
+
+    /* ── Responsive for variant grids ── */
+    @media (max-width: 900px) {
+      .v1-grid, .v6-grid, .v8-grid, .v9-grid { grid-template-columns: 1fr 1fr; }
+      .v7-split { flex-direction: column; }
+      .v7-menu { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+      .v10-card { flex-direction: column; }
+      .v10-phone { width: 140px; height: 240px; }
+    }
+    @media (max-width: 600px) {
+      .v1-grid, .v6-grid, .v8-grid, .v9-grid { grid-template-columns: 1fr; }
+      .v5-timeline::before { left: 20px; }
+      .v5-entry { flex-direction: column !important; }
+      .v5-content { width: 100%; margin-left: 40px !important; }
+      .v5-dot { left: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -1751,6 +2396,689 @@
 
     </div>
   </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       FEATURE SECTION VARIANTS — Scroll through all 7 and pick your fave
+  ════════════════════════════════════════════════════════════════════ -->
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 1: JARVIS Module Cards ══ -->
+  <section class="variant-section v1-section">
+    <div class="variant-label"><span>OPTION 1 — JARVIS MODULE CARDS</span></div>
+    <h2 class="v1-headline">Six modules. Always running.</h2>
+    <div class="v1-grid">
+
+      <div class="v1-card">
+        <div class="v1-module-label">FOLLOW.EXE</div>
+        <div class="v1-card-title">Smart Follow</div>
+        <div class="v1-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+      </div>
+
+      <div class="v1-card">
+        <div class="v1-module-label">DM.EXE</div>
+        <div class="v1-card-title">Voice-Matched DMs</div>
+        <div class="v1-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+      </div>
+
+      <div class="v1-card">
+        <div class="v1-module-label">UNFOLLOW.EXE</div>
+        <div class="v1-card-title">Auto-Unfollow</div>
+        <div class="v1-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
+      </div>
+
+      <div class="v1-card">
+        <div class="v1-module-label">TARGET.EXE</div>
+        <div class="v1-card-title">Niche Targeting</div>
+        <div class="v1-card-desc">Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.</div>
+      </div>
+
+      <div class="v1-card">
+        <div class="v1-module-label">ENGAGE.EXE</div>
+        <div class="v1-card-title">24/7 Engagement</div>
+        <div class="v1-card-desc">Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.</div>
+      </div>
+
+      <div class="v1-card">
+        <div class="v1-module-label">PACE.EXE</div>
+        <div class="v1-card-title">Human-like Pacing</div>
+        <div class="v1-card-desc">Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person — keeping your account safe.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 5: Animated Timeline ══ -->
+  <section class="variant-section">
+    <div class="variant-label"><span>OPTION 5 — ANIMATED TIMELINE</span></div>
+    <h2 class="v5-headline">A full day's work. Every day. Without you.</h2>
+    <div class="v5-timeline">
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">06:00</div>
+          <div class="v5-entry-title">Smart Follow</div>
+          <div class="v5-entry-desc">Finds and follows 50 ideal accounts before you wake up.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">09:00</div>
+          <div class="v5-entry-title">Niche Targeting</div>
+          <div class="v5-entry-desc">Scans for new targets matching your exact criteria.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">12:00</div>
+          <div class="v5-entry-title">Voice-Matched DMs</div>
+          <div class="v5-entry-desc">Sends personalized DMs to high-fit accounts.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">15:00</div>
+          <div class="v5-entry-title">24/7 Engagement</div>
+          <div class="v5-entry-desc">Likes posts, engages stories, builds niche presence.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">19:00</div>
+          <div class="v5-entry-title">Auto-Unfollow</div>
+          <div class="v5-entry-desc">Cleans up non-followers and off-niche accounts.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+      <div class="v5-entry">
+        <div class="v5-content">
+          <div class="v5-time">23:59</div>
+          <div class="v5-entry-title">Human-like Pacing</div>
+          <div class="v5-entry-desc">Every action spaced naturally. Account stays safe.</div>
+        </div>
+        <div class="v5-dot"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 6: Stats-Embedded Cards ══ -->
+  <section class="variant-section">
+    <div class="variant-label"><span>OPTION 6 — STATS-EMBEDDED CARDS</span></div>
+    <h2 class="v6-headline">Not just features. Proof.</h2>
+    <div class="v6-grid">
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="v6-card-title">Smart Follow</div>
+        <div class="v6-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">47 new follows</div>
+        <div class="v6-stat-label">avg. per day</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:78%"></div></div>
+      </div>
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="v6-card-title">Voice-Matched DMs</div>
+        <div class="v6-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">94% open rate</div>
+        <div class="v6-stat-label">on DMs sent by Ovis</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:94%"></div></div>
+      </div>
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
+        </div>
+        <div class="v6-card-title">Auto-Unfollow</div>
+        <div class="v6-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">ratio &lt; 1.1x</div>
+        <div class="v6-stat-label">follow/follower ratio stays clean</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:91%"></div></div>
+      </div>
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="v6-card-title">Niche Targeting</div>
+        <div class="v6-card-desc">Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">every 6 hrs</div>
+        <div class="v6-stat-label">targets refreshed automatically</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:85%"></div></div>
+      </div>
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="v6-card-title">24/7 Engagement</div>
+        <div class="v6-card-desc">Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">300+ actions</div>
+        <div class="v6-stat-label">per day, on autopilot</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:100%"></div></div>
+      </div>
+
+      <div class="v6-card">
+        <div class="v6-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="v6-card-title">Human-like Pacing</div>
+        <div class="v6-card-desc">Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person.</div>
+        <div class="v6-divider"></div>
+        <div class="v6-stat">0 bans</div>
+        <div class="v6-stat-label">reported by Ovis users</div>
+        <div class="v6-bar-track"><div class="v6-bar-fill" style="width:100%"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 7: Split Screen Menu + Detail ══ -->
+  <section class="variant-section">
+    <div class="variant-label"><span>OPTION 7 — SPLIT SCREEN MENU + DETAIL</span></div>
+    <h2 class="v7-headline">Every module, in detail.</h2>
+    <div class="v7-split">
+      <nav class="v7-menu" aria-label="Feature navigation">
+        <div class="v7-menu-item active" data-v7="0">
+          <span class="v7-menu-num">01</span> Smart Follow
+        </div>
+        <div class="v7-menu-item" data-v7="1">
+          <span class="v7-menu-num">02</span> Voice-Matched DMs
+        </div>
+        <div class="v7-menu-item" data-v7="2">
+          <span class="v7-menu-num">03</span> Auto-Unfollow
+        </div>
+        <div class="v7-menu-item" data-v7="3">
+          <span class="v7-menu-num">04</span> Niche Targeting
+        </div>
+        <div class="v7-menu-item" data-v7="4">
+          <span class="v7-menu-num">05</span> 24/7 Engagement
+        </div>
+        <div class="v7-menu-item" data-v7="5">
+          <span class="v7-menu-num">06</span> Human-like Pacing
+        </div>
+      </nav>
+      <div class="v7-detail" id="v7-detail-panel">
+        <!-- JS fills this -->
+      </div>
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 8: 3D Perspective Tilt Cards ══ -->
+  <section class="variant-section">
+    <div class="variant-label"><span>OPTION 8 — 3D PERSPECTIVE TILT CARDS</span></div>
+    <h2 class="v8-headline">Six capabilities. One agent.</h2>
+    <div class="v8-grid">
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="v8-card-title">Smart Follow</div>
+          <div class="v8-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+        </div>
+      </div>
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="v8-card-title">Voice-Matched DMs</div>
+          <div class="v8-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+        </div>
+      </div>
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
+          </div>
+          <div class="v8-card-title">Auto-Unfollow</div>
+          <div class="v8-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
+        </div>
+      </div>
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="v8-card-title">Niche Targeting</div>
+          <div class="v8-card-desc">Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.</div>
+        </div>
+      </div>
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="v8-card-title">24/7 Engagement</div>
+          <div class="v8-card-desc">Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.</div>
+        </div>
+      </div>
+
+      <div class="v8-card-wrap">
+        <div class="v8-card">
+          <div class="v8-card-gloss"></div>
+          <div class="v8-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="v8-card-title">Human-like Pacing</div>
+          <div class="v8-card-desc">Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person — keeping your account safe.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 9: Terminal Readout Cards ══ -->
+  <section class="variant-section v9-section">
+    <div class="variant-label" style="color:rgba(255,255,255,0.35)"><span style="background:#1A1D26;border-color:rgba(255,255,255,0.1)">OPTION 9 — TERMINAL READOUT CARDS</span></div>
+    <h2 class="v9-headline">Running right now. On your account.</h2>
+    <div class="v9-grid">
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">smart-follow.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.follow --niche="fitness" --city="NYC" --limit=50</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@alex.lifts — matched</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@sarah.runs — followed</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@nia.wellness — followed</span></div>
+          <div><span class="v9-accent">[50/50 complete]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">voice-dm.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.dm --voice=matched --queue=25</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@coachmark — "Hey Mark, love the content..."</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@fitwithema — "Ema, your reels are 🔥..."</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@jaylift — personalized DM sent</span></div>
+          <div><span class="v9-accent">[25/25 sent]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">auto-unfollow.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.unfollow --no-followback --days=7</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@ghost_user42 — removed</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@spambot_88 — removed</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@inactive_2020 — removed</span></div>
+          <div><span class="v9-accent">[ratio: 0.94]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">niche-target.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.target --query="fitness coaches LA &lt;10k"</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@la_fitcoach — 8.2k followers</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@trainwithlucy — 6.7k followers</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">@gymLA_pedro — 4.1k followers</span></div>
+          <div><span class="v9-accent">[142 targets queued]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">engage-24-7.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.engage --likes --stories --continuous</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">liked @alex.lifts post</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">viewed @nia.wellness story</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">liked @coachmark reel</span></div>
+          <div><span class="v9-accent">[312 actions today]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="v9-card">
+        <div class="v9-topbar">
+          <div class="v9-dot red"></div>
+          <div class="v9-dot yellow"></div>
+          <div class="v9-dot green"></div>
+          <div class="v9-term-title">human-pace.sh</div>
+        </div>
+        <div class="v9-body">
+          <div><span class="v9-dim">$ </span><span class="v9-cmd">ovis.pace --mode=human --variance=natural</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">action delay: 4.2s (natural)</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">burst guard: active</span></div>
+          <div><span class="v9-ok">✓</span> <span class="v9-dim">pattern mask: enabled</span></div>
+          <div><span class="v9-accent">[0 flags. 0 bans.]</span></div>
+          <div><span class="v9-dim">$ </span><span class="v9-cursor"></span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ OPTION 10: Feature Cards with Mini Phone Preview ══ -->
+  <section class="variant-section">
+    <div class="variant-label"><span>OPTION 10 — FEATURE CARDS WITH MINI PHONE PREVIEW</span></div>
+    <h2 class="v10-headline">See exactly what runs on your account.</h2>
+    <div class="v10-list">
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="v10-card-title">Smart Follow</div>
+          <div class="v10-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-follow">
+            <div class="v10-profile-row"><div class="v10-avatar"></div><span>alex.lifts</span><div class="v10-follow-btn">Follow</div></div>
+            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div><span>sarah.runs</span><div class="v10-follow-btn">Follow</div></div>
+            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div><span>nia.wellness</span><div class="v10-follow-btn">Follow</div></div>
+            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div><span>coachmark</span><div class="v10-follow-btn">Follow</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="v10-card-title">Voice-Matched DMs</div>
+          <div class="v10-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-dm">
+            <div class="v10-bubble sent">Hey Alex! Love your content — super aligned with what I do.</div>
+            <div class="v10-bubble recv">Thanks! Who are you?</div>
+            <div class="v10-bubble sent">I run a fitness brand in NYC. Would love to connect!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
+          </div>
+          <div class="v10-card-title">Auto-Unfollow</div>
+          <div class="v10-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-unfollow">
+            <div class="v10-unfollow-row crossed"><span>@ghost_user42</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
+            <div class="v10-unfollow-row crossed"><span>@spambot_88</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
+            <div class="v10-unfollow-row crossed"><span>@inactive_20</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
+            <div class="v10-unfollow-row"><span>@realfan_123</span><span style="font-size:6px;color:#28C840">kept</span></div>
+            <div class="v10-unfollow-row"><span>@lacoach_nia</span><span style="font-size:6px;color:#28C840">kept</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="v10-card-title">Niche Targeting</div>
+          <div class="v10-card-desc">Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-search">
+            <div class="v10-search-bar">fitness coaches in LA &lt;10k...</div>
+            <div class="v10-search-result">@la_fitcoach — 8.2k</div>
+            <div class="v10-search-result">@trainwithlucy — 6.7k</div>
+            <div class="v10-search-result">@gymLA_pedro — 4.1k</div>
+            <div class="v10-search-result">@coach_eli — 9.8k</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="v10-card-title">24/7 Engagement</div>
+          <div class="v10-card-desc">Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-engage">
+            <div class="v10-heart">❤️</div>
+            <div class="v10-engage-label">312 actions today</div>
+            <div class="v10-engage-label" style="color:#0098C8;font-size:8px">running 24/7</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="v10-card-title">Human-like Pacing</div>
+          <div class="v10-card-desc">Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person — keeping your account safe.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-pace">
+            <div class="v10-pace-row">
+              <div class="v10-pace-label">follow delay</div>
+              <div class="v10-pace-bar"><div class="v10-pace-fill" style="width:62%"></div></div>
+            </div>
+            <div class="v10-pace-row">
+              <div class="v10-pace-label">dm spacing</div>
+              <div class="v10-pace-bar"><div class="v10-pace-fill" style="width:48%"></div></div>
+            </div>
+            <div class="v10-pace-row">
+              <div class="v10-pace-label">like timing</div>
+              <div class="v10-pace-bar"><div class="v10-pace-fill" style="width:75%"></div></div>
+            </div>
+            <div class="v10-pace-row">
+              <div class="v10-pace-label">burst guard</div>
+              <div class="v10-pace-bar"><div class="v10-pace-fill" style="width:100%"></div></div>
+            </div>
+            <div style="font-size:7px;color:#28C840;font-weight:700;margin-top:4px">0 flags. 0 bans.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="variant-divider"></div>
+
+  <!-- ══ JS for Option 7 (Split Panel) and Option 8 (3D Tilt) ══ -->
+  <script>
+  // ─── OPTION 7: Split Screen Panel Switcher ───
+  (function() {
+    var features = [
+      {
+        title: 'Smart Follow',
+        desc: 'Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.follow --niche="fitness" --city="NYC" --limit=50</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@alex.lifts — matched (8.2k, 4.1% eng)</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@sarah.runs — followed</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@nia.wellness — followed</span>',
+          '<span class="t-accent">[50/50 complete · next run in 4h]</span>',
+        ],
+        stat: 'avg. 47 new follows / day'
+      },
+      {
+        title: 'Voice-Matched DMs',
+        desc: 'Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.dm --voice=matched --queue=25</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@coachmark — "Hey Mark, love the content..."</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@fitwithema — "Ema, your reels are on another level..."</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@jaylift — personalized DM sent</span>',
+          '<span class="t-accent">[25/25 sent · 94% open rate]</span>',
+        ],
+        stat: '94% open rate on DMs'
+      },
+      {
+        title: 'Auto-Unfollow',
+        desc: 'Silently removes anyone who doesn\'t follow back or isn\'t a fit for your account. Keeps your ratio clean.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.unfollow --no-followback --days=7</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@ghost_user42 — no followback, removed</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@spambot_88 — off-niche, removed</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@inactive_2020 — removed</span>',
+          '<span class="t-accent">[ratio now: 0.94 ✓]</span>',
+        ],
+        stat: 'ratio stays under 1.1x'
+      },
+      {
+        title: 'Niche Targeting',
+        desc: 'Describe your audience in plain English. "Fitness coaches in LA with under 10k followers." Ovis finds them.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.target --query="fitness coaches LA &lt;10k"</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@la_fitcoach — 8.2k followers, 5.3% eng</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@trainwithlucy — 6.7k followers</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">@gymLA_pedro — 4.1k followers</span>',
+          '<span class="t-accent">[142 targets queued · refreshing in 6h]</span>',
+        ],
+        stat: 'targets updated every 6 hrs'
+      },
+      {
+        title: '24/7 Engagement',
+        desc: 'Likes posts, engages with stories, builds presence in your niche — around the clock, while you live your life.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.engage --likes --stories --continuous</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">liked @alex.lifts latest post</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">viewed @nia.wellness story</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">liked @coachmark reel</span>',
+          '<span class="t-accent">[312 actions today · still running]</span>',
+        ],
+        stat: '300+ actions per day'
+      },
+      {
+        title: 'Human-like Pacing',
+        desc: 'Natural timing between every action. No burst patterns. Ovis behaves exactly like a real person — keeping your account safe.',
+        terminal: [
+          '<span class="t-prompt">$ </span><span class="t-cmd">ovis.pace --mode=human --variance=natural</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">action delay: 4.2s (randomized)</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">burst guard: active</span>',
+          '<span style="color:#4ADE80">✓</span> <span style="color:rgba(255,255,255,.45)">pattern mask: enabled</span>',
+          '<span class="t-accent">[0 flags. 0 bans. Account safe.]</span>',
+        ],
+        stat: '0 bans reported'
+      }
+    ];
+
+    function renderDetail(idx) {
+      var f = features[idx];
+      var termLines = f.terminal.map(function(l){ return '<div>' + l + '</div>'; }).join('');
+      document.getElementById('v7-detail-panel').innerHTML =
+        '<div class="v7-detail-title">' + f.title + '</div>' +
+        '<div class="v7-detail-desc">' + f.desc + '</div>' +
+        '<div class="v7-terminal">' + termLines + '</div>' +
+        '<div class="v7-stat-badge">&#9679; ' + f.stat + '</div>';
+    }
+
+    renderDetail(0);
+
+    document.querySelectorAll('.v7-menu-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.v7-menu-item').forEach(function(i){ i.classList.remove('active'); });
+        item.classList.add('active');
+        renderDetail(parseInt(item.dataset.v7));
+      });
+    });
+  })();
+
+  // ─── OPTION 8: 3D Tilt Cards ───
+  (function() {
+    document.querySelectorAll('.v8-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = (e.clientX - cx) / (rect.width / 2);
+        var dy = (e.clientY - cy) / (rect.height / 2);
+        var rotateY = dx * 8;
+        var rotateX = -dy * 8;
+        card.style.transform = 'perspective(600px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02,1.02,1.02)';
+        var gloss = card.querySelector('.v8-card-gloss');
+        if (gloss) {
+          var angle = Math.atan2(dy, dx) * (180/Math.PI) + 180;
+          gloss.style.background = 'linear-gradient(' + angle + 'deg, rgba(255,255,255,0.18) 0%, transparent 60%)';
+        }
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+        card.style.transition = 'transform .4s ease, box-shadow .3s';
+        setTimeout(function(){ card.style.transition = ''; }, 400);
+      });
+    });
+  })();
+  </script>
 
   <!-- ═══ BEFORE / AFTER ═══ -->
   <section class="contrast arm-from-bot">
