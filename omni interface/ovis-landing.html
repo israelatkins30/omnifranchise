@@ -642,114 +642,125 @@
 
     /* ─── PRODUCT SHOWCASE ─── */
     .showcase {
-      background: radial-gradient(ellipse 85% 70% at 50% 44%, #FAFBFF 0%, #F0F2F7 100%);
-      padding: 120px var(--pad) 150px;
+      background: #F5F6FA;
+      padding: 0 var(--pad) 160px;
       display: flex; flex-direction: column; align-items: center;
-      gap: 18px;
+      gap: 52px;
       position: relative; overflow: hidden;
     }
-    /* Studio backlight */
+    /* Studio backlight — centered warm glow */
     .showcase::before {
       content: '';
-      position: absolute; top: 10%; left: 50%;
+      position: absolute; top: 8%; left: 50%;
       transform: translateX(-50%);
-      width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(0,152,200,0.055) 0%, transparent 65%);
-      pointer-events: none;
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.95) 0%, rgba(245,246,250,0) 70%);
+      pointer-events: none; z-index: 0;
     }
     /* Shared glass surface */
     .sc-glass {
-      background: linear-gradient(178deg, #FFFFFF 0%, rgba(251,253,255,0.97) 100%);
-      border: 0.5px solid rgba(0,0,0,0.072);
+      background: #FFFFFF;
+      border: 0.5px solid rgba(0,0,0,0.08);
       box-shadow:
-        inset 0 1.5px 0 rgba(255,255,255,1),
-        inset 0 -0.5px 0 rgba(0,0,0,0.02),
-        0 1px 2px  rgba(0,0,0,0.04),
-        0 4px 10px rgba(0,0,0,0.05),
-        0 14px 36px rgba(0,0,0,0.07),
-        0 40px 80px rgba(0,0,0,0.06),
-        0 80px 110px rgba(0,0,0,0.03);
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 1px 1px   rgba(0,0,0,0.03),
+        0 3px 6px   rgba(0,0,0,0.04),
+        0 10px 24px rgba(0,0,0,0.06),
+        0 30px 60px rgba(0,0,0,0.08),
+        0 70px 100px rgba(0,0,0,0.05),
+        0 120px 140px rgba(0,0,0,0.03);
       position: relative; z-index: 2;
     }
     /* ── Activity card ── */
     .sc-card {
-      width: min(500px, 92vw);
-      border-radius: 22px;
-      padding: 26px 22px 20px;
-      animation: scFloat1 5.6s ease-in-out infinite;
+      width: min(600px, 92vw);
+      border-radius: 28px;
+      padding: 36px 32px 28px;
+      animation: scFloat1 5.8s ease-in-out infinite;
     }
     .sc-title {
-      font-size: 21px; font-weight: 700; letter-spacing: -.035em;
-      color: #0A0B12; text-align: center; margin-bottom: 20px;
+      font-size: 26px; font-weight: 800; letter-spacing: -.04em;
+      color: #080910; text-align: center; margin-bottom: 28px;
     }
     .sc-row {
-      display: flex; align-items: center; gap: 13px;
-      padding: 12px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.052);
+      display: flex; align-items: center; gap: 16px;
+      padding: 15px 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.06);
     }
-    .sc-row:last-of-type { border-bottom: none; margin-bottom: 4px; }
+    .sc-row:last-of-type { border-bottom: none; margin-bottom: 6px; }
     .sc-avatar {
-      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(52,199,89,0.11);
-      border: 0.5px solid rgba(52,199,89,0.18);
+      width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(52,199,89,0.10);
+      border: 0.5px solid rgba(52,199,89,0.22);
       display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(52,199,89,0.10);
     }
     .sc-row-text { flex: 1; min-width: 0; }
     .sc-row-action {
-      font-size: 14px; font-weight: 500; color: #0A0B12;
+      font-size: 15.5px; font-weight: 500; color: #080910;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: -.01em;
     }
     .sc-row-action strong { font-weight: 700; }
     .sc-row-meta {
-      font-size: 11.5px; color: rgba(10,11,18,0.40); margin-top: 2px;
+      font-size: 12.5px; color: rgba(8,9,16,0.38); margin-top: 3px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .sc-pulse-btn {
-      width: 100%; margin-top: 16px; height: 52px;
-      background: rgba(0,0,0,0.046); border: none;
-      border-radius: 14px; cursor: pointer;
-      font-size: 15px; font-weight: 500;
-      color: rgba(0,0,0,0.38); letter-spacing: -.01em;
+      width: 100%; margin-top: 20px; height: 58px;
+      background: rgba(0,0,0,0.042);
+      border: 0.5px solid rgba(0,0,0,0.07);
+      border-radius: 16px; cursor: pointer;
+      font-size: 16px; font-weight: 600;
+      color: rgba(0,0,0,0.36); letter-spacing: -.015em;
       font-family: 'Inter', sans-serif;
-      transition: background .2s, color .2s;
+      transition: background .22s, color .22s, box-shadow .22s;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
     }
-    .sc-pulse-btn:hover { background: rgba(0,0,0,0.09); color: rgba(0,0,0,0.55); }
+    .sc-pulse-btn:hover {
+      background: rgba(0,0,0,0.07);
+      color: rgba(0,0,0,0.60);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.06);
+    }
     /* ── Command bar ── */
     .sc-bar {
-      width: min(500px, 92vw); height: 58px;
+      width: min(600px, 92vw); height: 72px;
       border-radius: 99px;
       display: flex; align-items: center;
-      padding: 0 7px 0 22px; gap: 10px;
-      animation: scFloat2 4.9s ease-in-out infinite;
-      animation-delay: 0.65s;
+      padding: 0 10px 0 28px; gap: 12px;
+      animation: scFloat2 5.1s ease-in-out infinite;
+      animation-delay: 0.8s;
     }
     .sc-bar-status {
-      flex: 1; font-size: 15px; font-weight: 400;
-      color: rgba(0,0,0,0.34); letter-spacing: -.01em;
+      flex: 1; font-size: 17px; font-weight: 400;
+      color: rgba(0,0,0,0.32); letter-spacing: -.02em;
     }
-    .sc-bar-right { display: flex; align-items: center; gap: 8px; }
+    .sc-bar-right { display: flex; align-items: center; gap: 10px; }
     .sc-bar-grid {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: rgba(0,0,0,0.038);
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(0,0,0,0.044);
+      border: 0.5px solid rgba(0,0,0,0.06);
       display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
     }
     .sc-bar-ia {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: linear-gradient(145deg, #D6E3F4 0%, #E5EDF8 100%);
-      border: 0.5px solid rgba(0,0,0,0.08);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(145deg, #C8D9EE 0%, #DCE8F5 50%, #E8EFF8 100%);
+      border: 0.5px solid rgba(0,0,0,0.09);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.50);
-      letter-spacing: -.02em;
+      font-size: 13px; font-weight: 800; color: rgba(0,0,0,0.46);
+      letter-spacing: -.03em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.08);
     }
     /* Float keyframes — organic, not robotic */
     @keyframes scFloat1 {
       0%, 100% { transform: translateY(0px)   rotate(0.00deg); }
-      30%       { transform: translateY(-20px) rotate(0.22deg); }
-      65%       { transform: translateY(-11px) rotate(-0.14deg); }
+      30%       { transform: translateY(-22px) rotate(0.18deg); }
+      65%       { transform: translateY(-12px) rotate(-0.12deg); }
     }
     @keyframes scFloat2 {
-      0%, 100% { transform: translateY(-4px)  rotate(0.00deg); }
-      50%       { transform: translateY(-17px) rotate(0.16deg); }
+      0%, 100% { transform: translateY(-6px)  rotate(0.00deg); }
+      50%       { transform: translateY(-20px) rotate(0.14deg); }
     }
 
     /* ─── CAPSULE AGENTS ─── */
@@ -1839,7 +1850,7 @@
 
       <div class="sc-row">
         <div class="sc-avatar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div class="sc-row-text">
           <div class="sc-row-action">Unfollowed <strong>@hannahhpryor</strong></div>
@@ -1849,7 +1860,7 @@
 
       <div class="sc-row">
         <div class="sc-avatar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div class="sc-row-text">
           <div class="sc-row-action">Unfollowed <strong>@mezzaqueen</strong></div>
@@ -1859,7 +1870,7 @@
 
       <div class="sc-row">
         <div class="sc-avatar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div class="sc-row-text">
           <div class="sc-row-action">Unfollowed <strong>@arizona_outlaws</strong></div>
@@ -1869,7 +1880,7 @@
 
       <div class="sc-row">
         <div class="sc-avatar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div class="sc-row-text">
           <div class="sc-row-action">Unfollowed <strong>@josephmisleh</strong></div>
@@ -1885,11 +1896,11 @@
       <span class="sc-bar-status">Standing by.</span>
       <div class="sc-bar-right">
         <div class="sc-bar-grid">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-            <rect x="0.5" y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
-            <rect x="9"   y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
-            <rect x="0.5" y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
-            <rect x="9"   y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
+          <svg width="18" height="18" viewBox="0 0 15 15" fill="none">
+            <rect x="0.5" y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.30)"/>
+            <rect x="9"   y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.30)"/>
+            <rect x="0.5" y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.30)"/>
+            <rect x="9"   y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.30)"/>
           </svg>
         </div>
         <div class="sc-bar-ia">IA</div>
