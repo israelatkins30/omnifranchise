@@ -1796,29 +1796,6 @@
       <a href="#how" class="btn-ghost">See how it works</a>
     </div>
 
-    <!-- Live product card -->
-    <div class="hero-card">
-      <div class="hud-corner hud-tl"></div>
-      <div class="hud-corner hud-tr"></div>
-      <div class="hud-corner hud-bl"></div>
-      <div class="hud-corner hud-br"></div>
-      <div class="hero-card-bar">
-        <div class="hcb-dot"></div>
-        <div class="hcb-dot"></div>
-        <div class="hcb-dot"></div>
-        <div class="hcb-title">OVIS · UNIT-001 · LIVE FEED</div>
-      </div>
-      <div class="hero-feed" id="heroFeed">
-        <div class="hf-row"><div class="hf-icon">👥</div><div class="hf-body"><div class="hf-name">@alex.lifts</div><div class="hf-meta">Followed · Fitness · NYC</div></div><div class="hf-tag">Follow</div></div>
-        <div class="hf-row"><div class="hf-icon">💬</div><div class="hf-body"><div class="hf-name">@sarah.runs</div><div class="hf-meta">DM sent · "Hey loved your reel…"</div></div><div class="hf-tag">DM</div></div>
-        <div class="hf-row"><div class="hf-icon">❤️</div><div class="hf-body"><div class="hf-name">@mike.builds</div><div class="hf-meta">Liked latest post · Entrepreneur</div></div><div class="hf-tag">Like</div></div>
-        <div class="hf-row"><div class="hf-icon">✅</div><div class="hf-body"><div class="hf-name">@dan.creates</div><div class="hf-meta">Unfollowed · no follow-back · 3d</div></div><div class="hf-tag">Unfollow</div></div>
-      </div>
-      <div class="hero-card-footer">
-        <div class="hcf-stat"><b id="heroCount">47</b> ops completed</div>
-        <div class="hcf-live"><div class="hcf-live-dot"></div>SYSTEM ONLINE</div>
-      </div>
-    </div>
 
   </section>
 
@@ -2234,32 +2211,6 @@
       } catch { btn.disabled=false; btn.textContent='Try again →'; }
     });
 
-    /* ── Hero live feed ── */
-    const ACTIONS = [
-      { icon:'👥', name:'@alex.lifts',   meta:'Followed · Fitness · NYC',         tag:'Follow'   },
-      { icon:'💬', name:'@sarah.runs',   meta:'DM sent · "Hey loved your reel…"', tag:'DM'       },
-      { icon:'❤️', name:'@mike.builds',  meta:'Liked latest post · Entrepreneur', tag:'Like'     },
-      { icon:'👥', name:'@nia.wellness', meta:'Followed · Wellness · LA',         tag:'Follow'   },
-      { icon:'💬', name:'@coach.james',  meta:'DM sent · "Your content is 🔥"',  tag:'DM'       },
-      { icon:'✅', name:'@dan.creates',  meta:'Unfollowed · no follow-back · 3d', tag:'Unfollow' },
-      { icon:'❤️', name:'@fit.kels',     meta:'Liked 2 posts · Fitness creator',  tag:'Like'     },
-      { icon:'👥', name:'@marcus.m',     meta:'Followed · Content creator · NYC', tag:'Follow'   },
-    ];
-    let heroCount = 0;
-    const feed    = document.getElementById('heroFeed');
-    const countEl = document.getElementById('heroCount');
-    function addRow() {
-      const a = ACTIONS[heroCount % ACTIONS.length];
-      const row = document.createElement('div');
-      row.className = 'hf-row';
-      row.innerHTML = `<div class="hf-icon">${a.icon}</div><div class="hf-body"><div class="hf-name">${a.name}</div><div class="hf-meta">${a.meta}</div></div><div class="hf-tag">${a.tag}</div>`;
-      if (feed.children.length >= 5) feed.removeChild(feed.firstChild);
-      feed.appendChild(row);
-      heroCount++;
-      countEl.textContent = heroCount + 47;
-    }
-    for(let i=0;i<4;i++) addRow();
-    setInterval(addRow, 2400);
 
     /* ── Stats counter (removed - stats strip deleted) ── */
 
