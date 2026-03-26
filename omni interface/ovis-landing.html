@@ -1595,148 +1595,212 @@
       font-size: 16px; color: var(--muted); margin-bottom: 36px; line-height: 1.65;
     }
     .v10-list {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
     .v10-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
+      border-radius: 20px;
+      padding: 32px 40px;
       display: flex;
       align-items: center;
-      gap: 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: box-shadow .2s, transform .2s;
+      gap: 48px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+      transition: box-shadow .25s, transform .25s;
     }
     .v10-card:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.05);
+      transform: translateY(-3px);
     }
-    .v10-left {
-      flex: 1;
-    }
+    .v10-left { flex: 1; }
     .v10-icon-wrap {
-      width: 42px; height: 42px;
+      width: 46px; height: 46px;
       background: var(--blue-dim);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       color: var(--blue);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .v10-card-title {
-      font-size: 17px; font-weight: 700; letter-spacing: -.02em;
-      color: var(--text); margin-bottom: 8px;
+      font-size: 19px; font-weight: 700; letter-spacing: -.025em;
+      color: var(--text); margin-bottom: 10px;
     }
     .v10-card-desc {
-      font-size: 13.5px; line-height: 1.6; color: var(--muted);
+      font-size: 14px; line-height: 1.65; color: var(--muted);
     }
+
+    /* ── iPhone shell ── */
     .v10-phone {
-      width: 110px;
-      height: 195px;
-      border: 2px solid #1A1D26;
-      border-radius: 22px;
-      background: #F8F9FC;
+      width: 176px; height: 314px;
+      border: 2.5px solid #22252F;
+      border-radius: 38px;
+      background: #15171E;
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(255,255,255,0.5);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,0.12),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        inset 1px 0 0 rgba(255,255,255,0.04),
+        0 2px 4px  rgba(0,0,0,0.10),
+        0 8px 20px rgba(0,0,0,0.16),
+        0 24px 52px rgba(0,0,0,0.14),
+        0 48px 80px rgba(0,0,0,0.08);
     }
+    /* Dynamic Island */
     .v10-phone::before {
       content: '';
       position: absolute;
-      top: 8px; left: 50%; transform: translateX(-50%);
-      width: 28px; height: 4px;
-      background: #1A1D26;
+      top: 18px; left: 50%; transform: translateX(-50%);
+      width: 58px; height: 16px;
+      background: #15171E;
       border-radius: 99px;
+      z-index: 20;
     }
     .v10-phone-inner {
       position: absolute;
-      top: 20px; left: 4px; right: 4px; bottom: 4px;
-      border-radius: 16px;
+      top: 6px; left: 4px; right: 4px; bottom: 4px;
+      border-radius: 32px;
       overflow: hidden;
-      background: #FFF;
-    }
-    /* phone ui snippets */
-    .v10-ui-follow .v10-profile-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 5px 6px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      font-size: 7px; font-weight: 600; color: #1A1D26;
-    }
-    .v10-ui-follow .v10-profile-row .v10-avatar {
-      width: 18px; height: 18px; border-radius: 50%;
-      background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-      flex-shrink: 0;
-    }
-    .v10-ui-follow .v10-follow-btn {
-      font-size: 7px; font-weight: 700; color: #FFF;
-      background: #0098C8; border-radius: 4px; padding: 2px 7px;
-      box-shadow: 0 0 6px rgba(0,152,200,0.5);
-    }
-    .v10-ui-dm {
-      padding: 6px 6px; display: flex; flex-direction: column; gap: 4px;
-    }
-    .v10-bubble {
-      border-radius: 10px; padding: 5px 8px; font-size: 7px; line-height: 1.4; max-width: 85%;
-    }
-    .v10-bubble.sent { background: #0098C8; color: #FFF; align-self: flex-end; }
-    .v10-bubble.recv { background: #EBEBEB; color: #1A1D26; align-self: flex-start; }
-    .v10-ui-unfollow {
-      padding: 5px 6px; display: flex; flex-direction: column; gap: 3px;
-    }
-    .v10-unfollow-row {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 7px; color: #1A1D26; padding: 3px 2px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    .v10-unfollow-row.crossed { text-decoration: line-through; color: rgba(0,0,0,0.3); }
-    .v10-ui-search {
-      padding: 8px 6px;
-    }
-    .v10-search-bar {
-      background: #F0F1F5; border-radius: 6px; padding: 4px 8px;
-      font-size: 7px; color: #1A1D26; margin-bottom: 6px;
-    }
-    .v10-search-result {
-      font-size: 7px; color: var(--muted); padding: 3px 2px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    .v10-ui-engage {
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 8px; padding: 12px 8px;
-    }
-    .v10-heart {
-      font-size: 28px;
-      animation: heartbeat 1.2s ease-in-out infinite;
-      filter: drop-shadow(0 0 6px rgba(255,48,100,0.6));
-    }
-    @keyframes heartbeat {
-      0%,100%{transform:scale(1)} 30%{transform:scale(1.25)} 60%{transform:scale(1.1)}
-    }
-    .v10-engage-label { font-size: 7px; color: var(--muted); font-weight: 600; }
-    .v10-ui-pace {
-      padding: 10px 8px; display: flex; flex-direction: column; gap: 7px;
-    }
-    .v10-pace-row {
-      display: flex; flex-direction: column; gap: 2px;
-    }
-    .v10-pace-label { font-size: 6.5px; color: var(--muted); font-weight: 600; }
-    .v10-pace-bar {
-      height: 5px; background: #EEF; border-radius: 99px; overflow: hidden;
-    }
-    .v10-pace-fill {
-      height: 100%; background: linear-gradient(90deg,#0098C8,#00C8E0);
-      border-radius: 99px;
+      background: #FAFBFF;
     }
 
-    /* ── Responsive for features section ── */
-    @media (max-width: 900px) {
-      .v10-card { flex-direction: column; }
-      .v10-phone { width: 140px; height: 240px; }
+    /* ── Status bar (shared) ── */
+    .v10-status {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 38px 14px 4px;
+      font-size: 9.5px; font-weight: 700;
+      color: #0A0B12; letter-spacing: -.02em;
+      font-family: -apple-system, 'Inter', sans-serif;
+    }
+    .v10-status-right {
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    /* ── Follow screen ── */
+    .v10-ui-follow { display: flex; flex-direction: column; }
+    .v10-follow-header {
+      padding: 8px 14px 8px;
+      font-size: 12px; font-weight: 800; letter-spacing: -.02em;
+      color: #0A0B12;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .v10-profile-row {
+      display: flex; align-items: center;
+      padding: 8px 12px; gap: 9px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.06);
+    }
+    .v10-avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    }
+    .v10-profile-name {
+      flex: 1; font-size: 10.5px; font-weight: 600; color: #0A0B12;
+      letter-spacing: -.01em;
+    }
+    .v10-follow-btn {
+      font-size: 9.5px; font-weight: 700; color: #FFF;
+      background: #0098C8; border-radius: 6px;
+      padding: 5px 11px; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,152,200,0.35);
+    }
+
+    /* ── DM screen ── */
+    .v10-ui-dm {
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .v10-dm-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 12px 8px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .v10-dm-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg,#4facfe,#00f2fe);
+      flex-shrink: 0;
+    }
+    .v10-dm-info { flex: 1; }
+    .v10-dm-name {
+      font-size: 10.5px; font-weight: 700; color: #0A0B12;
+      letter-spacing: -.01em;
+    }
+    .v10-dm-online {
+      font-size: 8.5px; color: #34C759; font-weight: 500;
+    }
+    .v10-dm-feed {
+      flex: 1; padding: 10px 10px 6px;
+      display: flex; flex-direction: column; gap: 6px;
+      overflow: hidden;
+    }
+    .v10-bubble {
+      border-radius: 16px; padding: 8px 11px;
+      font-size: 10px; line-height: 1.45; max-width: 80%;
+      letter-spacing: -.01em;
+    }
+    .v10-bubble.sent {
+      background: #0098C8; color: #FFF;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .v10-bubble.recv {
+      background: #ECEEF2; color: #0A0B12;
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .v10-dm-input-row {
+      padding: 6px 10px 8px;
+      border-top: 0.5px solid rgba(0,0,0,0.07);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .v10-dm-input-pill {
+      flex: 1; background: rgba(0,0,0,0.055); border-radius: 99px;
+      padding: 6px 11px; font-size: 9px; color: rgba(0,0,0,0.32);
+    }
+    .v10-dm-send-btn {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: #0098C8; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Unfollow screen ── */
+    .v10-ui-unfollow { display: flex; flex-direction: column; }
+    .v10-uf-header {
+      padding: 8px 14px 6px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .v10-uf-title {
+      font-size: 12px; font-weight: 800; color: #0A0B12;
+      letter-spacing: -.02em;
+    }
+    .v10-uf-subtitle {
+      font-size: 9px; color: rgba(0,0,0,0.38); font-weight: 500;
+      margin-top: 1px;
+    }
+    .v10-unfollow-row {
+      display: flex; align-items: center;
+      padding: 8px 12px; gap: 9px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.055);
+    }
+    .v10-uf-dot {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    }
+    .v10-uf-name {
+      flex: 1; font-size: 10.5px; font-weight: 500;
+      color: #0A0B12; letter-spacing: -.01em;
+    }
+    .v10-uf-tag {
+      font-size: 9px; font-weight: 700;
+    }
+    .v10-unfollow-row.crossed .v10-uf-name {
+      text-decoration: line-through; color: rgba(0,0,0,0.28);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .v10-card { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .v10-phone { width: 160px; height: 285px; }
     }
 
   </style>
@@ -1949,10 +2013,35 @@
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-follow">
-            <div class="v10-profile-row"><div class="v10-avatar"></div><span>alex.lifts</span><div class="v10-follow-btn">Follow</div></div>
-            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div><span>sarah.runs</span><div class="v10-follow-btn">Follow</div></div>
-            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div><span>nia.wellness</span><div class="v10-follow-btn">Follow</div></div>
-            <div class="v10-profile-row"><div class="v10-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div><span>coachmark</span><div class="v10-follow-btn">Follow</div></div>
+            <div class="v10-status">
+              <span>9:41</span>
+              <div class="v10-status-right">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2.5" height="6" rx="1" fill="#0A0B12"/><rect x="3.5" y="2.5" width="2.5" height="7.5" rx="1" fill="#0A0B12"/><rect x="7" y="1" width="2.5" height="9" rx="1" fill="#0A0B12"/><rect x="10.5" y="0" width="2.5" height="10" rx="1" fill="#0A0B12"/></svg>
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="none"><path d="M7.5 2C9.8 2 11.9 3 13.4 4.6L14.5 3.4C12.7 1.5 10.2 0.5 7.5 0.5C4.8 0.5 2.3 1.5 0.5 3.4L1.6 4.6C3.1 3 5.2 2 7.5 2Z" fill="#0A0B12"/><path d="M7.5 4.5C9.1 4.5 10.6 5.1 11.7 6.2L12.8 5C11.4 3.7 9.5 2.9 7.5 2.9C5.5 2.9 3.6 3.7 2.2 5L3.3 6.2C4.4 5.1 5.9 4.5 7.5 4.5Z" fill="#0A0B12"/><circle cx="7.5" cy="8.5" r="1.5" fill="#0A0B12"/></svg>
+                <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="#0A0B12" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="16" height="8" rx="2" fill="#0A0B12"/><path d="M22 3.5V7.5C22.8 7.2 23.5 6.4 23.5 5.5C23.5 4.6 22.8 3.8 22 3.5Z" fill="#0A0B12" fill-opacity="0.4"/></svg>
+              </div>
+            </div>
+            <div class="v10-follow-header">Suggested for you</div>
+            <div class="v10-profile-row">
+              <div class="v10-avatar"></div>
+              <div class="v10-profile-name">alex.lifts</div>
+              <div class="v10-follow-btn">Follow</div>
+            </div>
+            <div class="v10-profile-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div>
+              <div class="v10-profile-name">sarah.runs</div>
+              <div class="v10-follow-btn">Follow</div>
+            </div>
+            <div class="v10-profile-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div>
+              <div class="v10-profile-name">nia.wellness</div>
+              <div class="v10-follow-btn">Follow</div>
+            </div>
+            <div class="v10-profile-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div>
+              <div class="v10-profile-name">coachmark</div>
+              <div class="v10-follow-btn">Follow</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1967,9 +2056,32 @@
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-dm">
-            <div class="v10-bubble sent">Hey Alex! Love your content — super aligned with what I do.</div>
-            <div class="v10-bubble recv">Thanks! Who are you?</div>
-            <div class="v10-bubble sent">I run a fitness brand in NYC. Would love to connect!</div>
+            <div class="v10-status">
+              <span>9:41</span>
+              <div class="v10-status-right">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2.5" height="6" rx="1" fill="#0A0B12"/><rect x="3.5" y="2.5" width="2.5" height="7.5" rx="1" fill="#0A0B12"/><rect x="7" y="1" width="2.5" height="9" rx="1" fill="#0A0B12"/><rect x="10.5" y="0" width="2.5" height="10" rx="1" fill="#0A0B12"/></svg>
+                <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="#0A0B12" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="16" height="8" rx="2" fill="#0A0B12"/><path d="M22 3.5V7.5C22.8 7.2 23.5 6.4 23.5 5.5C23.5 4.6 22.8 3.8 22 3.5Z" fill="#0A0B12" fill-opacity="0.4"/></svg>
+              </div>
+            </div>
+            <div class="v10-dm-header">
+              <div class="v10-dm-avatar"></div>
+              <div class="v10-dm-info">
+                <div class="v10-dm-name">alex.lifts</div>
+                <div class="v10-dm-online">Active now</div>
+              </div>
+            </div>
+            <div class="v10-dm-feed">
+              <div class="v10-bubble recv">Hey! Love your posts 💪</div>
+              <div class="v10-bubble sent">Thanks! Saw your gym content — incredible.</div>
+              <div class="v10-bubble recv">Appreciate it! What's up?</div>
+              <div class="v10-bubble sent">I run a brand in NYC. Would love to collab!</div>
+            </div>
+            <div class="v10-dm-input-row">
+              <div class="v10-dm-input-pill">Message...</div>
+              <div class="v10-dm-send-btn">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1984,11 +2096,42 @@
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-unfollow">
-            <div class="v10-unfollow-row crossed"><span>@ghost_user42</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
-            <div class="v10-unfollow-row crossed"><span>@spambot_88</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
-            <div class="v10-unfollow-row crossed"><span>@inactive_20</span><span style="font-size:6px;color:#FF5F57">removed</span></div>
-            <div class="v10-unfollow-row"><span>@realfan_123</span><span style="font-size:6px;color:#28C840">kept</span></div>
-            <div class="v10-unfollow-row"><span>@lacoach_nia</span><span style="font-size:6px;color:#28C840">kept</span></div>
+            <div class="v10-status">
+              <span>9:41</span>
+              <div class="v10-status-right">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2.5" height="6" rx="1" fill="#0A0B12"/><rect x="3.5" y="2.5" width="2.5" height="7.5" rx="1" fill="#0A0B12"/><rect x="7" y="1" width="2.5" height="9" rx="1" fill="#0A0B12"/><rect x="10.5" y="0" width="2.5" height="10" rx="1" fill="#0A0B12"/></svg>
+                <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="#0A0B12" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="16" height="8" rx="2" fill="#0A0B12"/><path d="M22 3.5V7.5C22.8 7.2 23.5 6.4 23.5 5.5C23.5 4.6 22.8 3.8 22 3.5Z" fill="#0A0B12" fill-opacity="0.4"/></svg>
+              </div>
+            </div>
+            <div class="v10-uf-header">
+              <div class="v10-uf-title">Cleanup</div>
+              <div class="v10-uf-subtitle">3 removed today · ratio clean</div>
+            </div>
+            <div class="v10-unfollow-row crossed">
+              <div class="v10-uf-dot" style="background:#FF5F57"></div>
+              <div class="v10-uf-name">@ghost_user42</div>
+              <div class="v10-uf-tag" style="color:#FF5F57">removed</div>
+            </div>
+            <div class="v10-unfollow-row crossed">
+              <div class="v10-uf-dot" style="background:#FF5F57"></div>
+              <div class="v10-uf-name">@spambot_88</div>
+              <div class="v10-uf-tag" style="color:#FF5F57">removed</div>
+            </div>
+            <div class="v10-unfollow-row crossed">
+              <div class="v10-uf-dot" style="background:#FF5F57"></div>
+              <div class="v10-uf-name">@inactive_acc</div>
+              <div class="v10-uf-tag" style="color:#FF5F57">removed</div>
+            </div>
+            <div class="v10-unfollow-row">
+              <div class="v10-uf-dot" style="background:#34C759"></div>
+              <div class="v10-uf-name">@realfan_123</div>
+              <div class="v10-uf-tag" style="color:#34C759">kept</div>
+            </div>
+            <div class="v10-unfollow-row">
+              <div class="v10-uf-dot" style="background:#34C759"></div>
+              <div class="v10-uf-name">@lacoach_nia</div>
+              <div class="v10-uf-tag" style="color:#34C759">kept</div>
+            </div>
           </div>
         </div>
       </div>
