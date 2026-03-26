@@ -616,210 +616,116 @@
     }
     .built-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
 
-    /* ─── LIVE DASHBOARD ─── */
-    .live-dash {
-      background: #06080F;
-      padding: 100px var(--pad) 100px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* ─── PRODUCT SHOWCASE ─── */
+    .showcase {
+      background: radial-gradient(ellipse 85% 70% at 50% 44%, #FAFBFF 0%, #F0F2F7 100%);
+      padding: 120px var(--pad) 150px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 18px;
+      position: relative; overflow: hidden;
     }
-    .live-dash::before {
+    /* Studio backlight */
+    .showcase::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(0,192,240,0.30), transparent);
+      position: absolute; top: 10%; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(0,152,200,0.055) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .live-dash::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(0,192,240,0.15), transparent);
+    /* Shared glass surface */
+    .sc-glass {
+      background: linear-gradient(178deg, #FFFFFF 0%, rgba(251,253,255,0.97) 100%);
+      border: 0.5px solid rgba(0,0,0,0.072);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,1),
+        inset 0 -0.5px 0 rgba(0,0,0,0.02),
+        0 1px 2px  rgba(0,0,0,0.04),
+        0 4px 10px rgba(0,0,0,0.05),
+        0 14px 36px rgba(0,0,0,0.07),
+        0 40px 80px rgba(0,0,0,0.06),
+        0 80px 110px rgba(0,0,0,0.03);
+      position: relative; z-index: 2;
     }
-    .ld-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 10px; font-weight: 700; letter-spacing: .20em;
-      text-transform: uppercase; color: rgba(0,192,240,0.60);
-      font-family: 'SF Mono','Fira Code',monospace;
-      margin-bottom: 44px;
+    /* ── Activity card ── */
+    .sc-card {
+      width: min(500px, 92vw);
+      border-radius: 22px;
+      padding: 26px 22px 20px;
+      animation: scFloat1 5.6s ease-in-out infinite;
     }
-    .ld-live-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #00C0F0;
-      box-shadow: 0 0 10px rgba(0,192,240,0.9);
-      animation: pulse 1.8s ease-in-out infinite;
+    .sc-title {
+      font-size: 21px; font-weight: 700; letter-spacing: -.035em;
+      color: #0A0B12; text-align: center; margin-bottom: 20px;
     }
-    .ld-headline {
-      font-size: clamp(28px, 3.5vw, 48px);
-      font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
-      color: #E8ECF5; margin-bottom: 56px;
+    .sc-row {
+      display: flex; align-items: center; gap: 13px;
+      padding: 12px 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.052);
     }
-    .ld-headline span {
-      color: rgba(232,236,245,0.35);
-    }
-    .ld-panel {
-      max-width: 1100px; margin: 0 auto;
-      background: rgba(255,255,255,0.025);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(0,192,240,0.04);
-    }
-    .ld-titlebar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 14px 20px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 0.5px solid rgba(255,255,255,0.07);
-    }
-    .ld-tb-dot {
-      width: 11px; height: 11px; border-radius: 50%;
-    }
-    .ld-tb-dot:nth-child(1) { background: #FF5F57; }
-    .ld-tb-dot:nth-child(2) { background: #FEBC2E; }
-    .ld-tb-dot:nth-child(3) { background: #28C840; }
-    .ld-tb-title {
-      font-size: 11px; font-weight: 600; letter-spacing: .12em;
-      color: rgba(232,236,245,0.30);
-      font-family: 'SF Mono','Fira Code',monospace;
-      margin-left: 8px;
-    }
-    .ld-tb-status {
-      margin-left: auto; display: flex; align-items: center; gap: 6px;
-      font-size: 10px; font-weight: 700; letter-spacing: .12em;
-      color: rgba(0,192,240,0.70);
-      font-family: 'SF Mono','Fira Code',monospace;
-    }
-    .ld-tb-status-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #00C0F0;
-      box-shadow: 0 0 8px rgba(0,192,240,0.8);
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-    .ld-body {
-      display: grid; grid-template-columns: 220px 1fr 200px;
-    }
-    @media(max-width:900px) {
-      .ld-body { grid-template-columns: 1fr; }
-      .ld-sidebar-right { display: none; }
-    }
-    .ld-sidebar-left {
-      padding: 24px 20px;
-      border-right: 0.5px solid rgba(255,255,255,0.06);
-    }
-    .ld-sidebar-right {
-      padding: 24px 20px;
-      border-left: 0.5px solid rgba(255,255,255,0.06);
-    }
-    .ld-col-label {
-      font-size: 9px; font-weight: 700; letter-spacing: .18em;
-      text-transform: uppercase;
-      color: rgba(232,236,245,0.25);
-      font-family: 'SF Mono','Fira Code',monospace;
-      margin-bottom: 16px; display: block;
-    }
-    .ld-target-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 600;
-      color: rgba(232,236,245,0.60);
-      background: rgba(255,255,255,0.04);
-      border: 0.5px solid rgba(255,255,255,0.09);
-      border-radius: 6px; padding: 5px 10px;
-      margin: 0 4px 6px 0;
-    }
-    .ld-target-chip.active {
-      color: #00C0F0;
-      background: rgba(0,192,240,0.08);
-      border-color: rgba(0,192,240,0.30);
-    }
-    .ld-target-divider {
-      height: 0.5px; background: rgba(255,255,255,0.06); margin: 16px 0;
-    }
-    .ld-status-row {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-    }
-    .ld-status-dot-on {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #28C840; box-shadow: 0 0 6px rgba(40,200,64,0.7);
-      animation: pulse 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    .ld-status-label {
-      font-size: 11px; font-weight: 600; color: rgba(232,236,245,0.50);
-    }
-    .ld-feed {
-      padding: 0; min-height: 280px;
-      display: flex; flex-direction: column;
-    }
-    .ld-feed-row {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 20px;
-      border-bottom: 0.5px solid rgba(255,255,255,0.04);
-      animation: feedSlide .35s ease both;
-    }
-    @keyframes feedSlide {
-      from { opacity:0; transform:translateX(-8px); }
-      to   { opacity:1; transform:translateX(0); }
-    }
-    .ld-feed-icon {
-      font-size: 14px; width: 28px; height: 28px;
+    .sc-row:last-of-type { border-bottom: none; margin-bottom: 4px; }
+    .sc-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(52,199,89,0.11);
+      border: 0.5px solid rgba(52,199,89,0.18);
       display: flex; align-items: center; justify-content: center;
-      border-radius: 8px; flex-shrink: 0;
     }
-    .ld-feed-icon.follow  { background: rgba(0,152,200,0.12); }
-    .ld-feed-icon.dm      { background: rgba(155,89,182,0.12); }
-    .ld-feed-icon.like    { background: rgba(255,82,82,0.12); }
-    .ld-feed-icon.unfollow{ background: rgba(255,165,0,0.10); }
-    .ld-feed-handle {
-      font-size: 12px; font-weight: 700; color: rgba(232,236,245,0.85);
-      font-family: 'SF Mono','Fira Code',monospace;
+    .sc-row-text { flex: 1; min-width: 0; }
+    .sc-row-action {
+      font-size: 14px; font-weight: 500; color: #0A0B12;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .ld-feed-meta {
-      font-size: 11px; color: rgba(232,236,245,0.35); margin-top: 1px;
+    .sc-row-action strong { font-weight: 700; }
+    .sc-row-meta {
+      font-size: 11.5px; color: rgba(10,11,18,0.40); margin-top: 2px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .ld-feed-tag {
-      margin-left: auto; flex-shrink: 0;
-      font-size: 9px; font-weight: 700; letter-spacing: .10em;
-      padding: 3px 8px; border-radius: 4px;
+    .sc-pulse-btn {
+      width: 100%; margin-top: 16px; height: 52px;
+      background: rgba(0,0,0,0.046); border: none;
+      border-radius: 14px; cursor: pointer;
+      font-size: 15px; font-weight: 500;
+      color: rgba(0,0,0,0.38); letter-spacing: -.01em;
+      font-family: 'Inter', sans-serif;
+      transition: background .2s, color .2s;
     }
-    .ld-feed-tag.follow  { color: #0098C8; background: rgba(0,152,200,0.12); }
-    .ld-feed-tag.dm      { color: #9B59B6; background: rgba(155,89,182,0.12); }
-    .ld-feed-tag.like    { color: #FF5252; background: rgba(255,82,82,0.12); }
-    .ld-feed-tag.unfollow{ color: #F0A500; background: rgba(255,165,0,0.10); }
-    .ld-feed-processing {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 20px;
-      color: rgba(232,236,245,0.20);
-      font-size: 11px; font-family: 'SF Mono','Fira Code',monospace;
+    .sc-pulse-btn:hover { background: rgba(0,0,0,0.09); color: rgba(0,0,0,0.55); }
+    /* ── Command bar ── */
+    .sc-bar {
+      width: min(500px, 92vw); height: 58px;
+      border-radius: 99px;
+      display: flex; align-items: center;
+      padding: 0 7px 0 22px; gap: 10px;
+      animation: scFloat2 4.9s ease-in-out infinite;
+      animation-delay: 0.65s;
     }
-    .ld-processing-dots span {
-      animation: blink 1.2s ease-in-out infinite;
-      display: inline-block;
+    .sc-bar-status {
+      flex: 1; font-size: 15px; font-weight: 400;
+      color: rgba(0,0,0,0.34); letter-spacing: -.01em;
     }
-    .ld-processing-dots span:nth-child(2) { animation-delay: .2s; }
-    .ld-processing-dots span:nth-child(3) { animation-delay: .4s; }
-    @keyframes blink { 0%,100%{opacity:.2} 50%{opacity:1} }
-    .ld-stat-row {
-      margin-bottom: 20px;
+    .sc-bar-right { display: flex; align-items: center; gap: 8px; }
+    .sc-bar-grid {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: rgba(0,0,0,0.038);
+      display: flex; align-items: center; justify-content: center;
     }
-    .ld-stat-num {
-      font-size: 28px; font-weight: 800; letter-spacing: -.04em;
-      color: #00C0F0; display: block; line-height: 1;
-      font-family: 'SF Mono','Fira Code',monospace;
+    .sc-bar-ia {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(145deg, #D6E3F4 0%, #E5EDF8 100%);
+      border: 0.5px solid rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.50);
+      letter-spacing: -.02em;
     }
-    .ld-stat-label {
-      font-size: 10px; color: rgba(232,236,245,0.30);
-      margin-top: 3px; display: block;
-      text-transform: uppercase; letter-spacing: .10em;
+    /* Float keyframes — organic, not robotic */
+    @keyframes scFloat1 {
+      0%, 100% { transform: translateY(0px)   rotate(0.00deg); }
+      30%       { transform: translateY(-20px) rotate(0.22deg); }
+      65%       { transform: translateY(-11px) rotate(-0.14deg); }
     }
-    .ld-zero-row {
-      display: flex; align-items: center; gap: 6px; margin-top: 24px;
-      padding-top: 16px;
-      border-top: 0.5px solid rgba(255,255,255,0.06);
-    }
-    .ld-zero-label {
-      font-size: 10px; color: rgba(232,236,245,0.25);
-      font-family: 'SF Mono','Fira Code',monospace;
-    }
-    .ld-zero-val {
-      font-size: 16px; font-weight: 800; color: rgba(232,236,245,0.20);
+    @keyframes scFloat2 {
+      0%, 100% { transform: translateY(-4px)  rotate(0.00deg); }
+      50%       { transform: translateY(-17px) rotate(0.16deg); }
     }
 
     /* ─── CAPSULE AGENTS ─── */
@@ -1928,104 +1834,73 @@
     </div>
   </section>
 
-  <!-- ═══ LIVE DASHBOARD ═══ -->
-  <section class="live-dash">
-    <div class="ld-eyebrow"><div class="ld-live-dot"></div>OVIS · UNIT-001 · LIVE SESSION</div>
-    <h2 class="ld-headline">This is what <span>running your Instagram</span><br>on autopilot looks like.</h2>
+  <!-- ═══ PRODUCT SHOWCASE ═══ -->
+  <section class="showcase">
 
-    <div class="ld-panel">
-      <div class="ld-titlebar">
-        <div class="ld-tb-dot"></div>
-        <div class="ld-tb-dot"></div>
-        <div class="ld-tb-dot"></div>
-        <span class="ld-tb-title">OVIS · AGENT CONSOLE · v1.0</span>
-        <div class="ld-tb-status"><div class="ld-tb-status-dot"></div>RUNNING</div>
+    <!-- Activity card -->
+    <div class="sc-card sc-glass">
+      <div class="sc-title">Ovis</div>
+
+      <div class="sc-row">
+        <div class="sc-avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="sc-row-text">
+          <div class="sc-row-action">Unfollowed <strong>@hannahhpryor</strong></div>
+          <div class="sc-row-meta">In People Looking To Get In Sales, 18 Y...&nbsp;&middot;&nbsp;Today at 5:09 AM</div>
+        </div>
       </div>
-      <div class="ld-body">
 
-        <!-- Left: Target config -->
-        <div class="ld-sidebar-left">
-          <span class="ld-col-label">Target Config</span>
-          <div class="ld-target-chip active">Fitness</div>
-          <div class="ld-target-chip active">NYC</div>
-          <div class="ld-target-chip active">&lt; 10k</div>
-          <div class="ld-target-chip">Coaches</div>
-          <div class="ld-target-chip">Gyms</div>
-          <div class="ld-target-divider"></div>
-          <div class="ld-status-row">
-            <div class="ld-status-dot-on"></div>
-            <span class="ld-status-label">Auto-follow ON</span>
-          </div>
-          <div class="ld-status-row">
-            <div class="ld-status-dot-on"></div>
-            <span class="ld-status-label">DM engine ON</span>
-          </div>
-          <div class="ld-status-row">
-            <div class="ld-status-dot-on"></div>
-            <span class="ld-status-label">Unfollow queue ON</span>
-          </div>
+      <div class="sc-row">
+        <div class="sc-avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-
-        <!-- Center: Live feed -->
-        <div class="ld-feed" id="ldFeed">
-          <div class="ld-feed-row">
-            <div class="ld-feed-icon follow">👥</div>
-            <div><div class="ld-feed-handle">@alex.lifts</div><div class="ld-feed-meta">Followed · Fitness · NYC · 4.2k</div></div>
-            <span class="ld-feed-tag follow">FOLLOW</span>
-          </div>
-          <div class="ld-feed-row">
-            <div class="ld-feed-icon dm">💬</div>
-            <div><div class="ld-feed-handle">@sarah.runs</div><div class="ld-feed-meta">DM sent · "Hey loved your last reel…"</div></div>
-            <span class="ld-feed-tag dm">DM</span>
-          </div>
-          <div class="ld-feed-row">
-            <div class="ld-feed-icon like">❤️</div>
-            <div><div class="ld-feed-handle">@nia.wellness</div><div class="ld-feed-meta">Liked 2 posts · Wellness creator</div></div>
-            <span class="ld-feed-tag like">LIKE</span>
-          </div>
-          <div class="ld-feed-row">
-            <div class="ld-feed-icon unfollow">✓</div>
-            <div><div class="ld-feed-handle">@ghost_user42</div><div class="ld-feed-meta">Unfollowed · no follow-back · 4 days</div></div>
-            <span class="ld-feed-tag unfollow">UNFOLLOW</span>
-          </div>
-          <div class="ld-feed-row">
-            <div class="ld-feed-icon follow">👥</div>
-            <div><div class="ld-feed-handle">@marcus.fit</div><div class="ld-feed-meta">Followed · Personal trainer · Brooklyn</div></div>
-            <span class="ld-feed-tag follow">FOLLOW</span>
-          </div>
-          <div class="ld-feed-processing">
-            <span>&gt; Processing next targets</span>
-            <span class="ld-processing-dots"><span>.</span><span>.</span><span>.</span></span>
-          </div>
+        <div class="sc-row-text">
+          <div class="sc-row-action">Unfollowed <strong>@mezzaqueen</strong></div>
+          <div class="sc-row-meta">In People Looking To Get In Sales, 18 Y...&nbsp;&middot;&nbsp;Today at 5:01 AM</div>
         </div>
+      </div>
 
-        <!-- Right: Stats -->
-        <div class="ld-sidebar-right">
-          <span class="ld-col-label">Today</span>
-          <div class="ld-stat-row">
-            <span class="ld-stat-num" id="ldFollowers">+47</span>
-            <span class="ld-stat-label">New followers</span>
-          </div>
-          <div class="ld-stat-row">
-            <span class="ld-stat-num" id="ldDms">28</span>
-            <span class="ld-stat-label">DMs sent</span>
-          </div>
-          <div class="ld-stat-row">
-            <span class="ld-stat-num" id="ldActions">312</span>
-            <span class="ld-stat-label">Total actions</span>
-          </div>
-          <div class="ld-zero-row">
-            <span class="ld-zero-label">Manual work:</span>
-            <span class="ld-zero-val">0h</span>
-          </div>
+      <div class="sc-row">
+        <div class="sc-avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
+        <div class="sc-row-text">
+          <div class="sc-row-action">Unfollowed <strong>@arizona_outlaws</strong></div>
+          <div class="sc-row-meta">In People Looking To Get In Sales, 18 Y...&nbsp;&middot;&nbsp;Today at 4:39 AM</div>
+        </div>
+      </div>
 
+      <div class="sc-row">
+        <div class="sc-avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="sc-row-text">
+          <div class="sc-row-action">Unfollowed <strong>@josephmisleh</strong></div>
+          <div class="sc-row-meta">In People Looking To Get In Sales, 18 Y...&nbsp;&middot;&nbsp;Today at 4:33 AM</div>
+        </div>
+      </div>
+
+      <button class="sc-pulse-btn" onclick="openModal()">Open Pulse</button>
+    </div>
+
+    <!-- Command bar -->
+    <div class="sc-bar sc-glass">
+      <span class="sc-bar-status">Standing by.</span>
+      <div class="sc-bar-right">
+        <div class="sc-bar-grid">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <rect x="0.5" y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
+            <rect x="9"   y="0.5" width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
+            <rect x="0.5" y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
+            <rect x="9"   y="9"   width="5.5" height="5.5" rx="1.2" fill="rgba(0,0,0,0.32)"/>
+          </svg>
+        </div>
+        <div class="sc-bar-ia">IA</div>
       </div>
     </div>
-  </section>
 
-  <!-- ─── dark→light fade ─── -->
-  <div style="height:60px;background:linear-gradient(to bottom,#06080F,var(--bg));pointer-events:none;"></div>
+  </section>
 
   <!-- ═══ FEATURES ═══ -->
   <section class="features-v10">
@@ -2514,43 +2389,6 @@
     builtObs.observe(builtCards[0]);
   }
 
-  // ── Live Dashboard feed ──
-  (function() {
-    var ldActions = [
-      { type:'follow',   icon:'👥', handle:'@coach.james',   meta:'Followed · Fitness · Miami · 7.8k',           tag:'FOLLOW'   },
-      { type:'dm',       icon:'💬', handle:'@fitgirl.nyc',   meta:'DM sent · "Your content is so real…"',        tag:'DM'       },
-      { type:'like',     icon:'❤️', handle:'@trainer.eli',   meta:'Liked 3 posts · Personal trainer',             tag:'LIKE'     },
-      { type:'unfollow', icon:'✓',  handle:'@spambot_22',    meta:'Unfollowed · no follow-back · 5 days',         tag:'UNFOLLOW' },
-      { type:'follow',   icon:'👥', handle:'@la.fitness',    meta:'Followed · Gym · Los Angeles · 3.1k',          tag:'FOLLOW'   },
-      { type:'dm',       icon:'💬', handle:'@alex.lifts',    meta:'DM sent · "Loved your transformation post…"',  tag:'DM'       },
-      { type:'like',     icon:'❤️', handle:'@nia.wellness',  meta:'Liked latest reel · Wellness · NYC',           tag:'LIKE'     },
-      { type:'follow',   icon:'👥', handle:'@run.with.kate', meta:'Followed · Running coach · Chicago · 5.4k',    tag:'FOLLOW'   },
-    ];
-    var ldFeed = document.getElementById('ldFeed');
-    var ldFollowersEl = document.getElementById('ldFollowers');
-    var ldDmsEl = document.getElementById('ldDms');
-    var ldActionsEl = document.getElementById('ldActions');
-    if (!ldFeed) return;
-    var ldIdx = 0, ldF = 47, ldD = 28, ldA = 312;
-    function ldAddRow() {
-      var a = ldActions[ldIdx % ldActions.length];
-      var processing = ldFeed.querySelector('.ld-feed-processing');
-      var row = document.createElement('div');
-      row.className = 'ld-feed-row';
-      row.innerHTML = '<div class="ld-feed-icon ' + a.type + '">' + a.icon + '</div>'
-        + '<div><div class="ld-feed-handle">' + a.handle + '</div><div class="ld-feed-meta">' + a.meta + '</div></div>'
-        + '<span class="ld-feed-tag ' + a.type + '">' + a.tag + '</span>';
-      ldFeed.insertBefore(row, processing);
-      var rows = ldFeed.querySelectorAll('.ld-feed-row');
-      if (rows.length > 6) rows[0].remove();
-      ldIdx++;
-      ldA++;
-      if (a.type === 'follow') { ldF++; ldFollowersEl.textContent = '+' + ldF; }
-      if (a.type === 'dm')     { ldD++; ldDmsEl.textContent = ldD; }
-      ldActionsEl.textContent = ldA;
-    }
-    setInterval(ldAddRow, 2200);
-  })();
 
   // ── arm-from-bot general observer ──
   document.querySelectorAll('.arm-from-bot').forEach(el => {
