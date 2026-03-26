@@ -36,9 +36,15 @@
 
     /* ─── HERO ZEROS ─── */
     .hero-zeros {
-      font-size: 13px; font-weight: 600; letter-spacing: .06em;
-      color: var(--muted); margin-top: 10px; margin-bottom: 0;
-      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px; font-weight: 500; letter-spacing: .02em;
+      color: var(--muted2);
+      margin-top: 0; margin-bottom: 36px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+    }
+    .hero-zeros-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--muted2); opacity: 0.5; flex-shrink: 0;
     }
 
     /* ─── TELL IT ONCE ─── */
@@ -257,29 +263,47 @@
       margin-bottom: 48px; font-weight: 400; position: relative; z-index: 2;
     }
 
-    /* buttons */
+    /* ── Buttons ── */
     .hero-btns {
-      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 80px; position: relative; z-index: 2;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      align-items: center;
+      margin-bottom: 28px; position: relative; z-index: 2;
     }
     .btn-primary {
-      font-size: 15px; font-weight: 700; color: #07080D;
-      background: var(--blue);
-      padding: 15px 38px; border-radius: 10px; border: none; cursor: pointer;
-      text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 0 0.5px rgba(0,152,200,0.4), 0 8px 28px rgba(0,152,200,0.40);
+      font-size: 16px; font-weight: 700; color: #FFFFFF;
+      background: #0A0B14;
+      padding: 17px 52px; border-radius: 99px; border: none; cursor: pointer;
+      text-decoration: none; letter-spacing: -.015em;
+      transition: transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s, background .18s;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 2px 6px rgba(0,0,0,0.14),
+        0 8px 24px rgba(0,0,0,0.12);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 0.5px rgba(0,152,200,0.5), 0 12px 40px rgba(0,152,200,0.55); }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #13141F;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 4px 12px rgba(0,0,0,0.18),
+        0 16px 40px rgba(0,0,0,0.16);
+    }
     .btn-ghost {
       font-size: 15px; font-weight: 500; color: var(--muted);
-      background: transparent;
-      border: 0.5px solid rgba(0,0,0,0.15);
-      padding: 15px 28px; border-radius: 10px; cursor: pointer;
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 0.5px solid rgba(0,0,0,0.10);
+      padding: 17px 32px; border-radius: 99px; cursor: pointer;
+      text-decoration: none; letter-spacing: -.01em;
+      transition: color .2s, background .2s, transform .22s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 8px rgba(0,0,0,0.06);
     }
-    .btn-ghost:hover { color: var(--text); border-color: rgba(0,0,0,0.30); }
+    .btn-ghost:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.96);
+      transform: translateY(-2px);
+    }
 
     /* hero product card */
     .hero-card {
@@ -1460,7 +1484,7 @@
     }
     @media (max-width: 560px) {
       .hero-btns { flex-direction: column; align-items: center; }
-      .hero-btns .btn-primary, .hero-btns .btn-ghost { width: 100%; max-width: 300px; text-align: center; }
+      .hero-btns .btn-primary, .hero-btns .btn-ghost { width: 100%; max-width: 320px; text-align: center; justify-content: center; }
       .modal-card { padding: 36px 24px; }
     }
 
@@ -1788,12 +1812,19 @@
 
     <!-- Sub -->
     <p class="hero-sub">Tell it once. It runs your Instagram forever.</p>
-    <p class="hero-zeros">0 logins &nbsp;·&nbsp; 0 dashboards &nbsp;·&nbsp; 0 thinking about it.</p>
 
     <!-- CTAs -->
     <div class="hero-btns">
-      <button class="btn-primary" onclick="openModal()">Request Access →</button>
+      <button class="btn-primary" onclick="openModal()">Get Early Access →</button>
       <a href="#how" class="btn-ghost">See how it works</a>
+    </div>
+
+    <div class="hero-zeros">
+      <span>Zero logins</span>
+      <div class="hero-zeros-dot"></div>
+      <span>Zero dashboards</span>
+      <div class="hero-zeros-dot"></div>
+      <span>Zero thinking about it</span>
     </div>
 
 
