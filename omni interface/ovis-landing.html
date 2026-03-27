@@ -876,32 +876,26 @@
       pointer-events: none; z-index: 0;
       transition: opacity .35s;
     }
-    /* Ovis logo placeholder inside jar */
+    /* Ovis character inside jar */
     .caps-logo {
-      width: 72px; height: 72px;
+      width: 86px; height: 86px;
       position: relative; z-index: 1;
       animation: capsFloat 3.6s ease-in-out infinite;
-      filter: drop-shadow(0 8px 20px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.35));
+      filter: drop-shadow(0 10px 24px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.45));
       flex-shrink: 0;
     }
-    .caps-logo-circle {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: linear-gradient(135deg,
-        rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.22) 0%,
-        rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.08) 100%
-      );
-      border: 1.5px solid rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.40);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.20),
-        0 0 20px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.15);
+    .caps-char {
+      width: 86px; height: 86px; border-radius: 50%;
+      background-image: url('ovis-chars.jpeg');
+      background-repeat: no-repeat;
+      background-size: 792px 108px;
+      overflow: hidden;
     }
-    .caps-logo-o {
-      font-size: 28px; font-weight: 900; letter-spacing: -.06em;
-      color: rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.90);
-      font-family: 'Inter', sans-serif; line-height: 1;
-      text-shadow: 0 0 16px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.6);
-    }
+    /* Map each capsule to its character (image 1320×180, scaled 0.6×) */
+    /* Creator  → Blue   (char 5) */ .caps-item:nth-child(1) .caps-char { background-position: -358px -4px; }
+    /* Fitness  → Green  (char 4) */ .caps-item:nth-child(2) .caps-char { background-position: -260px -4px; }
+    /* Music    → Purple (char 6) */ .caps-item:nth-child(3) .caps-char { background-position: -456px -4px; }
+    /* Sales    → Orange (char 2) */ .caps-item:nth-child(4) .caps-char { background-position: -60px  -4px; }
     @keyframes capsFloat {
       0%,100% { transform: translateY(0px); }
       50%      { transform: translateY(-9px); }
@@ -2231,7 +2225,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-logo-circle"><span class="caps-logo-o">O</span></div>
+              <div class="caps-char"></div>
             </div>
           </div>
           <div class="caps-name">Creator</div>
@@ -2244,7 +2238,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-logo-circle"><span class="caps-logo-o">O</span></div>
+              <div class="caps-char"></div>
             </div>
           </div>
           <div class="caps-name">Fitness</div>
@@ -2257,7 +2251,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-logo-circle"><span class="caps-logo-o">O</span></div>
+              <div class="caps-char"></div>
             </div>
           </div>
           <div class="caps-name">Music</div>
@@ -2270,7 +2264,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-logo-circle"><span class="caps-logo-o">O</span></div>
+              <div class="caps-char"></div>
             </div>
           </div>
           <div class="caps-name">Sales</div>
