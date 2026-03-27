@@ -110,7 +110,7 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-end;
       padding: 0 var(--pad);
       background: rgba(245,246,250,0.88);
       backdrop-filter: blur(24px);
@@ -142,12 +142,12 @@
     /* ambient glow behind OVIS */
     .hero::before {
       content: '';
-      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
-      width: 1000px; height: 600px; pointer-events: none;
-      background: radial-gradient(ellipse at 50% 40%,
-        rgba(0,152,200,0.05) 0%,
-        rgba(0,152,200,0.02) 40%,
-        transparent 70%);
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 1200px; height: 700px; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 38%,
+        rgba(0,152,200,0.10) 0%,
+        rgba(0,152,200,0.05) 30%,
+        transparent 65%);
     }
 
     /* live badge */
@@ -169,25 +169,36 @@
 
     /* THE NAME */
     .hero-ovis {
-      font-size: clamp(96px, 18vw, 180px);
-      font-weight: 800; letter-spacing: -.06em; line-height: .92;
-      background: linear-gradient(160deg,
-        #1A1D26 0%,
-        #42464F 18%,
-        #22252E 35%,
-        #4E5260 50%,
-        #1E2128 65%,
-        #3A3D48 82%,
-        #1C1F28 100%);
+      font-size: clamp(110px, 22vw, 220px);
+      font-weight: 800; letter-spacing: -.065em; line-height: .90;
+      background: linear-gradient(175deg,
+        #FFFFFF 0%,
+        #E6EAF4 7%,
+        #ACB4C8 20%,
+        #6C7488 38%,
+        #9AA2B8 54%,
+        #484D5E 70%,
+        #28293A 86%,
+        #12131C 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: block;
-      padding: 0.04em 0.22em 0.08em 0.12em;
+      padding: 0.02em 0.15em 0.05em;
       position: relative; z-index: 2;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18));
-      margin-bottom: 0;
-      animation: ovisAssemble 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+      filter:
+        drop-shadow(0 1px 0 rgba(255,255,255,0.30))
+        drop-shadow(0 8px 24px rgba(0,0,0,0.22))
+        drop-shadow(0 28px 60px rgba(0,0,0,0.16))
+        drop-shadow(0 60px 100px rgba(0,0,0,0.10))
+        drop-shadow(0 0 140px rgba(0,152,200,0.07));
+      animation:
+        ovisAssemble 1.1s cubic-bezier(0.22,1,0.36,1) 0.1s both,
+        ovisLevitate 9s ease-in-out infinite 1.4s;
+    }
+    @keyframes ovisLevitate {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-18px); }
     }
 
     /* ─── AGENT DESIGNATION LABEL (D) ─── */
@@ -1861,75 +1872,21 @@
 
   <!-- ═══ NAV ═══ -->
   <nav>
-    <div class="nav-logo">Ovis</div>
     <button class="nav-cta" onclick="openModal()">Get Access</button>
   </nav>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
 
-    <!-- ── Left toasts (A) ── -->
-    <div class="sp-left" id="spLeft">
-      <div class="sp-toast sp-t1">
-        <span class="sp-dot"></span>
-        <div class="sp-toast-body">
-          <div class="sp-toast-name">@fitcoach.alex</div>
-          <div class="sp-toast-action">just joined the waitlist · 2m ago</div>
-        </div>
-      </div>
-      <div class="sp-toast sp-t2">
-        <span class="sp-dot"></span>
-        <div class="sp-toast-body">
-          <div class="sp-toast-name">@music.kyle</div>
-          <div class="sp-toast-action">joined from Chicago · 5m ago</div>
-        </div>
-      </div>
-      <div class="sp-toast sp-t3">
-        <span class="sp-dot"></span>
-        <div class="sp-toast-body">
-          <div class="sp-toast-name">@nia.wellness</div>
-          <div class="sp-toast-action">signed up · Los Angeles · just now</div>
-        </div>
-      </div>
-    </div>
+    <!-- JS anchors kept hidden so scripts don't error -->
+    <div id="spLeft" style="display:none"></div>
+    <div id="proofLeft" style="display:none"></div>
+    <div id="proofRight" style="display:none"></div>
 
-    <!-- ── Right testimonials (C) ── -->
-    <div class="sp-right">
-      <div class="sp-testi">
-        <div class="sp-stars">★★★★★</div>
-        <div class="sp-testi-quote">"400 followers in one week."</div>
-        <div class="sp-testi-author">@fitcoach.alex</div>
-      </div>
-      <div class="sp-testi sp-testi-2">
-        <div class="sp-stars">★★★★★</div>
-        <div class="sp-testi-quote">"Set it up in 4 min. Never touched it again."</div>
-        <div class="sp-testi-author">@music.kyle</div>
-      </div>
-    </div>
-
-    <!-- Corner social proof -->
-    <div class="hero-proof hero-proof-left"  id="proofLeft"></div>
-    <div class="hero-proof hero-proof-right" id="proofRight"></div>
-
-    <!-- Live badge -->
-    <div class="hero-badge">
-      <div class="hero-badge-dot"></div>
-      <span id="waitlistCount">1,247</span>&nbsp;creators on the waitlist
-    </div>
-
-    <!-- The name + arc reactor -->
+    <!-- The name -->
     <div class="ovis-wrap">
-      <div class="arc-reactor" aria-hidden="true">
-        <div class="arc-ring arc-ring-1"></div>
-        <div class="arc-ring arc-ring-2"></div>
-        <div class="arc-ring arc-ring-3"></div>
-        <div class="arc-ring arc-ring-4"></div>
-      </div>
       <span class="hero-ovis">OVIS</span>
     </div>
-
-    <!-- Designation + Tagline -->
-    <div class="hero-designation">Agent Designation ·</div>
     <span class="hero-tag">Your <em><span class="jarvis-scan">Jarvis</span></em> for
       <svg class="ig-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Instagram">
         <defs>
