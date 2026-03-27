@@ -1618,62 +1618,100 @@
       font-size: 10.5px; color: rgba(12,13,20,0.45); font-weight: 500;
     }
 
-    /* ── FEATURES (Option 10): Feature Cards with Mini Phone Preview ── */
+    /* ── FEATURES BENTO ── */
     .features-v10 {
-      padding: 52px var(--pad) 60px;
+      padding: 80px var(--pad) 80px;
       max-width: 1100px; margin: 0 auto; text-align: center;
     }
     .v10-headline {
       font-size: clamp(28px,4.5vw,50px);
-      font-weight: 800;
-      letter-spacing: -.05em;
-      text-align: center;
-      margin-bottom: 14px;
-      color: var(--text);
+      font-weight: 800; letter-spacing: -.05em;
+      text-align: center; margin-bottom: 14px; color: var(--text);
     }
     .v10-sub {
-      font-size: 16px; color: var(--muted); margin-bottom: 36px; line-height: 1.65;
+      font-size: 16px; color: var(--muted); margin-bottom: 40px; line-height: 1.65;
     }
+    /* Bento grid */
     .v10-list {
-      max-width: 1040px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      max-width: 1040px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
+    /* Base card — scroll-reveal starts hidden */
     .v10-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 40px 52px;
+      border: 0.5px solid rgba(0,0,0,0.07);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 36px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      transition: box-shadow .25s, transform .25s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 14px rgba(0,0,0,0.04);
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity  0.65s cubic-bezier(0.22,1,0.36,1),
+        transform 0.65s cubic-bezier(0.22,1,0.36,1),
+        box-shadow 0.45s cubic-bezier(0.22,1,0.36,1);
+    }
+    .v10-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
     }
     .v10-card:hover {
-      box-shadow: 0 12px 40px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.05);
-      transform: translateY(-3px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.10), 0 48px 80px rgba(0,0,0,0.06);
+      transform: translateY(-6px);
     }
-    .v10-left { max-width: 560px; width: 100%; }
+    .v10-card.in-view:hover { transform: translateY(-6px); }
+    /* Wide card: spans 2 columns, phone on the right */
+    .v10-card-wide {
+      grid-column: span 2;
+      flex-direction: row;
+      align-items: flex-start;
+      min-height: 420px;
+      padding: 40px 0 0 40px;
+      text-align: left;
+    }
+    /* Narrow card: spans 1 column, phone at bottom */
+    .v10-card-narrow {
+      grid-column: span 1;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 420px;
+      padding: 36px 28px 0;
+      text-align: left;
+    }
+    .v10-left { flex-shrink: 0; }
+    .v10-card-wide .v10-left { max-width: 230px; }
+    .v10-card-narrow .v10-left { width: 100%; }
     .v10-icon-wrap {
-      width: 46px; height: 46px;
+      width: 42px; height: 42px;
       background: var(--blue-dim);
-      border-radius: 12px;
+      border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
       color: var(--blue);
-      margin: 0 auto 16px;
+      margin: 0 0 20px 0;
     }
     .v10-card-title {
-      font-size: 19px; font-weight: 700; letter-spacing: -.025em;
+      font-size: 18px; font-weight: 700; letter-spacing: -.03em;
       color: var(--text); margin-bottom: 10px;
     }
     .v10-card-desc {
-      font-size: 14px; line-height: 1.65; color: var(--muted);
+      font-size: 13.5px; line-height: 1.65; color: var(--muted);
     }
+    /* Phone placement */
+    .v10-card-wide .v10-phone {
+      flex-shrink: 0; align-self: flex-end;
+      margin-left: auto; margin-right: 44px;
+    }
+    .v10-card-narrow .v10-phone {
+      align-self: center; margin: auto auto 0;
+      width: 148px; height: 264px; border-radius: 34px;
+    }
+    .v10-card-narrow .v10-phone::before {
+      width: 50px; height: 13px; top: 16px;
+    }
+    .v10-card-narrow .v10-phone-inner { border-radius: 28px; }
 
     /* ── iPhone shell ── */
     .v10-phone {
@@ -1862,9 +1900,18 @@
     }
     .v10-like-heart svg { animation: heartPop 1.4s ease-in-out infinite; }
 
-    /* ── Responsive ── */
-    @media (max-width: 960px) {
-      .v10-phone { width: 160px; height: 285px; }
+    /* ── Bento Responsive ── */
+    @media (max-width: 900px) {
+      .v10-list { grid-template-columns: repeat(2, 1fr); }
+      .v10-card-wide { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .v10-list { grid-template-columns: 1fr; gap: 10px; }
+      .v10-card-wide, .v10-card-narrow { grid-column: span 1; min-height: auto; }
+      .v10-card-wide { flex-direction: column; padding: 28px 24px 0; }
+      .v10-card-wide .v10-left { max-width: none; }
+      .v10-card-wide .v10-phone { margin: auto auto 0; width: 148px; height: 264px; border-radius: 34px; }
+      .v10-card-narrow { padding: 28px 24px 0; }
     }
 
   </style>
@@ -2023,7 +2070,8 @@
     <p class="v10-sub">Four things running 24/7. Set once, runs forever.</p>
     <div class="v10-list">
 
-      <div class="v10-card">
+      <!-- ROW 1: Smart Follow (wide) + Auto-Likes (narrow) -->
+      <div class="v10-card v10-card-wide">
         <div class="v10-left">
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -2066,7 +2114,51 @@
         </div>
       </div>
 
-      <div class="v10-card">
+      <div class="v10-card v10-card-narrow">
+        <div class="v10-left">
+          <div class="v10-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="v10-card-title">Auto-Likes</div>
+          <div class="v10-card-desc">Identifies posts in your niche and likes them — building presence without lifting a finger.</div>
+        </div>
+        <div class="v10-phone">
+          <div class="v10-phone-inner v10-ui-likes">
+            <div class="v10-status">
+              <span>9:41</span>
+              <div class="v10-status-right">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2.5" height="6" rx="1" fill="#0A0B12"/><rect x="3.5" y="2.5" width="2.5" height="7.5" rx="1" fill="#0A0B12"/><rect x="7" y="1" width="2.5" height="9" rx="1" fill="#0A0B12"/><rect x="10.5" y="0" width="2.5" height="10" rx="1" fill="#0A0B12"/></svg>
+                <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="#0A0B12" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="16" height="8" rx="2" fill="#0A0B12"/><path d="M22 3.5V7.5C22.8 7.2 23.5 6.4 23.5 5.5C23.5 4.6 22.8 3.8 22 3.5Z" fill="#0A0B12" fill-opacity="0.4"/></svg>
+              </div>
+            </div>
+            <div class="v10-likes-header">Activity</div>
+            <div class="v10-like-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366)"></div>
+              <div class="v10-profile-name">alex.lifts</div>
+              <div class="v10-like-heart">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#E8344A" stroke="#E8344A" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+            </div>
+            <div class="v10-like-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div>
+              <div class="v10-profile-name">nia.wellness</div>
+              <div class="v10-like-heart">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#E8344A" stroke="#E8344A" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+            </div>
+            <div class="v10-like-row">
+              <div class="v10-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div>
+              <div class="v10-profile-name">sarah.runs</div>
+              <div class="v10-like-heart">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2: DMs (narrow) + Auto-Unfollow (wide) -->
+      <div class="v10-card v10-card-narrow">
         <div class="v10-left">
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -2106,7 +2198,7 @@
         </div>
       </div>
 
-      <div class="v10-card">
+      <div class="v10-card v10-card-wide">
         <div class="v10-left">
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
@@ -2151,57 +2243,6 @@
               <div class="v10-uf-dot" style="background:#34C759"></div>
               <div class="v10-uf-name">@lacoach_nia</div>
               <div class="v10-uf-tag" style="color:#34C759">kept</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="v10-card">
-        <div class="v10-left">
-          <div class="v10-icon-wrap">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="v10-card-title">Auto-Likes</div>
-          <div class="v10-card-desc">Identifies posts in your niche and likes them — building presence and signal without lifting a finger.</div>
-        </div>
-        <div class="v10-phone">
-          <div class="v10-phone-inner v10-ui-likes">
-            <div class="v10-status">
-              <span>9:41</span>
-              <div class="v10-status-right">
-                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2.5" height="6" rx="1" fill="#0A0B12"/><rect x="3.5" y="2.5" width="2.5" height="7.5" rx="1" fill="#0A0B12"/><rect x="7" y="1" width="2.5" height="9" rx="1" fill="#0A0B12"/><rect x="10.5" y="0" width="2.5" height="10" rx="1" fill="#0A0B12"/></svg>
-                <svg width="15" height="10" viewBox="0 0 15 10" fill="none"><path d="M7.5 2C9.8 2 11.9 3 13.4 4.6L14.5 3.4C12.7 1.5 10.2 0.5 7.5 0.5C4.8 0.5 2.3 1.5 0.5 3.4L1.6 4.6C3.1 3 5.2 2 7.5 2Z" fill="#0A0B12"/><path d="M7.5 4.5C9.1 4.5 10.6 5.1 11.7 6.2L12.8 5C11.4 3.7 9.5 2.9 7.5 2.9C5.5 2.9 3.6 3.7 2.2 5L3.3 6.2C4.4 5.1 5.9 4.5 7.5 4.5Z" fill="#0A0B12"/><circle cx="7.5" cy="8.5" r="1.5" fill="#0A0B12"/></svg>
-                <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="#0A0B12" stroke-opacity="0.35"/><rect x="1.5" y="1.5" width="16" height="8" rx="2" fill="#0A0B12"/><path d="M22 3.5V7.5C22.8 7.2 23.5 6.4 23.5 5.5C23.5 4.6 22.8 3.8 22 3.5Z" fill="#0A0B12" fill-opacity="0.4"/></svg>
-              </div>
-            </div>
-            <div class="v10-likes-header">Activity</div>
-            <div class="v10-like-row">
-              <div class="v10-avatar" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366)"></div>
-              <div class="v10-profile-name">alex.lifts</div>
-              <div class="v10-like-heart">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="#E8344A" stroke="#E8344A" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
-            </div>
-            <div class="v10-like-row">
-              <div class="v10-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div>
-              <div class="v10-profile-name">nia.wellness</div>
-              <div class="v10-like-heart">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="#E8344A" stroke="#E8344A" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
-            </div>
-            <div class="v10-like-row">
-              <div class="v10-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div>
-              <div class="v10-profile-name">sarah.runs</div>
-              <div class="v10-like-heart">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="#E8344A" stroke="#E8344A" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
-            </div>
-            <div class="v10-like-row">
-              <div class="v10-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div>
-              <div class="v10-profile-name">coachmark</div>
-              <div class="v10-like-heart">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
             </div>
           </div>
         </div>
@@ -2607,6 +2648,21 @@
     builtObs.observe(builtCards[0]);
   }
 
+
+  // ── bento cards stagger reveal ──
+  const bentoCards = document.querySelectorAll('.v10-card');
+  if (bentoCards.length) {
+    const bentoObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(bentoCards).indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('in-view'), idx * 80);
+          bentoObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    bentoCards.forEach(card => bentoObs.observe(card));
+  }
 
   // ── arm-from-bot general observer ──
   document.querySelectorAll('.arm-from-bot').forEach(el => {
