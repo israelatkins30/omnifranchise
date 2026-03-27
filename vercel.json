@@ -1,5 +1,6 @@
 {
+  "outputDirectory": "omni interface",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/omni interface/ovis-landing.html" }
+    { "source": "/", "destination": "/ovis-landing.html" }
   ]
 }
