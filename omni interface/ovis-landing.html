@@ -1620,83 +1620,129 @@
 
     /* ── FEATURES BENTO ── */
     .features-v10 {
-      padding: 80px var(--pad) 80px;
-      max-width: 1100px; margin: 0 auto; text-align: center;
+      padding: 100px var(--pad) 100px;
+      max-width: 1120px; margin: 0 auto; text-align: center;
     }
     .v10-headline {
-      font-size: clamp(28px,4.5vw,50px);
-      font-weight: 800; letter-spacing: -.05em;
-      text-align: center; margin-bottom: 14px; color: var(--text);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 800; letter-spacing: -.055em; line-height: 1.0;
+      text-align: center; margin-bottom: 16px; color: var(--text);
     }
     .v10-sub {
-      font-size: 16px; color: var(--muted); margin-bottom: 40px; line-height: 1.65;
+      font-size: 16px; color: var(--muted); margin-bottom: 52px; line-height: 1.65;
+      max-width: 400px; margin-left: auto; margin-right: auto;
     }
     /* Bento grid */
     .v10-list {
-      max-width: 1040px; margin: 0 auto;
+      max-width: 1080px; margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
     /* Base card */
     .v10-card {
       background: var(--surface);
-      border: 0.5px solid rgba(0,0,0,0.07);
-      border-radius: 24px;
+      border: 0.5px solid rgba(0,0,0,0.09);
+      border-radius: 28px;
       overflow: hidden;
       position: relative;
       display: flex;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 14px rgba(0,0,0,0.04);
-      transition: box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.06),
+        0 4px 16px rgba(0,0,0,0.06),
+        0 0 0 0.5px rgba(255,255,255,0.8) inset;
+      transition:
+        box-shadow 0.5s cubic-bezier(0.22,1,0.36,1),
+        transform  0.5s cubic-bezier(0.22,1,0.36,1);
     }
+    /* Accent wash gradient at top of each card */
+    .v10-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 200px;
+      background: linear-gradient(160deg, var(--ca-wash, rgba(0,152,200,0.05)) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    /* Top accent bar */
+    .v10-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2.5px;
+      background: var(--ca, #0098C8);
+      z-index: 3;
+    }
+    /* Per-card color variants */
+    .v10-ca-blue   { --ca: #0098C8; --ca-wash: rgba(0,152,200,0.05);   --ca-icon-bg: rgba(0,152,200,0.10);   --ca-icon: #0098C8; }
+    .v10-ca-red    { --ca: #E8344A; --ca-wash: rgba(232,52,74,0.045);   --ca-icon-bg: rgba(232,52,74,0.10);   --ca-icon: #E8344A; }
+    .v10-ca-purple { --ca: #7C5CFC; --ca-wash: rgba(124,92,252,0.045); --ca-icon-bg: rgba(124,92,252,0.10); --ca-icon: #7C5CFC; }
+    .v10-ca-green  { --ca: #0CB87A; --ca-wash: rgba(12,184,122,0.045);  --ca-icon-bg: rgba(12,184,122,0.10);  --ca-icon: #0CB87A; }
     .v10-card:hover {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.10), 0 48px 80px rgba(0,0,0,0.06);
-      transform: translateY(-6px);
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.06),
+        0 20px 56px rgba(0,0,0,0.13),
+        0 64px 96px rgba(0,0,0,0.07),
+        0 0 0 0.5px rgba(255,255,255,0.8) inset;
+      transform: translateY(-7px);
     }
-    /* Wide card: spans 2 columns, phone on the right */
+    /* Wide card */
     .v10-card-wide {
       grid-column: span 2;
       flex-direction: row;
       align-items: flex-start;
-      min-height: 420px;
-      padding: 40px 0 0 40px;
+      min-height: 440px;
+      padding: 48px 0 0 52px;
       text-align: left;
     }
-    /* Narrow card: spans 1 column, phone at bottom */
+    /* Narrow card */
     .v10-card-narrow {
       grid-column: span 1;
       flex-direction: column;
       align-items: flex-start;
-      min-height: 420px;
-      padding: 36px 28px 0;
+      min-height: 440px;
+      padding: 44px 36px 0;
       text-align: left;
     }
-    .v10-left { flex-shrink: 0; }
-    .v10-card-wide .v10-left { max-width: 230px; }
+    .v10-left { flex-shrink: 0; position: relative; z-index: 1; }
+    .v10-card-wide .v10-left { max-width: 256px; }
     .v10-card-narrow .v10-left { width: 100%; }
+    /* Card number */
+    .v10-card-num {
+      font-size: 10px; font-weight: 700; letter-spacing: .18em;
+      color: rgba(12,13,20,0.18);
+      font-family: 'SF Mono','Fira Code',monospace;
+      margin-bottom: 24px; text-transform: uppercase;
+    }
     .v10-icon-wrap {
-      width: 42px; height: 42px;
-      background: var(--blue-dim);
-      border-radius: 11px;
+      width: 46px; height: 46px;
+      background: var(--ca-icon-bg, var(--blue-dim));
+      border-radius: 13px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--blue);
-      margin: 0 0 20px 0;
+      color: var(--ca-icon, var(--blue));
+      margin: 0 0 22px 0;
+    }
+    .v10-card-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ca, var(--blue));
+      margin-bottom: 8px;
+      font-family: 'SF Mono','Fira Code',monospace;
     }
     .v10-card-title {
-      font-size: 18px; font-weight: 700; letter-spacing: -.03em;
-      color: var(--text); margin-bottom: 10px;
+      font-size: 22px; font-weight: 800; letter-spacing: -.04em; line-height: 1.15;
+      color: var(--text); margin-bottom: 12px;
     }
+    .v10-card-narrow .v10-card-title { font-size: 19px; }
     .v10-card-desc {
-      font-size: 13.5px; line-height: 1.65; color: var(--muted);
+      font-size: 13px; line-height: 1.72; color: var(--muted);
     }
     /* Phone placement */
     .v10-card-wide .v10-phone {
       flex-shrink: 0; align-self: flex-end;
-      margin-left: auto; margin-right: 44px;
+      margin-left: auto; margin-right: 48px;
     }
     .v10-card-narrow .v10-phone {
       align-self: center; margin: auto auto 0;
-      width: 148px; height: 264px; border-radius: 34px;
+      width: 148px; height: 266px; border-radius: 34px;
     }
     .v10-card-narrow .v10-phone::before {
       width: 50px; height: 13px; top: 16px;
@@ -1896,12 +1942,12 @@
       .v10-card-wide { grid-column: span 2; }
     }
     @media (max-width: 600px) {
-      .v10-list { grid-template-columns: 1fr; gap: 10px; }
+      .v10-list { grid-template-columns: 1fr; gap: 12px; }
       .v10-card-wide, .v10-card-narrow { grid-column: span 1; min-height: auto; }
-      .v10-card-wide { flex-direction: column; padding: 28px 24px 0; }
+      .v10-card-wide { flex-direction: column; padding: 36px 28px 0; }
       .v10-card-wide .v10-left { max-width: none; }
-      .v10-card-wide .v10-phone { margin: auto auto 0; width: 148px; height: 264px; border-radius: 34px; }
-      .v10-card-narrow { padding: 28px 24px 0; }
+      .v10-card-wide .v10-phone { margin: 32px auto 0; width: 148px; height: 264px; border-radius: 34px; }
+      .v10-card-narrow { padding: 36px 28px 0; }
     }
 
   </style>
@@ -2061,11 +2107,13 @@
     <div class="v10-list">
 
       <!-- ROW 1: Smart Follow (wide) + Auto-Likes (narrow) -->
-      <div class="v10-card v10-card-wide">
+      <div class="v10-card v10-card-wide v10-ca-blue">
         <div class="v10-left">
+          <div class="v10-card-num">01 / 04</div>
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
+          <div class="v10-card-tag">Audience</div>
           <div class="v10-card-title">Smart Follow</div>
           <div class="v10-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
         </div>
@@ -2104,11 +2152,13 @@
         </div>
       </div>
 
-      <div class="v10-card v10-card-narrow">
+      <div class="v10-card v10-card-narrow v10-ca-red">
         <div class="v10-left">
+          <div class="v10-card-num">02 / 04</div>
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
+          <div class="v10-card-tag">Engagement</div>
           <div class="v10-card-title">Auto-Likes</div>
           <div class="v10-card-desc">Identifies posts in your niche and likes them — building presence without lifting a finger.</div>
         </div>
@@ -2148,11 +2198,13 @@
       </div>
 
       <!-- ROW 2: DMs (narrow) + Auto-Unfollow (wide) -->
-      <div class="v10-card v10-card-narrow">
+      <div class="v10-card v10-card-narrow v10-ca-purple">
         <div class="v10-left">
+          <div class="v10-card-num">03 / 04</div>
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
+          <div class="v10-card-tag">Outreach</div>
           <div class="v10-card-title">Voice-Matched DMs</div>
           <div class="v10-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
         </div>
@@ -2188,11 +2240,13 @@
         </div>
       </div>
 
-      <div class="v10-card v10-card-wide">
+      <div class="v10-card v10-card-wide v10-ca-green">
         <div class="v10-left">
+          <div class="v10-card-num">04 / 04</div>
           <div class="v10-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="8"/></svg>
           </div>
+          <div class="v10-card-tag">Cleanup</div>
           <div class="v10-card-title">Auto-Unfollow</div>
           <div class="v10-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
         </div>
