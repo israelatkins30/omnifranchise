@@ -878,22 +878,22 @@
     }
     /* Ovis character inside jar */
     .caps-logo {
-      width: 90px; height: 90px;
+      width: 108px; height: 108px;
       position: relative; z-index: 1;
       animation: capsFloat 3.6s ease-in-out infinite;
-      filter: drop-shadow(0 10px 28px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.55));
+      filter: drop-shadow(0 6px 16px rgba(var(--glow-r),var(--glow-g),var(--glow-b),0.50));
       flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
     .caps-char {
-      width: 90px; height: 90px;
-      border-radius: 50%;
-      overflow: hidden;
+      width: 108px; height: 108px;
       display: block;
     }
     .caps-char img {
       width: 100%; height: 100%;
       display: block;
-      border-radius: 50%;
+      object-fit: contain;
+      filter: brightness(0.90) saturate(1.1);
     }
     @keyframes capsFloat {
       0%,100% { transform: translateY(0px); }
@@ -2224,7 +2224,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="char-creator.png" alt="Ovis Creator"></div>
+              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(0deg)"></div>
             </div>
           </div>
           <div class="caps-name">Creator</div>
@@ -2237,7 +2237,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="char-fitness.png" alt="Ovis Fitness"></div>
+              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(270deg)"></div>
             </div>
           </div>
           <div class="caps-name">Fitness</div>
@@ -2250,7 +2250,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="char-music.png" alt="Ovis Music"></div>
+              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(60deg)"></div>
             </div>
           </div>
           <div class="caps-name">Music</div>
@@ -2263,7 +2263,7 @@
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="char-sales.png" alt="Ovis Sales"></div>
+              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(170deg)"></div>
             </div>
           </div>
           <div class="caps-name">Sales</div>
