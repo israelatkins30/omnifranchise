@@ -1622,7 +1622,19 @@
     .features-v10 {
       padding: 100px var(--pad) 100px;
       max-width: 1120px; margin: 0 auto; text-align: center;
+      position: relative;
     }
+    /* Soft blob background behind the whole section */
+    .features-v10::before {
+      content: '';
+      position: absolute;
+      inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 700px 500px at 15% 60%, rgba(0,152,200,0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 600px 500px at 85% 40%, rgba(124,92,252,0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 500px 400px at 55% 90%, rgba(12,184,122,0.04) 0%, transparent 65%);
+    }
+    .features-v10 > * { position: relative; z-index: 1; }
     .v10-headline {
       font-size: clamp(36px, 5.5vw, 64px);
       font-weight: 800; letter-spacing: -.055em; line-height: 1.0;
@@ -1641,7 +1653,9 @@
     }
     /* Base card */
     .v10-card {
-      background: var(--surface);
+      background:
+        linear-gradient(155deg, var(--ca-wash, rgba(0,152,200,0.05)) 0%, transparent 45%),
+        var(--surface);
       border: 0.5px solid rgba(0,0,0,0.09);
       border-radius: 28px;
       overflow: hidden;
@@ -1655,34 +1669,78 @@
         box-shadow 0.5s cubic-bezier(0.22,1,0.36,1),
         transform  0.5s cubic-bezier(0.22,1,0.36,1);
     }
-    /* Accent wash gradient at top of each card */
+    /* Cursor-following radial glow */
     .v10-card::after {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 200px;
-      background: linear-gradient(160deg, var(--ca-wash, rgba(0,152,200,0.05)) 0%, transparent 100%);
+      position: absolute; inset: 0;
+      background: radial-gradient(
+        500px circle at var(--mx, -200px) var(--my, -200px),
+        var(--ca-glow, rgba(0,152,200,0.10)) 0%,
+        transparent 65%
+      );
       pointer-events: none; z-index: 0;
+      transition: opacity 0.3s ease;
     }
-    /* Top accent bar */
+    /* Top accent bar with shimmer */
     .v10-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; height: 2.5px;
-      background: var(--ca, #0098C8);
+      background: linear-gradient(90deg,
+        var(--ca) 0%, var(--ca) 35%,
+        rgba(255,255,255,0.85) 50%,
+        var(--ca) 65%, var(--ca) 100%);
+      background-size: 300% 100%;
+      animation: accentShimmer 3.5s linear infinite;
       z-index: 3;
     }
+    @keyframes accentShimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -100% 0; }
+    }
     /* Per-card color variants */
-    .v10-ca-blue   { --ca: #0098C8; --ca-wash: rgba(0,152,200,0.05);   --ca-icon-bg: rgba(0,152,200,0.10);   --ca-icon: #0098C8; }
-    .v10-ca-red    { --ca: #E8344A; --ca-wash: rgba(232,52,74,0.045);   --ca-icon-bg: rgba(232,52,74,0.10);   --ca-icon: #E8344A; }
-    .v10-ca-purple { --ca: #7C5CFC; --ca-wash: rgba(124,92,252,0.045); --ca-icon-bg: rgba(124,92,252,0.10); --ca-icon: #7C5CFC; }
-    .v10-ca-green  { --ca: #0CB87A; --ca-wash: rgba(12,184,122,0.045);  --ca-icon-bg: rgba(12,184,122,0.10);  --ca-icon: #0CB87A; }
+    .v10-ca-blue   { --ca: #0098C8; --ca-wash: rgba(0,152,200,0.05);   --ca-glow: rgba(0,152,200,0.10);   --ca-icon-bg: rgba(0,152,200,0.10);   --ca-icon: #0098C8; }
+    .v10-ca-red    { --ca: #E8344A; --ca-wash: rgba(232,52,74,0.045);  --ca-glow: rgba(232,52,74,0.09);   --ca-icon-bg: rgba(232,52,74,0.10);   --ca-icon: #E8344A; }
+    .v10-ca-purple { --ca: #7C5CFC; --ca-wash: rgba(124,92,252,0.045); --ca-glow: rgba(124,92,252,0.10);  --ca-icon-bg: rgba(124,92,252,0.10);  --ca-icon: #7C5CFC; }
+    .v10-ca-green  { --ca: #0CB87A; --ca-wash: rgba(12,184,122,0.045); --ca-glow: rgba(12,184,122,0.09);  --ca-icon-bg: rgba(12,184,122,0.10);  --ca-icon: #0CB87A; }
     .v10-card:hover {
       box-shadow:
         0 4px 8px rgba(0,0,0,0.06),
         0 20px 56px rgba(0,0,0,0.13),
         0 64px 96px rgba(0,0,0,0.07),
-        0 0 0 0.5px rgba(255,255,255,0.8) inset;
+        0 0 0 0.5px rgba(255,255,255,0.8) inset,
+        0 0 80px var(--ca-glow, rgba(0,152,200,0.10));
       transform: translateY(-7px);
+    }
+    /* ── Live stat badge ── */
+    .v10-stat-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 28px;
+      padding: 8px 14px 8px 10px;
+      background: rgba(255,255,255,0.88);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 0.5px solid rgba(0,0,0,0.09);
+      border-radius: 99px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07), 0 0 0 0.5px rgba(255,255,255,0.7) inset;
+      position: relative; z-index: 2;
+    }
+    .v10-stat-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ca, #0098C8); flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--ca-glow, rgba(0,152,200,0.20));
+      animation: statPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes statPulse {
+      0%, 100% { box-shadow: 0 0 0 3px var(--ca-glow, rgba(0,152,200,0.20)); }
+      50%       { box-shadow: 0 0 0 6px transparent; }
+    }
+    .v10-stat-val {
+      font-size: 13px; font-weight: 800; letter-spacing: -.025em;
+      color: var(--text);
+    }
+    .v10-stat-label {
+      font-size: 11.5px; color: var(--muted); white-space: nowrap;
     }
     /* Wide card */
     .v10-card-wide {
@@ -2116,6 +2174,11 @@
           <div class="v10-card-tag">Audience</div>
           <div class="v10-card-title">Smart Follow</div>
           <div class="v10-card-desc">Finds and follows your ideal audience by niche, city, account size, and engagement rate. Every single day.</div>
+          <div class="v10-stat-badge">
+            <div class="v10-stat-dot"></div>
+            <span class="v10-stat-val" data-count="2847">0</span>
+            <span class="v10-stat-label">new followers this week</span>
+          </div>
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-follow">
@@ -2161,6 +2224,11 @@
           <div class="v10-card-tag">Engagement</div>
           <div class="v10-card-title">Auto-Likes</div>
           <div class="v10-card-desc">Identifies posts in your niche and likes them — building presence without lifting a finger.</div>
+          <div class="v10-stat-badge">
+            <div class="v10-stat-dot"></div>
+            <span class="v10-stat-val" data-count="9241">0</span>
+            <span class="v10-stat-label">posts liked</span>
+          </div>
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-likes">
@@ -2207,6 +2275,11 @@
           <div class="v10-card-tag">Outreach</div>
           <div class="v10-card-title">Voice-Matched DMs</div>
           <div class="v10-card-desc">Writes and sends personalized messages that sound exactly like you. Not templates — real conversations.</div>
+          <div class="v10-stat-badge">
+            <div class="v10-stat-dot"></div>
+            <span class="v10-stat-val" data-count="186">0</span>
+            <span class="v10-stat-label">DMs sent today</span>
+          </div>
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-dm">
@@ -2249,6 +2322,11 @@
           <div class="v10-card-tag">Cleanup</div>
           <div class="v10-card-title">Auto-Unfollow</div>
           <div class="v10-card-desc">Silently removes anyone who doesn't follow back or isn't a fit. Keeps your ratio clean.</div>
+          <div class="v10-stat-badge">
+            <div class="v10-stat-dot"></div>
+            <span class="v10-stat-val" data-count="94">0</span>
+            <span class="v10-stat-label">% follower ratio</span>
+          </div>
         </div>
         <div class="v10-phone">
           <div class="v10-phone-inner v10-ui-unfollow">
@@ -2692,6 +2770,38 @@
     builtObs.observe(builtCards[0]);
   }
 
+
+  // ── bento cursor glow ──
+  document.querySelectorAll('.v10-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top)  + 'px');
+    });
+  });
+
+  // ── bento stat count-up ──
+  const statEls = document.querySelectorAll('.v10-stat-val[data-count]');
+  if (statEls.length) {
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const dur = 1600;
+        const start = performance.now();
+        const tick = now => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(eased * target).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    statEls.forEach(el => countObs.observe(el));
+  }
 
   // ── bento cards stagger reveal ──
   const bentoCards = document.querySelectorAll('.v10-card');
