@@ -651,21 +651,37 @@
     .sc-intro {
       text-align: center;
       position: relative; z-index: 2;
-      margin-bottom: 8px;
     }
     .sc-eyebrow {
       font-size: 11px; font-weight: 700; letter-spacing: .13em;
       color: rgba(0,0,0,0.32); text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .sc-reveal-headline {
       font-size: clamp(34px, 5.5vw, 58px);
       font-weight: 800; letter-spacing: -.05em;
       color: #080910; line-height: 1.08;
+      margin-bottom: 18px;
     }
-    .sc-reveal-headline em {
-      font-style: normal;
-      color: rgba(8,9,16,0.40);
+    .sc-reveal-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(8,9,16,0.42); font-weight: 400;
+      letter-spacing: -.02em; line-height: 1.6;
+    }
+    .sc-bridge {
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 700; letter-spacing: -.04em;
+      color: rgba(8,9,16,0.28); text-align: center;
+      position: relative; z-index: 2;
+      margin: -4px 0;
+    }
+    .sc-bar-caption {
+      font-size: 13px; color: rgba(8,9,16,0.36);
+      text-align: center; line-height: 1.7;
+      letter-spacing: -.01em;
+      max-width: 420px;
+      position: relative; z-index: 2;
+      margin-top: -12px;
     }
     /* Studio backlight — centered warm glow */
     .showcase::before {
@@ -1957,7 +1973,8 @@
 
     <div class="sc-intro">
       <div class="sc-eyebrow">Ovis · Always On</div>
-      <h2 class="sc-reveal-headline">This is what it looks like<br><em>when it's working.</em></h2>
+      <h2 class="sc-reveal-headline">The pulse of your Instagram.</h2>
+      <p class="sc-reveal-sub">Every follow. Every DM. Every unfollow. Happening now.</p>
     </div>
 
     <!-- Activity card -->
@@ -2007,6 +2024,8 @@
       <button class="sc-pulse-btn" onclick="openModal()">Open Pulse</button>
     </div>
 
+    <div class="sc-bridge">And to control all of it —</div>
+
     <!-- Command bar -->
     <div class="sc-bar sc-glass">
       <span class="sc-bar-status">Standing by.</span>
@@ -2022,6 +2041,8 @@
         <div class="sc-bar-ia">IA</div>
       </div>
     </div>
+
+    <p class="sc-bar-caption">Switch your target. Rewrite your bio. Adjust your message.<br>One sentence. Ovis handles the rest.</p>
 
   </section>
 
