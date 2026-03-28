@@ -823,29 +823,49 @@
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .sc-pulse-btn {
-      width: 100%; margin-top: 20px; height: 58px;
-      background: rgba(0,0,0,0.042);
-      border: 0.5px solid rgba(0,0,0,0.07);
-      border-radius: 16px; cursor: pointer;
-      font-size: 16px; font-weight: 600;
-      color: rgba(0,0,0,0.36); letter-spacing: -.015em;
+      width: 100%; margin-top: 20px; height: 52px;
+      background: #0098C8;
+      border: none;
+      border-radius: 14px; cursor: pointer;
+      font-size: 15px; font-weight: 700;
+      color: #fff; letter-spacing: -.01em;
       font-family: 'Inter', sans-serif;
-      transition: background .22s, color .22s, box-shadow .22s;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: box-shadow .25s, transform .18s;
+      box-shadow:
+        0 0 0 1px rgba(0,152,200,0.35),
+        0 4px 16px rgba(0,152,200,0.40),
+        0 0 32px rgba(0,152,200,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+      animation: pulseGlow 2.6s ease-in-out infinite;
     }
     .sc-pulse-btn:hover {
-      background: rgba(0,0,0,0.07);
-      color: rgba(0,0,0,0.60);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(0,152,200,0.50),
+        0 6px 22px rgba(0,152,200,0.55),
+        0 0 48px rgba(0,152,200,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(0,152,200,0.35), 0 4px 16px rgba(0,152,200,0.40), 0 0 32px rgba(0,152,200,0.18), inset 0 1px 0 rgba(255,255,255,0.20); }
+      50%       { box-shadow: 0 0 0 1px rgba(0,152,200,0.50), 0 4px 22px rgba(0,152,200,0.55), 0 0 52px rgba(0,152,200,0.30), inset 0 1px 0 rgba(255,255,255,0.25); }
     }
     /* ── Command bar ── */
     .sc-bar {
       width: min(600px, 92vw); height: 72px;
       border-radius: 99px;
       display: flex; align-items: center;
-      padding: 0 10px 0 28px; gap: 12px;
+      padding: 0 10px 0 22px; gap: 12px;
       animation: scFloat2 5.1s ease-in-out infinite;
       animation-delay: 0.8s;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 1px 1px rgba(0,0,0,0.03),
+        0 3px 6px rgba(0,0,0,0.04),
+        0 10px 24px rgba(0,0,0,0.06),
+        0 30px 60px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(0,152,200,0.10),
+        0 0 28px rgba(0,152,200,0.10);
     }
     .sc-bar-status {
       flex: 1; font-size: 17px; font-weight: 400;
@@ -878,6 +898,75 @@
     .sc-redact-md  { width: 55%; }
     .sc-redact-lg  { width: 70%; }
     .sc-redact-xl  { width: 85%; }
+
+    /* ── Card brand chip ── */
+    .sc-card-brand {
+      font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(0,152,200,0.65); text-align: center; margin-bottom: 4px;
+    }
+    /* ── Action avatar color variants ── */
+    .sc-av-follow   { background: rgba(52,199,89,0.10)!important;  border-color: rgba(52,199,89,0.22)!important;  box-shadow: 0 2px 8px rgba(52,199,89,0.12)!important; }
+    .sc-av-like     { background: rgba(240,84,106,0.10)!important; border-color: rgba(240,84,106,0.22)!important; box-shadow: 0 2px 8px rgba(240,84,106,0.12)!important; }
+    .sc-av-dm       { background: rgba(0,152,200,0.10)!important;  border-color: rgba(0,152,200,0.22)!important;  box-shadow: 0 2px 8px rgba(0,152,200,0.12)!important; }
+    .sc-av-unfollow { background: rgba(245,166,35,0.10)!important; border-color: rgba(245,166,35,0.22)!important; box-shadow: 0 2px 8px rgba(245,166,35,0.12)!important; }
+    /* ── Action tag pills ── */
+    .sc-action-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 99px; margin-bottom: 3px;
+    }
+    .sc-tag-follow   { background: rgba(52,199,89,0.12);  color: #1a9943; }
+    .sc-tag-like     { background: rgba(240,84,106,0.12); color: #c4293c; }
+    .sc-tag-dm       { background: rgba(0,152,200,0.12);  color: #0078a0; }
+    .sc-tag-unfollow { background: rgba(245,166,35,0.12); color: #a86800; }
+    /* ── Row entrance animation ── */
+    @keyframes scRowIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .sc-row:nth-child(2) { animation: scRowIn 0.45s 0.05s ease both; }
+    .sc-row:nth-child(3) { animation: scRowIn 0.45s 0.13s ease both; }
+    .sc-row:nth-child(4) { animation: scRowIn 0.45s 0.21s ease both; }
+    .sc-row:nth-child(5) { animation: scRowIn 0.45s 0.29s ease both; }
+    /* ── Bar live animation ── */
+    .sc-bar-live { flex: 1; display: flex; align-items: center; gap: 0; min-width: 0; }
+    .sc-bar-orb {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      background: #0098C8;
+      box-shadow: 0 0 0 2px rgba(0,152,200,0.20), 0 0 8px rgba(0,152,200,0.45);
+      animation: orbPulse 2.2s ease-in-out infinite;
+      margin-right: 14px;
+    }
+    @keyframes orbPulse {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(0,152,200,0.20), 0 0 8px rgba(0,152,200,0.45); }
+      50%       { box-shadow: 0 0 0 4px rgba(0,152,200,0.10), 0 0 18px rgba(0,152,200,0.60); }
+    }
+    .sc-bar-dots { display: flex; align-items: center; gap: 5px; transition: opacity 0.35s ease; }
+    .sc-bar-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(0,0,0,0.22);
+      animation: dotBounce 1.3s ease-in-out infinite;
+    }
+    .sc-bar-dots span:nth-child(2) { animation-delay: 0.22s; }
+    .sc-bar-dots span:nth-child(3) { animation-delay: 0.44s; }
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: translateY(0) scale(0.75); opacity: 0.35; }
+      40%            { transform: translateY(-3px) scale(1);   opacity: 1; }
+    }
+    .sc-bar-text {
+      flex: 1; font-size: 17px; font-weight: 400;
+      color: rgba(0,0,0,0.48); letter-spacing: -.02em;
+      transition: opacity 0.4s ease;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    /* ── Mobile sizing ── */
+    @media (max-width: 480px) {
+      .sc-card { padding: 22px 16px 18px; }
+      .sc-avatar { width: 40px; height: 40px; }
+      .sc-row { padding: 10px 0; gap: 11px; }
+      .sc-title { font-size: 20px; margin-bottom: 16px; }
+      .sc-pulse-btn { height: 46px; font-size: 14px; }
+    }
 
     /* Float keyframes — organic, not robotic */
     @keyframes scFloat1 {
@@ -2161,56 +2250,71 @@
 
     <!-- Activity card -->
     <div class="sc-card sc-glass">
+      <div class="sc-card-brand">Ovis</div>
       <div class="sc-title">Pulse</div>
 
+      <!-- Row 1: Follow -->
       <div class="sc-row">
-        <div class="sc-avatar">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="sc-avatar sc-av-follow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
         </div>
         <div class="sc-row-text">
+          <span class="sc-action-tag sc-tag-follow">Followed</span>
           <div class="sc-row-action sc-redact sc-redact-lg"></div>
           <div class="sc-row-meta sc-redact sc-redact-md"></div>
         </div>
       </div>
 
+      <!-- Row 2: Like -->
       <div class="sc-row">
-        <div class="sc-avatar">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="sc-avatar sc-av-like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0546A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <div class="sc-row-text">
+          <span class="sc-action-tag sc-tag-like">Liked</span>
           <div class="sc-row-action sc-redact sc-redact-xl"></div>
           <div class="sc-row-meta sc-redact sc-redact-md"></div>
         </div>
       </div>
 
+      <!-- Row 3: DM -->
       <div class="sc-row">
-        <div class="sc-avatar">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="sc-avatar sc-av-dm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0098C8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div class="sc-row-text">
+          <span class="sc-action-tag sc-tag-dm">DM Sent</span>
           <div class="sc-row-action sc-redact sc-redact-md"></div>
           <div class="sc-row-meta sc-redact sc-redact-lg"></div>
         </div>
       </div>
 
+      <!-- Row 4: Unfollow -->
       <div class="sc-row">
-        <div class="sc-avatar">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="sc-avatar sc-av-unfollow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
         </div>
         <div class="sc-row-text">
+          <span class="sc-action-tag sc-tag-unfollow">Unfollowed</span>
           <div class="sc-row-action sc-redact sc-redact-xl"></div>
           <div class="sc-row-meta sc-redact sc-redact-sm"></div>
         </div>
       </div>
 
-      <button class="sc-pulse-btn" onclick="openModal()">Open Pulse</button>
+      <button class="sc-pulse-btn" onclick="openModal()">Pulse</button>
     </div>
 
     <div class="sc-bridge">And to control all of it —</div>
 
     <!-- Command bar -->
     <div class="sc-bar sc-glass">
-      <span class="sc-bar-status">Standing by.</span>
+      <div class="sc-bar-orb"></div>
+      <div class="sc-bar-live">
+        <span class="sc-bar-dots" id="scBarDots">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="sc-bar-text" id="scBarText" aria-live="polite"></span>
+      </div>
       <div class="sc-bar-right">
         <div class="sc-bar-grid">
           <svg width="18" height="18" viewBox="0 0 15 15" fill="none">
@@ -3012,6 +3116,63 @@
 
 
 
+  </script>
+
+  <!-- Ovis bar: thinking dots → typewriter cycle -->
+  <script>
+    (function() {
+      const MESSAGES = [
+        'Following @surf_daily...',
+        'Liked 3 posts in your niche...',
+        'DM sent to @coaching.pro...',
+        'Unfollowed 12 inactive accounts.',
+        'Targeting new audience in NYC...',
+        'Engaging with Fitness niche...',
+        'Followed @run.everyday...',
+      ];
+
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+      async function scBarCycle() {
+        const dots = document.getElementById('scBarDots');
+        const text = document.getElementById('scBarText');
+        if (!dots || !text) return;
+
+        let idx = 0;
+        while (true) {
+          // Show dots, hide text
+          dots.style.opacity = '1';
+          text.style.opacity = '0';
+          text.textContent = '';
+          await sleep(1600);
+
+          // Fade out dots
+          dots.style.opacity = '0';
+          await sleep(320);
+
+          // Typewriter reveal
+          text.style.opacity = '1';
+          const msg = MESSAGES[idx++ % MESSAGES.length];
+          for (const ch of msg) {
+            text.textContent += ch;
+            await sleep(38);
+          }
+
+          // Hold
+          await sleep(2600);
+
+          // Fade out text
+          text.style.opacity = '0';
+          await sleep(450);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scBarCycle);
+      } else {
+        scBarCycle();
+      }
+    })();
   </script>
 </body>
 </html>
