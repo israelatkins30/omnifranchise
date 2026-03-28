@@ -823,28 +823,30 @@
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .sc-pulse-btn {
-      width: 100%; margin-top: 20px; height: 52px;
+      display: block; margin: 18px auto 0;
+      width: auto; min-width: 130px; padding: 0 28px;
+      height: 42px;
       background: #0098C8;
       border: none;
-      border-radius: 14px; cursor: pointer;
-      font-size: 15px; font-weight: 700;
-      color: #fff; letter-spacing: -.01em;
+      border-radius: 99px; cursor: pointer;
+      font-size: 14px; font-weight: 700;
+      color: #fff; letter-spacing: .02em;
       font-family: 'Inter', sans-serif;
       transition: box-shadow .25s, transform .18s;
       box-shadow:
-        0 0 0 1px rgba(0,152,200,0.35),
-        0 4px 16px rgba(0,152,200,0.40),
-        0 0 32px rgba(0,152,200,0.18),
-        inset 0 1px 0 rgba(255,255,255,0.20);
+        0 0 0 1px rgba(0,152,200,0.30),
+        0 3px 12px rgba(0,152,200,0.38),
+        0 0 24px rgba(0,152,200,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.22);
       animation: pulseGlow 2.6s ease-in-out infinite;
     }
     .sc-pulse-btn:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 0 1px rgba(0,152,200,0.50),
-        0 6px 22px rgba(0,152,200,0.55),
-        0 0 48px rgba(0,152,200,0.28),
-        inset 0 1px 0 rgba(255,255,255,0.25);
+        0 0 0 1px rgba(0,152,200,0.48),
+        0 5px 18px rgba(0,152,200,0.52),
+        0 0 36px rgba(0,152,200,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.28);
     }
     @keyframes pulseGlow {
       0%, 100% { box-shadow: 0 0 0 1px rgba(0,152,200,0.35), 0 4px 16px rgba(0,152,200,0.40), 0 0 32px rgba(0,152,200,0.18), inset 0 1px 0 rgba(255,255,255,0.20); }
@@ -901,8 +903,21 @@
 
     /* ── Card brand chip ── */
     .sc-card-brand {
-      font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(0,152,200,0.65); text-align: center; margin-bottom: 4px;
+      font-size: 22px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase;
+      text-align: center; margin-bottom: 24px;
+      background: linear-gradient(160deg,
+        #9EA7B3 0%,
+        #C8CDD6 22%,
+        #E2E5EA 38%,
+        #F0F2F5 50%,
+        #D4D8DF 62%,
+        #B0B6BF 78%,
+        #8C9299 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,0.6));
     }
     /* ── Action avatar color variants ── */
     .sc-av-follow   { background: rgba(52,199,89,0.10)!important;  border-color: rgba(52,199,89,0.22)!important;  box-shadow: 0 2px 8px rgba(52,199,89,0.12)!important; }
@@ -2250,8 +2265,7 @@
 
     <!-- Activity card -->
     <div class="sc-card sc-glass">
-      <div class="sc-card-brand">Ovis</div>
-      <div class="sc-title">Pulse</div>
+      <div class="sc-card-brand">OVIS</div>
 
       <!-- Row 1: Follow -->
       <div class="sc-row">
