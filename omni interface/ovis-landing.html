@@ -1429,6 +1429,104 @@
     .caps-item:nth-child(2) .caps-logo { animation-delay: .6s; }
     .caps-item:nth-child(3) .caps-logo { animation-delay: 1.2s; }
     .caps-item:nth-child(4) .caps-logo { animation-delay: 1.8s; }
+    .caps-item:nth-child(5) .caps-logo { animation-delay: 2.4s; }
+
+    /* ── Ovis Sphere (CSS) ── */
+    .ovis-sphere {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+      display: block;
+    }
+    /* Specular highlight */
+    .ovis-sphere::before {
+      content: '';
+      position: absolute;
+      left: 26%; top: 14%;
+      width: 32%; height: 22%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none; z-index: 2;
+    }
+    /* LED eye bar */
+    .sphere-eye {
+      position: absolute;
+      left: 11%; right: 11%;
+      top: 43%; height: 17%;
+      border-radius: 100px;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 45%,
+        #e8ffff 0%,
+        #00eeff 22%,
+        #00bcd4 52%,
+        #007a9a 100%
+      );
+      box-shadow:
+        0 0 0 2px rgba(0,0,0,0.32),
+        inset 0 2px 5px rgba(0,0,0,0.45),
+        inset 0 -1px 3px rgba(255,255,255,0.20);
+      z-index: 2;
+    }
+    /* LED pixel grid overlay */
+    .sphere-eye::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 3px,
+        rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+      );
+      z-index: 1;
+    }
+    /* 1. Friends — white */
+    .sphere-friends {
+      background: radial-gradient(circle at 38% 34%,
+        #ffffff 0%, #f2f2f2 30%, #d6d6d6 60%, #b8b8b8 100%);
+      box-shadow:
+        inset -6px -8px 18px rgba(0,0,0,0.12),
+        inset 4px 4px 10px rgba(255,255,255,0.90),
+        0 10px 28px rgba(0,0,0,0.35);
+    }
+    /* 2. Creator — medium-light grey */
+    .sphere-creator {
+      background: radial-gradient(circle at 38% 34%,
+        #dedede 0%, #c2c2c2 35%, #9e9e9e 65%, #787878 100%);
+      box-shadow:
+        inset -6px -8px 18px rgba(0,0,0,0.25),
+        inset 4px 4px 10px rgba(255,255,255,0.55),
+        0 10px 28px rgba(0,0,0,0.42);
+    }
+    /* 3. Influencer — mirror chrome */
+    .sphere-influencer {
+      background: radial-gradient(circle at 35% 28%,
+        #ffffff 0%, #f5f5f5 10%, #d0d0d0 24%, #787878 46%, #242424 72%, #080808 100%);
+      box-shadow:
+        inset -10px -12px 24px rgba(0,0,0,0.70),
+        inset 7px 7px 16px rgba(255,255,255,0.85),
+        0 10px 32px rgba(0,0,0,0.65);
+    }
+    /* 4. Sales — matte charcoal */
+    .sphere-sales {
+      background: radial-gradient(circle at 38% 34%,
+        #7a7a7a 0%, #555555 35%, #363636 65%, #1e1e1e 100%);
+      box-shadow:
+        inset -5px -7px 16px rgba(0,0,0,0.55),
+        inset 3px 3px 8px rgba(255,255,255,0.18),
+        0 10px 28px rgba(0,0,0,0.60);
+    }
+    /* 5. Founder — black */
+    .sphere-founder {
+      background: radial-gradient(circle at 36% 32%,
+        #4a4a4a 0%, #282828 30%, #141414 60%, #050505 100%);
+      box-shadow:
+        inset -5px -7px 16px rgba(0,0,0,0.80),
+        inset 3px 3px 8px rgba(255,255,255,0.10),
+        0 10px 28px rgba(0,0,0,0.75);
+    }
+    .sphere-founder::before { opacity: 0.20; }
     /* Hover lift */
     .caps-item:hover .caps-jar {
       transform: translateY(-10px);
@@ -2837,61 +2935,74 @@
   <!-- ═══ OVIS AGENTS (CAPSULES) ═══ -->
   <section class="caps-section">
     <span class="caps-eyebrow">Ovis Agents</span>
-    <h2 class="caps-headline">Four agents.<br>One for every ambition.</h2>
+    <h2 class="caps-headline">Welcome to<br>the Ovis Store</h2>
 
     <div class="caps-wrap">
       <div class="caps-row">
 
-        <div class="caps-item" style="--glow-r:0;--glow-g:192;--glow-b:240">
+        <div class="caps-item" style="--glow-r:200;--glow-g:210;--glow-b:220">
           <div class="caps-ripple"></div>
           <div class="caps-badge">DEPLOYED ✓</div>
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(0deg)"></div>
+              <div class="ovis-sphere sphere-friends"><div class="sphere-eye"></div></div>
+            </div>
+          </div>
+          <div class="caps-name">Friends</div>
+          <div class="caps-hook">Community & niche pages</div>
+        </div>
+
+        <div class="caps-item" style="--glow-r:155;--glow-g:160;--glow-b:170">
+          <div class="caps-ripple"></div>
+          <div class="caps-badge">DEPLOYED ✓</div>
+          <div class="caps-jar">
+            <div class="caps-glow-pool"></div>
+            <div class="caps-logo">
+              <div class="ovis-sphere sphere-creator"><div class="sphere-eye"></div></div>
             </div>
           </div>
           <div class="caps-name">Creator</div>
-          <div class="caps-hook">Any niche, any size</div>
+          <div class="caps-hook">YouTube, TikTok & Reels</div>
         </div>
 
-        <div class="caps-item" style="--glow-r:40;--glow-g:200;--glow-b:64">
+        <div class="caps-item" style="--glow-r:120;--glow-g:138;--glow-b:158">
           <div class="caps-ripple"></div>
           <div class="caps-badge">DEPLOYED ✓</div>
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(270deg)"></div>
+              <div class="ovis-sphere sphere-influencer"><div class="sphere-eye"></div></div>
             </div>
           </div>
-          <div class="caps-name">Fitness</div>
-          <div class="caps-hook">Coaches &amp; gyms</div>
+          <div class="caps-name">Influencer</div>
+          <div class="caps-hook">Brand deals & sponsorships</div>
         </div>
 
-        <div class="caps-item" style="--glow-r:155;--glow-g:89;--glow-b:182">
+        <div class="caps-item" style="--glow-r:75;--glow-g:80;--glow-b:90">
           <div class="caps-ripple"></div>
           <div class="caps-badge">DEPLOYED ✓</div>
           <div class="caps-jar">
             <div class="caps-glow-pool"></div>
             <div class="caps-logo">
-              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(60deg)"></div>
-            </div>
-          </div>
-          <div class="caps-name">Music</div>
-          <div class="caps-hook">Artists &amp; labels</div>
-        </div>
-
-        <div class="caps-item" style="--glow-r:240;--glow-g:165;--glow-b:0">
-          <div class="caps-ripple"></div>
-          <div class="caps-badge">DEPLOYED ✓</div>
-          <div class="caps-jar">
-            <div class="caps-glow-pool"></div>
-            <div class="caps-logo">
-              <div class="caps-char"><img src="ovis-char.png" alt="Ovis" style="filter:hue-rotate(170deg)"></div>
+              <div class="ovis-sphere sphere-sales"><div class="sphere-eye"></div></div>
             </div>
           </div>
           <div class="caps-name">Sales</div>
-          <div class="caps-hook">Outbound on autopilot</div>
+          <div class="caps-hook">Outbound DMs that close</div>
+        </div>
+
+        <div class="caps-item" style="--glow-r:38;--glow-g:40;--glow-b:46">
+          <div class="caps-ripple"></div>
+          <div class="caps-badge">DEPLOYED ✓</div>
+          <div class="caps-jar">
+            <div class="caps-glow-pool"></div>
+            <div class="caps-logo">
+              <div class="ovis-sphere sphere-founder"><div class="sphere-eye"></div></div>
+            </div>
+          </div>
+          <div class="caps-name">Founder</div>
+          <div class="caps-hook">Startups & brand builders</div>
         </div>
 
         <div class="caps-item caps-custom" onclick="openModal()">
