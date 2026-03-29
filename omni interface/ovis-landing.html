@@ -1243,6 +1243,63 @@
       letter-spacing: -.01em;
     }
 
+    /* ─── iMessage chat bubbles ─── */
+    .sc-chat-wrap {
+      width: min(520px, 92vw);
+      display: flex; flex-direction: column;
+      gap: 10px;
+      position: relative; z-index: 2;
+    }
+    .sc-bubble {
+      max-width: 78%;
+      padding: 13px 18px;
+      border-radius: 22px;
+      font-size: 15px; line-height: 1.5;
+      letter-spacing: -.01em;
+      opacity: 0;
+      transform: translateY(10px) scale(0.97);
+      transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22,1,0.36,1);
+    }
+    .sc-bubble.sc-bubble-show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .sc-bubble.sc-bubble-hide {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.97);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .sc-bubble-user {
+      background: rgba(0,0,0,0.07);
+      color: rgba(8,9,16,0.72);
+      border-radius: 22px 22px 6px 22px;
+      align-self: flex-start;
+    }
+    .sc-bubble-ovis {
+      background: #0098C8;
+      color: #fff; font-weight: 500;
+      border-radius: 22px 22px 22px 6px;
+      align-self: flex-end;
+      box-shadow: 0 4px 16px rgba(0,152,200,0.28);
+    }
+    .sc-bubble-dots {
+      align-self: flex-end;
+      background: rgba(0,152,200,0.10);
+      border: 1px solid rgba(0,152,200,0.15);
+      border-radius: 22px 22px 22px 6px;
+      padding: 11px 16px;
+      display: flex; gap: 5px; align-items: center;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .sc-bubble-dots.sc-bubble-show { opacity: 1; }
+    .sc-bubble-dots span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #0098C8;
+      animation: dotBounce 1.2s ease-in-out infinite;
+    }
+    .sc-bubble-dots span:nth-child(2) { animation-delay: .2s; }
+    .sc-bubble-dots span:nth-child(3) { animation-delay: .4s; }
+
     /* ─── CAPSULE AGENTS ─── */
     .caps-section {
       background: #07090E;
@@ -2512,8 +2569,11 @@
       <p class="sc-reveal-sub">This is how you talk to it.</p>
     </div>
 
-    <div class="sc-bar-arrow">
-      <svg width="2" height="48" viewBox="0 0 2 48" fill="none"><line x1="1" y1="0" x2="1" y2="40" stroke="rgba(8,9,16,0.18)" stroke-width="1.5" stroke-dasharray="3 4"/><path d="M1 40 L1 48" stroke="rgba(8,9,16,0.18)" stroke-width="1.5"/><path d="M-3 44 L1 48 L5 44" stroke="rgba(8,9,16,0.18)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    <!-- iMessage chat -->
+    <div class="sc-chat-wrap" id="scChatWrap">
+      <div class="sc-bubble sc-bubble-user" id="scBubbleUser"></div>
+      <div class="sc-bubble-dots" id="scBubbleDots"><span></span><span></span><span></span></div>
+      <div class="sc-bubble sc-bubble-ovis" id="scBubbleOvis"></div>
     </div>
 
     <!-- Command bar -->
@@ -2539,34 +2599,6 @@
     </div>
 
     <p class="sc-bar-caption">Switch your target. Rewrite your bio. Adjust your message.<br>One sentence. Ovis handles the rest.</p>
-
-  </section>
-
-  <!-- ═══ PROOF SECTION (Ideas 8 · 9 · 10) ═══ -->
-  <section class="sp-stats" id="spStats">
-
-    <!-- Cinematic brand eyebrow (Idea 10) -->
-    <span class="sp-ovis-brand">OVIS</span>
-    <h2 class="sp-stats-headline">The numbers don't lie.</h2>
-
-    <!-- Notification cascade (Idea 9) -->
-    <div class="sp-notif-stage" id="spNotifStage"></div>
-
-    <!-- Stats count-up (Idea 8) -->
-    <div class="sp-stats-row">
-      <div class="sp-stat-block">
-        <div class="sp-stat-val" data-sp-count="847" data-sp-prefix="+">0</div>
-        <div class="sp-stat-label">actions / day</div>
-      </div>
-      <div class="sp-stat-block">
-        <div class="sp-stat-val" data-sp-count="2847" data-sp-prefix="+">0</div>
-        <div class="sp-stat-label">profiles reached</div>
-      </div>
-      <div class="sp-stat-block">
-        <div class="sp-stat-val" data-sp-count="0" data-sp-suffix=" min">0</div>
-        <div class="sp-stat-label">from you</div>
-      </div>
-    </div>
 
   </section>
 
@@ -3441,6 +3473,79 @@
     }
 
     setInterval(streamTick, 2800);
+  })();
+  </script>
+
+  <!-- iMessage Chat Cycle -->
+  <script>
+  (function() {
+    var userEl  = document.getElementById('scBubbleUser');
+    var dotsEl  = document.getElementById('scBubbleDots');
+    var ovisEl  = document.getElementById('scBubbleOvis');
+    if (!userEl || !dotsEl || !ovisEl) return;
+
+    var PAIRS = [
+      { user: 'Target fitness creators in Miami under 10k followers.', ovis: 'Got it. Running 24/7.' },
+      { user: 'Only follow people who post at least 3x a week.',        ovis: 'On it. Filtering by activity now.' },
+      { user: 'DM everyone who follows me today.',                      ovis: 'Done. Messages going out.' },
+      { user: 'Stop following anyone inactive for 30 days.',            ovis: 'Cleaning it up. Already started.' },
+      { user: 'Target streetwear brands in New York.',                  ovis: 'Locked in. Engaging your niche.' },
+    ];
+
+    var idx = 0;
+
+    function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+    function typeInto(el, text, speed) {
+      return new Promise(function(resolve) {
+        el.textContent = '';
+        var i = 0;
+        function next() {
+          if (i < text.length) {
+            el.textContent += text[i++];
+            setTimeout(next, speed + Math.random() * 18);
+          } else { resolve(); }
+        }
+        next();
+      });
+    }
+
+    async function runCycle() {
+      var pair = PAIRS[idx % PAIRS.length]; idx++;
+
+      // Reset all
+      userEl.classList.remove('sc-bubble-show', 'sc-bubble-hide');
+      dotsEl.classList.remove('sc-bubble-show');
+      ovisEl.classList.remove('sc-bubble-show', 'sc-bubble-hide');
+      userEl.textContent = ''; ovisEl.textContent = '';
+
+      // 1. User bubble appears, typewriter
+      userEl.classList.add('sc-bubble-show');
+      await sleep(180);
+      await typeInto(userEl, pair.user, 32);
+      await sleep(420);
+
+      // 2. Ovis thinking dots
+      dotsEl.classList.add('sc-bubble-show');
+      await sleep(1600);
+
+      // 3. Dots out, Ovis response in
+      dotsEl.classList.remove('sc-bubble-show');
+      await sleep(250);
+      ovisEl.textContent = pair.ovis;
+      ovisEl.classList.add('sc-bubble-show');
+
+      // 4. Hold, then fade both out
+      await sleep(3200);
+      userEl.classList.add('sc-bubble-hide');
+      ovisEl.classList.add('sc-bubble-hide');
+      await sleep(600);
+
+      // 5. Next
+      runCycle();
+    }
+
+    runCycle();
   })();
   </script>
 
