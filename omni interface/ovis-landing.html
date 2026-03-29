@@ -994,6 +994,249 @@
       50%       { transform: translateY(-20px) rotate(0.14deg); }
     }
 
+    /* ══════════════════════════════════════════
+       SHOWCASE UPGRADES — Ideas 1, 2, 4, 5, 6
+       ══════════════════════════════════════════ */
+
+    /* ─── Idea 6 · 3D Parallax wrapper ─── */
+    .sc-card-wrap {
+      position: relative; z-index: 2;
+      perspective: 900px;
+    }
+    .sc-card-wrap:hover .sc-card {
+      animation-play-state: paused;
+    }
+
+    /* ─── Idea 4 · Blur assembly on scroll ─── */
+    .sc-card {
+      transition: filter 0.7s ease, opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      will-change: filter, opacity, transform;
+    }
+    .sc-card.sc-blur-init {
+      filter: blur(14px);
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    .sc-card.sc-blur-init.sc-blur-in {
+      filter: blur(0px);
+      opacity: 1;
+      transform: scale(1);
+    }
+    .sc-card.sc-blur-init .sc-row {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .sc-card.sc-blur-init .sc-row.sc-row-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .sc-card-brand {
+      transition: filter 0.5s ease;
+    }
+    .sc-card-brand.sc-brand-flash {
+      filter: drop-shadow(0 0 14px rgba(200,210,230,0.95)) drop-shadow(0 1px 0 rgba(255,255,255,0.7));
+    }
+
+    /* ─── Idea 1 · Live stream row animations ─── */
+    .sc-card.sc-streaming .sc-row:nth-child(n) {
+      animation: none;
+    }
+    @keyframes scRowSlideIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scRowSlideOut {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-18px); }
+    }
+    .sc-row.sc-row-enter {
+      animation: scRowSlideIn 0.38s ease both;
+    }
+    .sc-row.sc-row-exit {
+      animation: scRowSlideOut 0.32s ease both;
+      pointer-events: none;
+    }
+
+    /* ─── Idea 2 · Giant counter ─── */
+    .sc-counter-wrap {
+      text-align: center;
+      position: relative; z-index: 2;
+      margin-bottom: -4px;
+    }
+    .sc-counter-val {
+      font-size: clamp(52px, 8vw, 88px);
+      font-weight: 800; letter-spacing: -.06em; line-height: 1;
+      background: linear-gradient(160deg,
+        #9EA7B3 0%, #C8CDD6 22%, #E2E5EA 38%,
+        #F0F2F5 50%, #D4D8DF 62%, #B0B6BF 78%, #8C9299 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0 rgba(255,255,255,0.8));
+      font-variant-numeric: tabular-nums;
+    }
+    .sc-counter-label {
+      font-size: 12px; font-weight: 600; letter-spacing: .10em;
+      text-transform: uppercase; color: rgba(8,9,16,0.30);
+      margin-top: 8px;
+    }
+
+    /* ─── Idea 5 · EKG heartbeat ─── */
+    .sc-ekg-wrap {
+      display: flex; align-items: center; gap: 12px;
+      margin: 16px 0 4px;
+      padding: 0 2px;
+    }
+    #scEkg {
+      flex: 1; height: 40px; display: block;
+    }
+    .sc-ekg-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .10em;
+      text-transform: uppercase; color: #34C759;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       PROOF SECTION — Ideas 8, 9, 10
+       ══════════════════════════════════════════ */
+
+    /* ─── Idea 10 · Cinematic entry + section base ─── */
+    .sp-stats {
+      background: #F5F6FA;
+      padding: 100px var(--pad) 100px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 56px;
+      position: relative; overflow: hidden;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .sp-stats.sp-revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-stats { opacity: 1; transform: none; transition: none; }
+    }
+
+    .sp-ovis-brand {
+      font-size: 11px; font-weight: 800; letter-spacing: .18em;
+      text-transform: uppercase;
+      background: linear-gradient(160deg,
+        #9EA7B3 0%, #C8CDD6 22%, #E2E5EA 38%,
+        #F0F2F5 50%, #D4D8DF 62%, #B0B6BF 78%, #8C9299 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block; text-align: center; margin-bottom: 0;
+      filter: blur(6px);
+      transform: scale(1.4);
+      transition: filter 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+    .sp-stats.sp-revealed .sp-ovis-brand {
+      filter: blur(0px) drop-shadow(0 1px 0 rgba(255,255,255,0.6));
+      transform: scale(1);
+    }
+    .sp-stats-headline {
+      font-size: clamp(30px, 4.5vw, 46px);
+      font-weight: 800; letter-spacing: -.05em;
+      color: #080910; text-align: center; line-height: 1.1;
+      position: relative; z-index: 2;
+      margin-top: -36px;
+    }
+
+    /* ─── Idea 9 · Notification cascade ─── */
+    .sp-notif-stage {
+      position: relative; width: min(420px, 90vw); height: 210px;
+      z-index: 2;
+    }
+    .sp-notif-banner {
+      position: absolute; top: 0; right: 0;
+      width: min(380px, 88vw);
+      background: #FFFFFF;
+      border: 0.5px solid rgba(0,0,0,0.08);
+      border-radius: 18px;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 4px 16px rgba(0,0,0,0.10),
+        0 16px 40px rgba(0,0,0,0.08);
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+    .sp-notif-banner.sp-notif-show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .sp-notif-banner.sp-notif-hide {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    .sp-notif-banner:nth-child(1) { top: 0; }
+    .sp-notif-banner:nth-child(2) { top: 72px; }
+    .sp-notif-banner:nth-child(3) { top: 144px; }
+    .sp-notif-icon {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .sp-notif-icon-blue  { background: rgba(0,152,200,0.12); }
+    .sp-notif-icon-green { background: rgba(52,199,89,0.12); }
+    .sp-notif-icon-gold  { background: rgba(245,166,35,0.12); }
+    .sp-notif-icon-pink  { background: rgba(240,84,106,0.12); }
+    .sp-notif-body { flex: 1; min-width: 0; }
+    .sp-notif-title {
+      font-size: 13.5px; font-weight: 600; color: #080910;
+      letter-spacing: -.01em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sp-notif-sub {
+      font-size: 12px; color: rgba(8,9,16,0.42); margin-top: 2px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sp-notif-time {
+      font-size: 11px; color: rgba(8,9,16,0.28); flex-shrink: 0;
+    }
+
+    /* ─── Idea 8 · Stats count-up ─── */
+    .sp-stats-row {
+      display: flex; gap: clamp(32px, 6vw, 80px);
+      justify-content: center; flex-wrap: wrap;
+      position: relative; z-index: 2;
+    }
+    .sp-stat-block { text-align: center; min-width: 140px; }
+    .sp-stat-val {
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 800; letter-spacing: -.06em; line-height: 1;
+      background: linear-gradient(160deg,
+        #9EA7B3 0%, #C8CDD6 22%, #E2E5EA 38%,
+        #F0F2F5 50%, #D4D8DF 62%, #B0B6BF 78%, #8C9299 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0 rgba(255,255,255,0.7));
+      font-variant-numeric: tabular-nums;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .sp-stat-val.sp-counted {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .sp-stat-label {
+      font-size: 13px; font-weight: 500;
+      color: rgba(8,9,16,0.42); margin-top: 8px;
+      letter-spacing: -.01em;
+    }
+
     /* ─── CAPSULE AGENTS ─── */
     .caps-section {
       background: #07090E;
@@ -2263,61 +2506,6 @@
       <p class="sc-reveal-sub">Every follow. Every DM. Every unfollow. Happening now.</p>
     </div>
 
-    <!-- Activity card -->
-    <div class="sc-card sc-glass">
-      <div class="sc-card-brand">OVIS</div>
-
-      <!-- Row 1: Follow -->
-      <div class="sc-row">
-        <div class="sc-avatar sc-av-follow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-        </div>
-        <div class="sc-row-text">
-          <span class="sc-action-tag sc-tag-follow">Followed</span>
-          <div class="sc-row-action sc-redact sc-redact-lg"></div>
-          <div class="sc-row-meta sc-redact sc-redact-md"></div>
-        </div>
-      </div>
-
-      <!-- Row 2: Like -->
-      <div class="sc-row">
-        <div class="sc-avatar sc-av-like">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0546A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <div class="sc-row-text">
-          <span class="sc-action-tag sc-tag-like">Liked</span>
-          <div class="sc-row-action sc-redact sc-redact-xl"></div>
-          <div class="sc-row-meta sc-redact sc-redact-md"></div>
-        </div>
-      </div>
-
-      <!-- Row 3: DM -->
-      <div class="sc-row">
-        <div class="sc-avatar sc-av-dm">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0098C8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="sc-row-text">
-          <span class="sc-action-tag sc-tag-dm">DM Sent</span>
-          <div class="sc-row-action sc-redact sc-redact-md"></div>
-          <div class="sc-row-meta sc-redact sc-redact-lg"></div>
-        </div>
-      </div>
-
-      <!-- Row 4: Unfollow -->
-      <div class="sc-row">
-        <div class="sc-avatar sc-av-unfollow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-        </div>
-        <div class="sc-row-text">
-          <span class="sc-action-tag sc-tag-unfollow">Unfollowed</span>
-          <div class="sc-row-action sc-redact sc-redact-xl"></div>
-          <div class="sc-row-meta sc-redact sc-redact-sm"></div>
-        </div>
-      </div>
-
-      <button class="sc-pulse-btn" onclick="openModal()">Pulse</button>
-    </div>
-
     <div class="sc-bridge">And to control all of it —</div>
 
     <!-- Command bar -->
@@ -2343,6 +2531,34 @@
     </div>
 
     <p class="sc-bar-caption">Switch your target. Rewrite your bio. Adjust your message.<br>One sentence. Ovis handles the rest.</p>
+
+  </section>
+
+  <!-- ═══ PROOF SECTION (Ideas 8 · 9 · 10) ═══ -->
+  <section class="sp-stats" id="spStats">
+
+    <!-- Cinematic brand eyebrow (Idea 10) -->
+    <span class="sp-ovis-brand">OVIS</span>
+    <h2 class="sp-stats-headline">The numbers don't lie.</h2>
+
+    <!-- Notification cascade (Idea 9) -->
+    <div class="sp-notif-stage" id="spNotifStage"></div>
+
+    <!-- Stats count-up (Idea 8) -->
+    <div class="sp-stats-row">
+      <div class="sp-stat-block">
+        <div class="sp-stat-val" data-sp-count="847" data-sp-prefix="+">0</div>
+        <div class="sp-stat-label">actions / day</div>
+      </div>
+      <div class="sp-stat-block">
+        <div class="sp-stat-val" data-sp-count="2847" data-sp-prefix="+">0</div>
+        <div class="sp-stat-label">profiles reached</div>
+      </div>
+      <div class="sp-stat-block">
+        <div class="sp-stat-val" data-sp-count="0" data-sp-suffix=" min">0</div>
+        <div class="sp-stat-label">from you</div>
+      </div>
+    </div>
 
   </section>
 
@@ -3146,5 +3362,397 @@
       }
     })();
   </script>
+
+  <!-- ══ Idea 1: Live Activity Stream ══ -->
+  <script>
+  (function() {
+    var FOLLOW_SVG   = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>';
+    var LIKE_SVG     = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0546A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+    var DM_SVG       = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0098C8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    var UNFOLLOW_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="22" y1="11" x2="16" y2="11"/></svg>';
+
+    var POOL = [
+      { tag:'Followed',   tagClass:'sc-tag-follow',   avClass:'sc-av-follow',   icon:FOLLOW_SVG,   w:['lg','xl','md','lg','xl'] },
+      { tag:'Liked',      tagClass:'sc-tag-like',     avClass:'sc-av-like',     icon:LIKE_SVG,     w:['xl','md','lg','sm','md'] },
+      { tag:'DM Sent',    tagClass:'sc-tag-dm',       avClass:'sc-av-dm',       icon:DM_SVG,       w:['md','lg','xl','md','lg'] },
+      { tag:'Unfollowed', tagClass:'sc-tag-unfollow', avClass:'sc-av-unfollow', icon:UNFOLLOW_SVG, w:['xl','sm','lg','xl','sm'] },
+      { tag:'Followed',   tagClass:'sc-tag-follow',   avClass:'sc-av-follow',   icon:FOLLOW_SVG,   w:['md','xl','sm','lg','md'] },
+      { tag:'Liked',      tagClass:'sc-tag-like',     avClass:'sc-av-like',     icon:LIKE_SVG,     w:['lg','md','xl','sm','lg'] },
+      { tag:'DM Sent',    tagClass:'sc-tag-dm',       avClass:'sc-av-dm',       icon:DM_SVG,       w:['sm','xl','md','lg','sm'] },
+      { tag:'Unfollowed', tagClass:'sc-tag-unfollow', avClass:'sc-av-unfollow', icon:UNFOLLOW_SVG, w:['lg','sm','xl','md','xl'] },
+      { tag:'Followed',   tagClass:'sc-tag-follow',   avClass:'sc-av-follow',   icon:FOLLOW_SVG,   w:['sm','lg','xl','sm','md'] },
+      { tag:'Liked',      tagClass:'sc-tag-like',     avClass:'sc-av-like',     icon:LIKE_SVG,     w:['xl','lg','sm','xl','md'] },
+    ];
+
+    var REDACT = { sm:'sc-redact-sm', md:'sc-redact-md', lg:'sc-redact-lg', xl:'sc-redact-xl' };
+
+    function buildRow(action, seed) {
+      var w1 = action.w[seed % action.w.length];
+      var w2 = action.w[(seed + 2) % action.w.length];
+      var el = document.createElement('div');
+      el.className = 'sc-row sc-row-enter';
+      el.innerHTML =
+        '<div class="sc-avatar ' + action.avClass + '">' + action.icon + '</div>' +
+        '<div class="sc-row-text">' +
+          '<span class="sc-action-tag ' + action.tagClass + '">' + action.tag + '</span>' +
+          '<div class="sc-row-action sc-redact ' + REDACT[w1] + '"></div>' +
+          '<div class="sc-row-meta sc-redact ' + REDACT[w2] + '"></div>' +
+        '</div>';
+      return el;
+    }
+
+    var container = document.getElementById('scRowsContainer');
+    var card      = document.getElementById('scCard');
+    if (!container || !card) return;
+
+    window.scStreamListeners = [];
+    var poolIdx = 0;
+
+    // Seed 4 initial rows (no entrance animation)
+    for (var i = 0; i < 4; i++) {
+      var r = buildRow(POOL[poolIdx % POOL.length], poolIdx);
+      r.classList.remove('sc-row-enter');
+      container.appendChild(r);
+      poolIdx++;
+    }
+    card.classList.add('sc-streaming');
+
+    function streamTick() {
+      var rows = container.querySelectorAll('.sc-row:not(.sc-row-exit)');
+      if (rows.length === 0) return;
+      var outRow = rows[0];
+      outRow.classList.add('sc-row-exit');
+      setTimeout(function() {
+        if (outRow.parentNode) outRow.parentNode.removeChild(outRow);
+        var newRow = buildRow(POOL[poolIdx % POOL.length], poolIdx);
+        poolIdx++;
+        container.appendChild(newRow);
+        setTimeout(function() { newRow.classList.remove('sc-row-enter'); }, 400);
+        window.scStreamListeners.forEach(function(fn) { try { fn(); } catch(e){} });
+      }, 340);
+    }
+
+    setInterval(streamTick, 2800);
+  })();
+  </script>
+
+  <!-- ══ Idea 2: Giant Counter ══ -->
+  <script>
+  (function() {
+    var valEl = document.getElementById('scCounterVal');
+    if (!valEl) return;
+    var current = 1189;
+    var prefix  = '+';
+
+    function fmt(n) { return prefix + n.toLocaleString('en-US'); }
+
+    function slowTick() {
+      current += 1;
+      valEl.textContent = fmt(current);
+      setTimeout(slowTick, 3800 + Math.random() * 600);
+    }
+
+    function fastCountUp(from, to, duration, onDone) {
+      var start = performance.now();
+      function frame(now) {
+        var p = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        valEl.textContent = fmt(Math.floor(from + eased * (to - from)));
+        if (p < 1) { requestAnimationFrame(frame); }
+        else { valEl.textContent = fmt(to); if (onDone) onDone(); }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    valEl.textContent = fmt(current);
+
+    var hasAnimated = false;
+    var wrap = document.getElementById('scCounterWrap');
+    if (!wrap) { slowTick(); return; }
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          fastCountUp(Math.max(0, current - 312), current, 1400, slowTick);
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(wrap);
+  })();
+  </script>
+
+  <!-- ══ Ideas 4 + 6: Blur Assembly + 3D Parallax ══ -->
+  <script>
+  (function() {
+    var wrap  = document.getElementById('scCardWrap');
+    var card  = document.getElementById('scCard');
+    var brand = card ? card.querySelector('.sc-card-brand') : null;
+    if (!wrap || !card) return;
+
+    // ── Idea 4: Blur assembly ──
+    var assembled = false;
+    function assembleCard() {
+      if (assembled) return;
+      assembled = true;
+      card.classList.add('sc-blur-in');
+      var rows = card.querySelectorAll('.sc-row');
+      rows.forEach(function(row, i) {
+        setTimeout(function() { row.classList.add('sc-row-visible'); }, 80 * i);
+      });
+      if (brand) {
+        setTimeout(function() { brand.classList.add('sc-brand-flash'); }, 80 * rows.length + 100);
+      }
+    }
+
+    // Also re-apply to dynamically added rows
+    var rowObserver = new MutationObserver(function() {
+      if (!assembled) return;
+      var rows = card.querySelectorAll('.sc-row:not(.sc-row-visible):not(.sc-row-exit):not(.sc-row-enter)');
+      rows.forEach(function(r) { r.classList.add('sc-row-visible'); });
+    });
+    rowObserver.observe(card, { childList: true, subtree: true });
+
+    var assembleObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { assembleCard(); assembleObs.disconnect(); }
+      });
+    }, { threshold: 0.25 });
+    assembleObs.observe(wrap);
+
+    // ── Idea 6: 3D Parallax ──
+    var tRX = 0, tRY = 0, cRX = 0, cRY = 0;
+    var rafId = null;
+    var MAX = 8, LERP = 0.08;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function lerpLoop() {
+      cRX = lerp(cRX, tRX, LERP);
+      cRY = lerp(cRY, tRY, LERP);
+      card.style.transform = 'rotateX(' + cRX.toFixed(3) + 'deg) rotateY(' + cRY.toFixed(3) + 'deg)';
+      var mag = Math.sqrt(cRX * cRX + cRY * cRY) / MAX;
+      if (brand) {
+        var g = (mag * 18).toFixed(1);
+        brand.style.filter = 'drop-shadow(0 0 ' + g + 'px rgba(200,215,235,0.9)) drop-shadow(0 1px 0 rgba(255,255,255,0.6))';
+      }
+      var moving = Math.abs(cRX - tRX) > 0.01 || Math.abs(cRY - tRY) > 0.01
+                || Math.abs(cRX) > 0.01 || Math.abs(cRY) > 0.01;
+      if (moving) { rafId = requestAnimationFrame(lerpLoop); }
+      else { rafId = null; if (brand) brand.style.filter = ''; }
+    }
+
+    wrap.addEventListener('mousemove', function(e) {
+      var rect = wrap.getBoundingClientRect();
+      var dx = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
+      var dy = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
+      tRY =  dx * MAX;
+      tRX = -dy * MAX;
+      if (!rafId) rafId = requestAnimationFrame(lerpLoop);
+    });
+
+    wrap.addEventListener('mouseleave', function() {
+      tRX = 0; tRY = 0;
+      if (!rafId) rafId = requestAnimationFrame(lerpLoop);
+    });
+  })();
+  </script>
+
+  <!-- ══ Idea 5: EKG Heartbeat Canvas ══ -->
+  <script>
+  (function() {
+    var canvas = document.getElementById('scEkg');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = 0, H = 40, BASE_Y = 20;
+    var COLOR = '#0098C8';
+
+    function resize() {
+      var wrap = canvas.parentElement;
+      if (!wrap) return;
+      W = Math.max(40, wrap.clientWidth - 90);
+      canvas.width  = W;
+      canvas.height = H;
+      BASE_Y = H / 2;
+      drawFlat();
+    }
+
+    function drawFlat() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0,152,200,0.20)';
+      ctx.lineWidth = 1.5;
+      ctx.moveTo(0, BASE_Y);
+      ctx.lineTo(W, BASE_Y);
+      ctx.stroke();
+    }
+
+    // P-QRS-T shape: [x_fraction (0..1), y_offset_px]
+    var SHAPE = [
+      [0.00,  0], [0.15,  0],
+      [0.20, -4], [0.25,  0],   // P wave
+      [0.32,  3], [0.38,-20],   // QRS spike
+      [0.42, 12], [0.48,  0],   // S dip
+      [0.62, -6], [0.70,  0],   // T wave
+      [1.00,  0]
+    ];
+
+    function fireSpike() {
+      var dur = 620, t0 = performance.now();
+      function frame(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        ctx.clearRect(0, 0, W, H);
+        // flat baseline
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(0,152,200,0.18)';
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(0, BASE_Y); ctx.lineTo(W, BASE_Y);
+        ctx.stroke();
+        // spike up to progress p
+        ctx.beginPath();
+        ctx.strokeStyle = COLOR;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = COLOR;
+        ctx.shadowBlur = 7;
+        var started = false;
+        for (var i = 0; i < SHAPE.length; i++) {
+          var fx = SHAPE[i][0], fy = SHAPE[i][1];
+          if (fx > p) {
+            if (i > 0) {
+              var pfx = SHAPE[i-1][0], pfy = SHAPE[i-1][1];
+              var tt = (p - pfx) / (fx - pfx);
+              var px2 = (pfx + tt*(fx-pfx))*W, py2 = BASE_Y + pfy + tt*(fy-pfy);
+              if (!started) { ctx.moveTo(0, BASE_Y); started = true; }
+              ctx.lineTo(px2, py2);
+            }
+            break;
+          }
+          if (!started) { ctx.moveTo(0, BASE_Y); started = true; }
+          ctx.lineTo(fx*W, BASE_Y + fy);
+        }
+        if (started) ctx.stroke();
+        ctx.shadowBlur = 0;
+        if (p < 1) { requestAnimationFrame(frame); }
+        else { setTimeout(drawFlat, 300); }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('resize', resize);
+    // Delay resize so layout is painted
+    setTimeout(resize, 100);
+
+    if (!window.scStreamListeners) window.scStreamListeners = [];
+    window.scStreamListeners.push(fireSpike);
+  })();
+  </script>
+
+  <!-- ══ Ideas 8 + 9 + 10: Proof Section ══ -->
+  <script>
+  (function() {
+    var section = document.getElementById('spStats');
+    if (!section) return;
+
+    // ── Idea 10: Cinematic zoom entry ──
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) {
+          section.classList.add('sp-revealed');
+          this.disconnect();
+        }
+      }.bind(this));
+    }, { threshold: 0.12 }).observe(section);
+
+    // ── Idea 8: Stats count-up ──
+    var statEls = section.querySelectorAll('.sp-stat-val[data-sp-count]');
+    if (statEls.length) {
+      var sObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) {
+          if (!en.isIntersecting) return;
+          var el = en.target;
+          var idx = Array.prototype.indexOf.call(statEls, el);
+          sObs.unobserve(el);
+          setTimeout(function() {
+            var target  = parseInt(el.dataset.spCount, 10);
+            var prefix  = el.dataset.spPrefix  || '';
+            var suffix  = el.dataset.spSuffix  || '';
+            el.classList.add('sp-counted');
+            if (target === 0) { el.textContent = prefix + '0' + suffix; return; }
+            var dur = 1800, t0 = performance.now();
+            function frame(now) {
+              var p = Math.min((now - t0) / dur, 1);
+              var e = 1 - Math.pow(1 - p, 3);
+              el.textContent = prefix + Math.floor(e * target).toLocaleString('en-US') + suffix;
+              if (p < 1) { requestAnimationFrame(frame); }
+              else { el.textContent = prefix + target.toLocaleString('en-US') + suffix; }
+            }
+            requestAnimationFrame(frame);
+          }, idx * 180);
+        });
+      }, { threshold: 0.5 });
+      statEls.forEach(function(el) { sObs.observe(el); });
+    }
+
+    // ── Idea 9: Notification cascade ──
+    var NOTIFS = [
+      { icon:'👥', ic:'sp-notif-icon-blue',  title:'@alex.fitlife followed you',   sub:'Fitness · 8.4K followers',    time:'just now' },
+      { icon:'💬', ic:'sp-notif-icon-pink',  title:'DM reply: "Love this!"',       sub:'@nia.wellness · replied',      time:'2m ago'   },
+      { icon:'🔔', ic:'sp-notif-icon-gold',  title:'@music.kyle followed you',     sub:'Music Creator · Chicago',      time:'just now' },
+      { icon:'📈', ic:'sp-notif-icon-green', title:'Profile views +340%',          sub:'This week vs last',            time:'today'    },
+      { icon:'👥', ic:'sp-notif-icon-blue',  title:'@run.everyday followed you',   sub:'Running · 22.1K followers',    time:'1m ago'   },
+      { icon:'💬', ic:'sp-notif-icon-pink',  title:'"Hey! Sent you a DM"',         sub:'@coaching.pro · replied',      time:'3m ago'   },
+      { icon:'🔔', ic:'sp-notif-icon-gold',  title:'@realestate.j followed you',   sub:'Real Estate · New York',       time:'just now' },
+      { icon:'⚡', ic:'sp-notif-icon-blue',  title:'Ovis sent 28 DMs overnight',  sub:'4 replies while you slept',    time:'8h ago'   },
+    ];
+
+    var stage = document.getElementById('spNotifStage');
+    if (!stage) return;
+
+    var notifIdx = 0, active = [], started = false;
+
+    function showNotif() {
+      if (active.length >= 3) {
+        var old = active.shift();
+        old.classList.remove('sp-notif-show');
+        old.classList.add('sp-notif-hide');
+        setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 420);
+      }
+      var d = NOTIFS[notifIdx % NOTIFS.length]; notifIdx++;
+      var el = document.createElement('div');
+      el.className = 'sp-notif-banner';
+      el.innerHTML =
+        '<div class="sp-notif-icon ' + d.ic + '">' + d.icon + '</div>' +
+        '<div class="sp-notif-body">' +
+          '<div class="sp-notif-title">' + d.title + '</div>' +
+          '<div class="sp-notif-sub">'   + d.sub   + '</div>' +
+        '</div>' +
+        '<div class="sp-notif-time">' + d.time + '</div>';
+      stage.appendChild(el);
+      active.push(el);
+      el.getBoundingClientRect(); // force reflow
+      el.classList.add('sp-notif-show');
+      setTimeout(function() {
+        var i = active.indexOf(el);
+        if (i > -1) active.splice(i, 1);
+        el.classList.remove('sp-notif-show');
+        el.classList.add('sp-notif-hide');
+        setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 420);
+      }, 2500);
+    }
+
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting && !started) {
+          started = true;
+          showNotif();
+          setInterval(showNotif, 2600);
+          this.disconnect();
+        }
+      }.bind(this));
+    }, { threshold: 0.2 }).observe(stage);
+  })();
+  </script>
+
 </body>
 </html>
