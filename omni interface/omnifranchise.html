@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OmniFranchise — Own the System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0c0c0c; --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.13);
+      --white: #ffffff; --muted: rgba(255,255,255,0.48); --dim: rgba(255,255,255,0.22);
+      --chrome: #c2c2c2; --chrome2: #888888; --charcoal: #2a2a2a;
+      --radius: 24px; --radius-sm: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden; }
+
+    .orb { position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0; }
+    .orb-1 { width:700px;height:700px;background:radial-gradient(circle,rgba(70,70,70,0.2) 0%,transparent 70%);top:-250px;left:-250px; }
+    .orb-2 { width:500px;height:500px;background:radial-gradient(circle,rgba(150,150,150,0.07) 0%,transparent 70%);top:40%;right:-150px; }
+    .orb-3 { width:400px;height:400px;background:radial-gradient(circle,rgba(70,70,70,0.1) 0%,transparent 70%);bottom:10%;left:20%; }
+
+    nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(12,12,12,0.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:'Instrument Serif',serif;font-size:19px;color:var(--white);text-decoration:none; }
+    .nav-logo span { color:var(--chrome); }
+    .nav-links { display:flex;gap:32px;list-style:none;align-items:center; }
+    .nav-links a { font-size:14px;font-weight:400;color:var(--muted);text-decoration:none;transition:color .2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta { background:var(--white)!important;color:#0c0c0c!important;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;transition:opacity .2s,transform .2s; }
+    .nav-cta:hover { opacity:.88;transform:translateY(-1px); }
+
+    .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 80px; }
+    .badge { display:inline-flex;align-items:center;gap:8px;background:rgba(194,194,194,0.07);border:1px solid rgba(194,194,194,0.18);border-radius:100px;padding:6px 18px;font-size:12px;font-weight:500;color:var(--chrome);letter-spacing:.8px;text-transform:uppercase;margin-bottom:40px; }
+    .badge-dot { width:6px;height:6px;background:var(--chrome);border-radius:50%;animation:pulse 2.2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+    .hero h1 { font-family:'Instrument Serif',serif;font-size:clamp(52px,8.5vw,102px);font-weight:400;letter-spacing:-3.5px;line-height:.93;max-width:900px;margin-bottom:32px; }
+    .hero h1 .it { font-style:italic;color:var(--chrome); }
+    .hero h1 .dt { color:var(--muted); }
+    .hero p { font-size:18px;font-weight:300;color:var(--muted);max-width:500px;margin:0 auto 52px;line-height:1.75; }
+    .actions { display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center; }
+    .btn-p { background:var(--white);color:#0c0c0c;padding:16px 36px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 40px rgba(255,255,255,0.1); }
+    .btn-p:hover { opacity:.9;transform:translateY(-2px);box-shadow:0 0 60px rgba(255,255,255,0.18); }
+    .btn-s { background:var(--surface);color:var(--white);padding:16px 36px;border-radius:var(--radius-sm);font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--border2);backdrop-filter:blur(10px);transition:background .2s,transform .2s; }
+    .btn-s:hover { background:rgba(255,255,255,0.08);transform:translateY(-2px); }
+
+    section { position:relative;z-index:1;padding:110px 24px; }
+    .container { max-width:1060px;margin:0 auto; }
+    .tag { display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--chrome);background:rgba(194,194,194,0.07);border:1px solid rgba(194,194,194,0.16);border-radius:100px;padding:5px 14px;margin-bottom:20px; }
+    .sec-title { font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;letter-spacing:-2px;line-height:1.05;margin-bottom:18px; }
+    .sec-title .it { font-style:italic;color:var(--chrome); }
+    .sec-title .dt { color:var(--muted); }
+    .sec-sub { font-size:17px;color:var(--muted);line-height:1.75;max-width:520px;font-weight:300; }
+
+    /* ── PHONE SYSTEM ── */
+    .phone {
+      background:#e8eaed;border-radius:42px;padding:14px;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.15),0 40px 100px rgba(0,0,0,0.7),inset 0 1px 0 rgba(255,255,255,0.5);
+      flex-shrink:0;position:relative;
+      transition: transform 0.55s cubic-bezier(0.23,1,0.32,1),
+                  box-shadow 0.55s cubic-bezier(0.23,1,0.32,1),
+                  opacity 0.45s ease;
+    }
+    .phone-inner { background:#fff;border-radius:30px;overflow:hidden;position:relative; }
+    .phone-inner::before { content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:72px;height:20px;background:#e8eaed;border-radius:0 0 14px 14px;z-index:10; }
+
+    /* phone screen styles (light UI matching real app) */
+    .ps { font-family:'Inter',sans-serif;background:#f7f8fa;height:100%;overflow:hidden;padding-top:26px;position:relative;display:flex;flex-direction:column; }
+    .ps-bar { text-align:center;font-size:11px;font-weight:700;color:#1a1a2e;padding:0 16px 10px;border-bottom:1px solid #ebebf0;flex-shrink:0; }
+    .ps-scroll { flex:1;overflow:hidden; }
+
+    .ps-header { margin:10px 10px 0;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 1px 8px rgba(0,0,0,0.06); }
+    .ps-lbl { font-size:8px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#9a9ab0;margin-bottom:4px; }
+    .ps-title { font-size:15px;font-weight:800;color:#1a1a2e;line-height:1.2;margin-bottom:5px; }
+    .ps-desc { font-size:8.5px;color:#9a9ab0;line-height:1.4; }
+
+    .ps-stat { margin:2px 10px 0;padding:10px 6px;border-bottom:1px solid #ebebf0;background:#fff; }
+    .ps-stat:first-of-type { border-top:1px solid #ebebf0;margin-top:10px; }
+    .ps-stat-lbl { font-size:7.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaaabc;margin-bottom:2px; }
+    .ps-stat-num { font-size:20px;font-weight:800;color:#1a1a2e; }
+
+    .ps-member { margin:8px 10px 0;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 1px 6px rgba(0,0,0,0.05); }
+    .ps-member-top { display:flex;align-items:center;gap:8px;margin-bottom:8px; }
+    .ps-av { width:26px;height:26px;border-radius:50%;background:#dde0e8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#5a5a7a;flex-shrink:0; }
+    .ps-mname { font-size:10.5px;font-weight:700;color:#1a1a2e; }
+    .ps-memail { font-size:8px;color:#9a9ab0; }
+    .ps-mstats { display:grid;grid-template-columns:1fr 1fr;gap:4px; }
+    .ps-msl { font-size:6.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#aaaabc;margin-bottom:1px; }
+    .ps-msn { font-size:13px;font-weight:800;color:#1a1a2e; }
+    .ps-view { text-align:center;font-size:8px;color:#aaaabc;padding-top:7px;border-top:1px solid #ebebf0;margin-top:7px; }
+
+    .ps-detail { margin:10px 10px 0;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,0.05); }
+    .ps-detail-top { display:flex;align-items:center;gap:8px;margin-bottom:10px; }
+    .ps-dgrid { display:grid;grid-template-columns:1fr 1fr;gap:7px; }
+    .ps-dgl { font-size:6.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#aaaabc;margin-bottom:1px; }
+    .ps-dgv { font-size:10px;font-weight:700;color:#1a1a2e; }
+
+    .ps-appear { margin:8px 10px 0;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,0.05); }
+    .ps-appear h3 { font-size:13px;font-weight:800;color:#1a1a2e;margin-bottom:10px; }
+    .ps-asl { font-size:8px;font-weight:700;color:#1a1a2e;margin-bottom:2px; }
+    .ps-ass { font-size:7px;color:#9a9ab0;margin-bottom:7px; }
+    .ps-colors { display:flex;gap:5px;margin-bottom:10px; }
+    .ps-col { width:20px;height:20px;border-radius:50%; }
+    .ps-col.sel { outline:2px solid #1a1a2e;outline-offset:2px; }
+    .ps-file-btn { background:#e8eaed;border-radius:7px;padding:5px 10px;font-size:8px;color:#666;display:inline-block;margin-bottom:10px; }
+    .ps-reset { background:#f5f5f7;border-radius:10px;padding:8px;text-align:center;font-size:8.5px;color:#888;border:1px solid #eee; }
+
+    .ps-bottom { position:relative;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-top:1px solid #ebebf0;padding:7px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0;margin-top:auto; }
+    .ps-input-lbl { flex:1;font-size:8.5px;color:#bbb; }
+    .ps-grid-ico { width:20px;height:20px;border-radius:50%;background:#f0f0f2;display:flex;align-items:center;justify-content:center;font-size:8px;color:#888; }
+    .ps-av-btn { width:20px;height:20px;border-radius:50%;background:#dde0e8;display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:800;color:#5a5a7a; }
+
+    /* hero phones */
+    .hero-phones { margin-top:72px;display:flex;gap:22px;align-items:flex-end;justify-content:center;width:100%;max-width:960px; }
+
+    /* center — hero phone */
+    .ph-center {
+      z-index:3;
+      transform:translateY(0px) scale(1);
+    }
+    .ph-center:hover {
+      transform:translateY(-18px) scale(1.04);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.15),
+        0 60px 120px rgba(0,0,0,0.8),
+        0 0 60px rgba(194,194,194,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* side phones */
+    .ph-left {
+      transform:translateY(44px) rotate(-5deg);
+      opacity:0.6;z-index:2;
+    }
+    .ph-left:hover {
+      transform:translateY(22px) rotate(-2deg) scale(1.03);
+      opacity:1;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 50px 100px rgba(0,0,0,0.75),
+        0 0 40px rgba(194,194,194,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .ph-right {
+      transform:translateY(44px) rotate(5deg);
+      opacity:0.6;z-index:2;
+    }
+    .ph-right:hover {
+      transform:translateY(22px) rotate(2deg) scale(1.03);
+      opacity:1;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 50px 100px rgba(0,0,0,0.75),
+        0 0 40px rgba(194,194,194,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* phone label captions */
+    .ph-wrap { display:flex;flex-direction:column;align-items:center;gap:16px; }
+    .ph-label {
+      font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;
+      color:rgba(255,255,255,0.3);
+      transition:color 0.4s ease;
+    }
+    .ph-wrap:hover .ph-label { color:rgba(194,194,194,0.7); }
+
+    /* ── FRANCHISE HOME (center phone content) ── */
+    .ps-fhome { display:flex;flex-direction:column;align-items:center;padding:18px 14px 10px;background:#ffffff;flex:1; }
+    .ps-fhome-av {
+      width:58px;height:58px;border-radius:50%;
+      background:linear-gradient(135deg,#e4e8f0,#d0d4de);
+      display:flex;align-items:center;justify-content:center;
+      font-size:16px;font-weight:700;color:#4a4a6a;
+      margin-bottom:10px;
+      box-shadow:0 2px 12px rgba(0,0,0,0.1);
+    }
+    .ps-fhome-email {
+      font-size:9px;color:#5a5a7a;
+      background:#f0f1f6;border:1px solid #e0e1ea;
+      border-radius:100px;padding:3px 10px;margin-bottom:8px;
+    }
+    .ps-fhome-name { font-size:20px;font-weight:800;color:#1a1a2e;margin-bottom:16px;text-align:center;letter-spacing:-.3px; }
+    .ps-fhome-grid { display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%; }
+    .ps-fhome-item {
+      background:#f5f6fa;border-radius:12px;
+      padding:10px 8px;
+      display:flex;align-items:center;gap:7px;
+    }
+    .ps-fhome-ico {
+      width:26px;height:26px;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:13px;flex-shrink:0;
+    }
+    .ps-fhome-lbl { font-size:10.5px;font-weight:600;color:#1a1a2e; }
+    .ps-fhome-signout {
+      margin-top:10px;width:100%;background:#fff0f0;border-radius:12px;
+      padding:10px;text-align:center;font-size:10px;font-weight:700;color:#e05555;
+    }
+
+    /* ── LEFT PHONE (capabilities) ── */
+    .ps-capability-header {
+      margin:10px 10px 0;background:#fff;border-radius:16px;
+      padding:12px 14px;box-shadow:0 1px 8px rgba(0,0,0,0.06);
+    }
+    .ps-chart-wrap {
+      margin:6px 10px 0;background:#fff;border-radius:14px;
+      padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,0.05);
+    }
+    .ps-chart-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px; }
+    .ps-chart-val { font-size:18px;font-weight:800;color:#1a1a2e; }
+    .ps-chart-lbl { font-size:6.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aab; }
+    .ps-chart-trend { font-size:7px;font-weight:700;color:#34c759;background:#edfbf1;border-radius:6px;padding:2px 5px; }
+
+    /* ── RIGHT PHONE (team management) ── */
+    .ps-team-header {
+      margin:10px 10px 0;background:#fff;border-radius:16px;
+      padding:12px 14px;box-shadow:0 1px 8px rgba(0,0,0,0.06);
+    }
+    .ps-team-row {
+      margin:5px 10px 0;background:#fff;border-radius:12px;
+      padding:9px 12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      display:flex;align-items:center;gap:8px;
+    }
+    .ps-team-av {
+      width:26px;height:26px;border-radius:50%;background:#dde0e8;
+      display:flex;align-items:center;justify-content:center;
+      font-size:7.5px;font-weight:800;color:#5a5a7a;flex-shrink:0;
+    }
+    .ps-team-info { flex:1; }
+    .ps-team-name { font-size:9.5px;font-weight:700;color:#1a1a2e; }
+    .ps-team-role { font-size:7px;color:#9a9ab0; }
+    .ps-team-badge {
+      font-size:6.5px;font-weight:700;padding:2px 7px;border-radius:100px;
+      background:#edfbf1;color:#34c759;border:1px solid #d0f5e0;
+    }
+    .ps-team-badge.idle { background:#f5f5f7;color:#aaa;border-color:#eee; }
+    .ps-team-stats {
+      margin:5px 10px 0;background:#fff;border-radius:12px;
+      padding:9px 12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);
+    }
+    .ps-team-detail-grid { display:grid;grid-template-columns:1fr 1fr;gap:5px; }
+    .ps-tdl { font-size:6px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#aab;margin-bottom:1px; }
+    .ps-tdv { font-size:11px;font-weight:800;color:#1a1a2e; }
+
+    /* ── HOW IT WORKS — UPGRADED ── */
+    .how-header { max-width:640px;margin-bottom:72px; }
+    .how-track { position:relative; }
+
+    /* chrome connecting line */
+    .how-line {
+      position:absolute;top:112px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(194,194,194,0.35) 15%,rgba(194,194,194,0.35) 85%,transparent);
+      z-index:0;
+      pointer-events:none;
+    }
+    .how-line::after {
+      content:'';position:absolute;top:-1px;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,transparent,rgba(194,194,194,0.12) 15%,rgba(194,194,194,0.12) 85%,transparent);
+      filter:blur(4px);
+    }
+
+    /* dot on the line at each card */
+    .how-cards { display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1; }
+
+    /* card */
+    .hc {
+      position:relative;
+      border-radius:20px;
+      padding:1.5px; /* border gradient trick */
+      background:linear-gradient(145deg,rgba(194,194,194,0.18),rgba(255,255,255,0.04) 50%,rgba(194,194,194,0.1));
+      transition:transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s;
+      transform-style:preserve-3d;
+      cursor:default;
+      /* scroll-in animation */
+      opacity:0;
+      transform:translateY(36px);
+      transition:opacity .6s ease, transform .6s cubic-bezier(.23,1,.32,1), box-shadow .35s;
+    }
+    .hc.visible { opacity:1;transform:translateY(0); }
+    .hc:nth-child(2) { transition-delay:.1s; }
+    .hc:nth-child(3) { transition-delay:.2s; }
+    .hc:nth-child(4) { transition-delay:.3s; }
+    .hc:hover {
+      transform:translateY(-6px) perspective(800px) rotateX(2deg);
+      box-shadow:0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(194,194,194,0.22);
+    }
+    .hc-inner {
+      background:#111111;
+      border-radius:19px;
+      padding:24px 22px 26px;
+      height:100%;
+      display:flex;flex-direction:column;
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* ghost number behind card */
+    .hc-ghost {
+      position:absolute;bottom:-20px;right:-8px;
+      font-family:'Instrument Serif',serif;
+      font-size:120px;font-weight:400;
+      color:rgba(255,255,255,0.03);
+      line-height:1;pointer-events:none;
+      transition:color .35s;
+      z-index:0;
+      user-select:none;
+    }
+    .hc:hover .hc-ghost { color:rgba(194,194,194,0.055); }
+
+    /* top row: num + time badge */
+    .hc-top {
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:20px;position:relative;z-index:1;
+    }
+    .hc-num {
+      font-size:11px;font-weight:700;letter-spacing:2px;
+      text-transform:uppercase;color:var(--chrome2);
+    }
+    .hc-time {
+      font-size:10px;font-weight:600;letter-spacing:.5px;
+      color:var(--chrome2);
+      background:rgba(194,194,194,0.07);
+      border:1px solid rgba(194,194,194,0.14);
+      border-radius:100px;padding:3px 10px;
+    }
+
+    /* timeline dot */
+    .hc-dot {
+      width:8px;height:8px;border-radius:50%;
+      background:var(--chrome2);
+      border:1.5px solid rgba(194,194,194,0.4);
+      margin:0 auto 20px;
+      box-shadow:0 0 10px rgba(194,194,194,0.25);
+      position:relative;z-index:1;
+      flex-shrink:0;
+    }
+
+    /* mini phone preview */
+    .hc-preview {
+      flex:1;display:flex;align-items:center;justify-content:center;
+      margin-bottom:22px;position:relative;z-index:1;
+      min-height:200px;
+    }
+    .mini-phone {
+      width:110px;
+      background:#d8dadd;
+      border-radius:20px;
+      padding:7px;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.2),0 16px 40px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.4);
+      position:relative;
+    }
+    .mini-phone-inner {
+      background:#fff;border-radius:14px;overflow:hidden;
+      position:relative;
+    }
+    .mini-phone-inner::before {
+      content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:32px;height:9px;background:#d8dadd;border-radius:0 0 6px 6px;z-index:10;
+    }
+    .mps { /* mini phone screen */
+      font-family:'Inter',sans-serif;
+      background:#f7f8fa;
+      padding-top:14px;
+      display:flex;flex-direction:column;
+    }
+    .mps-bar { text-align:center;font-size:5px;font-weight:700;color:#1a1a2e;padding:0 6px 5px;border-bottom:1px solid #ebebf0; }
+    /* appearance mini */
+    .mps-appear { padding:6px; }
+    .mps-atitle { font-size:6px;font-weight:800;color:#1a1a2e;margin-bottom:5px; }
+    .mps-albl { font-size:4.5px;font-weight:700;color:#1a1a2e;margin-bottom:1px; }
+    .mps-asub { font-size:4px;color:#9a9ab0;margin-bottom:4px; }
+    .mps-dots { display:flex;gap:3px;margin-bottom:6px; }
+    .mps-dot { width:10px;height:10px;border-radius:50%; }
+    .mps-dot.sel { outline:1.5px solid #1a1a2e;outline-offset:1.5px; }
+    .mps-btn { background:#e8eaed;border-radius:4px;padding:3px 5px;font-size:4px;color:#666;display:inline-block;margin-bottom:4px; }
+    .mps-reset { background:#f5f5f7;border-radius:5px;padding:4px;text-align:center;font-size:4px;color:#888;border:1px solid #eee; }
+    /* connect mini */
+    .mps-connect { padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:5px; }
+    .mps-ig-icon { width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366);display:flex;align-items:center;justify-content:center;font-size:14px; }
+    .mps-ig-lbl { font-size:5px;font-weight:700;color:#1a1a2e;text-align:center; }
+    .mps-ig-btn { background:#1a1a2e;color:#fff;border-radius:5px;padding:4px 8px;font-size:4.5px;font-weight:700;width:100%;text-align:center; }
+    .mps-ig-sub { font-size:3.5px;color:#9a9ab0;text-align:center;line-height:1.4; }
+    /* stats mini */
+    .mps-stat { padding:4px 6px;border-bottom:1px solid #ebebf0;background:#fff; }
+    .mps-stat:first-child { margin-top:4px; }
+    .mps-sl { font-size:4px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#aaaabc;margin-bottom:1px; }
+    .mps-sn { font-size:11px;font-weight:800;color:#1a1a2e; }
+    /* add member mini */
+    .mps-add { padding:8px 6px;display:flex;flex-direction:column;gap:4px; }
+    .mps-email-lbl { font-size:5px;color:#bbb; }
+    .mps-email-box { background:#f0f0f2;border-radius:5px;padding:4px 6px;font-size:4px;color:#999; }
+    .mps-add-btn { background:#e8eaed;border-radius:6px;padding:5px;text-align:center;font-size:5px;font-weight:700;color:#1a1a2e; }
+    .mps-add-hint { font-size:3.5px;color:#9a9ab0;line-height:1.4; }
+
+    /* text area */
+    .hc-text { position:relative;z-index:1; }
+    .hc-text h3 { font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px; }
+    .hc-text p { font-size:13px;color:var(--muted);line-height:1.6; }
+
+    /* showcase */
+    .showcase { background:linear-gradient(180deg,var(--bg) 0%,#080808 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
+    .two-col { display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:64px; }
+    .two-col.rev { }
+    .phones-pair { display:flex;gap:14px;align-items:flex-end;justify-content:center; }
+    .points { display:flex;flex-direction:column;gap:18px;margin-top:32px; }
+    .point { display:flex;gap:14px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--border); }
+    .point:last-child { border-bottom:none;padding-bottom:0; }
+    .pt-icon { width:34px;height:34px;border-radius:10px;background:rgba(194,194,194,0.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0; }
+    .point h4 { font-size:14px;font-weight:600;margin-bottom:3px; }
+    .point p { font-size:13px;color:var(--muted);line-height:1.6; }
+
+    /* bento */
+    .bento { display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:64px; }
+    .bc { background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);padding:36px;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s;overflow:hidden;position:relative; }
+    .bc:hover { border-color:rgba(194,194,194,0.22);transform:translateY(-3px); }
+    .bc::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(194,194,194,0.3),transparent);opacity:0;transition:opacity .3s; }
+    .bc:hover::before { opacity:1; }
+    .bc.acc { background:linear-gradient(135deg,rgba(42,42,42,0.7) 0%,rgba(28,28,28,0.5) 100%);border-color:rgba(194,194,194,0.14); }
+    .c1{grid-column:span 5}.c2{grid-column:span 7}.c3{grid-column:span 7}.c4{grid-column:span 5}.c5{grid-column:span 4}.c6{grid-column:span 4}.c7{grid-column:span 4}
+    .bc-icon { font-size:26px;margin-bottom:18px;display:block; }
+    .bc h3 { font-size:17px;font-weight:600;margin-bottom:10px;letter-spacing:-.3px; }
+    .bc p { font-size:14px;color:var(--muted);line-height:1.65; }
+    .mini-stats { display:flex;gap:12px;margin-top:20px; }
+    .ms { background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 16px;flex:1; }
+    .ms-num { font-size:18px;font-weight:700; }
+    .ms-lbl { font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px; }
+
+    /* cta */
+    .cta-wrap { text-align:center; }
+    .cta-box { display:inline-block;position:relative;background:linear-gradient(135deg,rgba(42,42,42,0.6) 0%,rgba(20,20,20,0.5) 100%);border:1px solid rgba(194,194,194,0.14);border-radius:var(--radius);padding:80px 60px;max-width:760px;width:100%;backdrop-filter:blur(20px);overflow:hidden; }
+    .cta-box::before { content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:200px;background:radial-gradient(ellipse,rgba(194,194,194,0.08) 0%,transparent 70%);pointer-events:none; }
+    .cta-box h2 { font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,60px);font-weight:400;letter-spacing:-2px;line-height:1.05;margin-bottom:20px; }
+    .cta-box h2 .it { font-style:italic;color:var(--chrome); }
+    .cta-box p { font-size:17px;color:var(--muted);max-width:440px;margin:0 auto 44px;line-height:1.7;font-weight:300; }
+
+    footer { border-top:1px solid var(--border);padding:36px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:1; }
+    .footer-logo { font-family:'Instrument Serif',serif;font-size:16px; }
+    .footer-logo span { color:var(--chrome); }
+    .footer-r { font-size:12px;color:var(--dim); }
+
+    @media(max-width:900px){
+      nav{padding:16px 24px;}
+      .nav-links li:not(:last-child){display:none;}
+      .ph-left,.ph-right{display:none;}
+      .how-cards{grid-template-columns:1fr 1fr;}
+      .how-line{display:none;}
+      .two-col{grid-template-columns:1fr;}
+      .bento{grid-template-columns:1fr;}
+      .c1,.c2,.c3,.c4,.c5,.c6,.c7{grid-column:span 1;}
+      .cta-box{padding:50px 28px;}
+      footer{flex-direction:column;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Omni<span>Franchise</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#start" class="nav-cta">Claim Your Franchise</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span>Now Available — OmniFranchise</div>
+  <h1>Your brand.<br /><span class="it">Our system.</span><br /><span class="dt">Zero setup.</span></h1>
+  <p>White-label your own platform in minutes. Your logo, your colors, your clients — running seamlessly under your name. No dev team. No maintenance. No headache.</p>
+  <div class="actions">
+    <a href="#start" class="btn-p">Claim Your Franchise</a>
+    <a href="#how" class="btn-s">See How It Works</a>
+  </div>
+
+  <!-- THREE PHONES -->
+  <div class="hero-phones">
+
+    <!-- ══ LEFT: Members & Analytics ══ -->
+    <div class="ph-wrap">
+      <div class="phone ph-left" style="width:238px;">
+        <div class="phone-inner" style="height:488px;">
+          <div class="ps">
+            <div class="ps-bar">Members</div>
+            <div class="ps-scroll">
+              <!-- Stats bar -->
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px 0 10px;">
+                <div style="background:#f0f4ff;border-radius:8px;padding:7px 4px;text-align:center;">
+                  <div style="font-size:6.5px;color:#8892a4;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;">Total</div>
+                  <div style="font-size:15px;font-weight:800;color:#1a1a2e;">128</div>
+                </div>
+                <div style="background:#f0fff6;border-radius:8px;padding:7px 4px;text-align:center;">
+                  <div style="font-size:6.5px;color:#8892a4;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;">Active</div>
+                  <div style="font-size:15px;font-weight:800;color:#22c55e;">94</div>
+                </div>
+                <div style="background:#fffbf0;border-radius:8px;padding:7px 4px;text-align:center;">
+                  <div style="font-size:6.5px;color:#8892a4;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;">New</div>
+                  <div style="font-size:15px;font-weight:800;color:#f59e0b;">12</div>
+                </div>
+              </div>
+              <!-- Member rows -->
+              <div class="ps-team-row">
+                <div class="ps-team-av" style="background:#dbeafe;color:#3b82f6;">JL</div>
+                <div class="ps-team-info">
+                  <div class="ps-team-name">Jordan Lee</div>
+                  <div class="ps-team-role">@jordanlee · NYC</div>
+                </div>
+                <div class="ps-team-badge">Active</div>
+              </div>
+              <div class="ps-team-row">
+                <div class="ps-team-av" style="background:#fce7f3;color:#ec4899;">CR</div>
+                <div class="ps-team-info">
+                  <div class="ps-team-name">Camila Ruiz</div>
+                  <div class="ps-team-role">@camilaruiz · LA</div>
+                </div>
+                <div class="ps-team-badge">Active</div>
+              </div>
+              <div class="ps-team-row">
+                <div class="ps-team-av" style="background:#fef3c7;color:#d97706;">EB</div>
+                <div class="ps-team-info">
+                  <div class="ps-team-name">Elliot Brooks</div>
+                  <div class="ps-team-role">@elliotb · ATL</div>
+                </div>
+                <div class="ps-team-badge idle">Idle</div>
+              </div>
+              <div class="ps-team-row">
+                <div class="ps-team-av" style="background:#dcfce7;color:#16a34a;">MC</div>
+                <div class="ps-team-info">
+                  <div class="ps-team-name">Marcus Chen</div>
+                  <div class="ps-team-role">@mchen · CHI</div>
+                </div>
+                <div class="ps-team-badge">Active</div>
+              </div>
+            </div>
+            <div class="ps-bottom"><div class="ps-input-lbl">Ask Omni</div><div class="ps-grid-ico">⊞</div><div class="ps-av-btn">YB</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-label">All your members, one view</div>
+    </div>
+
+    <!-- ══ CENTER: Brand Title Splash ══ -->
+    <div class="ph-wrap">
+      <div class="phone ph-center" style="width:268px;">
+        <div class="phone-inner" style="height:552px;">
+          <div class="ps" style="background:linear-gradient(170deg,#f4f6ff 0%,#ffffff 45%);">
+            <div class="ps-bar" style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a0aaba;background:transparent;border-bottom:1px solid rgba(0,0,0,0.05);">Omni Franchise</div>
+            <!-- splash body -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:0 24px;text-align:center;gap:0;">
+              <!-- Logo placeholder -->
+              <div style="width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 10px 28px rgba(99,102,241,0.32);">
+                <span style="color:#fff;font-size:20px;font-weight:900;letter-spacing:-.5px;">YB</span>
+              </div>
+              <!-- Brand name -->
+              <div style="font-size:28px;font-weight:900;letter-spacing:-.04em;color:#1a1a2e;line-height:1.06;margin-bottom:10px;">Your Brand<br>Here</div>
+              <!-- Accent rule -->
+              <div style="width:28px;height:3px;border-radius:3px;background:linear-gradient(to right,#4f46e5,#7c3aed);margin-bottom:10px;"></div>
+              <!-- Tagline -->
+              <div style="font-size:10.5px;color:#8892a4;font-weight:500;letter-spacing:.01em;margin-bottom:26px;">Your platform. Your rules.</div>
+              <!-- Brand color swatches -->
+              <div style="display:flex;gap:7px;align-items:center;margin-bottom:4px;">
+                <div style="width:20px;height:20px;border-radius:50%;background:#4f46e5;box-shadow:0 2px 6px rgba(79,70,229,0.4);"></div>
+                <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;box-shadow:0 2px 6px rgba(124,58,237,0.4);"></div>
+                <div style="width:20px;height:20px;border-radius:50%;background:#1a1a2e;box-shadow:0 2px 6px rgba(0,0,0,0.2);"></div>
+                <div style="width:20px;height:20px;border-radius:50%;background:#e8eaff;border:1.5px dashed #b8bacc;display:flex;align-items:center;justify-content:center;">
+                  <span style="font-size:11px;color:#9698b8;line-height:1;">+</span>
+                </div>
+              </div>
+              <div style="font-size:8.5px;color:#b8bcc8;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-top:6px;">Your colors</div>
+            </div>
+            <!-- Powered by footer -->
+            <div style="padding:10px 16px;border-top:1px solid #f0f2f8;text-align:center;background:transparent;">
+              <span style="font-size:8px;color:#c4c8d8;font-weight:600;letter-spacing:.10em;text-transform:uppercase;">Powered by Omni Franchise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-label">Your franchise, your brand</div>
+    </div>
+
+    <!-- ══ RIGHT: Franchise Overview & Analytics ══ -->
+    <div class="ph-wrap">
+      <div class="phone ph-right" style="width:238px;">
+        <div class="phone-inner" style="height:488px;">
+          <div class="ps">
+            <div class="ps-bar">Franchise</div>
+            <div class="ps-scroll">
+              <div class="ps-capability-header">
+                <div class="ps-lbl">Overview</div>
+                <div class="ps-title" style="font-size:14px;">Your franchise health</div>
+              </div>
+              <!-- Revenue chart -->
+              <div class="ps-chart-wrap">
+                <div class="ps-chart-top">
+                  <div>
+                    <div class="ps-chart-lbl">Monthly Revenue</div>
+                    <div class="ps-chart-val">$24.8K</div>
+                  </div>
+                  <div class="ps-chart-trend" style="color:#10b981;">↑ 12%</div>
+                </div>
+                <svg width="100%" height="38" viewBox="0 0 180 38" fill="none" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#10b981" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,32 C20,30 35,26 60,20 C85,14 100,22 120,10 C140,0 160,6 180,2" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M0,32 C20,30 35,26 60,20 C85,14 100,22 120,10 C140,0 160,6 180,2 L180,38 L0,38 Z" fill="url(#revGrad)"/>
+                </svg>
+              </div>
+              <!-- Key metrics -->
+              <div class="ps-stat"><div class="ps-stat-lbl">Active Locations</div><div class="ps-stat-num" style="font-size:18px;">7</div></div>
+              <div class="ps-stat"><div class="ps-stat-lbl">Avg Performance</div><div class="ps-stat-num" style="font-size:18px;color:#10b981;">94%</div></div>
+              <div class="ps-stat"><div class="ps-stat-lbl">Total Members</div><div class="ps-stat-num" style="font-size:18px;">128</div></div>
+              <div class="ps-stat"><div class="ps-stat-lbl">30D Conversions</div><div class="ps-stat-num" style="font-size:18px;">64</div></div>
+            </div>
+            <div class="ps-bottom"><div class="ps-input-lbl">Ask Omni</div><div class="ps-grid-ico">⊞</div><div class="ps-av-btn">YB</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-label">Franchise at a glance</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="tag">How It Works</div>
+      <h2 class="sec-title">Four steps to <span class="it">your</span> platform.</h2>
+      <p class="sec-sub">We handle every technical detail. You handle your brand and your people. That's the entire arrangement.</p>
+    </div>
+    <div class="how-track">
+      <div class="how-line"></div>
+      <div class="how-cards">
+
+        <!-- STEP 01: Brand It -->
+        <div class="hc">
+          <div class="hc-ghost">01</div>
+          <div class="hc-inner">
+            <div class="hc-top">
+              <div class="hc-num">01</div>
+              <div class="hc-time">~2 min</div>
+            </div>
+            <div class="hc-dot"></div>
+            <div class="hc-preview">
+              <div class="mini-phone">
+                <div class="mini-phone-inner">
+                  <div class="mps" style="height:195px;">
+                    <div class="mps-bar">Omni World</div>
+                    <div class="mps-appear">
+                      <div class="mps-atitle">Appearance</div>
+                      <div class="mps-albl">Background Color</div>
+                      <div class="mps-asub">Choose a color for your dashboard</div>
+                      <div class="mps-dots">
+                        <div class="mps-dot" style="background:#f9b8b8;"></div>
+                        <div class="mps-dot" style="background:#f9d4a0;"></div>
+                        <div class="mps-dot" style="background:#b8e8c8;"></div>
+                        <div class="mps-dot sel" style="background:#b8c8f0;"></div>
+                        <div class="mps-dot" style="background:#e0b8f0;"></div>
+                      </div>
+                      <div class="mps-albl">Custom Logo</div>
+                      <div class="mps-asub">Upload your logo (PNG or JPG)</div>
+                      <div class="mps-btn">Choose File</div>
+                      <div class="mps-reset">↺ Reset to Default</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hc-text">
+              <h3>Brand It</h3>
+              <p>Upload your logo, pick your color. Your franchise instantly looks like your business — not ours.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 02: Connect -->
+        <div class="hc">
+          <div class="hc-ghost">02</div>
+          <div class="hc-inner">
+            <div class="hc-top">
+              <div class="hc-num">02</div>
+              <div class="hc-time">~30 sec</div>
+            </div>
+            <div class="hc-dot"></div>
+            <div class="hc-preview">
+              <div class="mini-phone">
+                <div class="mini-phone-inner">
+                  <div class="mps" style="height:195px;">
+                    <div class="mps-bar">Omni World</div>
+                    <div class="mps-connect">
+                      <div class="mps-ig-icon">📷</div>
+                      <div class="mps-ig-lbl">Connect your Instagram</div>
+                      <div class="mps-ig-btn">Connect Instagram</div>
+                      <div class="mps-ig-sub">One tap. Instantly linked.<br/>Your team does the same.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hc-text">
+              <h3>Connect</h3>
+              <p>One click to link Instagram. Invite your team by email — same simple flow for everyone on your roster.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 03: Watch It Run -->
+        <div class="hc">
+          <div class="hc-ghost">03</div>
+          <div class="hc-inner">
+            <div class="hc-top">
+              <div class="hc-num">03</div>
+              <div class="hc-time">Live</div>
+            </div>
+            <div class="hc-dot"></div>
+            <div class="hc-preview">
+              <div class="mini-phone">
+                <div class="mini-phone-inner">
+                  <div class="mps" style="height:195px;">
+                    <div class="mps-bar">Omni World</div>
+                    <div class="mps-stat"><div class="mps-sl">Total Members</div><div class="mps-sn">10</div></div>
+                    <div class="mps-stat"><div class="mps-sl">7D Leads</div><div class="mps-sn">90</div></div>
+                    <div class="mps-stat"><div class="mps-sl">7D DMs</div><div class="mps-sn">292</div></div>
+                    <div class="mps-stat"><div class="mps-sl">7D Conversions</div><div class="mps-sn">16</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hc-text">
+              <h3>Watch It Run</h3>
+              <p>Open Franchise Admin and see every member's DMs, leads, conversions, and engagement — live, at a glance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 04: Scale Freely -->
+        <div class="hc">
+          <div class="hc-ghost">04</div>
+          <div class="hc-inner">
+            <div class="hc-top">
+              <div class="hc-num">04</div>
+              <div class="hc-time">Anytime</div>
+            </div>
+            <div class="hc-dot"></div>
+            <div class="hc-preview">
+              <div class="mini-phone">
+                <div class="mini-phone-inner">
+                  <div class="mps" style="height:195px;">
+                    <div class="mps-bar">Omni World</div>
+                    <div class="mps-add">
+                      <div class="mps-email-lbl">Add member email</div>
+                      <div class="mps-email-box">name@yourbrand.com</div>
+                      <div class="mps-add-btn">Add member</div>
+                      <div class="mps-add-hint">Email only. Defaults to Member,<br/>Active, and Unassigned location.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hc-text">
+              <h3>Scale Freely</h3>
+              <p>Add members anytime via email. No infrastructure calls, no dev team. It all just works.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /how-cards -->
+    </div><!-- /how-track -->
+  </div>
+
+  <script>
+    // Staggered scroll-in animation
+    const hcs = document.querySelectorAll('.hc');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.15 });
+    hcs.forEach(el => obs.observe(el));
+  </script>
+</section>
+
+<!-- FRANCHISE DASHBOARD SHOWCASE -->
+<section class="showcase" id="dashboard">
+  <div class="container">
+    <div class="tag">Franchise Dashboard</div>
+    <h2 class="sec-title">See everyone.<br /><span class="it">Own everything.</span></h2>
+    <div class="two-col">
+      <div class="phones-pair">
+        <!-- Stats phone -->
+        <div class="phone" style="width:190px;">
+          <div class="phone-inner" style="height:420px;">
+            <div class="ps">
+              <div class="ps-bar" style="font-size:9.5px;">Omni World</div>
+              <div class="ps-scroll">
+                <div class="ps-header" style="margin:8px 8px 0;padding:10px 12px;">
+                  <div class="ps-lbl">Franchise Admin</div>
+                  <div class="ps-title" style="font-size:12px;">Member usage and access</div>
+                  <div class="ps-desc">Track activity and manage your roster in one place.</div>
+                </div>
+                <div class="ps-stat" style="margin:0 8px;padding:8px 4px;"><div class="ps-stat-lbl">Total Members</div><div class="ps-stat-num" style="font-size:17px;">10</div></div>
+                <div class="ps-stat" style="margin:0 8px;padding:8px 4px;"><div class="ps-stat-lbl">7D Leads</div><div class="ps-stat-num" style="font-size:17px;">90</div></div>
+                <div class="ps-stat" style="margin:0 8px;padding:8px 4px;"><div class="ps-stat-lbl">7D DMs</div><div class="ps-stat-num" style="font-size:17px;">292</div></div>
+                <div class="ps-stat" style="margin:0 8px;padding:8px 4px;"><div class="ps-stat-lbl">7D Conversions</div><div class="ps-stat-num" style="font-size:17px;">16</div></div>
+              </div>
+              <div class="ps-bottom" style="padding:6px 8px;"><div class="ps-input-lbl">Ask Omni</div><div class="ps-av-btn">IA</div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Member list phone -->
+        <div class="phone" style="width:210px;">
+          <div class="phone-inner" style="height:460px;">
+            <div class="ps">
+              <div class="ps-bar" style="font-size:9.5px;">Omni World</div>
+              <div class="ps-scroll">
+                <div class="ps-member" style="margin-top:8px;">
+                  <div class="ps-member-top"><div class="ps-av">JL</div><div><div class="ps-mname">Jordan Lee</div><div class="ps-memail">jordan@franchise.com</div></div></div>
+                  <div class="ps-mstats"><div><div class="ps-msl">Leads</div><div class="ps-msn">14</div></div><div><div class="ps-msl">Conversions</div><div class="ps-msn">3</div></div></div>
+                  <div class="ps-view">View details</div>
+                </div>
+                <div class="ps-member" style="margin-top:6px;">
+                  <div class="ps-member-top"><div class="ps-av">CR</div><div><div class="ps-mname">Camila Ruiz</div><div class="ps-memail">camila@franchise.com</div></div></div>
+                  <div class="ps-mstats"><div><div class="ps-msl">Leads</div><div class="ps-msn">11</div></div><div><div class="ps-msl">Conversions</div><div class="ps-msn">2</div></div></div>
+                  <div class="ps-view">View details</div>
+                </div>
+                <div class="ps-member" style="margin-top:6px;">
+                  <div class="ps-member-top"><div class="ps-av">EB</div><div><div class="ps-mname">Elliot Brooks</div><div class="ps-memail">elliot@franchise.com</div></div></div>
+                  <div class="ps-mstats"><div><div class="ps-msl">Leads</div><div class="ps-msn">9</div></div><div><div class="ps-msl">Conversions</div><div class="ps-msn">1</div></div></div>
+                  <div class="ps-view">View details</div>
+                </div>
+              </div>
+              <div class="ps-bottom" style="padding:6px 8px;"><div class="ps-input-lbl">Ask Omni</div><div class="ps-av-btn">IA</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Text -->
+      <div>
+        <p class="sec-sub">Hit the Franchise tab and instantly see every user under your umbrella — their stats, activity, and status. One screen. Full clarity.</p>
+        <div class="points">
+          <div class="point"><div class="pt-icon">📋</div><div><h4>Every member, one view</h4><p>See leads, DMs, conversions, logins, likes, and comments per member — no digging, no exports needed.</p></div></div>
+          <div class="point"><div class="pt-icon">➕</div><div><h4>Add members by email</h4><p>Type an email, hit Add Member. They're on your franchise immediately. No IT ticket, no onboarding call.</p></div></div>
+          <div class="point"><div class="pt-icon">🔍</div><div><h4>Drill into any account</h4><p>View details on any member — role, status, team, location, seat usage, and full engagement breakdown.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHITE-LABEL / APPEARANCE -->
+<section id="appearance">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="tag">White-Label</div>
+        <h2 class="sec-title">Their experience.<br /><span class="it">Your brand.</span></h2>
+        <p class="sec-sub">From the Appearance panel, franchisees set their own background color and upload their logo. What they see looks nothing like ours — it looks like theirs.</p>
+        <div class="points" style="margin-top:32px;">
+          <div class="point"><div class="pt-icon">🎨</div><div><h4>Custom background colors</h4><p>Each franchisee picks the color scheme that matches their brand — applied across the entire interface instantly.</p></div></div>
+          <div class="point"><div class="pt-icon">🖼️</div><div><h4>Logo upload</h4><p>PNG or JPG, up to 5MB. Their logo replaces ours everywhere — top of app, login, all of it.</p></div></div>
+          <div class="point"><div class="pt-icon">↺</div><div><h4>Reset anytime</h4><p>One tap to restore defaults. Full control, zero commitment — they can rebrand whenever they need to.</p></div></div>
+        </div>
+      </div>
+      <!-- Appearance phone -->
+      <div style="display:flex;justify-content:center;">
+        <div class="phone" style="width:260px;">
+          <div class="phone-inner" style="height:500px;">
+            <div class="ps">
+              <div class="ps-bar">Omni World</div>
+              <div class="ps-scroll">
+                <div style="padding:8px 10px 0;font-size:10px;color:#aaa;">← Appearance</div>
+                <div class="ps-appear">
+                  <h3>Appearance</h3>
+                  <div class="ps-asl">Background Color</div>
+                  <div class="ps-ass">Choose a background color for your dashboard</div>
+                  <div class="ps-colors">
+                    <div class="ps-col" style="background:#f9b8b8;"></div>
+                    <div class="ps-col" style="background:#f9d4a0;"></div>
+                    <div class="ps-col" style="background:#f9f0a0;"></div>
+                    <div class="ps-col" style="background:#b8e8c8;"></div>
+                    <div class="ps-col sel" style="background:#b8c8f0;"></div>
+                    <div class="ps-col" style="background:#e0b8f0;"></div>
+                  </div>
+                  <div class="ps-asl">Custom Logo</div>
+                  <div class="ps-ass">Upload your logo (PNG or JPG, max 5MB)</div>
+                  <div class="ps-file-btn">Choose File &nbsp;<span style="color:#bbb;">no file selected</span></div>
+                  <div class="ps-reset">↺ Reset to Default</div>
+                </div>
+              </div>
+              <div class="ps-bottom"><div class="ps-input-lbl">Ask Omni</div><div class="ps-grid-ico">⊞</div><div class="ps-av-btn">IA</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BENTO -->
+<section id="features">
+  <div class="container">
+    <div class="tag">Features</div>
+    <h2 class="sec-title">Everything you need.<br /><span class="dt">Nothing you don't.</span></h2>
+    <p class="sec-sub">Built for creators, agencies, and business owners who want the power of a full platform without the overhead of running one.</p>
+    <div class="bento">
+      <div class="bc acc c1"><span class="bc-icon">🏷️</span><h3>Full White-Labeling</h3><p>Your name, your logo, your colors — applied across the entire platform. Your clients never see our name.</p><div class="mini-stats"><div class="ms"><div class="ms-num">100%</div><div class="ms-lbl">Your Brand</div></div><div class="ms"><div class="ms-num">0</div><div class="ms-lbl">Dev Work</div></div></div></div>
+      <div class="bc c2"><span class="bc-icon">📈</span><h3>Live Franchise Metrics</h3><p>Total members, 7D leads, DMs, conversions, and engagement — updated in real time for every account on your roster. Know who's performing and who needs attention.</p><div class="mini-stats"><div class="ms"><div class="ms-num">DMs</div><div class="ms-lbl">Per Member</div></div><div class="ms"><div class="ms-num">Leads</div><div class="ms-lbl">7D Window</div></div><div class="ms"><div class="ms-num">Conv.</div><div class="ms-lbl">Tracked</div></div></div></div>
+      <div class="bc c3"><span class="bc-icon">👥</span><h3>Team & Member Management</h3><p>Add anyone by email. See their role, status, team, location, seat usage, and full activity log — all in Franchise Admin. Remove or reassign with a single tap.</p></div>
+      <div class="bc acc c4"><span class="bc-icon">⚡</span><h3>Zero Technical Lift</h3><p>No servers. No code. No integrations to debug. We built it and maintain it. You just run your business.</p></div>
+      <div class="bc c5"><span class="bc-icon">🔒</span><h3>Secure by Default</h3><p>Enterprise security on every account. Your clients' data is protected without you ever thinking about it.</p></div>
+      <div class="bc c6"><span class="bc-icon">📱</span><h3>One-Click Connect</h3><p>Your team clicks connect. No manual setup, no instructions to read. It works the first time, every time.</p></div>
+      <div class="bc c7"><span class="bc-icon">🤝</span><h3>Powered by Ovis</h3><p>The only constant under the hood. Invisible to your clients, essential to your reliability.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="start">
+  <div class="container cta-wrap">
+    <div class="cta-box">
+      <h2>Elevate with the times.<br /><span class="it">Without the overhead.</span></h2>
+      <p>Your brand. Your clients. Your platform — fully running, fully yours, from day one. No dev team. No setup. Just results.</p>
+      <div class="actions" style="justify-content:center;">
+        <a href="#" class="btn-p">Claim Your Franchise</a>
+        <a href="#" class="btn-s">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Omni<span>Franchise</span></div>
+  <div class="footer-r">Powered by Ovis</div>
+</footer>
+
+</body>
+</html>
