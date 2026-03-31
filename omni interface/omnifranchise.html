@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OmniFranchise — Own the System</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0c0c0c; --surface: rgba(255,255,255,0.04);
       --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.13);
-      --white: #ffffff; --muted: rgba(255,255,255,0.48); --dim: rgba(255,255,255,0.22);
+      --white: #ffffff; --muted: rgba(255,255,255,0.72); --dim: rgba(255,255,255,0.40);
       --chrome: #c2c2c2; --chrome2: #888888; --charcoal: #2a2a2a;
       --radius: 24px; --radius-sm: 14px;
     }
@@ -31,13 +32,22 @@
     .nav-cta { background:var(--white)!important;color:#0c0c0c!important;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;transition:opacity .2s,transform .2s; }
     .nav-cta:hover { opacity:.88;transform:translateY(-1px); }
 
-    .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 80px; }
+    .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 80px; overflow:hidden; }
+    #hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none; }
+    .hero > *:not(#hero-canvas) { position:relative;z-index:1; }
+    #features { position:relative; }
+    #features-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.5; }
+    #features > *:not(#features-canvas) { position:relative;z-index:1; }
+    #start { position:relative; }
+    #cta-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none; }
+    #start > *:not(#cta-canvas) { position:relative;z-index:1; }
     .badge { display:inline-flex;align-items:center;gap:8px;background:rgba(194,194,194,0.07);border:1px solid rgba(194,194,194,0.18);border-radius:100px;padding:6px 18px;font-size:12px;font-weight:500;color:var(--chrome);letter-spacing:.8px;text-transform:uppercase;margin-bottom:40px; }
     .badge-dot { width:6px;height:6px;background:var(--chrome);border-radius:50%;animation:pulse 2.2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
     .hero h1 { font-family:'Instrument Serif',serif;font-size:clamp(52px,8.5vw,102px);font-weight:400;letter-spacing:-3.5px;line-height:.93;max-width:900px;margin-bottom:32px; }
-    .hero h1 .it { font-style:italic;color:var(--chrome); }
-    .hero h1 .dt { color:var(--muted); }
+    .hero h1 .line-1 { color:#ffffff; }
+    .hero h1 .it { font-style:italic;color:rgba(255,255,255,0.72); }
+    .hero h1 .dt { color:rgba(255,255,255,0.55); }
     .hero p { font-size:18px;font-weight:300;color:var(--muted);max-width:500px;margin:0 auto 52px;line-height:1.75; }
     .actions { display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center; }
     .btn-p { background:var(--white);color:#0c0c0c;padding:16px 36px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 40px rgba(255,255,255,0.1); }
@@ -51,7 +61,9 @@
     .sec-title { font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;letter-spacing:-2px;line-height:1.05;margin-bottom:18px; }
     .sec-title .it { font-style:italic;color:var(--chrome); }
     .sec-title .dt { color:var(--muted); }
-    .sec-sub { font-size:17px;color:var(--muted);line-height:1.75;max-width:520px;font-weight:300; }
+    .sec-sub { font-size:17px;color:rgba(255,255,255,0.72);line-height:1.75;max-width:520px;font-weight:300; }
+
+    .feature-icon { width:28px;height:28px;stroke:rgba(255,255,255,0.85);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:1rem;display:block; }
 
     /* ── PHONE SYSTEM ── */
     .phone {
@@ -473,8 +485,9 @@
 
 <!-- HERO -->
 <section class="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="badge"><span class="badge-dot"></span>Now Available — OmniFranchise</div>
-  <h1>Your brand.<br /><span class="it">Our system.</span><br /><span class="dt">Zero setup.</span></h1>
+  <h1><span class="line-1">Your brand.</span><br /><span class="it">Our system.</span><br /><span class="dt">Zero setup.</span></h1>
   <p>White-label your own platform in minutes. Your logo, your colors, your clients — running seamlessly under your name. No dev team. No maintenance. No headache.</p>
   <div class="actions">
     <a href="#start" class="btn-p">Claim Your Franchise</a>
@@ -482,7 +495,7 @@
   </div>
 
   <!-- THREE PHONES -->
-  <div class="hero-phones">
+  <div class="hero-phones" id="phone-scene-section">
 
     <!-- ══ LEFT: Members & Analytics ══ -->
     <div class="ph-wrap">
@@ -909,24 +922,26 @@
 
 <!-- FEATURES BENTO -->
 <section id="features">
+  <canvas id="features-canvas"></canvas>
   <div class="container">
     <div class="tag">Features</div>
     <h2 class="sec-title">Everything you need.<br /><span class="dt">Nothing you don't.</span></h2>
     <p class="sec-sub">Built for creators, agencies, and business owners who want the power of a full platform without the overhead of running one.</p>
     <div class="bento">
-      <div class="bc acc c1"><span class="bc-icon">🏷️</span><h3>Full White-Labeling</h3><p>Your name, your logo, your colors — applied across the entire platform. Your clients never see our name.</p><div class="mini-stats"><div class="ms"><div class="ms-num">100%</div><div class="ms-lbl">Your Brand</div></div><div class="ms"><div class="ms-num">0</div><div class="ms-lbl">Dev Work</div></div></div></div>
-      <div class="bc c2"><span class="bc-icon">📈</span><h3>Live Franchise Metrics</h3><p>Total members, 7D leads, DMs, conversions, and engagement — updated in real time for every account on your roster. Know who's performing and who needs attention.</p><div class="mini-stats"><div class="ms"><div class="ms-num">DMs</div><div class="ms-lbl">Per Member</div></div><div class="ms"><div class="ms-num">Leads</div><div class="ms-lbl">7D Window</div></div><div class="ms"><div class="ms-num">Conv.</div><div class="ms-lbl">Tracked</div></div></div></div>
-      <div class="bc c3"><span class="bc-icon">👥</span><h3>Team & Member Management</h3><p>Add anyone by email. See their role, status, team, location, seat usage, and full activity log — all in Franchise Admin. Remove or reassign with a single tap.</p></div>
-      <div class="bc acc c4"><span class="bc-icon">⚡</span><h3>Zero Technical Lift</h3><p>No servers. No code. No integrations to debug. We built it and maintain it. You just run your business.</p></div>
-      <div class="bc c5"><span class="bc-icon">🔒</span><h3>Secure by Default</h3><p>Enterprise security on every account. Your clients' data is protected without you ever thinking about it.</p></div>
-      <div class="bc c6"><span class="bc-icon">📱</span><h3>One-Click Connect</h3><p>Your team clicks connect. No manual setup, no instructions to read. It works the first time, every time.</p></div>
-      <div class="bc c7"><span class="bc-icon">🤝</span><h3>Powered by Ovis</h3><p>The only constant under the hood. Invisible to your clients, essential to your reliability.</p></div>
+      <div class="bc acc c1"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><h3>Full White-Labeling</h3><p>Your name, your logo, your colors — applied across the entire platform. Your clients never see our name.</p><div class="mini-stats"><div class="ms"><div class="ms-num">100%</div><div class="ms-lbl">Your Brand</div></div><div class="ms"><div class="ms-num">0</div><div class="ms-lbl">Dev Work</div></div></div></div>
+      <div class="bc c2"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg><h3>Live Franchise Metrics</h3><p>Total members, 7D leads, DMs, conversions, and engagement — updated in real time for every account on your roster. Know who's performing and who needs attention.</p><div class="mini-stats"><div class="ms"><div class="ms-num">DMs</div><div class="ms-lbl">Per Member</div></div><div class="ms"><div class="ms-num">Leads</div><div class="ms-lbl">7D Window</div></div><div class="ms"><div class="ms-num">Conv.</div><div class="ms-lbl">Tracked</div></div></div></div>
+      <div class="bc c3"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><h3>Team & Member Management</h3><p>Add anyone by email. See their role, status, team, location, seat usage, and full activity log — all in Franchise Admin. Remove or reassign with a single tap.</p></div>
+      <div class="bc acc c4"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><h3>Zero Technical Lift</h3><p>No servers. No code. No integrations to debug. We built it and maintain it. You just run your business.</p></div>
+      <div class="bc c5"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h3>Secure by Default</h3><p>Enterprise security on every account. Your clients' data is protected without you ever thinking about it.</p></div>
+      <div class="bc c6"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><h3>One-Click Connect</h3><p>Your team clicks connect. No manual setup, no instructions to read. It works the first time, every time.</p></div>
+      <div class="bc c7"><svg class="feature-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><h3>Powered by Ovis</h3><p>The only constant under the hood. Invisible to your clients, essential to your reliability.</p></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section id="start">
+  <canvas id="cta-canvas"></canvas>
   <div class="container cta-wrap">
     <div class="cta-box">
       <h2>Elevate with the times.<br /><span class="it">Without the overhead.</span></h2>
@@ -944,6 +959,278 @@
   <div class="footer-logo">Omni<span>Franchise</span></div>
   <div class="footer-r">Powered by Ovis</div>
 </footer>
+
+
+<script>
+// ─── HERO PARTICLE FIELD ───────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.z = 5;
+  const COUNT = 1800;
+  const positions = new Float32Array(COUNT * 3);
+  const velocities = new Float32Array(COUNT * 3);
+  const sizes = new Float32Array(COUNT);
+  for (let i = 0; i < COUNT; i++) {
+    const i3 = i * 3;
+    positions[i3]     = (Math.random() - 0.5) * 18;
+    positions[i3 + 1] = (Math.random() - 0.5) * 12;
+    positions[i3 + 2] = (Math.random() - 0.5) * 8;
+    velocities[i3]     = (Math.random() - 0.5) * 0.002;
+    velocities[i3 + 1] = (Math.random() - 0.5) * 0.002;
+    velocities[i3 + 2] = 0;
+    sizes[i] = Math.random() * 2 + 0.5;
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  const material = new THREE.PointsMaterial({ color: 0xffffff, size: 0.045, transparent: true, opacity: 0.45, sizeAttenuation: true });
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
+    mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  function resize() {
+    const el = canvas.parentElement;
+    const w = el.offsetWidth, h = el.offsetHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    const pos = geometry.attributes.position.array;
+    for (let i = 0; i < COUNT; i++) {
+      const i3 = i * 3;
+      pos[i3]     += velocities[i3];
+      pos[i3 + 1] += velocities[i3 + 1];
+      if (pos[i3] >  9) pos[i3] = -9;
+      if (pos[i3] < -9) pos[i3] =  9;
+      if (pos[i3 + 1] >  6) pos[i3 + 1] = -6;
+      if (pos[i3 + 1] < -6) pos[i3 + 1] =  6;
+    }
+    geometry.attributes.position.needsUpdate = true;
+    camera.position.x += (mouseX * 1.2 - camera.position.x) * 0.04;
+    camera.position.y += (mouseY * 0.8 - camera.position.y) * 0.04;
+    camera.lookAt(scene.position);
+    particles.rotation.z = t * 0.018;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── 3D PHONE SCENE ────────────────────────────────────────────────────────
+(function() {
+  const section = document.getElementById('phone-scene-section');
+  if (!section) return;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'phone-canvas';
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+  section.style.position = 'relative';
+  section.insertBefore(canvas, section.firstChild);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0, 9);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambient);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  keyLight.position.set(5, 8, 5);
+  scene.add(keyLight);
+  const rimLight = new THREE.DirectionalLight(0x8888ff, 0.6);
+  rimLight.position.set(-5, -3, -3);
+  scene.add(rimLight);
+  function makePhone(screenColor) {
+    const group = new THREE.Group();
+    const bodyGeo = new THREE.BoxGeometry(1.4, 2.8, 0.12);
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.2, metalness: 0.8 });
+    group.add(new THREE.Mesh(bodyGeo, bodyMat));
+    const screenGeo = new THREE.BoxGeometry(1.18, 2.45, 0.02);
+    const screenMat = new THREE.MeshStandardMaterial({ color: screenColor, roughness: 0.05, metalness: 0.1, emissive: screenColor, emissiveIntensity: 0.08 });
+    const screen = new THREE.Mesh(screenGeo, screenMat);
+    screen.position.z = 0.07;
+    group.add(screen);
+    const notchMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
+    const notch = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.08, 0.025), notchMat);
+    notch.position.set(0, 1.16, 0.085);
+    group.add(notch);
+    const home = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.04, 0.025), notchMat);
+    home.position.set(0, -1.18, 0.085);
+    group.add(home);
+    return group;
+  }
+  const phoneLeft   = makePhone(0xf4f4f5);
+  const phoneCenter = makePhone(0xffffff);
+  const phoneRight  = makePhone(0xf0f4ff);
+  phoneLeft.position.set(-3.2, 0, -1.5);
+  phoneLeft.rotation.y = 0.35;
+  phoneRight.position.set(3.2, 0, -1.5);
+  phoneRight.rotation.y = -0.35;
+  scene.add(phoneLeft, phoneCenter, phoneRight);
+  function resize() {
+    const w = section.offsetWidth, h = section.offsetHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', (e) => {
+    mx = (e.clientX / window.innerWidth  - 0.5);
+    my = -(e.clientY / window.innerHeight - 0.5);
+  });
+  let scrollProgress = 0;
+  window.addEventListener('scroll', () => {
+    const rect = section.getBoundingClientRect();
+    const total = section.offsetHeight + window.innerHeight;
+    scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / total));
+  });
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    phoneLeft.position.y   = Math.sin(t * 0.7 + 0.0) * 0.18;
+    phoneCenter.position.y = Math.sin(t * 0.7 + 1.0) * 0.22;
+    phoneRight.position.y  = Math.sin(t * 0.7 + 2.0) * 0.18;
+    const tiltX = my * 0.35, tiltY = mx * 0.45;
+    phoneLeft.rotation.x   = tiltX; phoneLeft.rotation.y   = 0.35 + tiltY;
+    phoneCenter.rotation.x = tiltX; phoneCenter.rotation.y = tiltY;
+    phoneRight.rotation.x  = tiltX; phoneRight.rotation.y  = -0.35 + tiltY;
+    phoneLeft.position.z   = -1.5 + scrollProgress * 1.2;
+    phoneRight.position.z  = -1.5 + scrollProgress * 1.2;
+    phoneCenter.position.z = scrollProgress * 0.5;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── FEATURES FLOATING GEOMETRY ────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('features-canvas');
+  if (!canvas) return;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.z = 7;
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.07 });
+  const ambient = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(ambient);
+  const shapes = [];
+  const geos = [
+    new THREE.OctahedronGeometry(0.7), new THREE.TetrahedronGeometry(0.8),
+    new THREE.IcosahedronGeometry(0.6), new THREE.OctahedronGeometry(0.4),
+    new THREE.IcosahedronGeometry(0.9), new THREE.TetrahedronGeometry(0.5),
+    new THREE.OctahedronGeometry(0.55),
+  ];
+  geos.forEach((geo) => {
+    const mesh = new THREE.Mesh(geo, mat.clone());
+    mesh.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 4 - 1);
+    mesh.userData.rotSpeed = { x: (Math.random() - 0.5) * 0.008, y: (Math.random() - 0.5) * 0.012 };
+    scene.add(mesh);
+    shapes.push(mesh);
+  });
+  function resize() {
+    const el = canvas.parentElement;
+    const w = el.offsetWidth, h = el.offsetHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const section = document.getElementById('features');
+  function updateOpacity() {
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    const visible = 1 - Math.max(0, Math.min(1, rect.top / window.innerHeight));
+    canvas.style.opacity = (visible * 0.55).toFixed(3);
+  }
+  window.addEventListener('scroll', updateOpacity);
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    shapes.forEach((s, i) => {
+      s.rotation.x += s.userData.rotSpeed.x;
+      s.rotation.y += s.userData.rotSpeed.y;
+      s.position.y += Math.sin(t * 0.4 + i) * 0.0015;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── CTA RIPPLE PLANE ──────────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 2.5, 7);
+  camera.lookAt(0, 0, 0);
+  const geo = new THREE.PlaneGeometry(18, 10, 80, 45);
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.06 });
+  const plane = new THREE.Mesh(geo, mat);
+  plane.rotation.x = -Math.PI / 4;
+  scene.add(plane);
+  scene.add(new THREE.AmbientLight(0xffffff, 1));
+  function resize() {
+    const el = canvas.parentElement;
+    const w = el.offsetWidth, h = el.offsetHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  let mx = 0;
+  document.addEventListener('mousemove', (e) => { mx = (e.clientX / window.innerWidth - 0.5); });
+  const pos = geo.attributes.position;
+  const originalY = new Float32Array(pos.count);
+  for (let i = 0; i < pos.count; i++) originalY[i] = pos.getY(i);
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i), z = pos.getZ(i);
+      const wave = Math.sin(x * 0.5 + t * 1.1) * 0.25
+                 + Math.sin(z * 0.4 + t * 0.7) * 0.2
+                 + Math.sin((x + z) * 0.3 + t * 0.9 + mx * 2) * 0.15;
+      pos.setY(i, originalY[i] + wave);
+    }
+    pos.needsUpdate = true;
+    geo.computeVertexNormals();
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── PERFORMANCE + REDUCED MOTION ─────────────────────────────────────────
+document.addEventListener('visibilitychange', () => {});
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  ['hero-canvas','phone-canvas','features-canvas','cta-canvas'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+</script>
 
 </body>
 </html>
