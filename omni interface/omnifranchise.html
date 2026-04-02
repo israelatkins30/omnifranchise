@@ -33,8 +33,8 @@
     .nav-cta:hover { opacity:.88;transform:translateY(-1px); }
 
     .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 80px;overflow:hidden;background-image:url('https://images.unsplash.com/photo-1503179008861-d1e2b41f8bec?auto=format&fit=crop&w=1920&q=90&ixlib=rb-4.1.0');background-size:cover;background-position:center 60%; }
-    .hero::before { content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(18,8,2,0.56) 0%, rgba(12,5,1,0.50) 28%, rgba(12,5,1,0.54) 62%, rgba(4,1,0,0.93) 100%); }
-    .hero::after  { content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 120% 60% at 50% 100%, rgba(180,80,15,0.18) 0%, transparent 60%),radial-gradient(ellipse 80% 40% at 0% 50%, rgba(10,5,0,0.22) 0%, transparent 70%),radial-gradient(ellipse 80% 40% at 100% 50%, rgba(10,5,0,0.22) 0%, transparent 70%);pointer-events:none; }
+    .hero::before { content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(8,3,0,0.68) 0%, rgba(6,2,0,0.62) 28%, rgba(6,2,0,0.66) 62%, rgba(2,0,0,0.96) 100%); }
+    .hero::after  { content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 110% 55% at 50% 100%, rgba(160,65,10,0.20) 0%, transparent 58%),radial-gradient(ellipse 60% 100% at 0% 50%, rgba(4,2,0,0.32) 0%, transparent 70%),radial-gradient(ellipse 60% 100% at 100% 50%, rgba(4,2,0,0.32) 0%, transparent 70%);pointer-events:none; }
     #hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none; }
     .hero > *:not(#hero-canvas) { position:relative;z-index:1; }
     #features { position:relative; }
@@ -565,38 +565,127 @@
       <div class="ph-label">All your members, one view</div>
     </div>
 
-    <!-- ══ CENTER: Brand Title Splash ══ -->
+    <!-- ══ CENTER: Live Branded Storefront ══ -->
     <div class="ph-wrap">
       <div class="phone ph-center" style="width:268px;">
         <div class="phone-inner" style="height:552px;">
-          <div class="ps" style="background:linear-gradient(170deg,#f4f6ff 0%,#ffffff 45%);">
-            <div class="ps-bar" style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a0aaba;background:transparent;border-bottom:1px solid rgba(0,0,0,0.05);">Omni Franchise</div>
-            <!-- splash body -->
-            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:0 24px;text-align:center;gap:0;">
-              <!-- Logo placeholder -->
-              <div style="width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 10px 28px rgba(99,102,241,0.32);">
-                <span style="color:#fff;font-size:20px;font-weight:900;letter-spacing:-.5px;">YB</span>
+          <!-- Phone screen -->
+          <div id="brand-phone-screen" class="ps" style="background:#f7f8fa;gap:0;">
+
+            <!-- Status bar -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 4px;flex-shrink:0;">
+              <span style="font-size:9px;font-weight:700;color:#1a1a2e;">9:41</span>
+              <div style="display:flex;gap:4px;align-items:center;">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none"><rect x="0" y="3" width="2" height="6" rx="1" fill="#1a1a2e" opacity=".35"/><rect x="3" y="2" width="2" height="7" rx="1" fill="#1a1a2e" opacity=".55"/><rect x="6" y="1" width="2" height="8" rx="1" fill="#1a1a2e" opacity=".75"/><rect x="9" y="0" width="2" height="9" rx="1" fill="#1a1a2e"/></svg>
+                <svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M5.5 1.5C7.4 1.5 9.1 2.3 10.3 3.6L11 2.8C9.6 1.3 7.65 0.3 5.5 0.3C3.35 0.3 1.4 1.3 0 2.8L0.7 3.6C1.9 2.3 3.6 1.5 5.5 1.5Z" fill="#1a1a2e" opacity=".4"/><path d="M5.5 3.5C6.85 3.5 8.05 4.05 8.9 4.95L9.6 4.15C8.55 3.05 7.1 2.35 5.5 2.35C3.9 2.35 2.45 3.05 1.4 4.15L2.1 4.95C2.95 4.05 4.15 3.5 5.5 3.5Z" fill="#1a1a2e" opacity=".65"/><circle cx="5.5" cy="7" r="1.2" fill="#1a1a2e"/></svg>
+                <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><rect x=".5" y=".5" width="16" height="9" rx="2.5" stroke="#1a1a2e" stroke-opacity=".35"/><rect x="1.5" y="1.5" width="12" height="7" rx="1.5" id="batt-fill" fill="#1a1a2e"/><path d="M17.5 3.5v3a1.5 1.5 0 0 0 0-3Z" fill="#1a1a2e" opacity=".4"/></svg>
               </div>
-              <!-- Brand name -->
-              <div style="font-size:28px;font-weight:900;letter-spacing:-.04em;color:#1a1a2e;line-height:1.06;margin-bottom:10px;">Your Brand<br>Here</div>
-              <!-- Accent rule -->
-              <div style="width:28px;height:3px;border-radius:3px;background:linear-gradient(to right,#4f46e5,#7c3aed);margin-bottom:10px;"></div>
-              <!-- Tagline -->
-              <div style="font-size:10.5px;color:#8892a4;font-weight:500;letter-spacing:.01em;margin-bottom:26px;">Your platform. Your rules.</div>
-              <!-- Brand color swatches -->
-              <div style="display:flex;gap:7px;align-items:center;margin-bottom:4px;">
-                <div style="width:20px;height:20px;border-radius:50%;background:#4f46e5;box-shadow:0 2px 6px rgba(79,70,229,0.4);"></div>
-                <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;box-shadow:0 2px 6px rgba(124,58,237,0.4);"></div>
-                <div style="width:20px;height:20px;border-radius:50%;background:#1a1a2e;box-shadow:0 2px 6px rgba(0,0,0,0.2);"></div>
-                <div style="width:20px;height:20px;border-radius:50%;background:#e8eaff;border:1.5px dashed #b8bacc;display:flex;align-items:center;justify-content:center;">
-                  <span style="font-size:11px;color:#9698b8;line-height:1;">+</span>
+            </div>
+
+            <!-- Brand header card -->
+            <div id="brand-header-card" style="margin:6px 10px 0;border-radius:18px;padding:18px 16px 14px;background:linear-gradient(138deg,#1A58A0 0%,#0e3d74 100%);position:relative;overflow:hidden;flex-shrink:0;">
+              <!-- subtle pattern overlay -->
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 110% -10%,rgba(255,255,255,0.12) 0%,transparent 60%);pointer-events:none;"></div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;position:relative;">
+                <!-- Brand logo icon -->
+                <div id="brand-logo" style="width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;backdrop-filter:blur(4px);">
+                  <span style="font-size:14px;font-weight:900;color:#fff;letter-spacing:-.5px;">YB</span>
+                </div>
+                <div>
+                  <div id="brand-name-display" style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.1;">Your Brand</div>
+                  <div style="font-size:8px;font-weight:500;color:rgba(255,255,255,0.65);letter-spacing:.04em;text-transform:uppercase;margin-top:1px;">Franchise Platform</div>
+                </div>
+                <div style="margin-left:auto;background:rgba(255,255,255,0.14);border-radius:8px;padding:4px 8px;">
+                  <span style="font-size:8px;font-weight:700;color:#fff;letter-spacing:.06em;">LIVE</span>
                 </div>
               </div>
-              <div style="font-size:8.5px;color:#b8bcc8;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-top:6px;">Your colors</div>
+              <!-- Stats row -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;position:relative;">
+                <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:7px 8px;backdrop-filter:blur(4px);">
+                  <div style="font-size:14px;font-weight:800;color:#fff;line-height:1;">128</div>
+                  <div style="font-size:6.5px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Members</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:7px 8px;backdrop-filter:blur(4px);">
+                  <div style="font-size:14px;font-weight:800;color:#fff;line-height:1;">$24K</div>
+                  <div style="font-size:6.5px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Revenue</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:7px 8px;backdrop-filter:blur(4px);">
+                  <div style="font-size:14px;font-weight:800;color:#fff;line-height:1;">94%</div>
+                  <div style="font-size:6.5px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Retention</div>
+                </div>
+              </div>
             </div>
-            <!-- Powered by footer -->
-            <div style="padding:10px 16px;border-top:1px solid #f0f2f8;text-align:center;background:transparent;">
-              <span style="font-size:8px;color:#c4c8d8;font-weight:600;letter-spacing:.10em;text-transform:uppercase;">Powered by Omni Franchise</span>
+
+            <!-- Quick actions row -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:8px 10px 0;flex-shrink:0;">
+              <div style="background:#fff;border-radius:13px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 1px 6px rgba(0,0,0,0.05);">
+                <div id="qa-1" style="width:26px;height:26px;border-radius:8px;background:#1A58A0;display:flex;align-items:center;justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <span style="font-size:7px;font-weight:600;color:#444;text-align:center;">Members</span>
+              </div>
+              <div style="background:#fff;border-radius:13px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 1px 6px rgba(0,0,0,0.05);">
+                <div id="qa-2" style="width:26px;height:26px;border-radius:8px;background:#1A58A0;display:flex;align-items:center;justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <span style="font-size:7px;font-weight:600;color:#444;text-align:center;">Analytics</span>
+              </div>
+              <div style="background:#fff;border-radius:13px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 1px 6px rgba(0,0,0,0.05);">
+                <div id="qa-3" style="width:26px;height:26px;border-radius:8px;background:#1A58A0;display:flex;align-items:center;justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <span style="font-size:7px;font-weight:600;color:#444;text-align:center;">Locations</span>
+              </div>
+              <div style="background:#fff;border-radius:13px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 1px 6px rgba(0,0,0,0.05);">
+                <div id="qa-4" style="width:26px;height:26px;border-radius:8px;background:#1A58A0;display:flex;align-items:center;justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                </div>
+                <span style="font-size:7px;font-weight:600;color:#444;text-align:center;">Brand</span>
+              </div>
+            </div>
+
+            <!-- Recent activity feed -->
+            <div style="margin:8px 10px 0;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 1px 6px rgba(0,0,0,0.04);flex-shrink:0;">
+              <div style="font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a0a8b8;margin-bottom:7px;">Recent Activity</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div id="act-dot-1" style="width:7px;height:7px;border-radius:50%;background:#1A58A0;flex-shrink:0;"></div>
+                  <div style="flex:1;"><div style="font-size:8.5px;font-weight:600;color:#1a1a2e;">New member joined</div><div style="font-size:7px;color:#a0a8b8;">2 min ago · Location #3</div></div>
+                  <div style="font-size:8px;font-weight:700;color:#10b981;">+$149</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div id="act-dot-2" style="width:7px;height:7px;border-radius:50%;background:#1A58A0;flex-shrink:0;opacity:.55;"></div>
+                  <div style="flex:1;"><div style="font-size:8.5px;font-weight:600;color:#1a1a2e;">Renewal processed</div><div style="font-size:7px;color:#a0a8b8;">18 min ago · Location #1</div></div>
+                  <div style="font-size:8px;font-weight:700;color:#10b981;">+$89</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div id="act-dot-3" style="width:7px;height:7px;border-radius:50%;background:#1A58A0;flex-shrink:0;opacity:.35;"></div>
+                  <div style="flex:1;"><div style="font-size:8.5px;font-weight:600;color:#1a1a2e;">Check-in streak: 7 days</div><div style="font-size:7px;color:#a0a8b8;">1 hr ago · Marcus T.</div></div>
+                  <div style="font-size:8px;font-weight:700;color:#f59e0b;">🔥</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spectrum arc color wheel -->
+            <div style="margin:8px 10px 0;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 1px 6px rgba(0,0,0,0.04);flex-shrink:0;">
+              <div style="font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a0a8b8;margin-bottom:6px;">Brand Color</div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <!-- Arc canvas -->
+                <canvas id="color-arc" width="90" height="52" style="cursor:pointer;flex-shrink:0;"></canvas>
+                <!-- Selected color preview -->
+                <div style="flex:1;">
+                  <div id="color-swatch" style="width:100%;height:22px;border-radius:7px;background:#1A58A0;margin-bottom:5px;transition:background .15s;"></div>
+                  <div id="color-hex" style="font-size:9px;font-weight:700;color:#1a1a2e;letter-spacing:.04em;font-family:'Inter',monospace;">#1A58A0</div>
+                  <div style="font-size:7px;color:#a0a8b8;margin-top:1px;">Drag arc to change</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="ps-bottom" style="margin-top:auto;">
+              <div class="ps-input-lbl">Ask Omni</div>
+              <div class="ps-grid-ico">⊞</div>
+              <div id="brand-av-btn" class="ps-av-btn" style="background:#1A58A0;color:#fff;">YB</div>
             </div>
           </div>
         </div>
@@ -975,6 +1064,50 @@
   const ctx = canvas.getContext('2d');
   let W = 0, H = 0;
 
+  // ── Building window grid — generated once, stable positions ─────────────
+  // Each window: screen-space x/y fraction, warm/cool, flicker phase/speed
+  const WIN_COUNT = 110;
+  const windows = Array.from({length: WIN_COUNT}, () => ({
+    x:   0.04 + Math.random() * 0.92,
+    y:   0.08 + Math.random() * 0.58,   // upper 2/3 of frame = buildings
+    w:   1.5  + Math.random() * 2.8,    // px width
+    h:   1.2  + Math.random() * 2.2,    // px height
+    // warm: most windows are warm yellow-white; a few cool white
+    warm: Math.random() < 0.78,
+    ph:  Math.random() * Math.PI * 2,
+    // flicker speed — very slow (buildings don't strobe, they just breathe)
+    sp:  0.08 + Math.random() * 0.28,
+    // base opacity — most are dim, a handful are brighter
+    base: Math.random() < 0.15 ? (0.28 + Math.random() * 0.38)
+                                : (0.06 + Math.random() * 0.18),
+    // a small subset can randomly go dark for a beat
+    canDark: Math.random() < 0.22,
+    darkNext: 8 + Math.random() * 40,
+    darkDur:  0,
+    darkT:    -999,
+  }));
+
+  // ── Lens flare definitions (warm amber only — no blue) ───────────────────
+  const flares = [
+    { x:0.13, y:0.20, hue:42,  dur:2.8, interval:12.0, next:3.5,  t0:-999 },
+    { x:0.81, y:0.16, hue:34,  dur:2.4, interval:10.5, next:7.2,  t0:-999 },
+    { x:0.51, y:0.08, hue:46,  dur:3.0, interval:16.0, next:11.0, t0:-999 },
+  ];
+
+  // ── Car light streaks ────────────────────────────────────────────────────
+  const streaks = Array.from({length:22}, () => {
+    const dir = Math.random() < 0.52 ? 1 : -1;
+    return {
+      x:   Math.random(),
+      y:   0.70 + Math.random() * 0.24,
+      len: 0.04 + Math.random() * 0.11,
+      spd: (0.0005 + Math.random() * 0.0018) * dir,
+      warm: Math.random() < 0.65,
+      a:   0.14 + Math.random() * 0.30,   // more subtle than before
+      w:   0.8 + Math.random() * 2.0,
+    };
+  });
+
   function resize() {
     const pr = Math.min(devicePixelRatio, 2);
     W = canvas.offsetWidth  || innerWidth;
@@ -982,144 +1115,79 @@
     canvas.width  = W * pr;
     canvas.height = H * pr;
     ctx.setTransform(pr, 0, 0, pr, 0, 0);
-    // recalc neon radii on resize
-    neons.forEach(n => { n.r = W * (0.025 + n._rs); });
   }
-
-  // ── Mouse-reactive parallax ──────────────────────────────────────────────
-  let bgX = 50, bgY = 60, tBgX = 50, tBgY = 60;
-  // Canvas-level mouse offset (for overlay elements)
-  let camX = 0, camY = 0, tCamX = 0, tCamY = 0;
-
-  window.addEventListener('mousemove', e => {
-    const nx = (e.clientX / innerWidth)  - 0.5;  // -0.5 → 0.5
-    const ny = (e.clientY / innerHeight) - 0.5;
-    tBgX  = 50 + nx * -5.5;   // photo drifts opposite to cursor (deep layer)
-    tBgY  = 60 + ny * -3.5;
-    tCamX = nx * 28;           // overlay elements follow cursor (foreground layer)
-    tCamY = ny * 16;
-  });
-
-  // ── Billboard glow zones ────────────────────────────────────────────────
-  const boards = [
-    { x:0.03, y:0.18, w:0.18, h:0.30, hue:200, sp:0.38, ph:0.0 },
-    { x:0.22, y:0.10, w:0.20, h:0.24, hue:30,  sp:0.55, ph:1.1 },  // warmer: amber-orange
-    { x:0.44, y:0.06, w:0.16, h:0.20, hue:38,  sp:0.42, ph:2.2 },  // warmer: gold
-    { x:0.62, y:0.14, w:0.22, h:0.28, hue:42,  sp:0.61, ph:0.6 },  // gold/yellow
-    { x:0.82, y:0.20, w:0.17, h:0.26, hue:22,  sp:0.44, ph:3.0 },  // warm amber
-    { x:0.08, y:0.50, w:0.28, h:0.16, hue:35,  sp:0.32, ph:1.7 },
-    { x:0.55, y:0.46, w:0.32, h:0.18, hue:48,  sp:0.50, ph:2.8 },  // gold
-    { x:0.28, y:0.38, w:0.24, h:0.14, hue:195, sp:0.68, ph:0.4 },
-  ];
-
-  // ── Lens flare definitions ───────────────────────────────────────────────
-  // x,y = screen position (0-1); hue = color; dur = visible seconds; interval = repeat cycle
-  const flares = [
-    { x:0.14, y:0.21, hue:44,  dur:3.0, interval:10.0, next:1.8,  t0:-999 },  // left billboard — gold
-    { x:0.55, y:0.09, hue:198, dur:3.5, interval:13.5, next:6.5,  t0:-999 },  // center-top — cool blue flash
-    { x:0.81, y:0.17, hue:28,  dur:2.6, interval:9.0,  next:0.4,  t0:-999 },  // right — warm amber burst
-  ];
-
-  // ── Car light streaks ────────────────────────────────────────────────────
-  const streaks = Array.from({length:28}, () => {
-    const dir = Math.random() < 0.52 ? 1 : -1;
-    return {
-      x:   Math.random(),
-      y:   0.68 + Math.random() * 0.26,
-      len: 0.05 + Math.random() * 0.14,
-      spd: (0.0006 + Math.random() * 0.0022) * dir,
-      warm: Math.random() < 0.62,
-      a:   0.22 + Math.random() * 0.50,
-      w:   1 + Math.random() * 2.5,
-    };
-  });
-
-  // ── Neon sign flickers ───────────────────────────────────────────────────
-  const neons = Array.from({length:14}, () => {
-    const rs = 0.025 + Math.random() * 0.055;
-    return {
-      x:  0.05 + Math.random() * 0.90,
-      y:  0.20 + Math.random() * 0.55,
-      r:  0,       // set after resize
-      _rs: rs,
-      hue: Math.floor(Math.random() * 360),
-      ph: Math.random() * Math.PI * 2,
-      sp: 1.2 + Math.random() * 3.8,
-    };
-  });
-
   resize();
   window.addEventListener('resize', resize);
 
-  // ── Lens flare draw function ─────────────────────────────────────────────
+  // ── Mouse-reactive parallax ──────────────────────────────────────────────
+  let bgX = 50, bgY = 60, tBgX = 50, tBgY = 60;
+  let camX = 0, camY = 0, tCamX = 0, tCamY = 0;
+  window.addEventListener('mousemove', e => {
+    const nx = (e.clientX / innerWidth)  - 0.5;
+    const ny = (e.clientY / innerHeight) - 0.5;
+    tBgX  = 50 + nx * -5.0;
+    tBgY  = 60 + ny * -3.0;
+    tCamX = nx * 22;
+    tCamY = ny * 12;
+  });
+
+  // ── Lens flare draw (warm amber only) ───────────────────────────────────
   function drawFlare(fx, fy, alpha, hue) {
-    const cx = W * 0.5, cy = H * 0.45;   // axis origin (approx screen center)
+    const cx = W * 0.5, cy = H * 0.45;
     const dx = cx - fx, dy = cy - fy;
 
-    // 1. Central burst — bright white-gold core
-    const coreR = W * 0.042;
+    // Core burst
+    const coreR = W * 0.038;
     const core  = ctx.createRadialGradient(fx, fy, 0, fx, fy, coreR);
-    core.addColorStop(0,    `rgba(255,248,225,${alpha * 0.98})`);
-    core.addColorStop(0.10, `hsla(${hue},100%,82%,${alpha * 0.75})`);
-    core.addColorStop(0.40, `hsla(${hue},100%,62%,${alpha * 0.28})`);
+    core.addColorStop(0,    `rgba(255,248,220,${alpha * 0.96})`);
+    core.addColorStop(0.15, `hsla(${hue},100%,80%,${alpha * 0.68})`);
+    core.addColorStop(0.50, `hsla(${hue},90%,58%,${alpha * 0.22})`);
     core.addColorStop(1,    'rgba(0,0,0,0)');
     ctx.fillStyle = core;
     ctx.beginPath();
-    ctx.arc(fx, fy, coreR * 2.8, 0, Math.PI * 2);
+    ctx.arc(fx, fy, coreR * 2.6, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. Starburst spikes — 6 rays rotating slowly
-    const rot = performance.now() * 0.00003;
+    // Starburst — 4 rays, slower rotation
+    const rot = performance.now() * 0.000018;
     ctx.save();
     ctx.translate(fx, fy);
-    for (let i = 0; i < 6; i++) {
-      const angle = (i / 6) * Math.PI * 2 + rot;
-      const len   = W * (0.055 + (i % 2) * 0.042);
-      const sg = ctx.createLinearGradient(0, 0, Math.cos(angle)*len, Math.sin(angle)*len);
-      sg.addColorStop(0,   `rgba(255,248,210,${alpha * 0.85})`);
-      sg.addColorStop(0.3, `hsla(${hue},100%,78%,${alpha * 0.35})`);
+    for (let i = 0; i < 4; i++) {
+      const angle = (i / 4) * Math.PI * 2 + rot;
+      const len   = W * (0.046 + (i % 2) * 0.036);
+      const sg    = ctx.createLinearGradient(0, 0, Math.cos(angle)*len, Math.sin(angle)*len);
+      sg.addColorStop(0,   `rgba(255,242,200,${alpha * 0.78})`);
+      sg.addColorStop(0.4, `hsla(${hue},100%,72%,${alpha * 0.28})`);
       sg.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.strokeStyle = sg;
-      ctx.lineWidth   = 1.8;
+      ctx.lineWidth   = 1.4;
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(Math.cos(angle) * len, Math.sin(angle) * len);
+      ctx.lineTo(Math.cos(angle)*len, Math.sin(angle)*len);
       ctx.stroke();
     }
     ctx.restore();
 
-    // 3. Secondary lens orbs along the axis (center-to-edge direction)
+    // Lens orbs along axis
     const orbs = [
-      { t:0.22, r:0.016, a:0.52 },
-      { t:0.45, r:0.028, a:0.32 },
-      { t:0.68, r:0.014, a:0.48 },
-      { t:0.95, r:0.022, a:0.36 },
-      { t:1.28, r:0.038, a:0.22 },
-      { t:1.55, r:0.012, a:0.28 },
+      {t:0.25, r:0.013, a:0.44},
+      {t:0.50, r:0.022, a:0.26},
+      {t:0.80, r:0.011, a:0.38},
+      {t:1.10, r:0.030, a:0.18},
+      {t:1.40, r:0.010, a:0.24},
     ];
     for (const o of orbs) {
-      const ox = fx + dx * o.t, oy = fy + dy * o.t;
+      const ox = fx + dx*o.t, oy = fy + dy*o.t;
       const or = W * o.r;
       const og = ctx.createRadialGradient(ox, oy, 0, ox, oy, or);
-      og.addColorStop(0,   `hsla(${hue+22},85%,88%,${alpha * o.a})`);
-      og.addColorStop(0.5, `hsla(${hue},100%,68%,${alpha * o.a * 0.38})`);
+      og.addColorStop(0,   `hsla(${hue+18},80%,85%,${alpha * o.a})`);
+      og.addColorStop(0.6, `hsla(${hue},90%,62%,${alpha * o.a * 0.30})`);
       og.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.fillStyle = og;
       ctx.beginPath();
       ctx.arc(ox, oy, or, 0, Math.PI * 2);
       ctx.fill();
     }
-
-    // 4. Outer ring halo
-    const ringR = W * 0.08;
-    const ring  = ctx.createRadialGradient(fx, fy, ringR * 0.76, fx, fy, ringR);
-    ring.addColorStop(0,   'rgba(0,0,0,0)');
-    ring.addColorStop(0.5, `hsla(${hue},90%,72%,${alpha * 0.14})`);
-    ring.addColorStop(1,   'rgba(0,0,0,0)');
-    ctx.fillStyle = ring;
-    ctx.beginPath();
-    ctx.arc(fx, fy, ringR, 0, Math.PI * 2);
-    ctx.fill();
   }
 
   // ── Main render loop ─────────────────────────────────────────────────────
@@ -1131,70 +1199,62 @@
     lastNow  = now;
     t       += dt;
 
-    // Smooth lerp — parallax background
-    bgX  += (tBgX  - bgX)  * 0.042;
-    bgY  += (tBgY  - bgY)  * 0.042;
-    camX += (tCamX - camX) * 0.055;
-    camY += (tCamY - camY) * 0.055;
+    // Parallax lerp
+    bgX  += (tBgX  - bgX)  * 0.040;
+    bgY  += (tBgY  - bgY)  * 0.040;
+    camX += (tCamX - camX) * 0.050;
+    camY += (tCamY - camY) * 0.050;
 
-    // Slow cinematic auto-drift even without mouse
-    const autoDrift = Math.sin(t * 0.09) * 1.8;
+    // Slow auto-drift
+    const autoDrift = Math.sin(t * 0.08) * 1.6;
     hero.style.backgroundPosition = `${bgX + autoDrift}% ${bgY}%`;
 
     ctx.clearRect(0, 0, W, H);
 
-    // Subtle warm amber color-grade wash across entire canvas
+    // Very faint warm amber grade wash
     const grade = ctx.createLinearGradient(0, 0, 0, H);
-    grade.addColorStop(0,   'rgba(190,95,12,0.03)');
-    grade.addColorStop(0.45,'rgba(210,115,18,0.05)');
-    grade.addColorStop(1,   'rgba(165,72,10,0.10)');
+    grade.addColorStop(0,    'rgba(160,75,8,0.02)');
+    grade.addColorStop(0.55, 'rgba(185,90,12,0.04)');
+    grade.addColorStop(1,    'rgba(140,58,6,0.08)');
     ctx.fillStyle = grade;
     ctx.fillRect(0, 0, W, H);
 
-    // ── Billboard glows (shifted by camX/Y for parallax depth) ──────────
-    for (const b of boards) {
-      // Foreground parallax shift (slightly less than camera to create depth)
-      const px = camX * 0.38, py = camY * 0.38;
-      const bx = b.x * W + px, by = b.y * H + py;
-      const bw = b.w * W,      bh = b.h * H;
-      const hue   = (b.hue + t * 16 * b.sp + b.ph * 28) % 360;
-      const pulse = 0.5 + 0.5 * Math.sin(t * b.sp + b.ph);
-      const alpha = 0.07 + pulse * 0.16;
-      const gx = bx + bw * 0.5, gy = by + bh * 0.5;
-      const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(bw, bh) * 0.9);
-      grad.addColorStop(0,    `hsla(${hue},100%,68%,${alpha})`);
-      grad.addColorStop(0.45, `hsla(${hue},90%,55%,${alpha * 0.5})`);
-      grad.addColorStop(1,    `hsla(${hue},80%,40%,0)`);
-      ctx.fillStyle = grad;
-      ctx.fillRect(bx - bw*0.35, by - bh*0.35, bw*1.7, bh*1.7);
+    // ── Building window flickers ─────────────────────────────────────────
+    for (const w of windows) {
+      // Handle random dark moments (light turns off briefly)
+      w.darkNext -= dt;
+      if (w.canDark && w.darkNext <= 0) {
+        w.darkT    = t;
+        w.darkDur  = 0.6 + Math.random() * 2.2;
+        w.darkNext = 15 + Math.random() * 50;
+      }
+      const isDark = w.canDark && (t - w.darkT) < w.darkDur;
+      if (isDark) continue;
+
+      // Very slow breathe — not a strobe, just alive
+      const breathe = 0.5 + 0.5 * Math.sin(t * w.sp + w.ph);
+      const a       = w.base * (0.7 + 0.3 * breathe);
+
+      // Parallax shift — windows are mid-depth layer
+      const wx = w.x * W + camX * 0.30;
+      const wy = w.y * H + camY * 0.30;
+
+      // Color: warm yellow-white or cool neutral white
+      ctx.fillStyle = w.warm
+        ? `rgba(255,232,160,${a})`   // warm incandescent
+        : `rgba(220,235,255,${a})`; // cool fluorescent
+      ctx.fillRect(wx, wy, w.w, w.h);
     }
 
-    // ── Neon sign flickers ───────────────────────────────────────────────
-    for (const n of neons) {
-      const flicker = Math.sin(t * n.sp + n.ph) * Math.sin(t * n.sp * 2.3 + n.ph * 1.7);
-      if (flicker < -0.6) continue;
-      const a  = 0.04 + Math.max(0, flicker) * 0.09;
-      const r  = n.r  * (0.6 + 0.4 * Math.max(0, flicker));
-      const nx = n.x * W + camX * 0.55;
-      const ny = n.y * H + camY * 0.55;
-      const g2 = ctx.createRadialGradient(nx, ny, 0, nx, ny, r);
-      g2.addColorStop(0, `hsla(${n.hue},100%,72%,${a})`);
-      g2.addColorStop(1, `hsla(${n.hue},100%,55%,0)`);
-      ctx.fillStyle = g2;
-      ctx.beginPath();
-      ctx.arc(nx, ny, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // ── Car light streaks (street level, close layer) ────────────────────
+    // ── Car light streaks ────────────────────────────────────────────────
     for (const s of streaks) {
       s.x += s.spd;
-      if (s.x > 1.4) s.x = -0.4;
-      if (s.x < -0.4) s.x = 1.4;
-      const sx  = s.x * W + camX * 0.72;
-      const sy  = s.y * H + camY * 0.45;
+      if (s.x >  1.4) s.x = -0.4;
+      if (s.x < -0.4) s.x =  1.4;
+      const sx  = s.x * W + camX * 0.68;
+      const sy  = s.y * H + camY * 0.40;
       const len = s.len * W * (s.spd > 0 ? 1 : -1);
-      const col = s.warm ? `rgba(255,198,90,${s.a})` : `rgba(210,228,255,${s.a})`;
+      const col = s.warm ? `rgba(255,195,80,${s.a})` : `rgba(200,220,255,${s.a})`;
       const sg  = ctx.createLinearGradient(sx-len*0.5, sy, sx+len*0.5, sy);
       sg.addColorStop(0,    'rgba(0,0,0,0)');
       sg.addColorStop(0.35, col);
@@ -1204,40 +1264,170 @@
       ctx.fillRect(sx - Math.abs(len)*0.5, sy - s.w*0.5, Math.abs(len), s.w);
     }
 
-    // ── Street-level amber pavement glow ────────────────────────────────
+    // ── Street-level amber glow ──────────────────────────────────────────
     const streetY = H * 0.72;
-    const wash    = 0.5 + 0.5 * Math.sin(t * 0.20);
+    const wash    = 0.5 + 0.5 * Math.sin(t * 0.18);
     const wg      = ctx.createLinearGradient(0, streetY, 0, H);
     wg.addColorStop(0,   'rgba(0,0,0,0)');
-    wg.addColorStop(0.5, `rgba(200,90,20,${0.05 + wash * 0.07})`);
-    wg.addColorStop(1,   `rgba(160,60,10,${0.10 + wash * 0.10})`);
+    wg.addColorStop(0.4, `rgba(185,78,14,${0.04 + wash * 0.05})`);
+    wg.addColorStop(1,   `rgba(140,52,8,${0.08 + wash * 0.08})`);
     ctx.fillStyle = wg;
     ctx.fillRect(0, streetY, W, H - streetY);
 
-    // ── Lens flares ──────────────────────────────────────────────────────
+    // ── Lens flares (warm amber) ─────────────────────────────────────────
     for (const fl of flares) {
       fl.next -= dt;
       if (fl.next <= 0) {
-        fl.next = fl.interval + (Math.random() - 0.5) * 3.5;
+        fl.next = fl.interval + (Math.random() - 0.5) * 4;
         fl.t0   = t;
       }
       const age = t - fl.t0;
       if (age >= 0 && age < fl.dur) {
-        const fadeIn  = fl.dur * 0.15;
-        const fadeOut = fl.dur * 0.80;
-        let alpha;
-        if (age < fadeIn)        alpha = age / fadeIn;
-        else if (age > fadeOut)  alpha = 1 - (age - fadeOut) / (fl.dur - fadeOut);
-        else                     alpha = 1;
-        alpha = Math.max(0, Math.min(1, alpha)) * 0.80;
-        // Flare position also responds slightly to mouse (closest layer)
-        const fx = fl.x * W + camX * 0.85;
-        const fy = fl.y * H + camY * 0.85;
-        drawFlare(fx, fy, alpha, fl.hue);
+        const fi = fl.dur * 0.18, fo = fl.dur * 0.78;
+        let alpha = age < fi ? age/fi : age > fo ? 1-(age-fo)/(fl.dur-fo) : 1;
+        alpha = Math.max(0, Math.min(1, alpha)) * 0.72;
+        drawFlare(fl.x * W + camX * 0.82, fl.y * H + camY * 0.82, alpha, fl.hue);
       }
     }
   }
   requestAnimationFrame(frame);
+})();
+
+// ─── SPECTRUM ARC COLOR WHEEL ────────────────────────────────────────────────
+(function() {
+  const arcCanvas = document.getElementById('color-arc');
+  if (!arcCanvas) return;
+  const ctx = arcCanvas.getContext('2d');
+  const W = arcCanvas.width, H = arcCanvas.height;
+
+  // Arc geometry: half-circle arc sitting at bottom center
+  const cx = W / 2, cy = H - 4;
+  const R  = 38, thick = 10;
+
+  // Draw the spectrum arc (half-circle, left=0° right=180°, top=90°=hue middle)
+  function drawArc(selectedHue) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw arc segments as gradient
+    const steps = 180;
+    for (let i = 0; i < steps; i++) {
+      const a1 = Math.PI + (i / steps) * Math.PI;       // π → 2π (left to right, top arc)
+      const a2 = Math.PI + ((i+1) / steps) * Math.PI;
+      const hue = (i / steps) * 360;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, a1, a2);
+      ctx.arc(cx, cy, R - thick, a2, a1, true);
+      ctx.closePath();
+      ctx.fillStyle = `hsl(${hue},90%,55%)`;
+      ctx.fill();
+    }
+
+    // Draw dot at selected hue position
+    const dotAngle = Math.PI + (selectedHue / 360) * Math.PI;
+    const dotR     = R - thick / 2;
+    const dotX     = cx + Math.cos(dotAngle) * dotR;
+    const dotY     = cy + Math.sin(dotAngle) * dotR;
+
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${selectedHue},90%,55%)`;
+    ctx.fill();
+    // Thin ring
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 7, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Convert hue → hex (full saturation brand color, slightly darkened for readability)
+  function hueToHex(hue) {
+    // Use HSL 90% sat, 42% light for a rich brand tone
+    const h = hue / 360, s = 0.85, l = 0.42;
+    const a = s * Math.min(l, 1 - l);
+    function f(n) {
+      const k = (n + h * 12) % 12;
+      return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+    }
+    const r = Math.round(f(0) * 255);
+    const g = Math.round(f(8) * 255);
+    const b = Math.round(f(4) * 255);
+    return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('').toUpperCase();
+  }
+
+  // Apply selected color to all phone accent elements
+  function applyColor(hex, hue) {
+    // Header card gradient
+    const card = document.getElementById('brand-header-card');
+    if (card) {
+      const h2 = Math.round(hue);
+      card.style.background = `linear-gradient(138deg,hsl(${h2},85%,38%) 0%,hsl(${h2},85%,22%) 100%)`;
+    }
+    // Quick action icon backgrounds
+    ['qa-1','qa-2','qa-3','qa-4'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.background = hex;
+    });
+    // Activity dots
+    ['act-dot-1','act-dot-2','act-dot-3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.background = hex;
+    });
+    // Avatar button
+    const av = document.getElementById('brand-av-btn');
+    if (av) av.style.background = hex;
+    // Color swatch preview
+    const swatch = document.getElementById('color-swatch');
+    if (swatch) swatch.style.background = hex;
+    // Hex label
+    const label = document.getElementById('color-hex');
+    if (label) label.textContent = hex;
+  }
+
+  let currentHue = 210;  // default: our brand blue
+  drawArc(currentHue);
+  applyColor(hueToHex(currentHue), currentHue);
+
+  // Hit-test: angle from center to pointer → hue
+  function pointerHue(e) {
+    const rect = arcCanvas.getBoundingClientRect();
+    const px   = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const py   = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    // Scale to canvas coords
+    const sx = px * (W / rect.width);
+    const sy = py * (H / rect.height);
+    const dx = sx - cx, dy = sy - cy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    // Only respond if near the arc band
+    if (dist < R - thick - 8 || dist > R + 8) return null;
+    let angle = Math.atan2(dy, dx);  // -π to π
+    if (angle < 0) angle += Math.PI * 2;
+    // Arc spans π → 2π (top half). Clamp to that range.
+    if (angle < Math.PI) return null;
+    const hue = ((angle - Math.PI) / Math.PI) * 360;
+    return Math.max(0, Math.min(359, hue));
+  }
+
+  let dragging = false;
+  function onMove(e) {
+    if (!dragging) return;
+    const h = pointerHue(e);
+    if (h === null) return;
+    e.preventDefault();
+    currentHue = h;
+    drawArc(currentHue);
+    applyColor(hueToHex(currentHue), currentHue);
+  }
+  arcCanvas.addEventListener('mousedown',  e => { const h = pointerHue(e); if (h!==null){dragging=true;currentHue=h;drawArc(h);applyColor(hueToHex(h),h);} });
+  arcCanvas.addEventListener('touchstart', e => { const h = pointerHue(e); if (h!==null){dragging=true;currentHue=h;drawArc(h);applyColor(hueToHex(h),h);} }, {passive:false});
+  window.addEventListener('mousemove',  onMove);
+  window.addEventListener('touchmove',  onMove, {passive:false});
+  window.addEventListener('mouseup',   () => { dragging = false; });
+  window.addEventListener('touchend',  () => { dragging = false; });
 })();
 
 // ─── 3D PHONE SCENE ────────────────────────────────────────────────────────
