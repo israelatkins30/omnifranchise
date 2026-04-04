@@ -997,6 +997,200 @@
     { x:0.28, y:0.38, w:0.24, h:0.14, hue:195, sp:0.68, ph:0.4 },   // center-mid — cool blue
   ];
 
+  // ── Brand billboard panels ─────────────────────────────────────────────
+  const brandBoards = [
+    { x:0.24, y:0.12, w:0.16, h:0.20, asset:'ovis-ball', sp:0.33, ph:0.0 },
+    { x:0.63, y:0.17, w:0.20, h:0.18, asset:'ovis-word', sp:0.41, ph:3.3 },
+    { x:0.59, y:0.47, w:0.22, h:0.16, asset:'omni-icon', sp:0.29, ph:1.6 },
+  ];
+
+  function getBrandAlpha(t, bb) {
+    const pulse = 0.5 + 0.5 * Math.sin(t * bb.sp + bb.ph);
+    const flickerRaw = Math.sin(t * bb.sp * 0.7 + bb.ph * 1.3)
+                     * Math.sin(t * bb.sp * 1.9 + bb.ph * 0.8);
+    const flickerMod = flickerRaw < -0.55 ? 0.20 : 1.0;
+    return (0.08 + pulse * 0.10) * flickerMod;
+  }
+
+  function rrect(ctx, x, y, w, h, r) {
+    if (ctx.roundRect) { ctx.roundRect(x, y, w, h, r); return; }
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.arcTo(x + w, y, x + w, y + r, r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+    ctx.lineTo(x + r, y + h);
+    ctx.arcTo(x, y + h, x, y + h - r, r);
+    ctx.lineTo(x, y + r);
+    ctx.arcTo(x, y, x + r, y, r);
+    ctx.closePath();
+  }
+
+  function drawOvisBall(ctx, px, py, pw, ph, alpha) {
+    ctx.save();
+    // Panel background
+    ctx.globalAlpha = alpha * 0.55;
+    ctx.fillStyle = 'rgba(0,5,15,0.85)';
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.06); ctx.fill();
+    // Panel border
+    ctx.globalAlpha = alpha * 0.7;
+    ctx.strokeStyle = `rgba(0,220,255,${alpha * 0.6})`;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.06); ctx.stroke();
+    // Sphere
+    const cx = px + pw * 0.50, cy = py + ph * 0.42, sr = pw * 0.30;
+    ctx.globalAlpha = alpha * 0.90;
+    const sGrad = ctx.createRadialGradient(cx - sr * 0.30, cy - sr * 0.30, sr * 0.05, cx, cy, sr);
+    sGrad.addColorStop(0,    'rgba(230,235,245,1)');
+    sGrad.addColorStop(0.35, 'rgba(180,190,205,1)');
+    sGrad.addColorStop(0.70, 'rgba(100,110,125,1)');
+    sGrad.addColorStop(1,    'rgba(50,55,65,1)');
+    ctx.fillStyle = sGrad;
+    ctx.beginPath(); ctx.arc(cx, cy, sr, 0, Math.PI * 2); ctx.fill();
+    // Rim glow
+    ctx.globalAlpha = alpha * 0.35;
+    const rimG = ctx.createRadialGradient(cx, cy, sr * 0.88, cx, cy, sr * 1.22);
+    rimG.addColorStop(0, 'rgba(0,200,255,0.18)');
+    rimG.addColorStop(1, 'rgba(0,200,255,0)');
+    ctx.fillStyle = rimG;
+    ctx.beginPath(); ctx.arc(cx, cy, sr * 1.22, 0, Math.PI * 2); ctx.fill();
+    // Cyan eye bar (clipped to sphere)
+    ctx.save();
+    ctx.globalAlpha = alpha * 0.95;
+    ctx.beginPath(); ctx.arc(cx, cy, sr * 0.99, 0, Math.PI * 2); ctx.clip();
+    const eyeW = sr * 1.80, eyeH = sr * 0.28;
+    const eyeX = cx - eyeW / 2, eyeY = cy - eyeH / 2, eyeR = eyeH / 2;
+    // bloom
+    const eyeGlow = ctx.createLinearGradient(eyeX, eyeY, eyeX, eyeY + eyeH * 3);
+    eyeGlow.addColorStop(0,   'rgba(0,240,255,0)');
+    eyeGlow.addColorStop(0.5, `rgba(0,240,255,${alpha * 0.5})`);
+    eyeGlow.addColorStop(1,   'rgba(0,240,255,0)');
+    ctx.fillStyle = eyeGlow;
+    ctx.beginPath(); rrect(ctx, eyeX - eyeH, eyeY - eyeH, eyeW + eyeH * 2, eyeH * 3, eyeH * 1.5); ctx.fill();
+    // core
+    const eyeCore = ctx.createLinearGradient(eyeX, eyeY, eyeX + eyeW, eyeY);
+    eyeCore.addColorStop(0,    'rgba(0,200,255,0.3)');
+    eyeCore.addColorStop(0.15, 'rgba(0,240,255,0.95)');
+    eyeCore.addColorStop(0.50, 'rgba(150,255,255,1)');
+    eyeCore.addColorStop(0.85, 'rgba(0,240,255,0.95)');
+    eyeCore.addColorStop(1,    'rgba(0,200,255,0.3)');
+    ctx.fillStyle = eyeCore;
+    ctx.beginPath(); rrect(ctx, eyeX, eyeY, eyeW, eyeH, eyeR); ctx.fill();
+    ctx.restore();
+    // Label
+    ctx.globalAlpha = alpha * 0.55;
+    ctx.fillStyle = 'rgba(180,230,255,1)';
+    ctx.font = `bold ${pw * 0.13}px Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('OVIS', cx, cy + sr + pw * 0.15);
+    ctx.restore();
+  }
+
+  function drawOvisWord(ctx, px, py, pw, ph, alpha) {
+    ctx.save();
+    // Panel
+    ctx.globalAlpha = alpha * 0.60;
+    ctx.fillStyle = 'rgba(2,4,10,0.90)';
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.04); ctx.fill();
+    ctx.globalAlpha = alpha * 0.50;
+    ctx.strokeStyle = `rgba(200,210,225,${alpha * 0.45})`;
+    ctx.lineWidth = 1.0;
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.04); ctx.stroke();
+    const cx = px + pw * 0.50, cy = py + ph * 0.50;
+    const fontSize = pw * 0.34;
+    ctx.font = `900 ${fontSize}px Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    // Glow pass
+    ctx.globalAlpha = alpha * 0.35;
+    ctx.shadowColor = 'rgba(220,235,255,1)';
+    ctx.shadowBlur = pw * 0.08;
+    ctx.fillStyle = 'rgba(220,235,255,1)';
+    ctx.fillText('OVIS', cx, cy);
+    // Sharp chrome pass
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = alpha * 0.85;
+    const tGrad = ctx.createLinearGradient(cx, cy - fontSize * 0.5, cx, cy + fontSize * 0.5);
+    tGrad.addColorStop(0,    'rgba(255,255,255,1)');
+    tGrad.addColorStop(0.30, 'rgba(210,218,228,1)');
+    tGrad.addColorStop(0.52, 'rgba(140,150,165,1)');
+    tGrad.addColorStop(0.70, 'rgba(200,208,220,1)');
+    tGrad.addColorStop(1,    'rgba(160,168,180,1)');
+    ctx.fillStyle = tGrad;
+    ctx.fillText('OVIS', cx, cy);
+    // Scan lines
+    ctx.save();
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.04); ctx.clip();
+    ctx.globalAlpha = alpha * 0.08;
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 0.6;
+    for (let sy = py + 1.5; sy < py + ph; sy += 3) {
+      ctx.beginPath(); ctx.moveTo(px, sy); ctx.lineTo(px + pw, sy); ctx.stroke();
+    }
+    ctx.restore();
+    ctx.restore();
+  }
+
+  function drawOmniIcon(ctx, px, py, pw, ph, alpha) {
+    ctx.save();
+    // Panel
+    ctx.globalAlpha = alpha * 0.55;
+    ctx.fillStyle = 'rgba(0,3,12,0.90)';
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.05); ctx.fill();
+    ctx.globalAlpha = alpha * 0.50;
+    ctx.strokeStyle = `rgba(60,140,255,${alpha * 0.55})`;
+    ctx.lineWidth = 1.0;
+    ctx.beginPath(); rrect(ctx, px, py, pw, ph, pw * 0.05); ctx.stroke();
+    // App icon square
+    const iconSz = ph * 0.58, iconX = px + (pw - iconSz) * 0.5, iconY = py + ph * 0.05;
+    const iconR = iconSz * 0.22;
+    ctx.globalAlpha = alpha * 0.90;
+    const iGrad = ctx.createLinearGradient(iconX, iconY, iconX, iconY + iconSz);
+    iGrad.addColorStop(0,   'rgba(20,90,220,1)');
+    iGrad.addColorStop(0.45,'rgba(40,130,240,1)');
+    iGrad.addColorStop(1,   'rgba(85,200,255,1)');
+    ctx.fillStyle = iGrad;
+    ctx.beginPath(); rrect(ctx, iconX, iconY, iconSz, iconSz, iconR); ctx.fill();
+    // Glass sheen
+    ctx.globalAlpha = alpha * 0.25;
+    const sGrad = ctx.createLinearGradient(iconX, iconY, iconX + iconSz * 0.6, iconY + iconSz * 0.5);
+    sGrad.addColorStop(0,   'rgba(255,255,255,0.40)');
+    sGrad.addColorStop(0.5, 'rgba(255,255,255,0.08)');
+    sGrad.addColorStop(1,   'rgba(255,255,255,0)');
+    ctx.fillStyle = sGrad;
+    ctx.beginPath(); rrect(ctx, iconX, iconY, iconSz, iconSz, iconR); ctx.fill();
+    // Glass O ring (clipped to icon)
+    ctx.save();
+    ctx.beginPath(); rrect(ctx, iconX, iconY, iconSz, iconSz, iconR); ctx.clip();
+    const oCx = iconX + iconSz * 0.5, oCy = iconY + iconSz * 0.52;
+    const oRout = iconSz * 0.36, oRin = iconSz * 0.22;
+    ctx.globalAlpha = alpha * 0.80;
+    ctx.fillStyle = 'rgba(180,220,255,0.30)';
+    ctx.beginPath();
+    ctx.arc(oCx, oCy, oRout, 0, Math.PI * 2, false);
+    ctx.arc(oCx, oCy, oRin,  0, Math.PI * 2, true);
+    ctx.fill('evenodd');
+    ctx.globalAlpha = alpha * 0.65;
+    ctx.strokeStyle = 'rgba(200,240,255,0.70)';
+    ctx.lineWidth = iconSz * 0.025;
+    ctx.beginPath(); ctx.arc(oCx, oCy, oRout, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(oCx, oCy, oRin,  0, Math.PI * 2); ctx.stroke();
+    // Specular arc (top)
+    ctx.globalAlpha = alpha * 0.45;
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = iconSz * 0.012;
+    ctx.beginPath(); ctx.arc(oCx, oCy, oRout * 0.96, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke();
+    ctx.restore();
+    // Label
+    ctx.globalAlpha = alpha * 0.65;
+    ctx.fillStyle = 'rgba(160,210,255,1)';
+    ctx.font = `700 ${ph * 0.12}px Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('OMNI WORLD', px + pw * 0.5, iconY + iconSz + ph * 0.04);
+    ctx.restore();
+  }
+
   // ── Car light streaks ──────────────────────────────────────────────────
   const streaks = Array.from({length: 26}, () => {
     const dir = Math.random() < 0.52 ? 1 : -1;
@@ -1043,6 +1237,16 @@
       grad.addColorStop(1,   `hsla(${hue},80%,40%,0)`);
       ctx.fillStyle = grad;
       ctx.fillRect(bx - bw * 0.35, by - bh * 0.35, bw * 1.7, bh * 1.7);
+    }
+
+    // ── Brand billboard panels ─────────────────────────────────────────
+    for (const bb of brandBoards) {
+      const px = bb.x * W, py = bb.y * H;
+      const pw = bb.w * W, ph = bb.h * H;
+      const alpha = getBrandAlpha(t, bb);
+      if      (bb.asset === 'ovis-ball') drawOvisBall(ctx, px, py, pw, ph, alpha);
+      else if (bb.asset === 'ovis-word') drawOvisWord(ctx, px, py, pw, ph, alpha);
+      else if (bb.asset === 'omni-icon') drawOmniIcon(ctx, px, py, pw, ph, alpha);
     }
 
     // ── Neon sign flickers ─────────────────────────────────────────────
