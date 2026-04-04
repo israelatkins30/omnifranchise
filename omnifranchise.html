@@ -1009,7 +1009,7 @@
     const flickerRaw = Math.sin(t * bb.sp * 0.7 + bb.ph * 1.3)
                      * Math.sin(t * bb.sp * 1.9 + bb.ph * 0.8);
     const flickerMod = flickerRaw < -0.55 ? 0.20 : 1.0;
-    return (0.08 + pulse * 0.10) * flickerMod;
+    return (0.30 + pulse * 0.28) * flickerMod;
   }
 
   function rrect(ctx, x, y, w, h, r) {
