@@ -1117,12 +1117,12 @@
     c.fillStyle = ambG;
     c.fillRect(px - sr, py - sr * 0.5, pw + sr * 2, ph + sr);
 
-    // ── 3. Large cyan pre-glow — illuminates the "billboard" from within ─
-    c.globalAlpha = 0.45;
-    const preGlow = c.createRadialGradient(cx, cy, 0, cx, cy, sr * 2.6);
-    preGlow.addColorStop(0,   'rgba(0,180,255,0.38)');
-    preGlow.addColorStop(0.5, 'rgba(0,130,255,0.12)');
-    preGlow.addColorStop(1,   'rgba(0,60,200,0)');
+    // ── 3. Subtle cyan pre-glow — just enough to feel alive, not artificial
+    c.globalAlpha = 0.18;
+    const preGlow = c.createRadialGradient(cx, cy, 0, cx, cy, sr * 2.0);
+    preGlow.addColorStop(0,   'rgba(0,170,255,0.30)');
+    preGlow.addColorStop(0.5, 'rgba(0,110,255,0.08)');
+    preGlow.addColorStop(1,   'rgba(0,50,180,0)');
     c.fillStyle = preGlow;
     c.fillRect(px - sr, py - sr, pw + sr * 2, ph + sr * 2);
 
@@ -1176,11 +1176,11 @@
     c.restore();
 
     // ── 6. Bloom spilling out from eye onto surroundings ─────────────────
-    c.globalAlpha = 0.42;
-    const bloom = c.createRadialGradient(cx, cy, sr*0.2, cx, cy, sr * 2.2);
-    bloom.addColorStop(0,   'rgba(0,215,255,0.32)');
-    bloom.addColorStop(0.5, 'rgba(0,165,255,0.10)');
-    bloom.addColorStop(1,   'rgba(0,70,200,0)');
+    c.globalAlpha = 0.28;
+    const bloom = c.createRadialGradient(cx, cy, sr*0.3, cx, cy, sr * 1.7);
+    bloom.addColorStop(0,   'rgba(0,210,255,0.28)');
+    bloom.addColorStop(0.6, 'rgba(0,155,255,0.07)');
+    bloom.addColorStop(1,   'rgba(0,60,180,0)');
     c.fillStyle = bloom;
     c.fillRect(px - sr, py - sr, pw + sr * 2, ph + sr * 2);
 
