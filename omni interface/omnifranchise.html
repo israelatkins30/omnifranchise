@@ -1090,64 +1090,129 @@
   function drawOvisBillboard(c, px, py, pw, ph) {
     c.save();
 
-    // Solid dark panel — fully covers whatever is behind it
+    // ── Clip all drawing to the rounded panel shape ──────────────────────
+    c.beginPath(); rrect(c, px, py, pw, ph, pw * 0.015); c.clip();
+
+    // ── 1. Base: near-black LED panel substrate ──────────────────────────
     c.globalAlpha = 1.0;
-    c.fillStyle = 'rgba(8,8,14,1)';
-    c.beginPath(); rrect(c, px, py, pw, ph, pw * 0.012); c.fill();
+    c.fillStyle = 'rgba(4,6,16,1)';
+    c.fillRect(px, py, pw, ph);
 
-    // Subtle metallic edge
-    c.globalAlpha = 0.30;
-    c.strokeStyle = 'rgba(70,90,110,1)';
-    c.lineWidth = 2;
-    c.beginPath(); rrect(c, px, py, pw, ph, pw * 0.012); c.stroke();
+    // ── 2. Warm city ambient — Times Square orange light spilling on panel
+    c.globalAlpha = 1.0;
+    const ambG = c.createLinearGradient(px, py, px + pw, py + ph);
+    ambG.addColorStop(0,   'rgba(255,130,30,0.09)');
+    ambG.addColorStop(0.45,'rgba(255,175,70,0.04)');
+    ambG.addColorStop(1,   'rgba(50,90,220,0.06)');
+    c.fillStyle = ambG;
+    c.fillRect(px, py, pw, ph);
 
-    // Ovis ball — centered
-    const sr = ph * 0.28;
+    // ── 3. Ball geometry ─────────────────────────────────────────────────
+    const sr = ph * 0.26;
     const cx = px + pw * 0.50;
-    const cy = py + ph * 0.43;
+    const cy = py + ph * 0.40;
 
-    // Sphere body
+    // Wide soft bloom behind ball — panel glows from the inside
+    c.globalAlpha = 0.60;
+    const bigBloom = c.createRadialGradient(cx, cy, 0, cx, cy, sr * 2.8);
+    bigBloom.addColorStop(0,   'rgba(0,190,255,0.40)');
+    bigBloom.addColorStop(0.45,'rgba(0,140,255,0.14)');
+    bigBloom.addColorStop(1,   'rgba(0,60,180,0)');
+    c.fillStyle = bigBloom;
+    c.fillRect(px, py, pw, ph);
+
+    // Sphere body — bright highlights like a real illuminated orb
     c.globalAlpha = 1.0;
-    const sGrad = c.createRadialGradient(cx - sr*0.30, cy - sr*0.30, sr*0.05, cx, cy, sr);
-    sGrad.addColorStop(0,    'rgba(230,235,245,1)');
-    sGrad.addColorStop(0.35, 'rgba(180,190,205,1)');
-    sGrad.addColorStop(0.70, 'rgba(100,110,125,1)');
-    sGrad.addColorStop(1,    'rgba(50,55,65,1)');
+    const sGrad = c.createRadialGradient(cx - sr*0.28, cy - sr*0.30, sr*0.04, cx, cy, sr);
+    sGrad.addColorStop(0,    'rgba(255,255,255,1)');
+    sGrad.addColorStop(0.10, 'rgba(220,232,252,1)');
+    sGrad.addColorStop(0.42, 'rgba(158,174,202,1)');
+    sGrad.addColorStop(0.74, 'rgba(78,90,112,1)');
+    sGrad.addColorStop(1,    'rgba(22,28,44,1)');
     c.fillStyle = sGrad;
     c.beginPath(); c.arc(cx, cy, sr, 0, Math.PI*2); c.fill();
 
-    // Cyan eye bar (clipped to sphere)
+    // Rim highlight — city light catching the sphere edge
+    c.globalAlpha = 0.22;
+    const rimG = c.createRadialGradient(cx, cy, sr * 0.72, cx, cy, sr);
+    rimG.addColorStop(0, 'rgba(0,0,0,0)');
+    rimG.addColorStop(1, 'rgba(170,210,255,1)');
+    c.fillStyle = rimG;
+    c.beginPath(); c.arc(cx, cy, sr, 0, Math.PI*2); c.fill();
+
+    // ── 4. Cyan eye bar — clipped inside sphere ──────────────────────────
     c.save();
-    c.beginPath(); c.arc(cx, cy, sr*0.99, 0, Math.PI*2); c.clip();
-    const eyeW = sr*1.80, eyeH = sr*0.28;
-    const eyeX = cx - sr*0.90, eyeY = cy - eyeH*0.5;
-    const eG = c.createLinearGradient(eyeX, eyeY, eyeX + eyeW, eyeY);
-    eG.addColorStop(0,    'rgba(0,200,255,0.3)');
-    eG.addColorStop(0.15, 'rgba(0,240,255,0.95)');
-    eG.addColorStop(0.50, 'rgba(150,255,255,1)');
-    eG.addColorStop(0.85, 'rgba(0,240,255,0.95)');
-    eG.addColorStop(1,    'rgba(0,200,255,0.3)');
+    c.beginPath(); c.arc(cx, cy, sr * 0.992, 0, Math.PI*2); c.clip();
+
+    const eyeW = sr*1.86, eyeH = sr*0.30;
+    const eyeX = cx - sr*0.93, eyeY = cy - eyeH*0.5;
+
+    // Soft inner halo before bar
+    c.globalAlpha = 0.55;
+    const eyeHalo = c.createRadialGradient(cx, cy, 0, cx, cy, sr);
+    eyeHalo.addColorStop(0,   'rgba(0,240,255,0.50)');
+    eyeHalo.addColorStop(0.55,'rgba(0,200,255,0.18)');
+    eyeHalo.addColorStop(1,   'rgba(0,150,255,0)');
+    c.fillStyle = eyeHalo;
+    c.fillRect(eyeX - 20, eyeY - 40, eyeW + 40, eyeH + 80);
+
+    // Hot bright eye bar with white-hot center
+    c.globalAlpha = 1.0;
+    const eG = c.createLinearGradient(eyeX, 0, eyeX + eyeW, 0);
+    eG.addColorStop(0,    'rgba(0,200,255,0.0)');
+    eG.addColorStop(0.07, 'rgba(0,230,255,0.88)');
+    eG.addColorStop(0.32, 'rgba(80,248,255,1)');
+    eG.addColorStop(0.50, 'rgba(230,255,255,1)');
+    eG.addColorStop(0.68, 'rgba(80,248,255,1)');
+    eG.addColorStop(0.93, 'rgba(0,230,255,0.88)');
+    eG.addColorStop(1,    'rgba(0,200,255,0.0)');
     c.fillStyle = eG;
     c.beginPath(); rrect(c, eyeX, eyeY, eyeW, eyeH, eyeH*0.5); c.fill();
-    // Eye ambient glow on panel
-    c.globalAlpha = 0.35;
-    const bloom = c.createRadialGradient(cx, cy, sr*0.2, cx, cy, sr*1.4);
-    bloom.addColorStop(0, 'rgba(0,220,255,0.22)');
-    bloom.addColorStop(1, 'rgba(0,220,255,0)');
-    c.fillStyle = bloom;
-    c.beginPath(); c.arc(cx, cy, sr*1.4, 0, Math.PI*2); c.fill();
+
     c.restore();
 
-    // "OVIS" wordmark
-    c.globalAlpha = 0.88;
-    c.font = `900 ${pw * 0.11}px Arial, sans-serif`;
+    // ── 5. Outer bloom spilling onto panel from eye ──────────────────────
+    c.globalAlpha = 0.48;
+    const outerBloom = c.createRadialGradient(cx, cy, sr*0.25, cx, cy, sr*1.9);
+    outerBloom.addColorStop(0,   'rgba(0,220,255,0.30)');
+    outerBloom.addColorStop(0.5, 'rgba(0,170,255,0.10)');
+    outerBloom.addColorStop(1,   'rgba(0,80,200,0)');
+    c.fillStyle = outerBloom;
+    c.fillRect(px, py, pw, ph);
+
+    // ── 6. "OVIS" wordmark — billboard-bright, strong glow ───────────────
+    const textY = cy + sr + ph * 0.046;
+    const fontSize = pw * 0.118;
+    c.font = `900 ${fontSize}px Arial Black, Arial, sans-serif`;
     c.textAlign = 'center';
     c.textBaseline = 'top';
-    c.shadowColor = 'rgba(0,220,255,0.5)';
-    c.shadowBlur = 10;
-    c.fillStyle = 'rgba(210,225,242,1)';
-    c.fillText('OVIS', cx, cy + sr + ph * 0.05);
+
+    // Deep glow layer
+    c.globalAlpha = 0.55;
+    c.shadowColor = 'rgba(0,220,255,1)';
+    c.shadowBlur = 38;
+    c.fillStyle = 'rgba(0,200,255,1)';
+    c.fillText('OVIS', cx, textY);
+
+    // Mid glow
+    c.globalAlpha = 0.8;
+    c.shadowBlur = 18;
+    c.fillStyle = 'rgba(160,235,255,1)';
+    c.fillText('OVIS', cx, textY);
+
+    // Crisp top layer
+    c.globalAlpha = 1.0;
     c.shadowBlur = 0;
+    c.fillStyle = 'rgba(232,250,255,1)';
+    c.fillText('OVIS', cx, textY);
+
+    // ── 7. Vignette — dark edges around panel (frame depth) ──────────────
+    c.globalAlpha = 0.55;
+    const vig = c.createRadialGradient(cx, cy, sr*1.2, cx, cy, pw * 0.72);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(0,0,0,0.65)');
+    c.fillStyle = vig;
+    c.fillRect(px, py, pw, ph);
 
     c.restore();
   }
