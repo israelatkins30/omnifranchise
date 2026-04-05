@@ -1077,7 +1077,7 @@
 
   // ── Ovis billboard cover ─────────────────────────────────────────────────
   // Replaces the LG G6 billboard in the photo with the Ovis logo
-  const lgBillboard = { x: 0.64, y: 0.21, w: 0.36, h: 0.30 };
+  const lgBillboard = { x: 0.695, y: 0.255, w: 0.235, h: 0.185 };
 
   function rrect(c, x, y, w, h, r) {
     if (c.roundRect) { c.roundRect(x, y, w, h, r); return; }
@@ -1090,125 +1090,29 @@
   function drawOvisBillboard(c, px, py, pw, ph) {
     c.save();
 
-    // Ball centre — the anchor point for everything
-    const sr = ph * 0.24;
-    const cx = px + pw * 0.50;
-    const cy = py + ph * 0.38;
+    // Clip to billboard bounds — clean rectangular panel like a real billboard
+    c.beginPath(); c.rect(px, py, pw, ph); c.clip();
 
-    // ── 1. Soft radial dark fill — NO hard rectangle, fades into city ────
-    // This covers the LG G6 content in the center while blending naturally
-    // into the dark photo background at the edges (no bounding-box effect)
+    // White billboard face — warm off-white matching ambient city light levels
     c.globalAlpha = 1.0;
-    const bgR = c.createRadialGradient(cx, cy + sr*0.3, sr*0.1, cx, cy + sr*0.3, sr * 3.2);
-    bgR.addColorStop(0,    'rgba(3,5,14,1)');
-    bgR.addColorStop(0.40, 'rgba(3,5,14,0.98)');
-    bgR.addColorStop(0.68, 'rgba(3,5,14,0.80)');
-    bgR.addColorStop(0.85, 'rgba(3,5,14,0.40)');
-    bgR.addColorStop(1.0,  'rgba(3,5,14,0)');
-    c.fillStyle = bgR;
-    c.fillRect(px - sr, py - sr * 0.5, pw + sr * 2, ph + sr);
+    c.fillStyle = 'rgb(236, 230, 218)';
+    c.fillRect(px, py, pw, ph);
 
-    // ── 2. Warm Times Square ambient — subtle orange bleed on dark area ──
-    c.globalAlpha = 0.55;
-    const ambG = c.createRadialGradient(cx - pw*0.2, cy, sr*0.5, cx - pw*0.2, cy, sr*3.5);
-    ambG.addColorStop(0,   'rgba(255,140,30,0.12)');
-    ambG.addColorStop(0.5, 'rgba(255,160,50,0.05)');
-    ambG.addColorStop(1,   'rgba(255,120,20,0)');
-    c.fillStyle = ambG;
-    c.fillRect(px - sr, py - sr * 0.5, pw + sr * 2, ph + sr);
+    // Very subtle warm-to-cool gradient wash (Times Square ambient hitting the panel)
+    const ag = c.createLinearGradient(px, py, px + pw, py + ph);
+    ag.addColorStop(0,   'rgba(255, 160, 50, 0.07)');
+    ag.addColorStop(0.5, 'rgba(255, 185, 80, 0.03)');
+    ag.addColorStop(1,   'rgba(60,  90, 160, 0.05)');
+    c.fillStyle = ag;
+    c.fillRect(px, py, pw, ph);
 
-    // ── 3. Subtle cyan pre-glow — just enough to feel alive, not artificial
-    c.globalAlpha = 0.18;
-    const preGlow = c.createRadialGradient(cx, cy, 0, cx, cy, sr * 2.0);
-    preGlow.addColorStop(0,   'rgba(0,170,255,0.30)');
-    preGlow.addColorStop(0.5, 'rgba(0,110,255,0.08)');
-    preGlow.addColorStop(1,   'rgba(0,50,180,0)');
-    c.fillStyle = preGlow;
-    c.fillRect(px - sr, py - sr, pw + sr * 2, ph + sr * 2);
-
-    // ── 4. Sphere body ───────────────────────────────────────────────────
+    // OVIS — minimal thin letterforms, centered
     c.globalAlpha = 1.0;
-    const sGrad = c.createRadialGradient(cx - sr*0.28, cy - sr*0.30, sr*0.04, cx, cy, sr);
-    sGrad.addColorStop(0,    'rgba(255,255,255,1)');
-    sGrad.addColorStop(0.10, 'rgba(218,230,250,1)');
-    sGrad.addColorStop(0.42, 'rgba(152,168,196,1)');
-    sGrad.addColorStop(0.74, 'rgba(72,84,106,1)');
-    sGrad.addColorStop(1,    'rgba(18,22,38,1)');
-    c.fillStyle = sGrad;
-    c.beginPath(); c.arc(cx, cy, sr, 0, Math.PI*2); c.fill();
-
-    // Subtle blue rim — city light catching the edge
-    c.globalAlpha = 0.20;
-    const rimG = c.createRadialGradient(cx, cy, sr * 0.70, cx, cy, sr);
-    rimG.addColorStop(0, 'rgba(0,0,0,0)');
-    rimG.addColorStop(1, 'rgba(140,200,255,1)');
-    c.fillStyle = rimG;
-    c.beginPath(); c.arc(cx, cy, sr, 0, Math.PI*2); c.fill();
-
-    // ── 5. Cyan eye bar — clipped inside sphere ──────────────────────────
-    c.save();
-    c.beginPath(); c.arc(cx, cy, sr * 0.992, 0, Math.PI*2); c.clip();
-
-    const eyeW = sr*1.86, eyeH = sr*0.30;
-    const eyeX = cx - sr*0.93, eyeY = cy - eyeH*0.5;
-
-    // Inner sphere glow before bar
-    c.globalAlpha = 0.50;
-    const eyeHalo = c.createRadialGradient(cx, cy, 0, cx, cy, sr);
-    eyeHalo.addColorStop(0,   'rgba(0,235,255,0.48)');
-    eyeHalo.addColorStop(0.6, 'rgba(0,190,255,0.15)');
-    eyeHalo.addColorStop(1,   'rgba(0,140,255,0)');
-    c.fillStyle = eyeHalo;
-    c.fillRect(eyeX - 20, eyeY - 40, eyeW + 40, eyeH + 80);
-
-    // Hot eye bar — white-hot center, cyan fade
-    c.globalAlpha = 1.0;
-    const eG = c.createLinearGradient(eyeX, 0, eyeX + eyeW, 0);
-    eG.addColorStop(0,    'rgba(0,195,255,0.0)');
-    eG.addColorStop(0.07, 'rgba(0,228,255,0.90)');
-    eG.addColorStop(0.32, 'rgba(75,245,255,1)');
-    eG.addColorStop(0.50, 'rgba(228,255,255,1)');
-    eG.addColorStop(0.68, 'rgba(75,245,255,1)');
-    eG.addColorStop(0.93, 'rgba(0,228,255,0.90)');
-    eG.addColorStop(1,    'rgba(0,195,255,0.0)');
-    c.fillStyle = eG;
-    c.beginPath(); rrect(c, eyeX, eyeY, eyeW, eyeH, eyeH*0.5); c.fill();
-    c.restore();
-
-    // ── 6. Bloom spilling out from eye onto surroundings ─────────────────
-    c.globalAlpha = 0.28;
-    const bloom = c.createRadialGradient(cx, cy, sr*0.3, cx, cy, sr * 1.7);
-    bloom.addColorStop(0,   'rgba(0,210,255,0.28)');
-    bloom.addColorStop(0.6, 'rgba(0,155,255,0.07)');
-    bloom.addColorStop(1,   'rgba(0,60,180,0)');
-    c.fillStyle = bloom;
-    c.fillRect(px - sr, py - sr, pw + sr * 2, ph + sr * 2);
-
-    // ── 7. "OVIS" wordmark ───────────────────────────────────────────────
-    const textY = cy + sr + ph * 0.042;
-    const fontSize = pw * 0.108;
-    c.font = `900 ${fontSize}px Arial Black, Arial, sans-serif`;
+    c.font = `200 ${pw * 0.30}px "Helvetica Neue", Helvetica, "Arial", sans-serif`;
     c.textAlign = 'center';
-    c.textBaseline = 'top';
-
-    // Outer glow pass
-    c.globalAlpha = 0.50;
-    c.shadowColor = 'rgba(0,210,255,1)';
-    c.shadowBlur = 36;
-    c.fillStyle = 'rgba(0,195,255,1)';
-    c.fillText('OVIS', cx, textY);
-
-    // Mid glow pass
-    c.globalAlpha = 0.78;
-    c.shadowBlur = 16;
-    c.fillStyle = 'rgba(150,230,255,1)';
-    c.fillText('OVIS', cx, textY);
-
-    // Crisp top pass
-    c.globalAlpha = 1.0;
-    c.shadowBlur = 0;
-    c.fillStyle = 'rgba(228,248,255,1)';
-    c.fillText('OVIS', cx, textY);
+    c.textBaseline = 'middle';
+    c.fillStyle = 'rgb(14, 12, 10)';
+    c.fillText('OVIS', px + pw * 0.5, py + ph * 0.5);
 
     c.restore();
   }
