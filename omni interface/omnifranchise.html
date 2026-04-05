@@ -1090,29 +1090,67 @@
   function drawOvisBillboard(c, px, py, pw, ph) {
     c.save();
 
-    // Clip to billboard bounds — clean rectangular panel like a real billboard
+    // Clip to billboard bounds
     c.beginPath(); c.rect(px, py, pw, ph); c.clip();
 
-    // White billboard face — warm off-white matching ambient city light levels
+    // White billboard face — warm off-white matching city ambient
     c.globalAlpha = 1.0;
-    c.fillStyle = 'rgb(236, 230, 218)';
+    c.fillStyle = 'rgb(240, 235, 225)';
     c.fillRect(px, py, pw, ph);
 
-    // Very subtle warm-to-cool gradient wash (Times Square ambient hitting the panel)
-    const ag = c.createLinearGradient(px, py, px + pw, py + ph);
-    ag.addColorStop(0,   'rgba(255, 160, 50, 0.07)');
-    ag.addColorStop(0.5, 'rgba(255, 185, 80, 0.03)');
-    ag.addColorStop(1,   'rgba(60,  90, 160, 0.05)');
+    // Subtle warm gradient wash
+    const ag = c.createLinearGradient(px, py, px, py + ph);
+    ag.addColorStop(0,   'rgba(255, 200, 100, 0.06)');
+    ag.addColorStop(1,   'rgba(200, 180, 140, 0.08)');
     c.fillStyle = ag;
     c.fillRect(px, py, pw, ph);
 
-    // OVIS — minimal thin letterforms, centered
+    // ── Ovis mascot sphere (small, upper portion of billboard) ──
+    const cx = px + pw * 0.5;
+    const sphereR = pw * 0.16;           // small — ~16% of billboard width
+    const sphereY = py + ph * 0.35;      // upper third
+
+    c.save();
+    // Sphere base: white-to-silver radial gradient
+    const sg = c.createRadialGradient(
+      cx - sphereR * 0.28, sphereY - sphereR * 0.30, sphereR * 0.04,
+      cx, sphereY, sphereR
+    );
+    sg.addColorStop(0,   'rgb(255, 255, 255)');
+    sg.addColorStop(0.35,'rgb(210, 215, 220)');
+    sg.addColorStop(0.75,'rgb(155, 160, 168)');
+    sg.addColorStop(1,   'rgb(80,  88,  98)');
+    c.beginPath(); c.arc(cx, sphereY, sphereR, 0, Math.PI * 2);
+    c.fillStyle = sg; c.fill();
+
+    // Cyan eye bar — clipped to sphere
+    c.save();
+    c.beginPath(); c.arc(cx, sphereY, sphereR, 0, Math.PI * 2); c.clip();
+    const eyeH = sphereR * 0.38;
+    const eyeY = sphereY - eyeH * 0.5;
+    const eyeW = sphereR * 1.8;
+    const eg = c.createLinearGradient(cx - eyeW * 0.5, eyeY, cx + eyeW * 0.5, eyeY);
+    eg.addColorStop(0,   'rgba(0,220,255,0.6)');
+    eg.addColorStop(0.3, 'rgba(130,245,255,1)');
+    eg.addColorStop(0.5, 'rgba(220,255,255,1)');
+    eg.addColorStop(0.7, 'rgba(130,245,255,1)');
+    eg.addColorStop(1,   'rgba(0,220,255,0.6)');
+    c.fillStyle = eg;
+    c.beginPath();
+    if (c.roundRect) c.roundRect(cx - eyeW*0.5, eyeY, eyeW, eyeH, eyeH*0.5);
+    else c.rect(cx - eyeW*0.5, eyeY, eyeW, eyeH);
+    c.fill();
+    c.restore(); // eye clip
+
+    c.restore(); // sphere
+
+    // ── OVIS wordmark below sphere ──
     c.globalAlpha = 1.0;
-    c.font = `200 ${pw * 0.30}px "Helvetica Neue", Helvetica, "Arial", sans-serif`;
+    c.font = `300 ${pw * 0.22}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
     c.textAlign = 'center';
     c.textBaseline = 'middle';
-    c.fillStyle = 'rgb(14, 12, 10)';
-    c.fillText('OVIS', px + pw * 0.5, py + ph * 0.5);
+    c.fillStyle = 'rgb(18, 14, 10)';
+    c.fillText('OVIS', cx, py + ph * 0.78);
 
     c.restore();
   }
