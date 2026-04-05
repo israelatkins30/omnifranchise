@@ -1075,86 +1075,6 @@
     };
   });
 
-  // ── Ovis billboard cover ─────────────────────────────────────────────────
-  // Replaces the LG G6 billboard in the photo with the Ovis logo
-  const lgBillboard = { x: 0.695, y: 0.255, w: 0.235, h: 0.185 };
-
-  function rrect(c, x, y, w, h, r) {
-    if (c.roundRect) { c.roundRect(x, y, w, h, r); return; }
-    c.moveTo(x+r,y); c.lineTo(x+w-r,y); c.arcTo(x+w,y,x+w,y+r,r);
-    c.lineTo(x+w,y+h-r); c.arcTo(x+w,y+h,x+w-r,y+h,r);
-    c.lineTo(x+r,y+h); c.arcTo(x,y+h,x,y+h-r,r);
-    c.lineTo(x,y+r); c.arcTo(x,y,x+r,y,r); c.closePath();
-  }
-
-  function drawOvisBillboard(c, px, py, pw, ph) {
-    c.save();
-
-    // Clip to billboard bounds
-    c.beginPath(); c.rect(px, py, pw, ph); c.clip();
-
-    // White billboard face — warm off-white matching city ambient
-    c.globalAlpha = 1.0;
-    c.fillStyle = 'rgb(240, 235, 225)';
-    c.fillRect(px, py, pw, ph);
-
-    // Subtle warm gradient wash
-    const ag = c.createLinearGradient(px, py, px, py + ph);
-    ag.addColorStop(0,   'rgba(255, 200, 100, 0.06)');
-    ag.addColorStop(1,   'rgba(200, 180, 140, 0.08)');
-    c.fillStyle = ag;
-    c.fillRect(px, py, pw, ph);
-
-    // ── Ovis mascot sphere (small, upper portion of billboard) ──
-    const cx = px + pw * 0.5;
-    const sphereR = pw * 0.16;           // small — ~16% of billboard width
-    const sphereY = py + ph * 0.35;      // upper third
-
-    c.save();
-    // Sphere base: white-to-silver radial gradient
-    const sg = c.createRadialGradient(
-      cx - sphereR * 0.28, sphereY - sphereR * 0.30, sphereR * 0.04,
-      cx, sphereY, sphereR
-    );
-    sg.addColorStop(0,   'rgb(255, 255, 255)');
-    sg.addColorStop(0.35,'rgb(210, 215, 220)');
-    sg.addColorStop(0.75,'rgb(155, 160, 168)');
-    sg.addColorStop(1,   'rgb(80,  88,  98)');
-    c.beginPath(); c.arc(cx, sphereY, sphereR, 0, Math.PI * 2);
-    c.fillStyle = sg; c.fill();
-
-    // Cyan eye bar — clipped to sphere
-    c.save();
-    c.beginPath(); c.arc(cx, sphereY, sphereR, 0, Math.PI * 2); c.clip();
-    const eyeH = sphereR * 0.38;
-    const eyeY = sphereY - eyeH * 0.5;
-    const eyeW = sphereR * 1.8;
-    const eg = c.createLinearGradient(cx - eyeW * 0.5, eyeY, cx + eyeW * 0.5, eyeY);
-    eg.addColorStop(0,   'rgba(0,220,255,0.6)');
-    eg.addColorStop(0.3, 'rgba(130,245,255,1)');
-    eg.addColorStop(0.5, 'rgba(220,255,255,1)');
-    eg.addColorStop(0.7, 'rgba(130,245,255,1)');
-    eg.addColorStop(1,   'rgba(0,220,255,0.6)');
-    c.fillStyle = eg;
-    c.beginPath();
-    if (c.roundRect) c.roundRect(cx - eyeW*0.5, eyeY, eyeW, eyeH, eyeH*0.5);
-    else c.rect(cx - eyeW*0.5, eyeY, eyeW, eyeH);
-    c.fill();
-    c.restore(); // eye clip
-
-    c.restore(); // sphere
-
-    // ── OVIS wordmark below sphere ──
-    c.globalAlpha = 1.0;
-    c.font = `300 ${pw * 0.22}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
-    c.fillStyle = 'rgb(18, 14, 10)';
-    c.fillText('OVIS', cx, py + ph * 0.78);
-
-    c.restore();
-  }
-
   function resize() {
     const pr = Math.min(devicePixelRatio, 2);
     W = canvas.offsetWidth  || innerWidth;
@@ -1311,13 +1231,6 @@
       ctx.fillRect(sx - Math.abs(len)*0.5, sy - s.w*0.5, Math.abs(len), s.w);
     }
 
-    // ── Ovis billboard cover ─────────────────────────────────────────────
-    drawOvisBillboard(ctx,
-      lgBillboard.x * W + camX * 0.42,
-      lgBillboard.y * H + camY * 0.42,
-      lgBillboard.w * W,
-      lgBillboard.h * H
-    );
 
     // ── Street-level amber glow ──────────────────────────────────────────
     const streetY = H * 0.72;
