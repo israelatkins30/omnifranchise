@@ -1234,6 +1234,35 @@
     }
 
 
+    // ── Paint over readable billboards — blend into building darkness ────
+    const covers = [
+      // Phantom of the Opera poster (left-center)
+      { x:0.175, y:0.30, w:0.115, h:0.32, c:'rgba(18,14,10,0.96)' },
+      // LG G6 billboard (right side)
+      { x:0.695, y:0.255, w:0.235, h:0.22, c:'rgba(22,18,14,0.97)' },
+      // Smaller signage mid-right
+      { x:0.60,  y:0.42,  w:0.09,  h:0.08, c:'rgba(16,13,10,0.93)' },
+    ];
+    for (const cv of covers) {
+      const bx = cv.x * W + camX * 0.42;
+      const by = cv.y * H + camY * 0.42;
+      const bw = cv.w * W;
+      const bh = cv.h * H;
+      // Dark fill matching surrounding building tone
+      ctx.save();
+      ctx.fillStyle = cv.c;
+      ctx.fillRect(bx, by, bw, bh);
+      // Feathered edges so it blends — small gradient border
+      const fade = Math.min(bw, bh) * 0.18;
+      const eg = ctx.createLinearGradient(bx, by, bx + fade, by);
+      eg.addColorStop(0, 'rgba(0,0,0,0)'); eg.addColorStop(1, cv.c);
+      ctx.fillStyle = eg; ctx.fillRect(bx - fade, by, fade, bh);
+      const eg2 = ctx.createLinearGradient(bx + bw, by, bx + bw - fade, by);
+      eg2.addColorStop(0, 'rgba(0,0,0,0)'); eg2.addColorStop(1, cv.c);
+      ctx.fillStyle = eg2; ctx.fillRect(bx + bw, by, fade, bh);
+      ctx.restore();
+    }
+
     // ── Street-level amber glow ──────────────────────────────────────────
     const streetY = H * 0.72;
     const wash    = 0.5 + 0.5 * Math.sin(t * 0.18);
