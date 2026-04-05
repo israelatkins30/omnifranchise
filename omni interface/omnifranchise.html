@@ -1234,32 +1234,70 @@
     }
 
 
-    // ── Paint over readable billboards — blend into building darkness ────
+    // ── Cover readable signage with building-facade texture ──────────────
     const covers = [
-      // Phantom of the Opera poster (left-center)
-      { x:0.175, y:0.30, w:0.115, h:0.32, c:'rgba(18,14,10,0.96)' },
-      // LG G6 billboard (right side)
-      { x:0.695, y:0.255, w:0.235, h:0.22, c:'rgba(22,18,14,0.97)' },
-      // Smaller signage mid-right
-      { x:0.60,  y:0.42,  w:0.09,  h:0.08, c:'rgba(16,13,10,0.93)' },
+      { x:0.175, y:0.30,  w:0.115, h:0.32  },   // Phantom of the Opera
+      { x:0.695, y:0.255, w:0.235, h:0.22  },   // LG G6 billboard
+      { x:0.60,  y:0.42,  w:0.09,  h:0.08  },   // small mid-right sign
     ];
     for (const cv of covers) {
       const bx = cv.x * W + camX * 0.42;
       const by = cv.y * H + camY * 0.42;
       const bw = cv.w * W;
       const bh = cv.h * H;
-      // Dark fill matching surrounding building tone
       ctx.save();
-      ctx.fillStyle = cv.c;
+      ctx.beginPath(); ctx.rect(bx, by, bw, bh); ctx.clip();
+
+      // Building base — dark, slightly warm stone/glass tone
+      const base = ctx.createLinearGradient(bx, by, bx + bw, by + bh);
+      base.addColorStop(0,   'rgb(22, 19, 15)');
+      base.addColorStop(0.5, 'rgb(18, 15, 12)');
+      base.addColorStop(1,   'rgb(14, 12, 9)');
+      ctx.fillStyle = base;
       ctx.fillRect(bx, by, bw, bh);
-      // Feathered edges so it blends — small gradient border
-      const fade = Math.min(bw, bh) * 0.18;
-      const eg = ctx.createLinearGradient(bx, by, bx + fade, by);
-      eg.addColorStop(0, 'rgba(0,0,0,0)'); eg.addColorStop(1, cv.c);
-      ctx.fillStyle = eg; ctx.fillRect(bx - fade, by, fade, bh);
-      const eg2 = ctx.createLinearGradient(bx + bw, by, bx + bw - fade, by);
-      eg2.addColorStop(0, 'rgba(0,0,0,0)'); eg2.addColorStop(1, cv.c);
-      ctx.fillStyle = eg2; ctx.fillRect(bx + bw, by, fade, bh);
+
+      // Window grid — tiny warm-lit rectangles like a real building at night
+      const cols = Math.round(bw / 10);
+      const rows = Math.round(bh / 12);
+      const ww = bw / cols;
+      const wh = bh / rows;
+      const gap = 2;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          // Randomised per-window brightness using a stable hash
+          const seed = (cv.x * 1000 + r * 37 + c * 13) % 1;
+          const h = ((cv.x * 9999 + r * 127 + c * 31) % 100) / 100;
+          const lit = h < 0.28;   // ~28% of windows faintly lit
+          if (!lit) continue;
+          const bright = 0.06 + (((r * 7 + c * 11) % 17) / 17) * 0.10;
+          const warm   = (r + c) % 3 === 0;
+          ctx.fillStyle = warm
+            ? `rgba(255,200,120,${bright})`
+            : `rgba(180,210,255,${bright * 0.6})`;
+          ctx.fillRect(
+            bx + c * ww + gap * 0.5,
+            by + r * wh + gap * 0.5,
+            ww - gap, wh - gap
+          );
+        }
+      }
+
+      // Soft feather on all four edges so it melts into the photo
+      const fe = Math.min(bw, bh) * 0.22;
+      const sides = [
+        [bx, by, fe, bh, bx, by, bx + fe, by],
+        [bx + bw - fe, by, fe, bh, bx + bw, by, bx + bw - fe, by],
+        [bx, by, bw, fe, bx, by, bx, by + fe],
+        [bx, by + bh - fe, bw, fe, bx, by + bh, bx, by + bh - fe],
+      ];
+      for (const [rx, ry, rw, rh, x0, y0, x1, y1] of sides) {
+        const fg = ctx.createLinearGradient(x0, y0, x1, y1);
+        fg.addColorStop(0, 'rgba(0,0,0,0.85)');
+        fg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = fg;
+        ctx.fillRect(rx, ry, rw, rh);
+      }
+
       ctx.restore();
     }
 
