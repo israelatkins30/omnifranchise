@@ -33,7 +33,8 @@
     .nav-cta:hover { opacity:.88;transform:translateY(-1px); }
 
     .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 24px 80px;overflow:hidden;background-image:url('https://images.unsplash.com/photo-1503179008861-d1e2b41f8bec?auto=format&fit=crop&w=1920&q=90&ixlib=rb-4.1.0');background-size:cover;background-position:center 60%; }
-    .hero::before { content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(8,3,0,0.68) 0%, rgba(6,2,0,0.62) 28%, rgba(6,2,0,0.66) 62%, rgba(2,0,0,0.96) 100%); }
+    .hero-bg-filter { position:absolute;inset:0;z-index:0;backdrop-filter:saturate(0.2) brightness(0.5);pointer-events:none; }
+    .hero::before { content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(4,2,0,0.86) 0%, rgba(3,1,0,0.82) 28%, rgba(3,1,0,0.86) 62%, rgba(1,0,0,0.98) 100%); }
     .hero::after  { content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 110% 55% at 50% 100%, rgba(160,65,10,0.20) 0%, transparent 58%),radial-gradient(ellipse 60% 100% at 0% 50%, rgba(4,2,0,0.32) 0%, transparent 70%),radial-gradient(ellipse 60% 100% at 100% 50%, rgba(4,2,0,0.32) 0%, transparent 70%);pointer-events:none; }
     #hero-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none; }
     .hero > *:not(#hero-canvas) { position:relative;z-index:1; }
@@ -515,6 +516,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-filter"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="badge"><span class="badge-dot"></span>Now Available — OmniFranchise</div>
   <h1>Omni<span class="hero-wm-s">Franchise</span></h1>
